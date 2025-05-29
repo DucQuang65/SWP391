@@ -8,8 +8,9 @@ GO
 -- Bảng Roles
 CREATE TABLE Roles (
     RoleID INT PRIMARY KEY IDENTITY(1,1),
-    RoleName NVARCHAR(6) -- VD: Admin, Member, Staff, Guest
+    RoleName NVARCHAR(20) NOT NULL UNIQUE -- Guest, Member, Staff-Doctor, Staff-BloodManager, Admin
 );
+
 
 -- Bảng Users (mã hóa AES/Bcrypt tại tầng ứng dụng)
 CREATE TABLE Users (
