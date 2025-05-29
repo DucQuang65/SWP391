@@ -3,160 +3,357 @@ Go
 
 INSERT INTO Roles (RoleName)
 VALUES 
-('Admin'),
 ('Member'),
-('Staff');
+('Doctor'),
+('BloodManager'),
+('Admin');
 GO
 
-INSERT INTO Users (Email, PasswordHash, Name, Age, Phone, Address, Status, BloodGroup, RhType, RoleID)
-VALUES
-(CAST('Kien@gmail.com' AS VARBINARY), '$2a$12$Mv6D5ra.ZkrM2jSnpzGj9.3U7ADHtC9YO8opNB2lGp9dov13hzUSe', CAST('Kien' AS VARBINARY), 25, CAST('0123456789' AS VARBINARY), CAST('126 Hoang Hoa Tham HCM' AS VARBINARY), 1, 'A', 'Rh+', 2),
-(CAST('Nhu@gmail.com' AS VARBINARY), '$2a$12$6nDP7npwCjx3Bfyd.3mJk.xcVHZP5uxK.A7UnZMxIFDNhzLzQqlbO', CAST('Nhu' AS VARBINARY), 30, CAST('0987654321' AS VARBINARY), CAST('473 Le Van Si HCM' AS VARBINARY), 1, 'B', 'Rh-', 2),
-(CAST('Vinh@gmail.com' AS VARBINARY), '$2a$12$FNdkgcsRyo4IB3rQG4kxSevG.gRZ3wYtuUXRCgHlODPXdzRw69s4C', CAST('Vinh' AS VARBINARY), 22, CAST('0909090909' AS VARBINARY), CAST('521 Dong Khoi HCM' AS VARBINARY), 1, 'O', 'Rh+', 3),
-(CAST('Duc@gmail.com' AS VARBINARY), '$2a$12$5yB4taC2nkAVqzUZ5dnRMu4MTUNWvtsF9sIUo/NY2Rvzy5uOyMp9y', CAST('Duc' AS VARBINARY), 35, CAST('0933933933' AS VARBINARY), CAST('435 Le Van Viet' AS VARBINARY), 1, 'AB', 'Rh-', 3),
-(CAST('Nhi@gmail.com' AS VARBINARY), '$2a$12$z7EY9UAtu3iQrIptwWw9Tuo2qS1hF1EQiZr0rXlDUv9kuoWJFFAoK', CAST('Nhi' AS VARBINARY), 28, CAST('0911223344' AS VARBINARY), CAST('726 Thong Nhat HCM' AS VARBINARY), 1, 'O', 'Rh+', 1);
-GO
-
-INSERT INTO Facilities (Name, Address, Email, Phone, Latitude, Longitude)
+INSERT INTO HospitalInfo (Name, Address, Phone, Email, WorkingHours, MapImageUrl)
 VALUES
 (N'Bệnh viện Chợ Rẫy', N'201B Nguyễn Chí Thanh, Phường 12, Quận 5, TP.HCM', 'bvchoray@choray.vn', '02838554137', 10.7556, 106.6639),
-(N'Bệnh viện Nhân dân Gia Định', N'1 Nơ Trang Long, Phường 7, Bình Thạnh, TP.HCM', 'bvgd@hcmhealth.gov.vn', '02838412617', 10.8031, 106.6945),
-(N'Bệnh viện Đại học Y Dược TP.HCM', N'215 Hồng Bàng, Phường 11, Quận 5, TP.HCM', 'contact@umc.edu.vn', '02838554269', 10.7585, 106.6646),
-(N'Bệnh viện Nhi Đồng 1', N'341 Sư Vạn Hạnh, Phường 10, Quận 10, TP.HCM', 'bvnd1@hcmhealth.gov.vn', '02839271119', 10.7723, 106.6675),
-(N'Bệnh viện Từ Dũ', N'284 Cống Quỳnh, Phường Phạm Ngũ Lão, Quận 1, TP.HCM', 'tudu@tudu.com.vn', '02838391747', 10.7631, 106.6897),
-(N'Bệnh viện Quốc tế Vinmec Central Park', N'208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, TP.HCM', 'info@vinmec.com', '02835203388', 10.7945, 106.7206),
-(N'Bệnh viện Quốc tế Pháp Việt (FV Hospital)', N'6 Nguyễn Lương Bằng, Phường Tân Phú, Quận 7, TP.HCM', 'information@fvhospital.com', '02854113333', 10.7306, 106.7217),
-(N'Bệnh viện Quân y 175', N'786 Nguyễn Kiệm, Phường 3, Gò Vấp, TP.HCM', 'bv175@bv175.vn', '02838940063', 10.8231, 106.6875),
-(N'Bệnh viện Hùng Vương', N'128 Hồng Bàng, Phường 12, Quận 5, TP.HCM', 'info@bvhungvuong.vn', '02838554126', 10.7551, 106.6590),
-(N'Bệnh viện Nhân dân 115', N'527 Sư Vạn Hạnh, Phường 12, Quận 10, TP.HCM', 'bv115@hcmhealth.gov.vn', '02838653239', 10.7769, 106.6672),
-(N'Bệnh viện Nhiệt Đới TP.HCM', N'764 Võ Văn Kiệt, Phường 1, Quận 5, TP.HCM', 'bv.bnhietdoi@tphcm.gov.vn', '02839238704', 10.7521, 106.6632),
-(N'Bệnh viện Hoàn Mỹ Sài Gòn', N'60-60A Phan Xích Long, Phường 1, Phú Nhuận, TP.HCM', 'contactus.saigon@hoanmy.com', '02839902468', 10.7995, 106.6816),
-(N'Bệnh viện Truyền máu Huyết học TP.HCM', N'118 Hồng Bàng, Phường 12, Quận 5, TP.HCM', 'contact@bvtmhh.gov.vn', '02839557858', 10.7592, 106.6557),
-(N'Bệnh viện Quân dân y miền Đông', N'50 Lê Văn Việt, Phường Hiệp Phú, TP. Thủ Đức, TP.HCM', 'info@bvqdymd.vn', '02838966764', 10.8474, 106.7893),
-(N'Bệnh viện Quốc tế Mỹ (AIH)', N'199 Nguyễn Hoàng, Phường An Phú, Quận 2, TP.HCM', 'info@aih.com.vn', '02839109100', 10.8002, 106.7468);
 GO
+
+INSERT INTO Tags (TagName) VALUES ('A'),('B'),('AB'),('O'),('Rh+'),('Rh-'),('Tổng quan nhóm máu')('Truyền máu');GO
 
 INSERT INTO BloodArticles (Title, Content, img_url)
 VALUES
-('Giới thiệu các nhóm máu', 'Hệ thống nhóm máu ABO chia máu người thành 4 nhóm chính:
+-- Nhóm A Rh+
+('Giới thiệu nhóm máu A Rh+', 
+N'Nhóm máu A Rh+ là một trong những nhóm máu phổ biến ở người.
 
-Nhóm máu A: có kháng nguyên A trên bề mặt hồng cầu và kháng thể anti-B trong huyết tương.
+Đặc điểm:
+- Có kháng nguyên A trên bề mặt hồng cầu.
+- Có kháng thể anti-B trong huyết tương.
+- Có yếu tố Rh (D antigen), tức là Rh dương tính (Rh+).
 
-Nhóm máu B: có kháng nguyên B và kháng thể anti-A.
+Người có nhóm máu A Rh+:
+- Có thể nhận máu từ: A Rh+, A Rh-, O Rh+, O Rh-
+- Có thể cho máu cho: A Rh+, AB Rh+
 
-Nhóm máu AB: có cả kháng nguyên A và B, không có kháng thể. Là người nhận phổ thông.
+Lưu ý:
+- Trong truyền máu, yếu tố Rh đóng vai trò quan trọng. Người Rh+ có thể nhận máu Rh- nhưng ngược lại thì không an toàn.', 
+'article1.jpg'),
 
-Nhóm máu O: không có kháng nguyên, có cả kháng thể anti-A và anti-B. Là người cho phổ thông.
+-- Nhóm A Rh-
+('Giới thiệu nhóm máu A Rh-', 
+N'Nhóm máu A Rh- là nhóm máu hiếm hơn A Rh+.
 
-Ngoài ABO còn có yếu tố Rh (Rh+ hoặc Rh-), nhưng trong tài liệu này tập trung vào hệ ABO.', 'article1.jpg'),
-('Nguyên tắc truyền máu toàn phần', 'Truyền máu toàn phần là việc truyền nguyên đơn vị máu, bao gồm hồng cầu, huyết tương, tiểu cầu và bạch cầu.
+Đặc điểm:
+- Có kháng nguyên A trên bề mặt hồng cầu.
+- Có kháng thể anti-B trong huyết tương.
+- Không có yếu tố Rh (Rh-), nên không mang D antigen.
 
-Nguyên tắc quan trọng: Tránh sự tương tác giữa kháng nguyên trên hồng cầu của người cho và kháng thể trong huyết tương của người nhận.
+Người có nhóm máu A Rh-:
+- Có thể nhận máu từ: A Rh-, O Rh-
+- Có thể cho máu cho: A Rh-, A Rh+, AB Rh-, AB Rh+
 
-Tương thích nhóm máu toàn phần:
+Lưu ý:
+- Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.', 
+'article1.jpg'),
 
-Người nhóm O → cho được tất cả (cho phổ thông)
+-- Nhóm B Rh+
+('Giới thiệu nhóm máu B Rh+', 
+N'Nhóm máu B Rh+ có những đặc điểm:
 
-Người nhóm AB → nhận được từ tất cả (nhận phổ thông)
+- Có kháng nguyên B trên hồng cầu.
+- Có kháng thể anti-A trong huyết tương.
+- Mang yếu tố Rh (Rh+).
 
-Bảng tương thích:
+Người có nhóm máu B Rh+:
+- Có thể nhận máu từ: B Rh+, B Rh-, O Rh+, O Rh-
+- Có thể cho máu cho: B Rh+, AB Rh+
 
-Nhóm O nhận từ: O
+Lưu ý:
+- Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
+'article1.jpg'),
 
-Nhóm A nhận từ: A, O
+-- Nhóm B Rh-
+('Giới thiệu nhóm máu B Rh-', 
+N'Nhóm máu B Rh- là một trong những nhóm máu hiếm.
 
-Nhóm B nhận từ: B, O
+Đặc điểm:
+- Có kháng nguyên B.
+- Có kháng thể anti-A.
+- Không có yếu tố Rh (Rh-).
 
-Nhóm AB nhận từ: AB, A, B, O', 'article2.jpg'),
-('Truyền hồng cầu', 'Truyền hồng cầu tập trung vào tương tác giữa kháng nguyên trên hồng cầu và kháng thể trong huyết tương người nhận. Nguyên tắc tương tự truyền máu toàn phần.
+Người có nhóm máu B Rh-:
+- Có thể nhận máu từ: B Rh-, O Rh-
+- Có thể cho máu cho: B Rh-, B Rh+, AB Rh-, AB Rh+
 
-Bảng tương thích hồng cầu:
+Lưu ý:
+- Trong truyền máu, người Rh- cần thận trọng và **chỉ nên nhận từ Rh-** để tránh phản ứng miễn dịch.', 
+'article1.jpg'),
 
-Người nhóm O nhận từ: O
+-- Nhóm AB Rh+
+('Giới thiệu nhóm máu AB Rh+', 
+N'Nhóm máu AB Rh+ là nhóm máu **hiếm và đặc biệt**.
 
-Người nhóm A nhận từ: A, O
+Đặc điểm:
+- Có cả kháng nguyên A và B trên hồng cầu.
+- Không có kháng thể anti-A hay anti-B trong huyết tương.
+- Có yếu tố Rh (Rh+).
 
-Người nhóm B nhận từ: B, O
+Người có nhóm máu AB Rh+:
+- Có thể nhận máu từ: Tất cả các nhóm (A, B, AB, O - cả Rh+ và Rh-)
+- Có thể cho máu cho: AB Rh+
 
-Người nhóm AB nhận từ: A, B, AB, O
+Lưu ý:
+- AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.', 
+'article1.jpg'),
 
-Người cho hồng cầu phổ thông: O', 'article3.jpg'),
-('Truyền huyết tương', 'Huyết tương chứa các kháng thể, không chứa kháng nguyên. Khi truyền huyết tương, cần tránh kháng thể của người cho tấn công hồng cầu của người nhận.
+-- Nhóm AB Rh-
+('Giới thiệu nhóm máu AB Rh-', 
+N'Nhóm máu AB Rh- là một trong những nhóm máu **hiếm nhất**.
 
-Người nhóm AB không có kháng thể → là người cho huyết tương phổ thông.
+Đặc điểm:
+- Có kháng nguyên A và B.
+- Không có kháng thể anti-A hay anti-B.
+- Không có yếu tố Rh.
 
-Bảng tương thích huyết tương:
+Người có nhóm máu AB Rh-:
+- Có thể nhận máu từ: AB Rh-, A Rh-, B Rh-, O Rh-
+- Có thể cho máu cho: AB Rh-, AB Rh+
 
-Nhóm O nhận từ: O, A, B, AB
+Lưu ý:
+- Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.', 
+'article1.jpg'),
 
-Nhóm A nhận từ: A, AB
+-- Nhóm O Rh+
+('Giới thiệu nhóm máu O Rh+', 
+N'Nhóm máu O Rh+ là nhóm máu phổ biến nhất tại nhiều quốc gia.
 
-Nhóm B nhận từ: B, AB
+Đặc điểm:
+- Không có kháng nguyên A hoặc B.
+- Có cả kháng thể anti-A và anti-B trong huyết tương.
+- Có yếu tố Rh (Rh+).
 
-Nhóm AB nhận từ: AB', 'article4.jpg'),
-('Truyền tiểu cầu', 'Tiểu cầu có ít biểu hiện kháng nguyên ABO, do đó việc truyền có thể linh hoạt hơn. Tuy nhiên, trong trường hợp có thời gian và nguồn lực, vẫn nên truyền cùng nhóm để hạn chế phản ứng miễn dịch.
+Người có nhóm máu O Rh+:
+- Có thể nhận máu từ: O Rh+, O Rh-
+- Có thể cho máu cho: A Rh+, B Rh+, AB Rh+, O Rh+
 
-Gợi ý:
+Lưu ý:
+- Không thể nhận từ các nhóm A, B, AB vì có kháng thể.', 
+'article1.jpg'),
 
-Truyền cùng nhóm là tốt nhất
+-- Nhóm O Rh-
+('Giới thiệu nhóm máu O Rh-', 
+N'Nhóm máu O Rh- được xem là nhóm máu **cho phổ thông** trong truyền máu khẩn cấp.
 
-Truyền chéo có thể chấp nhận trong cấp cứu nếu kiểm soát cẩn thận', 'article5.jpg'),
-('Tổng quan về các loại thành phần máu','Máu người gồm nhiều thành phần:
+Đặc điểm:
+- Không có kháng nguyên A hoặc B.
+- Có cả kháng thể anti-A và anti-B.
+- Không có yếu tố Rh (Rh-).
 
-Hồng cầu: mang oxy, chứa kháng nguyên nhóm máu.
+Người có nhóm máu O Rh-:
+- Có thể nhận máu từ: O Rh-
+- Có thể cho máu cho: Tất cả nhóm máu (A, B, AB, O - cả Rh+ và Rh-)
 
-Huyết tương: là phần lỏng, chứa kháng thể và protein.
-
-Tiểu cầu: giúp đông máu.
-
-Bạch cầu: chống nhiễm trùng, không liên quan đến truyền máu thông thường.
-
-Tùy vào bệnh lý, bác sĩ có thể chỉ định truyền toàn phần hoặc từng thành phần riêng biệt.','article6.jpg'),
-('Ý nghĩa truyền máu chọn lọc thành phần','Truyền máu theo thành phần giúp:
-
-Giảm nguy cơ phản ứng miễn dịch
-
-Tối ưu hiệu quả điều trị
-
-Sử dụng hợp lý nguồn máu hiến
-
-Ví dụ:
-
-Thiếu máu nặng → truyền hồng cầu
-
-Rối loạn đông máu → truyền huyết tương hoặc tiểu cầu','article7.jpg');
+Lưu ý:
+- O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.', 
+'article1.jpg');
 GO
 
-INSERT INTO BlogPosts (Title, Content, img_url, UserID, Posted)
-VALUES
-(N'Lần đầu tôi hiến máu', 
-N'Lần đầu tiên tôi hiến máu là một trải nghiệm vừa hồi hộp vừa đầy ý nghĩa. Tôi bước vào trung tâm hiến máu mà không biết điều gì sẽ xảy ra. Các y tá rất thân thiện, giải thích quy trình rõ ràng. Tôi ngạc nhiên vì quá trình này diễn ra rất nhanh và hầu như không đau. Sau khi hiến xong, tôi ngồi nghỉ với một hộp nước trái cây và bánh quy, cảm thấy rất tự hào vì biết rằng mình có thể đã giúp cứu sống một ai đó. Hành động tuy nhỏ nhưng đã thay đổi suy nghĩ của tôi. Tôi bắt đầu tìm hiểu về tình trạng thiếu máu, đặc biệt là vào các dịp lễ và biết rằng một lần hiến máu có thể giúp được đến ba người. Từ đó, tôi quyết định hiến máu định kỳ mỗi 6 tháng và còn rủ bạn bè cùng tham gia.', 
-'blog1.jpg', 2, GETDATE()),
-
-(N'Giúp đỡ trong khủng hoảng',
-N'Khi đại dịch lên đến đỉnh điểm, các bệnh viện thiếu trầm trọng máu dự trữ. Tôi cảm thấy bất lực khi xem tin tức, nhưng tôi biết mình có thể làm gì đó. Tôi đã đặt lịch đến trung tâm hiến máu gần nhất. Mọi thứ được thực hiện theo quy định an toàn nghiêm ngặt, và tôi cảm thấy rất yên tâm. Việc hiến máu giúp tôi cảm thấy mình đang làm điều có ích, một cách để góp phần cứu sống người khác trong lúc khó khăn. Từ đó, tôi trở thành người hiến máu thường xuyên và còn đi tuyên truyền ở các nhóm sinh viên để nâng cao nhận thức. Một hành động nhỏ thôi nhưng có thể tạo ra sự thay đổi rất lớn.',
-'blog2.jpg', 3, GETDATE()),
-
-(N'Tại sao tôi chọn hiến máu',
-N'Nhiều người hỏi tôi vì sao lại đi hiến máu thường xuyên. Câu trả lời rất đơn giản: vì tôi có thể, và vì nó cứu sống con người. Có rất nhiều trường hợp bệnh nhân cần máu gấp như phẫu thuật, tai nạn, điều trị ung thư... Nếu không có người hiến, họ có thể không qua khỏi. Tôi chưa từng phải truyền máu, nhưng tôi biết nhiều người đã từng, và họ sống được là nhờ sự hy sinh thầm lặng của người khác. Quá trình hiến máu rất an toàn, nhanh chóng và có đội ngũ y tế hỗ trợ. Thậm chí sau khi hiến còn được ăn nhẹ và trò chuyện với những người tử tế khác. Mục tiêu của tôi là đạt 50 lần hiến máu trong đời.',
-'blog3.jpg', 2, GETDATE()),
-
-(N'Trải nghiệm tại trung tâm hiến máu',
-N'Tôi từng lo lắng khi lần đầu bước vào trung tâm hiến máu. Liệu có đau không? Tôi có đủ điều kiện không? Nhưng nhân viên ở đó đã xóa tan mọi lo âu. Họ hướng dẫn tận tình, kiểm tra kỹ lưỡng và luôn mỉm cười khiến tôi cảm thấy rất thoải mái. Lúc chích kim vào cũng chỉ như một cú chích nhẹ, hoàn toàn chịu được. Sau đó tôi nghỉ ngơi một lúc và cảm thấy rất tự hào. Từ đó, tôi quay lại thường xuyên và thậm chí còn quen biết với những người hiến máu khác. Chúng tôi như một cộng đồng thầm lặng, luôn sẵn sàng giúp đỡ người cần. Tôi khuyên mọi người hãy thử một lần. Bạn sẽ ngạc nhiên với cảm giác tuyệt vời đó.',
-'blog4.jpg', 3, GETDATE()),
-
-(N'Hành trình hiến máu của tôi',
-N'Tôi bắt đầu hành trình hiến máu khi một người bạn thân bị tai nạn và cần truyền máu gấp. Khoảnh khắc đó thay đổi tôi. Tôi lập tức đến hiến máu và kể từ đó không ngừng lại. Mỗi lần hiến, tôi lại nhớ tới bạn mình và nghĩ đến những người đang cần. Tôi từng đọc các câu chuyện về trẻ sinh non, bệnh nhân ung thư hay những người có nhóm máu hiếm được cứu sống nhờ máu của người lạ. Điều đó khiến tôi thấy mình thật nhỏ bé nhưng lại có thể làm điều lớn lao. Giờ tôi ghi chép lại mỗi lần hiến máu và đặt lịch định kỳ 3 tháng một lần. Nó đã trở thành một phần cuộc sống của tôi. Lời nhắn của tôi đến bạn là: Đừng chờ tới khi có chuyện xấu mới hành động. Hãy là người giúp đỡ từ hôm nay.',
-'blog5.jpg', 2, GETDATE());
+INSERT INTO ArticleTags (ArticleID, TagID) VALUES
+-- Bài 1: A Rh+
+(1, 1), (1, 5), (1, 7), (1, 8),
+-- Bài 2: A Rh−
+(2, 1), (2, 6), (2, 7), (2, 8),
+-- Bài 3: B Rh+
+(3, 2), (3, 5), (3, 7), (3, 8),
+-- Bài 4: B Rh−
+(4, 2), (4, 6), (4, 7), (4, 8),
+-- Bài 5: AB Rh+
+(5, 3), (5, 5), (5, 7), (5, 8),
+-- Bài 6: AB Rh−
+(6, 3), (6, 6), (6, 7), (6, 8),
+-- Bài 7: O Rh+
+(7, 4), (7, 5), (7, 7), (7, 8),
+-- Bài 8: O Rh−
+(8, 4), (8, 6), (8, 7); (8, 8),
 GO
 
-INSERT INTO BloodInventory (FacilityID, BloodGroup, RhType, ComponentType, Quantity, LastUpdated)
+INSERT INTO BlogPosts (BlogPostID, Title, Content, CreatedAt, UpdatedAt)
 VALUES
-(1, 'A', 'Rh+', 'Plasma', 10, GETDATE()),
-(1, 'O', 'Rh-', 'Whole Blood', 5, GETDATE()),
-(2, 'B', 'Rh+', 'Platelets', 7, GETDATE()),
-(2, 'AB', 'Rh-', 'Red Cells', 3, GETDATE()),
-(3, 'O', 'Rh+', 'Whole Blood', 8, GETDATE());
+(1, N'Thông tin về nhóm máu A (Rh+)', N'
+Nhóm máu A (Rh+) là một trong những nhóm máu phổ biến, đóng vai trò quan trọng trong truyền máu và chăm sóc sức khỏe.
+
+Đặc điểm:
+- Kháng nguyên: A
+- Kháng thể: anti-B
+- Yếu tố Rh: Dương tính (Rh+)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: A (Rh+), A (Rh−), O (Rh+), O (Rh−)
+- Có thể cho máu cho: A (Rh+), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Phụ nữ mang thai Rh− cần lưu ý khi mang thai con Rh+ để tránh hiện tượng bất đồng Rh.
+
+Lưu ý:
+- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh để đảm bảo an toàn.
+', GETDATE(), GETDATE()),
+
+(2, N'Thông tin về nhóm máu A (Rh−)', N'
+Nhóm máu A (Rh−) là một nhóm máu hiếm, chiếm tỷ lệ nhỏ trong dân số, nhưng có ý nghĩa quan trọng trong y học.
+
+Đặc điểm:
+- Kháng nguyên: A
+- Kháng thể: anti-B
+- Yếu tố Rh: Âm tính (Rh−)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: A (Rh−), O (Rh−)
+- Có thể cho máu cho: A (Rh−), A (Rh+), AB (Rh−), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người Rh− cần cẩn trọng khi nhận máu để tránh phản ứng miễn dịch.
+
+Lưu ý:
+- Phụ nữ Rh− mang thai con Rh+ cần theo dõi và điều trị để tránh bệnh tan máu ở trẻ sơ sinh.
+', GETDATE(), GETDATE()),
+
+(3, N'Thông tin về nhóm máu B (Rh+)', N'
+Nhóm máu B (Rh+) là một nhóm máu phổ biến, có vai trò quan trọng trong truyền máu và chăm sóc sức khỏe.
+
+Đặc điểm:
+- Kháng nguyên: B
+- Kháng thể: anti-A
+- Yếu tố Rh: Dương tính (Rh+)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: B (Rh+), B (Rh−), O (Rh+), O (Rh−)
+- Có thể cho máu cho: B (Rh+), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người nhóm máu B (Rh+) cần lưu ý khi nhận máu để tránh phản ứng miễn dịch.
+
+Lưu ý:
+- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh.
+', GETDATE(), GETDATE()),
+
+(4, N'Thông tin về nhóm máu B (Rh−)', N'
+Nhóm máu B (Rh−) là một nhóm máu hiếm, có ý nghĩa quan trọng trong truyền máu và chăm sóc sức khỏe.
+
+Đặc điểm:
+- Kháng nguyên: B
+- Kháng thể: anti-A
+- Yếu tố Rh: Âm tính (Rh−)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: B (Rh−), O (Rh−)
+- Có thể cho máu cho: B (Rh−), B (Rh+), AB (Rh−), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người Rh− cần cẩn trọng khi nhận máu để tránh phản ứng miễn dịch.
+
+Lưu ý:
+- Phụ nữ Rh− mang thai con Rh+ cần theo dõi và điều trị để tránh bệnh tan máu ở trẻ sơ sinh.
+', GETDATE(), GETDATE()),
+
+(5, N'Thông tin về nhóm máu AB (Rh+)', N'
+Nhóm máu AB (Rh+) là nhóm máu hiếm, có khả năng nhận máu từ tất cả các nhóm máu khác, được gọi là "người nhận phổ thông".
+
+Đặc điểm:
+- Kháng nguyên: A và B
+- Kháng thể: Không có
+- Yếu tố Rh: Dương tính (Rh+)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: Tất cả các nhóm máu (A, B, AB, O) bất kể Rh
+- Có thể cho máu cho: AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người nhóm máu AB (Rh+) có thể nhận máu từ bất kỳ nhóm máu nào, giúp thuận lợi trong cấp cứu.
+
+Lưu ý:
+- Mặc dù có thể nhận máu từ nhiều nhóm, việc truyền máu vẫn cần kiểm tra kỹ lưỡng để đảm bảo an toàn.
+', GETDATE(), GETDATE()),
+
+(6, N'Thông tin về nhóm máu AB (Rh−)', N'
+Nhóm máu AB (Rh−) là nhóm máu hiếm nhất, chiếm tỷ lệ rất nhỏ trong dân số, có ý nghĩa đặc biệt trong truyền máu.
+
+Đặc điểm:
+- Kháng nguyên: A và B
+- Kháng thể: Không có
+- Yếu tố Rh: Âm tính (Rh−)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: AB (Rh−), A (Rh−), B (Rh−), O (Rh−)
+- Có thể cho máu cho: AB (Rh−), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người nhóm máu AB (Rh−) cần cẩn trọng khi nhận máu do tính hiếm của nhóm máu này.
+
+Lưu ý:
+- Việc tìm nguồn máu phù hợp cho người AB (Rh−) có thể gặp khó khăn, cần có kế hoạch trước.
+', GETDATE(), GETDATE()),
+
+(7, N'Thông tin về nhóm máu O (Rh+)', N'
+Nhóm máu O (Rh+) là nhóm máu phổ biến nhất, có khả năng cho máu cho nhiều nhóm khác, được gọi là "người cho phổ thông".
+
+Đặc điểm:
+- Kháng nguyên: Không có
+- Kháng thể: anti-A và anti-B
+- Yếu tố Rh: Dương tính (Rh+)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: O (Rh+), O (Rh−)
+- Có thể cho máu cho: O (Rh+), A (Rh+), B (Rh+), AB (Rh+)
+
+Ý nghĩa lâm sàng:
+- Người nhóm máu O (Rh+) có thể cho máu cho nhiều nhóm khác, rất quan trọng trong cấp cứu.
+
+Lưu ý:
+- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh để đảm bảo an toàn.
+', GETDATE(), GETDATE()),
+
+(8, N'Thông tin về nhóm máu O (Rh−)', N'
+Nhóm máu O (Rh−) là nhóm máu hiếm, có khả năng cho máu cho tất cả các nhóm máu khác, được gọi là "người cho phổ thông".
+
+Đặc điểm:
+- Kháng nguyên: Không có
+- Kháng thể: anti-A và anti-B
+- Yếu tố Rh: Âm tính (Rh−)
+
+Khả năng truyền máu:
+- Có thể nhận máu từ: O (Rh−)
+- Có thể cho máu cho: Tất cả các nhóm máu (A, B, AB, O) bất kể Rh
+
+Ý nghĩa lâm sàng:
+- Người nhóm máu O (Rh−) rất quan trọng trong cấp cứu, có thể cho máu cho bất kỳ ai.
+
+Lưu ý:
+- Do tính hiếm, cần bảo tồn nguồn máu O (Rh−) cho các trường hợp khẩn cấp.
+', GETDATE(), GETDATE());
+GO
+
+INSERT INTO BlogPostTags (BlogPostID, TagID)
+VALUES
+-- Bài 1: A Rh+
+(1, 1), (1, 5), (1, 7),
+-- Bài 2: A Rh−
+(2, 1), (2, 6), (2, 7),
+-- Bài 3: B Rh+
+(3, 2), (3, 5), (3, 7),
+-- Bài 4: B Rh−
+(4, 2), (4, 6), (4, 7),
+-- Bài 5: AB Rh+
+(5, 3), (5, 5), (5, 7),
+-- Bài 6: AB Rh−
+(6, 3), (6, 6), (6, 7),
+-- Bài 7: O Rh+
+(7, 4), (7, 5), (7, 7),
+-- Bài 8: O Rh−
+(8, 4), (8, 6), (8, 7);
+GO
+
+INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare) VALUES
+('A', 'Rh+', 'Whole', 10, 0),
+('B', 'Rh-', 'RedCells', 5, 0),
+('AB', 'Rh-', 'Plasma', 2, 1),
+('O', 'Rh+', 'Platelets', 8, 0),
+('A', 'Rh-', 'Whole', 3, 0);
 GO
 
 INSERT INTO BloodRequests (UserID, BloodGroup, RhType, BloodComponent, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
