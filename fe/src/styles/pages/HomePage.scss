@@ -1,0 +1,483 @@
+@use "../base/variables" as vars;
+@use "../base/mixin" as mix;
+
+.guest-home-page {
+  width: 100%;
+  overflow-x: hidden;
+
+  .hero-section {
+    min-height: 70dvh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+
+    .hero-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      text-align: left;
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+      color: #fff;
+      text-align: left;
+
+      .merriweather-title {
+        font-family: "Montserrat", Arial, Helvetica, sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        white-space: nowrap;
+      }
+
+      .merriweather-content {
+        font-size: 1.3rem;
+        color: #fff;
+        margin-bottom: 40px;
+        font-family: "Open Sans", "Roboto", Arial, sans-serif;
+        line-height: 1.6;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        font-weight: 400;
+        text-align: justify;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+
+        .cta-button {
+          background: #C21121;
+          color: #fff;
+          border: none;
+          border-radius: 25px;
+          font-weight: 700;
+          padding: 12px 32px;
+          font-size: 1.2rem;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          outline: none;
+          text-align: center;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          transition: transform 0.1s, box-shadow 0.1s;
+
+          &:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+          }
+
+          &:active {
+            background: #d32f2f;
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          }
+        }
+
+        .cta-button.secondary {
+          background: #ffffff;
+          color: #d32f2f;
+          border: 2px solid #d32f2f;
+          border-radius: 25px;
+          font-weight: 700;
+          padding: 12px 32px;
+          font-size: 1.2rem;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          outline: none;
+          text-align: center;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          transition: transform 0.1s, box-shadow 0.1s;
+
+          &:hover {
+            background: #ffffff;
+            color: #C21121;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+          }
+
+          &:active {
+            background: #ffffff;
+            color: #C21121;
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+
+    .hero-image {
+      display: none;
+    }
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    /* Set the background image on the main element */
+    background: url('../../assets/images/blood1.jpg') no-repeat center center/cover;
+
+    @media (max-width: 900px) {
+      min-height: 80vh;
+
+      .hero-container {
+        padding: 15px;
+      }
+
+      .hero-content {
+        max-width: 100%;
+
+        .merriweather-title {
+          font-size: 1.8rem;
+          white-space: normal;
+        }
+
+        .merriweather-content {
+          font-size: 1.1rem;
+        }
+
+        .cta-row {
+          flex-direction: column;
+          gap: 15px;
+
+          .cta-button,
+          .cta-button.secondary {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .hospital-info-section {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 48px;
+    background: #fff;
+    padding: 64px 40px;
+    max-width: 100%;
+    margin: 0 auto;
+
+    .hospital-right {
+      flex: 1;
+      max-width: 650px;
+      border-radius: 0;
+      padding: 25px 40px;
+      text-align: left;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hospital-left {
+      flex: 1;
+      max-width: 480px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      position: relative;
+
+      .hospital-img-box {
+        width: 100%;
+        height: 90%;
+        background: #d32f2f;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding-left: 30px;
+        padding-top: 25px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 20px;
+          display: block;
+        }
+      }
+    }
+
+    .hospital-title {
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      font-size: 1.15rem;
+      color: #d32f2f;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      border-bottom: 2px solid #d32f2f;
+      padding-bottom: 4px;
+    }
+
+    .hospital-name {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #02314B;
+      margin-bottom: 18px;
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hospital-desc {
+      font-family: "Open Sans", "Roboto", Arial, sans-serif;
+      color: #6c757d;
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+      line-height: 1.6;
+      text-align: justify;
+
+      &+& {
+        margin-top: 16px;
+      }
+    }
+
+    .hospital-contact {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+        color: black;
+        margin-bottom: 10px;
+
+        .icon {
+          margin-right: 10px;
+          font-size: 1.2em;
+          width: 32px;
+          height: 32px;
+          background-color: #02314B;
+          color: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #02314B;
+
+          &.phone,
+          &.email,
+          &.address,
+          &.clock {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      padding: 32px 8px;
+      gap: 32px;
+
+      .hospital-left,
+      .hospital-right {
+        max-width: 100%;
+        flex: 1;
+      }
+
+      .hospital-img-box {
+        width: 100%;
+        height: 300px;
+        background: #f28c82;
+      }
+    }
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 60dvh;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+    display: block;
+  }
+
+  .emergency-section {
+    padding: 64px 40px;
+    background: #02314B;
+    max-width: 100%;
+    margin: 0 auto;
+
+    .section-title-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      background: #C21121;
+      padding: 20px 20px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    /* Tùy chỉnh bảng Ant Design */
+    .ant-table-wrapper {
+      .ant-table {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(25, 118, 210, 0.1);
+
+        .ant-table-thead {
+          th {
+            background: #f6fbfd;
+            color: #102f53;
+            font-family: "Montserrat", Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 16px;
+            border-bottom: 2px solid #e8ecef;
+            text-align: center;
+          }
+        }
+
+        .ant-table-tbody {
+          td {
+            font-family: "Open Sans", "Roboto", Arial, sans-serif;
+            font-size: 1rem;
+            color: #21272A;
+            padding: 16px;
+            border-bottom: 1px solid #e8ecef;
+            text-align: center;
+          }
+
+          tr:hover td {
+            background: #f6fbfd;
+          }
+
+          // Styling cho nhóm máu
+          .blood-type-badge {
+            display: inline-block;
+            padding: 6px 25px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 20px;
+            text-align: center;
+            min-width: 50px;
+
+            // Nhóm máu dương (+) - màu xanh
+            &.positive {
+              background-color: #e3f2fd;
+              color: #1976d2;
+              border: 1px solid #bbdefb;
+            }
+
+            // Nhóm máu âm (-) - màu đỏ  
+            &.negative {
+              background-color: #ffebee;
+              color: #d32f2f;
+              border: 1px solid #ffcdd2;
+            }
+          }
+        }
+
+        /* Tùy chỉnh nút Hỗ trợ */
+        .table-action-button {
+          background: #1976d2;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          font-weight: 700;
+          padding: 10px 20px;
+          font-size: 1rem;
+          transition: background 0.3s;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          outline: none;
+          text-align: center;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+
+          &:hover {
+            background: #1565c0;
+          }
+
+          &:active {
+            background: #0d47a1;
+          }
+        }
+      }
+
+      /* Tùy chỉnh phân trang */
+      .ant-pagination {
+        margin-top: 20px;
+
+        .ant-pagination-item {
+          border-radius: 8px;
+
+          a {
+            color: #1976d2;
+          }
+        }
+
+        .ant-pagination-item-active {
+          background: #1976d2;
+          border-color: #1976d2;
+
+          a {
+            color: #fff;
+          }
+        }
+
+        .ant-pagination-prev,
+        .ant-pagination-next {
+          .ant-pagination-item-link {
+            border-radius: 8px;
+            color: #1976d2;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 900px) {
+      padding: 32px 8px;
+
+      .section-title {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+      }
+    }
+  }
+}
