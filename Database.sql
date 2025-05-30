@@ -6,129 +6,223 @@ USE BloodManagementSystem;
 GO
 
 -- Bảng Roles
+-- Roles table: Stores user roles
 CREATE TABLE Roles (
     RoleID INT PRIMARY KEY IDENTITY(1,1),
     RoleName NVARCHAR(20) NOT NULL UNIQUE -- Guest, Member, Staff-Doctor, Staff-BloodManager, Admin
 );
 
 
--- Bảng Users (mã hóa AES/Bcrypt tại tầng ứng dụng)
+-- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
-    Email VARBINARY(MAX),         -- Mã hóa AES
-    PasswordHash VARCHAR(255),    -- Hash bằng BCrypt.Net
-    Name VARBINARY(MAX),          -- Mã hóa AES
+    FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
+
+
+    Email VARBINARY(MAX), -- AES encrypted
+    Phone VARBINARY(MAX), -- AES encrypted
+
+
+    Name VARBINARY(MAX), -- AES encrypted
     Age INT,
-    Phone VARBINARY(MAX),         -- Mã hóa AES
-    Address VARBINARY(MAX),       -- Mã hóa AES
-    Status TINYINT,
-    BloodGroup NVARCHAR(2),       -- A, B, AB, O
-    RhType NVARCHAR(3),           -- Rh+, Rh-
-    RoleID INT,
+    Gender NVARCHAR(10), -- Male, Female, Other
+    Address VARBINARY(MAX), -- AES encrypted
+    BloodGroup NVARCHAR(2), -- A, B, AB, O
+    RhType NVARCHAR(3), -- Rh+, Rh-
+
+
+    Status TINYINT NOT NULL, -- 0: inactive, 1: active, 2: banned
+    RoleID INT NOT NULL,
+    Department NVARCHAR(50), -- For Staff-Doctor (e.g., Khoa A)
+    CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
 
--- Bảng Facilities
-CREATE TABLE Facilities (
-    FacilityID INT PRIMARY KEY IDENTITY(1,1),
+
+-- HospitalInfo table: Stores information about hospital
+CREATE TABLE HospitalInfo (
+    ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn inser
     Name NVARCHAR(255),
     Address NVARCHAR(255),
-    Email NVARCHAR(255),
-    Phone NVARCHAR(11),
-    Latitude FLOAT,
-    Longitude FLOAT
+    Phone NVARCHAR(20),
+    Email NVARCHAR(100),
+    WorkingHours NVARCHAR(255),
+    MapImageUrl NVARCHAR(255) -- link ảnh bản đồ tĩnh Google Maps
 );
 
--- Bảng BloodArticles
+
+-- BloodArticles table: Stores public blood group articles
 CREATE TABLE BloodArticles (
     ArticleID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(255),
-    Content TEXT,
-    img_url NVARCHAR(255)
+    Title NVARCHAR(255) NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
+    ImgUrl NVARCHAR(255),
 );
 
--- Bảng BlogPosts
+
+-- ArticleTags table: For sorting article tags
+CREATE TABLE ArticleTags (
+    ArticleID INT,
+    TagID INT,
+    PRIMARY KEY (ArticleID, TagID),
+    FOREIGN KEY (ArticleID) REFERENCES BloodArticles(ArticleID),
+    FOREIGN KEY (TagID) REFERENCES Tags(TagID)
+);
+
+
+-- BloodTypeTags table: For sorting blood type tags
+CREATE TABLE Tags(
+    TagID INT PRIMARY KEY IDENTITY(1,1),
+    TagName NVARCHAR(50) NOT NULL, -- A+, O−, Truyền máu, Khẩn cấp
+);
+
+
+-- BlogPosts table: Stores blog posts
 CREATE TABLE BlogPosts (
     PostID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(255),
-    Content TEXT,
-    img_url NVARCHAR(255),
-    UserID INT,
-    Posted DATETIME,
+    Title NVARCHAR(255) NOT NULL,
+    Content NVARCHAR(MAX)NOT NULL,
+    ImgUrl NVARCHAR(255),
+    UserID INT NOT NULL,
+    PostedAt DATETIME DEFAULT GETDATE(),
+    Status TINYINT DEFAULT 0, -- 0: Pending, 1: Approved, 2: Rejected
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- Bảng BloodInventory
+
+-- BlogPostTagPostTags table: For sorting blogs
+CREATE TABLE BlogPostTags (
+    PostID INT,
+    TagID INT,
+    PRIMARY KEY (PostID, TagID),
+    FOREIGN KEY (PostID) REFERENCES BlogPosts(PostID),
+    FOREIGN KEY (TagID) REFERENCES Tags(TagID)
+);
+
+
+-- BloodInventory table: Stores blood stock
 CREATE TABLE BloodInventory (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
-    FacilityID INT,
-    BloodGroup NVARCHAR(2),
-    RhType NVARCHAR(3),
-    ComponentType NVARCHAR(20),
-    Quantity INT,
-    LastUpdated DATETIME,
-    FOREIGN KEY (FacilityID) REFERENCES Facilities(FacilityID)
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    ComponentType NVARCHAR(20) NOT NULL, -- Whole, RedCells, Plasma, Platelets
+    Quantity INT NOT NULL CHECK (Quantity >= 0),
+    IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
+    LastUpdated DATETIME DEFAULT GETDATE()
 );
 
--- Bảng BloodRequests
+
+-- BloodRequests table: Stores blood requests
 CREATE TABLE BloodRequests (
     RequestID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT,
-    BloodGroup NVARCHAR(2),
-    RhType NVARCHAR(3),
-    BloodComponent VARCHAR(1000),
-    Quantity INT,
-    UrgencyLevel VARCHAR(15),
-    NeededTime DATETIME,
-    Reason TEXT,
-    Status TINYINT, -- 0: processing, 1: accepted, 2: complete
-    CreatedTime DATETIME,
+    UserID INT NOT NULL, -- Requester (Member or Staff-Doctor)
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    UrgencyLevel TINYINT NOT NULL, -- 0: Normal, 1: Urgent, 2: Critical
+    NeededTime DATETIME NOT NULL,
+    Reason NVARCHAR(1000),
+    IsAutoApproved BIT DEFAULT 0, -- 1 for Staff-Doctor requests
+    Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
+    CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- Bảng BloodRequestHistory
-CREATE TABLE BloodRequestHistory (
-    HistoryID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT,
-    RequestID INT,
-    Status VARCHAR(255),
-    TimeStamp DATETIME,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+
+-- RequestComponents table: Stores blood components for requests
+CREATE TABLE RequestComponents (
+    ComponentID INT PRIMARY KEY IDENTITY(1,1),
+    RequestID INT NOT NULL,
+    ComponentType NVARCHAR(20) NOT NULL, -- RedCells, Plasma, Platelets
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
 );
 
--- Bảng BloodDonationHistory
-CREATE TABLE BloodDonationHistory (
-    DonationID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT,
-    FacilityID INT,
-    DonationDate DATETIME,
-    BloodGroup NVARCHAR(2),
-    RhType NVARCHAR(3),
-    ComponentType NVARCHAR(20),
-    Quantity INT,
-    Notes NVARCHAR(255),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (FacilityID) REFERENCES Facilities(FacilityID)
-);
 
--- Bảng UserLocations (Chỉ lưu khi user cho phép, cập nhật liên tục hoặc tạm thời)
-CREATE TABLE UserLocations (
-    LocationID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT,
-    Latitude FLOAT,
-    Longitude FLOAT,
-    UpdatedAt DATETIME,
+-- BloodRequestHistory table: Tracks request status changes
+CREATE TABLE BloodRequestHistory (
+    HistoryID INT PRIMARY KEY IDENTITY(1,1),
+    RequestID INT NOT NULL,
+    UserID INT NOT NULL, -- Staff-Doctor or Staff-BloodManager
+    Status TINYINT NOT NULL, -- 0: Pending, 1: Verified, 2: Processing, 3: Connected, 4: Completed, 5: Rejected
+    Notes NVARCHAR(255),
+    TimeStamp DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- Bảng Notifications
+
+-- BloodDonationHistory table: Stores donation records
+CREATE TABLE BloodDonationHistory (
+    DonationID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    DonationDate DATETIME NOT NULL,
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    ComponentType NVARCHAR(20) NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    IsSuccessful BIT DEFAULT 1,
+    Notes NVARCHAR(255),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+
+-- PublicBloodRequests table: Stores public urgent requests
+CREATE TABLE PublicBloodRequests (
+    PublicRequestID INT PRIMARY KEY IDENTITY(1,1),
+    RequestID INT NOT NULL,
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    Deadline DATETIME NOT NULL,
+    IsRare BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
+);
+
+
+-- UserLocations table: Stores user locations
+CREATE TABLE UserLocations (
+    LocationID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    Latitude FLOAT NOT NULL,
+    Longitude FLOAT NOT NULL,
+    UpdatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+
+-- Appointments table: Stores appointment created
+CREATE TABLE Appointments (
+    AppointmentID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL, -– Người đăng ký khám (thường là người hiến máu)
+    AppointmentDate DATETIME  NOT NULL, -- Ngày giờ hẹn khám
+    Status TINYINT DEFAULT 0, -- 0: Đang chờ, 1: Đã xác nhận, 2: Hủy      
+    Notes NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+
+-- Notifications table: Stores user notifications
 CREATE TABLE Notifications (
     NotificationID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT,
-    Title NVARCHAR(255),
-    Message TEXT,
-    IsRead BIT,
-    SENT DATETIME,
+    UserID INT NOT NULL,
+    Title NVARCHAR(255) NOT NULL,
+    Message NVARCHAR(255)NOT NULL,
+    Type NVARCHAR(50) NOT NULL, -- Reminder, Alert, Report
+    Priority TINYINT DEFAULT 0, -- 0: Normal, 1: High (for rare blood)
+    IsRead BIT DEFAULT 0,
+    SentAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+
+-- DonationReminders table: Stores donation reminders
+CREATE TABLE DonationReminders (
+    ReminderID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    SuggestedDate DATETIME NOT NULL,
+    IsSent BIT DEFAULT 0,
+    SentAt DATETIME,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
