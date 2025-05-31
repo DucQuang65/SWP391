@@ -216,9 +216,158 @@ INSERT INTO ArticleTags (ArticleID, TagID) VALUES
 GO
 
 INSERT INTO BlogPosts (PostID, Title, Content, CreatedAt) VALUES
-(1, N'Tại Sao Bạn Nên Hiến Máu Ít Nhất Một Lần Trong Đời', N'Hiến máu là một hành động nhân đạo có thể cứu sống nhiều người. Mỗi lần hiến máu bạn có thể cứu được tới ba người khác nhau nhờ vào việc tách máu thành các thành phần như hồng cầu, tiểu cầu và huyết tương. Việc hiến máu không chỉ mang lại lợi ích cho người nhận mà còn giúp cải thiện sức khỏe tim mạch, giảm nguy cơ mắc bệnh tim cho người hiến.', '2025-05-19 16:03:52'),
-(2, N'Chuẩn Bị Gì Trước Khi Hiến Máu?', N'Trước khi hiến máu, bạn nên đảm bảo cơ thể khỏe mạnh, ngủ đủ giấc và ăn nhẹ trước 2 tiếng. Tránh thức ăn nhiều dầu mỡ để đảm bảo chất lượng máu được lấy. Uống đủ nước cũng là điều rất quan trọng để giúp bạn hồi phục nhanh hơn sau khi hiến.', '2025-05-21 16:03:52'),
-(3, N'Quy Trình Hiến Máu Diễn Ra Như Thế Nào?', N'Quy trình hiến máu bao gồm các bước: đăng ký, kiểm tra sức khỏe, lấy máu, nghỉ ngơi sau khi hiến. Toàn bộ quá trình chỉ mất khoảng 30-45 phút. Dụng cụ được sử dụng trong quá trình lấy máu đều vô trùng và sử dụng một lần để đảm bảo an toàn cho người hiến.', '2025-05-23 16:03:52'),
+(1, N'🩸 Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
+N'1. Vì Sao Nên Hiến Máu?
+Hiến máu là một hành động cao cả, mang lại cơ hội sống cho hàng triệu người mỗi năm. Mỗi đơn vị máu bạn hiến có thể cứu sống đến ba người nhờ việc tách thành các thành phần như hồng cầu, tiểu cầu và huyết tương.
+
+Ngoài ra, hiến máu còn giúp bạn:
+
+Kiểm tra sức khỏe miễn phí: Trước khi hiến, bạn sẽ được kiểm tra huyết áp, nhịp tim, và xét nghiệm máu.
+
+Cải thiện tuần hoàn máu: Việc hiến máu định kỳ giúp kích thích cơ thể sản sinh máu mới.
+
+Giảm nguy cơ mắc bệnh tim mạch: Một số nghiên cứu cho thấy hiến máu có thể giảm lượng sắt dư thừa, từ đó giảm nguy cơ bệnh tim.
+
+2. Chuẩn Bị Trước Khi Hiến Máu
+Để đảm bảo quá trình hiến máu diễn ra suôn sẻ, bạn nên:
+
+Ngủ đủ giấc: Ít nhất 7–8 tiếng trước ngày hiến máu.
+
+Ăn nhẹ: Tránh ăn thực phẩm nhiều dầu mỡ; nên ăn nhẹ trước khi hiến máu khoảng 2 tiếng.
+
+Uống đủ nước: Giúp duy trì huyết áp ổn định và dễ dàng lấy máu.
+
+Mang theo giấy tờ tùy thân: CMND/CCCD hoặc giấy tờ hợp lệ khác.
+
+3. Quy Trình Hiến Máu Diễn Ra Như Thế Nào?
+Quy trình hiến máu thường bao gồm các bước sau:
+
+Đăng ký: Điền thông tin cá nhân và lịch sử y tế.
+
+Khám sàng lọc: Kiểm tra huyết áp, nhịp tim, và xét nghiệm máu nhanh.
+
+Hiến máu: Quá trình lấy máu kéo dài khoảng 10–15 phút.
+
+Nghỉ ngơi: Sau khi hiến, bạn sẽ được nghỉ ngơi và ăn nhẹ để phục hồi.
+
+4. Lưu Ý Sau Khi Hiến Máu
+Sau khi hiến máu, bạn nên:
+
+Uống nhiều nước: Giúp cơ thể nhanh chóng bù đắp lượng máu đã mất.
+
+Tránh vận động mạnh: Trong 24 giờ đầu tiên, hạn chế các hoạt động thể chất nặng.
+
+Ăn uống đầy đủ: Bổ sung thực phẩm giàu sắt như thịt đỏ, rau xanh đậm.
+
+Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
+
+5. Kết Luận
+Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.
+
+', '2025-05-19 16:03:52'),
+(2, N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
+N'
+1. Khoảng Cách Giữa Các Lần Hiến Máu
+Để đảm bảo sức khỏe, người hiến máu cần tuân thủ khoảng cách tối thiểu giữa các lần hiến:
+
+Hiến máu toàn phần: ít nhất 12 tuần (3 tháng) giữa hai lần hiến.
+
+Hiến tiểu cầu hoặc huyết tương: có thể thực hiện sau mỗi 2 tuần, tùy theo chỉ định của cơ sở y tế.
+Vinmec International Hospital
+
+Việc tuân thủ khoảng cách này giúp cơ thể có đủ thời gian để phục hồi và tái tạo lượng máu đã hiến.
+
+2. Chế Độ Dinh Dưỡng Hợp Lý
+Người hiến máu thường xuyên nên duy trì chế độ ăn uống cân đối, giàu chất sắt và vitamin:
+
+Thực phẩm giàu sắt: thịt đỏ, gan, rau xanh đậm, đậu, hạt.
+
+Vitamin C: cam, chanh, dâu tây, giúp tăng cường hấp thu sắt.
+
+Tránh: các thực phẩm nhiều chất béo và đồ uống có cồn trước khi hiến máu.
+
+Chế độ dinh dưỡng hợp lý giúp duy trì lượng hemoglobin ổn định và hỗ trợ quá trình tái tạo máu.
+
+3. Lối Sống Lành Mạnh
+Để đảm bảo sức khỏe khi hiến máu thường xuyên, bạn nên:
+
+Ngủ đủ giấc: ngủ từ 7–8 tiếng mỗi đêm.
+
+Tập thể dục đều đặn: duy trì hoạt động thể chất nhẹ nhàng như đi bộ, yoga.
+
+Tránh căng thẳng: thực hành thiền, hít thở sâu để giảm stress.
+
+Lối sống lành mạnh giúp cơ thể phục hồi nhanh chóng sau mỗi lần hiến máu.
+
+4. Theo Dõi Sức Khỏe Định Kỳ
+Người hiến máu thường xuyên nên kiểm tra sức khỏe định kỳ:
+
+Xét nghiệm máu: kiểm tra hemoglobin, sắt huyết thanh.
+
+Khám tổng quát: đánh giá tổng thể tình trạng sức khỏe.
+
+Việc theo dõi sức khỏe giúp phát hiện sớm các vấn đề và đảm bảo an toàn khi tiếp tục hiến máu.
+
+5. Lưu Ý Sau Khi Hiến Máu
+Sau mỗi lần hiến máu, bạn nên:
+
+Uống nhiều nước: giúp cơ thể bù đắp lượng dịch đã mất.
+
+Ăn nhẹ: bổ sung năng lượng bằng bữa ăn nhẹ sau hiến máu.
+
+Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
+
+Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', '2025-05-21 16:03:52'),
+(3, N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ',
+N'Hiến Máu – Không Chỉ Là Cứu Người
+
+Hiến máu từ lâu được biết đến là một hành động nhân đạo cao đẹp, giúp cứu sống hàng triệu người mỗi năm. Tuy nhiên, ít ai biết rằng việc hiến máu định kỳ cũng mang lại nhiều lợi ích thiết thực cho chính người hiến.
+
+Khi bạn hiến máu đều đặn, cơ thể không chỉ được kích thích sản sinh máu mới mà còn tạo điều kiện để bạn:
+
+Giảm lượng sắt dư thừa: Duy trì mức sắt ổn định giúp hạn chế nguy cơ mắc bệnh tim và gan.
+
+Cải thiện tuần hoàn máu: Việc hiến máu thúc đẩy quá trình sản sinh tế bào máu mới, giúp máu lưu thông tốt hơn.
+
+Tầm soát bệnh: Mỗi lần hiến máu đều được kiểm tra miễn phí các chỉ số như huyết áp, nhịp tim, và xét nghiệm máu giúp phát hiện sớm các bệnh lý tiềm ẩn.
+
+Tăng cường sức khỏe tinh thần: Cảm giác được giúp đỡ người khác mang lại sự hài lòng, giảm stress và nâng cao chất lượng cuộc sống.
+
+Lợi Ích Với Tâm Trạng Và Cuộc Sống
+
+Không chỉ cải thiện thể chất, hiến máu còn giúp cải thiện tinh thần đáng kể:
+
+Giảm căng thẳng: Khi làm việc tốt, cơ thể tiết ra hormone hạnh phúc giúp bạn cảm thấy tích cực hơn.
+
+Xây dựng thói quen sống lành mạnh: Người hiến máu thường xuyên sẽ chú ý hơn đến dinh dưỡng, giấc ngủ và luyện tập để đảm bảo đủ điều kiện sức khỏe.
+
+Gắn kết cộng đồng: Hiến máu là một hoạt động kết nối mọi người, lan tỏa yêu thương và trách nhiệm xã hội.
+
+Hiến Máu Bao Nhiêu Lần Là Đủ?
+
+Tùy vào loại hiến máu, mỗi người có thể hiến với tần suất khác nhau:
+
+Hiến máu toàn phần: Tối đa 4 lần/năm đối với nam và 3 lần/năm với nữ.
+
+Hiến tiểu cầu/huyết tương: Có thể lặp lại sau mỗi 2 tuần, nhưng không quá 24 lần/năm.
+
+Điều quan trọng là bạn cần theo dõi sức khỏe và tuân thủ hướng dẫn từ nhân viên y tế để đảm bảo an toàn.
+
+Lưu Ý Khi Hiến Máu Định Kỳ
+
+Để đảm bảo hiến máu hiệu quả và an toàn, hãy:
+
+Ăn uống đầy đủ trước và sau hiến máu.
+
+Uống nhiều nước để hỗ trợ quá trình tuần hoàn.
+
+Tránh vận động mạnh sau hiến máu ít nhất 24 giờ.
+
+Giữ tâm trạng thoải mái và ngủ đủ giấc trước ngày hiến máu.
+
+Kết Luận
+
+Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', '2025-05-23 16:03:52'),
 (4, N'Hiến Máu Định Kỳ – Một Lối Sống Đẹp', N'Hiến máu định kỳ không chỉ giúp cộng đồng duy trì nguồn máu dự trữ ổn định mà còn là một cách để theo dõi sức khỏe định kỳ. Mỗi người trưởng thành khỏe mạnh có thể hiến máu 3–4 lần mỗi năm và vẫn duy trì được sức khỏe bình thường.', '2025-05-25 16:03:52'),
 (5, N'Câu Chuyện Của Một Người Hiến Máu Ẩn Danh', N'Anh Nguyễn Văn A là một người hiến máu thường xuyên nhưng luôn giữ kín danh tính. Đối với anh, việc hiến máu là cách thể hiện lòng biết ơn cuộc sống và chia sẻ với những người cần. Câu chuyện của anh đã truyền cảm hứng cho rất nhiều người trẻ tham gia hiến máu.', '2025-05-28 16:03:52');
 GO
