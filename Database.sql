@@ -1,11 +1,3 @@
-﻿-- Tạo database
-CREATE DATABASE BloodManagementSystem;
-GO
-
-USE BloodManagementSystem;
-GO
-
--- Bảng Roles
 -- Roles table: Stores user roles
 CREATE TABLE Roles (
     RoleID INT PRIMARY KEY IDENTITY(1,1),
@@ -194,7 +186,7 @@ CREATE TABLE UserLocations (
 -- Appointments table: Stores appointment created
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
+    UserID INT NOT NULL, -– Người đăng ký khám (thường là người hiến máu)
     AppointmentDate DATETIME  NOT NULL, -- Ngày giờ hẹn khám
     Status TINYINT DEFAULT 0, -- 0: Đang chờ, 1: Đã xác nhận, 2: Hủy      
     Notes NVARCHAR(255),
