@@ -9,12 +9,54 @@ VALUES
 ('Admin');
 GO
 
-INSERT INTO HospitalInfo (Name, Address, Phone, Email, WorkingHours, MapImageUrl)
+INSERT INTO HospitalInfo (ID, Name, Address, Phone, Email, WorkingHours, MapImageUrl)
 VALUES
-(N'Bệnh viện Chợ Rẫy', N'201B Nguyễn Chí Thanh, Phường 12, Quận 5, TP.HCM', 'bvchoray@choray.vn', '02838554137', 10.7556, 106.6639),
+(1, N'Trung Tâm Hiến Máu', N'đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau@gmail.vn', N'Thứ 2 - Thứ 6: 7:00 - 17:00','https://maps.app.goo.gl/NhCZ66UD3kdH2bPM6'),
 GO
 
-INSERT INTO Tags (TagName) VALUES ('A'),('B'),('AB'),('O'),('Rh+'),('Rh-'),('Tổng quan nhóm máu')('Truyền máu');GO
+INSERT INTO Tags (TagID, TagName) VALUES
+-- Nhóm máu
+(1, 'A'),
+(2, 'B'),
+(3, 'AB'),
+(4, 'O'),
+(5, 'Rh+'),
+(6, 'Rh-'),
+
+-- Tag bài viết về hiến máu
+(7, N'Tổng quan nhóm máu'),
+(8, N'Truyền máu'),
+(9,  N'Hiến Máu Lần Đầu'),
+(10, N'Chuẩn Bị Trước Hiến Máu'),
+(11, N'Quy Trình Hiến Máu'),
+(12, N'Lợi Ích Hiến Máu'),
+(13, N'Hiến Máu Định Kỳ'),
+(14, N'Sức Khoẻ'),
+(15, N'Nhóm Máu'),
+(16, N'Truyền Máu'),
+(17, N'Kiến Thức Y Khoa'),
+(18, N'Quy Trình Xử Lý Máu'),
+(19, N'Tổ Chức Hiến Máu'),
+(20, N'Cứu Người'),
+(21, N'Hiến Máu Toàn Phần'),
+(22, N'Hiến Tiểu Cầu'),
+(23, N'Kỹ Thuật Hiến Máu'),
+(24, N'Câu Chuyện Hiến Máu'),
+(25, N'Truyền Cảm Hứng'),
+(26, N'Người Hiến Ẩn Danh'),
+(27, N'Nhóm Máu O'),
+(28, N'Hiếm Máu'),
+(29, N'Kêu Gọi Hiến Máu'),
+(30, N'Sự Kiện Hiến Máu'),
+(31, N'Ngày Hội Hiến Máu'),
+(32, N'Đăng Ký Hiến Máu'),
+(33, N'FAQ Hiến Máu'),
+(34, N'Giải Đáp Thắc Mắc'),
+(35, N'Hiểu Đúng Hiến Máu'),
+(36, N'Hiến Máu Thường Xuyên'),
+(37, N'Chăm Sóc Sức Khoẻ'),
+(38, N'Lưu Ý Sau Hiến Máu');
+GO
 
 INSERT INTO BloodArticles (Title, Content, img_url)
 VALUES
@@ -173,179 +215,30 @@ INSERT INTO ArticleTags (ArticleID, TagID) VALUES
 (8, 4), (8, 6), (8, 7); (8, 8),
 GO
 
-INSERT INTO BlogPosts (BlogPostID, Title, Content, CreatedAt, UpdatedAt)
-VALUES
-(1, N'Thông tin về nhóm máu A (Rh+)', N'
-Nhóm máu A (Rh+) là một trong những nhóm máu phổ biến, đóng vai trò quan trọng trong truyền máu và chăm sóc sức khỏe.
-
-Đặc điểm:
-- Kháng nguyên: A
-- Kháng thể: anti-B
-- Yếu tố Rh: Dương tính (Rh+)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: A (Rh+), A (Rh−), O (Rh+), O (Rh−)
-- Có thể cho máu cho: A (Rh+), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Phụ nữ mang thai Rh− cần lưu ý khi mang thai con Rh+ để tránh hiện tượng bất đồng Rh.
-
-Lưu ý:
-- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh để đảm bảo an toàn.
-', GETDATE(), GETDATE()),
-
-(2, N'Thông tin về nhóm máu A (Rh−)', N'
-Nhóm máu A (Rh−) là một nhóm máu hiếm, chiếm tỷ lệ nhỏ trong dân số, nhưng có ý nghĩa quan trọng trong y học.
-
-Đặc điểm:
-- Kháng nguyên: A
-- Kháng thể: anti-B
-- Yếu tố Rh: Âm tính (Rh−)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: A (Rh−), O (Rh−)
-- Có thể cho máu cho: A (Rh−), A (Rh+), AB (Rh−), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người Rh− cần cẩn trọng khi nhận máu để tránh phản ứng miễn dịch.
-
-Lưu ý:
-- Phụ nữ Rh− mang thai con Rh+ cần theo dõi và điều trị để tránh bệnh tan máu ở trẻ sơ sinh.
-', GETDATE(), GETDATE()),
-
-(3, N'Thông tin về nhóm máu B (Rh+)', N'
-Nhóm máu B (Rh+) là một nhóm máu phổ biến, có vai trò quan trọng trong truyền máu và chăm sóc sức khỏe.
-
-Đặc điểm:
-- Kháng nguyên: B
-- Kháng thể: anti-A
-- Yếu tố Rh: Dương tính (Rh+)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: B (Rh+), B (Rh−), O (Rh+), O (Rh−)
-- Có thể cho máu cho: B (Rh+), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người nhóm máu B (Rh+) cần lưu ý khi nhận máu để tránh phản ứng miễn dịch.
-
-Lưu ý:
-- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh.
-', GETDATE(), GETDATE()),
-
-(4, N'Thông tin về nhóm máu B (Rh−)', N'
-Nhóm máu B (Rh−) là một nhóm máu hiếm, có ý nghĩa quan trọng trong truyền máu và chăm sóc sức khỏe.
-
-Đặc điểm:
-- Kháng nguyên: B
-- Kháng thể: anti-A
-- Yếu tố Rh: Âm tính (Rh−)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: B (Rh−), O (Rh−)
-- Có thể cho máu cho: B (Rh−), B (Rh+), AB (Rh−), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người Rh− cần cẩn trọng khi nhận máu để tránh phản ứng miễn dịch.
-
-Lưu ý:
-- Phụ nữ Rh− mang thai con Rh+ cần theo dõi và điều trị để tránh bệnh tan máu ở trẻ sơ sinh.
-', GETDATE(), GETDATE()),
-
-(5, N'Thông tin về nhóm máu AB (Rh+)', N'
-Nhóm máu AB (Rh+) là nhóm máu hiếm, có khả năng nhận máu từ tất cả các nhóm máu khác, được gọi là "người nhận phổ thông".
-
-Đặc điểm:
-- Kháng nguyên: A và B
-- Kháng thể: Không có
-- Yếu tố Rh: Dương tính (Rh+)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: Tất cả các nhóm máu (A, B, AB, O) bất kể Rh
-- Có thể cho máu cho: AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người nhóm máu AB (Rh+) có thể nhận máu từ bất kỳ nhóm máu nào, giúp thuận lợi trong cấp cứu.
-
-Lưu ý:
-- Mặc dù có thể nhận máu từ nhiều nhóm, việc truyền máu vẫn cần kiểm tra kỹ lưỡng để đảm bảo an toàn.
-', GETDATE(), GETDATE()),
-
-(6, N'Thông tin về nhóm máu AB (Rh−)', N'
-Nhóm máu AB (Rh−) là nhóm máu hiếm nhất, chiếm tỷ lệ rất nhỏ trong dân số, có ý nghĩa đặc biệt trong truyền máu.
-
-Đặc điểm:
-- Kháng nguyên: A và B
-- Kháng thể: Không có
-- Yếu tố Rh: Âm tính (Rh−)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: AB (Rh−), A (Rh−), B (Rh−), O (Rh−)
-- Có thể cho máu cho: AB (Rh−), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người nhóm máu AB (Rh−) cần cẩn trọng khi nhận máu do tính hiếm của nhóm máu này.
-
-Lưu ý:
-- Việc tìm nguồn máu phù hợp cho người AB (Rh−) có thể gặp khó khăn, cần có kế hoạch trước.
-', GETDATE(), GETDATE()),
-
-(7, N'Thông tin về nhóm máu O (Rh+)', N'
-Nhóm máu O (Rh+) là nhóm máu phổ biến nhất, có khả năng cho máu cho nhiều nhóm khác, được gọi là "người cho phổ thông".
-
-Đặc điểm:
-- Kháng nguyên: Không có
-- Kháng thể: anti-A và anti-B
-- Yếu tố Rh: Dương tính (Rh+)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: O (Rh+), O (Rh−)
-- Có thể cho máu cho: O (Rh+), A (Rh+), B (Rh+), AB (Rh+)
-
-Ý nghĩa lâm sàng:
-- Người nhóm máu O (Rh+) có thể cho máu cho nhiều nhóm khác, rất quan trọng trong cấp cứu.
-
-Lưu ý:
-- Trước khi truyền máu, cần xác định chính xác nhóm máu và yếu tố Rh để đảm bảo an toàn.
-', GETDATE(), GETDATE()),
-
-(8, N'Thông tin về nhóm máu O (Rh−)', N'
-Nhóm máu O (Rh−) là nhóm máu hiếm, có khả năng cho máu cho tất cả các nhóm máu khác, được gọi là "người cho phổ thông".
-
-Đặc điểm:
-- Kháng nguyên: Không có
-- Kháng thể: anti-A và anti-B
-- Yếu tố Rh: Âm tính (Rh−)
-
-Khả năng truyền máu:
-- Có thể nhận máu từ: O (Rh−)
-- Có thể cho máu cho: Tất cả các nhóm máu (A, B, AB, O) bất kể Rh
-
-Ý nghĩa lâm sàng:
-- Người nhóm máu O (Rh−) rất quan trọng trong cấp cứu, có thể cho máu cho bất kỳ ai.
-
-Lưu ý:
-- Do tính hiếm, cần bảo tồn nguồn máu O (Rh−) cho các trường hợp khẩn cấp.
-', GETDATE(), GETDATE());
+INSERT INTO BlogPosts (PostID, Title, Content, CreatedAt) VALUES
+(1, N'Tại Sao Bạn Nên Hiến Máu Ít Nhất Một Lần Trong Đời', N'Hiến máu là một hành động nhân đạo có thể cứu sống nhiều người. Mỗi lần hiến máu bạn có thể cứu được tới ba người khác nhau nhờ vào việc tách máu thành các thành phần như hồng cầu, tiểu cầu và huyết tương. Việc hiến máu không chỉ mang lại lợi ích cho người nhận mà còn giúp cải thiện sức khỏe tim mạch, giảm nguy cơ mắc bệnh tim cho người hiến.', '2025-05-19 16:03:52'),
+(2, N'Chuẩn Bị Gì Trước Khi Hiến Máu?', N'Trước khi hiến máu, bạn nên đảm bảo cơ thể khỏe mạnh, ngủ đủ giấc và ăn nhẹ trước 2 tiếng. Tránh thức ăn nhiều dầu mỡ để đảm bảo chất lượng máu được lấy. Uống đủ nước cũng là điều rất quan trọng để giúp bạn hồi phục nhanh hơn sau khi hiến.', '2025-05-21 16:03:52'),
+(3, N'Quy Trình Hiến Máu Diễn Ra Như Thế Nào?', N'Quy trình hiến máu bao gồm các bước: đăng ký, kiểm tra sức khỏe, lấy máu, nghỉ ngơi sau khi hiến. Toàn bộ quá trình chỉ mất khoảng 30-45 phút. Dụng cụ được sử dụng trong quá trình lấy máu đều vô trùng và sử dụng một lần để đảm bảo an toàn cho người hiến.', '2025-05-23 16:03:52'),
+(4, N'Hiến Máu Định Kỳ – Một Lối Sống Đẹp', N'Hiến máu định kỳ không chỉ giúp cộng đồng duy trì nguồn máu dự trữ ổn định mà còn là một cách để theo dõi sức khỏe định kỳ. Mỗi người trưởng thành khỏe mạnh có thể hiến máu 3–4 lần mỗi năm và vẫn duy trì được sức khỏe bình thường.', '2025-05-25 16:03:52'),
+(5, N'Câu Chuyện Của Một Người Hiến Máu Ẩn Danh', N'Anh Nguyễn Văn A là một người hiến máu thường xuyên nhưng luôn giữ kín danh tính. Đối với anh, việc hiến máu là cách thể hiện lòng biết ơn cuộc sống và chia sẻ với những người cần. Câu chuyện của anh đã truyền cảm hứng cho rất nhiều người trẻ tham gia hiến máu.', '2025-05-28 16:03:52');
 GO
 
-INSERT INTO BlogPostTags (BlogPostID, TagID)
-VALUES
--- Bài 1: A Rh+
-(1, 1), (1, 5), (1, 7),
--- Bài 2: A Rh−
-(2, 1), (2, 6), (2, 7),
--- Bài 3: B Rh+
-(3, 2), (3, 5), (3, 7),
--- Bài 4: B Rh−
-(4, 2), (4, 6), (4, 7),
--- Bài 5: AB Rh+
-(5, 3), (5, 5), (5, 7),
--- Bài 6: AB Rh−
-(6, 3), (6, 6), (6, 7),
--- Bài 7: O Rh+
-(7, 4), (7, 5), (7, 7),
--- Bài 8: O Rh−
-(8, 4), (8, 6), (8, 7);
+INSERT INTO PostTags (PostID, TagID) VALUES
+(1, 12),
+(1, 20),
+(1, 25),
+(2, 10),
+(2, 14),
+(2, 37),
+(3, 11),
+(3, 35),
+(3, 18),
+(4, 13),
+(4, 36),
+(4, 14),
+(5, 24),
+(5, 26),
+(5, 25);
 GO
 
 INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare) VALUES
