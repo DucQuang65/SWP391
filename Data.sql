@@ -9,9 +9,9 @@ VALUES
 ('Admin');
 GO
 
-INSERT INTO HospitalInfo (ID, Name, Address, Phone, Email, WorkingHours, MapImageUrl)
+INSERT INTO HospitalInfo (ID, Name, Address, Phone, Email, WorkingHours, MapImageUrl, Latitude, Longitude)
 VALUES
-(1, N'Trung Tâm Hiến Máu', N'đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau@gmail.vn', N'Thứ 2 - Thứ 6: 7:00 - 17:00','https://maps.app.goo.gl/NhCZ66UD3kdH2bPM6'),
+(1, N'Trung Tâm Hiến Máu', N'đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau@gmail.vn', N'Thứ 2 - Thứ 6: 7:00 - 17:00','https://maps.app.goo.gl/NhCZ66UD3kdH2bPM6', '10.7751237', '106.6862143'),
 GO
 
 INSERT INTO Tags (TagID, TagName) VALUES
