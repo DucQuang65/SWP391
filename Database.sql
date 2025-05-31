@@ -33,13 +33,15 @@ CREATE TABLE Users (
 
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
-    ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn inser
+    ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
     Name NVARCHAR(255),
     Address NVARCHAR(255),
     Phone NVARCHAR(20),
     Email NVARCHAR(100),
     WorkingHours NVARCHAR(255),
-    MapImageUrl NVARCHAR(255) -- link ảnh bản đồ tĩnh Google Maps
+    MapImageUrl NVARCHAR(255) -- link gán = ảnh bản đồ tĩnh Google Maps,
+    Latitude FLOAT NOT NULL,
+    Longitude FLOAT NOT NULL;
 );
 
 
@@ -64,7 +66,7 @@ CREATE TABLE ArticleTags (
 
 -- BloodTypeTags table: For sorting blood type tags
 CREATE TABLE Tags(
-    TagID INT PRIMARY KEY IDENTITY(1,1),
+    TagID INT PRIMARY KEY,
     TagName NVARCHAR(50) NOT NULL, -- A+, O−, Truyền máu, Khẩn cấp
 );
 
