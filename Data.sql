@@ -644,38 +644,38 @@ INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare)
 ('A', 'Rh-', 'Whole', 3, 0);
 GO
 
-INSERT INTO BloodRequests (UserID, BloodGroup, RhType, BloodComponent, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
+INSERT INTO BloodRequests (UserID, BloodGroup, RhType, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
 VALUES
-(1, 'A', 'Rh+', 'Plasma', 2, 'High', DATEADD(DAY, 1, GETDATE()), 'Surgery', 0, GETDATE()),
-(2, 'O', 'Rh-', 'Whole Blood', 1, 'Medium', DATEADD(DAY, 2, GETDATE()), 'Accident', 0, GETDATE()),
-(3, 'B', 'Rh+', 'Platelets', 3, 'Low', DATEADD(DAY, 3, GETDATE()), 'Cancer treatment', 1, GETDATE()),
-(4, 'AB', 'Rh-', 'Red Cells', 2, 'High', DATEADD(DAY, 1, GETDATE()), 'Emergency', 2, GETDATE()),
-(5, 'O', 'Rh+', 'Whole Blood', 1, 'Medium', DATEADD(DAY, 2, GETDATE()), 'Anemia', 0, GETDATE());
+(1, 'A', 'Rh+', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Surgery', 0, GETDATE()), -- High = 2
+(2, 'O', 'Rh-', 1, 1, DATEADD(DAY, 2, GETDATE()), 'Accident', 0, GETDATE()), -- Medium = 1
+(3, 'B', 'Rh+', 3, 0, DATEADD(DAY, 3, GETDATE()), 'Cancer treatment', 1, GETDATE()), -- Low = 0
+(4, 'AB', 'Rh-', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Emergency', 2, GETDATE()),
+(5, 'O', 'Rh+', 1, 1, DATEADD(DAY, 2, GETDATE()), 'Anemia', 0, GETDATE());
 GO
 
 INSERT INTO BloodRequestHistory (UserID, RequestID, Status, TimeStamp)
 VALUES
-(1, 1, 'Requested', GETDATE()),
-(2, 2, 'Requested', GETDATE()),
-(3, 3, 'Accepted', GETDATE()),
-(4, 4, 'Completed', GETDATE()),
-(5, 5, 'Requested', GETDATE());
-GO
+(1, 1, 0, GETDATE()), -- Requested
+(2, 2, 0, GETDATE()),
+(3, 3, 1, GETDATE()), -- Accepted = Verified
+(4, 4, 4, GETDATE()), -- Completed
+(5, 5, 0, GETDATE());
 
-INSERT INTO BloodDonationHistory (UserID, FacilityID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, Notes)
-VALUES
-(1, 1, GETDATE(), 'A', 'Rh+', 'Plasma', 1, 'Routine donation'),
-(2, 2, GETDATE(), 'O', 'Rh-', 'Whole Blood', 1, 'After 6 months'),
-(3, 1, GETDATE(), 'B', 'Rh+', 'Platelets', 1, 'First time donor'),
-(4, 3, GETDATE(), 'AB', 'Rh-', 'Red Cells', 1, 'Voluntary'),
-(5, 2, GETDATE(), 'O', 'Rh+', 'Whole Blood', 1, 'No issues');
-GO
 
-INSERT INTO Notifications (UserID, Title, Message, IsRead, SENT)
+INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, Notes)
 VALUES
-(1, 'Donation Reminder', 'You can donate again in 2 weeks', 0, GETDATE()),
-(2, 'Urgent Request', 'We need your blood type urgently', 0, GETDATE()),
-(3, 'Thank You', 'Thanks for donating!', 1, GETDATE()),
-(4, 'Blood Request Approved', 'Your request has been approved', 1, GETDATE()),
-(5, 'New Article', 'Check out our latest blood donation guide', 0, GETDATE());
+(1, GETDATE(), 'A', 'Rh+', 'Plasma', 1, 'Routine donation'),
+(2, GETDATE(), 'O', 'Rh-', 'Whole', 1, 'After 6 months'),
+(3, GETDATE(), 'B', 'Rh+', 'Platelets', 1, 'First time donor'),
+(4, GETDATE(), 'AB', 'Rh-', 'RedCells', 1, 'Voluntary'),
+(5, GETDATE(), 'O', 'Rh+', 'Whole', 1, 'No issues');
+Go
+
+INSERT INTO Notifications (UserID, Title, Message, Type, IsRead, SentAt)
+VALUES
+(1, 'Nhắc Hiến Máu', 'Bạn có thể hiến lại sau 2 tuần', 'Reminder', 0, GETDATE()),
+(2, 'Yêu cầu khẩn cấp', 'Chúng tôi cần máu của bạn cho trường hợp khẩn cấp', 'Alert', 0, GETDATE()),
+(3, 'Cảm ơn', 'Cảm ơn bạn đã hiến máu!', 'Report', 1, GETDATE()),
+(4, 'Yêu cầu máu đã chấp nhận, 'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
+(5, 'Có 1 bài viết mới', 'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
 GO
