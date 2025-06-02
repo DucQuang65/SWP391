@@ -22,9 +22,9 @@ namespace Hien_mau
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "My API",
+                    Title = "HienMau API",
                     Version = "v1",
-                    Description = "Demo Swagger UI trong .NET 9"
+                    Description = "Swagger UI trong .NET 9"
                 });
             });
 
@@ -42,7 +42,7 @@ namespace Hien_mau
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HienMau API v1");
                 c.RoutePrefix = ""; 
             });
 
