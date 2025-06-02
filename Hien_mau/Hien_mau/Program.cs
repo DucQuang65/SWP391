@@ -24,7 +24,7 @@ namespace Hien_mau
                 {
                     Title = "HienMau API",
                     Version = "v1",
-                    Description = "Swagger UI trong .NET 9"
+                    Description = "Swagger HienMau UI trong .NET 9"
                 });
             });
 
