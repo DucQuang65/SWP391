@@ -33,29 +33,34 @@ INSERT INTO Tags (TagID, TagName) VALUES
 (13, N'Hiến Máu Định Kỳ'),
 (14, N'Sức Khoẻ'),
 (15, N'Nhóm Máu'),
-(16, N'Truyền Máu'),
-(17, N'Kiến Thức Y Khoa'),
-(18, N'Quy Trình Xử Lý Máu'),
-(19, N'Tổ Chức Hiến Máu'),
-(20, N'Cứu Người'),
-(21, N'Hiến Máu Toàn Phần'),
-(22, N'Hiến Tiểu Cầu'),
-(23, N'Kỹ Thuật Hiến Máu'),
-(24, N'Câu Chuyện Hiến Máu'),
-(25, N'Truyền Cảm Hứng'),
-(26, N'Người Hiến Ẩn Danh'),
-(27, N'Nhóm Máu O'),
-(28, N'Hiếm Máu'),
-(29, N'Kêu Gọi Hiến Máu'),
-(30, N'Sự Kiện Hiến Máu'),
-(31, N'Ngày Hội Hiến Máu'),
-(32, N'Đăng Ký Hiến Máu'),
-(33, N'FAQ Hiến Máu'),
-(34, N'Giải Đáp Thắc Mắc'),
-(35, N'Hiểu Đúng Hiến Máu'),
-(36, N'Hiến Máu Thường Xuyên'),
-(37, N'Chăm Sóc Sức Khoẻ'),
+(16, N'Kiến Thức Y Khoa'),
+(17, N'Quy Trình Xử Lý Máu'),
+(18, N'Tổ Chức Hiến Máu'),
+(19, N'Cứu Người'),
+(20, N'Hiến Máu Toàn Phần'),
+(21, N'Hiến Tiểu Cầu'),
+(22, N'Kỹ Thuật Hiến Máu'),
+(23, N'Câu Chuyện Hiến Máu'),
+(24, N'Truyền Cảm Hứng'),
+(25, N'Người Hiến Ẩn Danh'),
+(26, N'Phân Loại Máu'),
+(27, N'Hiến Máu'),
+(28, N'Kêu Gọi Hiến Máu'),
+(29, N'Sự Kiện Hiến Máu'),
+(30, N'Ngày Hội Hiến Máu'),
+(31, N'Đăng Ký Hiến Máu'),
+(32, N'FAQ Hiến Máu'),
+(33, N'Giải Đáp Thắc Mắc'),
+(34, N'Hiểu Đúng Hiến Máu'),
+(35, N'Hiến Máu Thường Xuyên'),
+(36, N'Chăm Sóc Sức Khoẻ'),
+(37, N'Lưu Ý Trước Hiến Máu');
 (38, N'Lưu Ý Sau Hiến Máu');
+(39, N'Hướng Dẫn Hiến Máu'),
+(40, N'Dinh Dưỡng Cho Người Hiến Máu'),
+(41, N'Theo Dõi Sức Khỏe'),
+(42, N'Sức Khỏe Tinh Thần'),
+(43, N'Phòng Bệnh');
 GO
 
 INSERT INTO BloodArticles (Title, Content, img_url)
@@ -520,7 +525,7 @@ Nhu cầu máu luôn ở mức cao, nhất là trong:
 
 Kết Luận
 👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', '2025-05-28 16:03:52'),
-(6, N'🩸 5. Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu
+(6, N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu
 
 Không Chỉ Là “Hiến Máu” – Hãy Hiểu Đúng Hơn
 Khi nghe đến “hiến máu”, nhiều người chỉ nghĩ đơn giản là lấy máu từ cơ thể người hiến để truyền cho người cần. Tuy nhiên, trong y học hiện đại, máu có thể được phân loại và hiến tách biệt theo nhu cầu điều trị. Hai hình thức phổ biến nhất là hiến máu toàn phần và hiến tiểu cầu – mỗi loại đều có quy trình, mục đích và lợi ích riêng biệt.
@@ -573,24 +578,62 @@ Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
 👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!','2025-04-28 10:23:52'),
+(7, '🩸Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu',
+'Đằng Sau Một Túi Máu – Là Một Cuộc Đời
+Hiến máu là hành động giản dị nhưng mang ý nghĩa sâu sắc. Mỗi đơn vị máu bạn hiến tặng không chỉ là những giọt chất lỏng đỏ tươi – mà là niềm hy vọng sống còn của một con người, một gia đình, thậm chí cả một thế hệ.
+
+Câu chuyện dưới đây là minh chứng rõ ràng nhất cho giá trị của một hành động nhỏ nhưng cứu cả một cuộc đời.
+
+1. Em Bé 5 Tuổi Và Cuộc Chiến Với Căn Bệnh Hiếm
+Tại khoa Huyết học – Bệnh viện Nhi Trung Ương, bé Linh (5 tuổi) mắc căn bệnh thiếu máu bất sản – một rối loạn hiếm gặp khiến cơ thể không thể tự sản sinh máu. Mỗi tháng, em cần truyền máu để duy trì sự sống.
+
+Một lần, lượng máu trong kho bệnh viện sụt giảm nghiêm trọng, đặc biệt là nhóm máu O – nhóm máu của Linh. Các bác sĩ chỉ còn 12 giờ để tìm máu nếu không, em sẽ rơi vào hôn mê do thiếu oxy nghiêm trọng.
+
+2. Người Lạ Trong Danh Sách Khẩn Cấp
+Khi thông tin được đăng tải lên mạng xã hội, anh Minh – một nhân viên văn phòng 32 tuổi sống gần đó – ngay lập tức đến trung tâm hiến máu.
+
+Là người từng hiến máu nhiều lần, anh Minh không ngần ngại khi biết ca bệnh khẩn cấp cần nhóm máu O. Sau khi xét nghiệm, anh đủ điều kiện và lập tức hiến tiểu cầu trực tiếp cho bé Linh.
+
+Chỉ vài giờ sau, máu được truyền đến bệnh viện, và kịp thời cứu sống em bé khỏi biến chứng nguy hiểm.
+
+3. Gặp Lại Sau Một Năm – Khoảnh Khắc Không Bao Giờ Quên
+Một năm sau, trong chương trình “Lễ hội Xuân Hồng”, bé Linh – giờ đã khỏe mạnh và đi học bình thường – được mời lên sân khấu. Em mang bó hoa nhỏ để cảm ơn những người đã từng hiến máu cứu mình. Trùng hợp, anh Minh cũng có mặt trong sự kiện với tư cách người hiến tiêu biểu.
+
+Khoảnh khắc hai người gặp nhau, cả hội trường vỡ òa trong xúc động. Em bé ôm lấy anh – người từng không quen biết – và nói:
+
+“Cháu cảm ơn chú, nếu không có chú, cháu sẽ không được đến lớp học với các bạn...”
+
+Không có món quà nào ý nghĩa hơn giây phút ấy.
+
+4. Một Đơn Vị Máu – Nhiều Hơn Bạn Nghĩ
+Một đơn vị máu có thể:
+
+Cứu sống người gặp tai nạn giao thông.
+
+Hồi sinh bệnh nhân xuất huyết nội.
+
+Duy trì sự sống cho những người bị bệnh máu mãn tính như tan máu bẩm sinh, ung thư máu...
+
+Mang đến cơ hội sống cho trẻ sơ sinh thiếu máu, người cần phẫu thuật tim mạch, ghép tạng...
+
+👉 Một người hiến máu, có thể cứu tới 3 người bệnh khi máu được tách thành các thành phần khác nhau.
+
+Kết Luận
+Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
+
+Hiến máu không mất đi – chỉ là đang trao đi sự sống.
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.','2025-05-30 10:13:52'),
 GO
 
 INSERT INTO PostTags (PostID, TagID) VALUES
-(1, 12),
-(1, 20),
-(1, 25),
-(2, 10),
-(2, 14),
-(2, 37),
-(3, 11),
-(3, 35),
-(3, 18),
-(4, 13),
-(4, 36),
-(4, 14),
-(5, 24),
-(5, 26),
-(5, 25);
+  -- Post 1:
+(1, 9),(1, 12),(1, 37),(1,38),(1,39),
+  -- Post 2:
+(2, 13),(2, 14),(2, 38),1,40),(1,41),
+  -- Post 3:
+(3, 12),(3, 13),(3, 42),(3, 43),
+  -- Post 4:
+(4, 8),(4, 15),(4, 26),(4, 27),
 GO
 
 INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare) VALUES
