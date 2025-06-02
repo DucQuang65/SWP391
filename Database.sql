@@ -1,5 +1,9 @@
 CREATE DATABASE BloodManagementSystem;
 GO
+
+USE BloodManagementSystem;
+GO
+
 -- Roles table: Stores user roles
 CREATE TABLE Roles (
     RoleID INT PRIMARY KEY IDENTITY(1,1),
@@ -52,13 +56,13 @@ CREATE TABLE BloodArticles (
     ArticleID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX) NOT NULL,
-    ImgUrl NVARCHAR(255),
+    ImgUrl NVARCHAR(255)
 );
 
 -- BloodTypeTags table: For sorting blood type tags
 CREATE TABLE Tags(
     TagID INT PRIMARY KEY,
-    TagName NVARCHAR(50) NOT NULL, -- A+, O−, Truyền máu, Khẩn cấp
+    TagName NVARCHAR(50) NOT NULL -- A+, O−, Truyền máu, Khẩn cấp
 );
 
 -- ArticleTags table: For sorting article tags
@@ -83,7 +87,7 @@ CREATE TABLE BlogPosts (
 );
 
 
--- BlogPostTagPostTags table: For sorting blogs
+-- BlogPostTags table: For sorting blogs
 CREATE TABLE BlogPostTags (
     PostID INT,
     TagID INT,
