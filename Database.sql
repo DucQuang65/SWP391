@@ -39,9 +39,9 @@ CREATE TABLE HospitalInfo (
     Phone NVARCHAR(20),
     Email NVARCHAR(100),
     WorkingHours NVARCHAR(255),
-    MapImageUrl NVARCHAR(255) -- link gán = ảnh bản đồ tĩnh Google Maps,
+    MapImageUrl NVARCHAR(255), -- link gán = ảnh bản đồ tĩnh Google Maps,
     Latitude FLOAT NOT NULL,
-    Longitude FLOAT NOT NULL;
+    Longitude FLOAT NOT NULL
 );
 
 
