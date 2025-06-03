@@ -29,7 +29,7 @@ namespace Hien_mau
             });
 
             builder.Services.AddDbContext<Hien_mauContext>(options => 
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
             var app = builder.Build();
 
