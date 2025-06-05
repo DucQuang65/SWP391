@@ -17,14 +17,14 @@ CREATE TABLE Users (
     FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
 
 
-    Email VARBINARY(MAX), -- AES encrypted
-    Phone VARBINARY(MAX), -- AES encrypted
+    Email NVARCHAR(MAX), -- AES encrypted
+    Phone NVARCHAR(11), -- AES encrypted
 
 
-    Name VARBINARY(MAX), -- AES encrypted
+    Name NVARCHAR(50), -- AES encrypted
     Age INT,
     Gender NVARCHAR(10), -- Male, Female, Other
-    Address VARBINARY(MAX), -- AES encrypted
+    Address NVARCHAR(MAX), -- AES encrypted
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
 
