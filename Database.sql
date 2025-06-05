@@ -19,7 +19,7 @@ CREATE TABLE Users (
 
     Email NVARCHAR(MAX), -- AES encrypted
     Phone NVARCHAR(11), -- AES encrypted
-
+	Password NVARCHAR(MAX),
 
     Name NVARCHAR(50), -- AES encrypted
     Age INT,
