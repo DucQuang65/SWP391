@@ -9,17 +9,19 @@ public partial class User
 
     public string FirebaseUid { get; set; } = null!;
 
-    public byte[]? Email { get; set; }
+    public string? Email { get; set; }
 
-    public byte[]? Phone { get; set; }
+    public string? Phone { get; set; }
 
-    public byte[]? Name { get; set; }
+    public string? Password { get; set; }
+
+    public string? Name { get; set; }
 
     public int? Age { get; set; }
 
     public string? Gender { get; set; }
 
-    public byte[]? Address { get; set; }
+    public string? Address { get; set; }
 
     public string? BloodGroup { get; set; }
 
