@@ -1,0 +1,72 @@
+// src/styles/pages/NotFoundPage.scss
+@use '../base/variables' as *;
+@use '../base/mixin' as *;
+
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-light;
+
+  &__content {
+    flex: 1;
+    @include flex-align(center, center); // Sử dụng mixin flex-align
+    flex-direction: column;
+    padding: $spacing-xxl $spacing-lg;
+    text-align: center;
+  }
+
+  &__error-code {
+    @include heading(120px, $primary-color); // Sử dụng mixin heading
+    font-weight: 800;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__title {
+    @include heading($font-size-xlarge, $text-color); // Sử dụng mixin heading
+    margin-bottom: $spacing-md;
+  }
+
+  &__message {
+    @include text($font-size-large, $text-secondary); // Sử dụng mixin text
+    margin-bottom: $spacing-xl;
+    max-width: 600px;
+  }
+
+  &__button {
+    @include primary-button; // Sử dụng mixin primary-button
+    text-decoration: none;
+  }
+}
+
+@include tablet {
+  .not-found-page {
+    &__error-code {
+      font-size: 100px;
+    }
+
+    &__title {
+      font-size: $font-size-large;
+    }
+
+    &__message {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+@include mobile {
+  .not-found-page {
+    &__error-code {
+      font-size: 80px;
+    }
+
+    &__title {
+      font-size: $font-size-base;
+    }
+
+    &__message {
+      font-size: $font-size-small;
+    }
+  }
+}
