@@ -1,7 +1,9 @@
 
 using Hien_mau.Data;
+using Hien_mau.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 
 namespace Hien_mau
 {
@@ -31,12 +33,15 @@ namespace Hien_mau
             builder.Services.AddDbContext<Hien_mauContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
-            var app = builder.Build();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
+            var app = builder.Build();
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.MapScalarApiReference();
             }
 
             app.UseSwagger();

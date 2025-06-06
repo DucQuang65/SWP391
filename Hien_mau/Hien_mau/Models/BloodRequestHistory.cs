@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
 public partial class BloodRequestHistory
 {
+    [Key]
     public int HistoryId { get; set; }
 
     public int RequestId { get; set; }

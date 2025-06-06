@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
 public partial class BlogPost
 {
+    [Key]
     public int PostId { get; set; }
 
     public string Title { get; set; } = null!;

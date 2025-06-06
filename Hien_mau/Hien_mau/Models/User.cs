@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
 public partial class User
 {
+    [Key]
     public int UserId { get; set; }
 
     public string FirebaseUid { get; set; } = null!;

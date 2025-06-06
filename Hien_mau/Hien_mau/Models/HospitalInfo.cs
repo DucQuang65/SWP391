@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
 public partial class HospitalInfo
 {
+    [Key]
     public int Id { get; set; }
 
     public string? Name { get; set; }

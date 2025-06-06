@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
 public partial class Tag
 {
+    [Key]
     public int TagId { get; set; }
 
     public string TagName { get; set; } = null!;
