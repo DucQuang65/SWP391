@@ -20,7 +20,7 @@ import ScrollToTop from "../../components/common/ScrollToTop";
 
 const { Panel } = Collapse;
 
-const GuestHomePage = ({ CustomNavbar, hideNavbar }) => {
+const GuestHomePage = ({ CustomNavbar }) => {
   const [emergencyRequests, setEmergencyRequests] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const questionsPerPage = 5;
@@ -361,7 +361,7 @@ const GuestHomePage = ({ CustomNavbar, hideNavbar }) => {
 
   return (
     <>
-      {!hideNavbar && (CustomNavbar ? <CustomNavbar /> : <GuestNavbar />)}
+      {CustomNavbar ? <CustomNavbar /> : <GuestNavbar />}
       <div className="guest-home-page">
         <section
           className="hero-section"

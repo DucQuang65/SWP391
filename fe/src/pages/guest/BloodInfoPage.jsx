@@ -258,7 +258,7 @@ const documents = [
   },
 ];
 
-const BloodInfoPage = ({ CustomNavbar, hideNavbar }) => {
+const BloodInfoPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState({}); // State quản lý trang hiện tại cho mỗi danh mục
@@ -327,7 +327,7 @@ const BloodInfoPage = ({ CustomNavbar, hideNavbar }) => {
 
   return (
     <>
-      {!hideNavbar && (CustomNavbar ? <CustomNavbar /> : <GuestNavbar />)}
+      <GuestNavbar />
       <div className="guest-home-page">
         <section className="content-section">
           <div className="page-header">

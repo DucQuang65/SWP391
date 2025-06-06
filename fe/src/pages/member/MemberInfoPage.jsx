@@ -15,7 +15,8 @@ const genders = [
   { value: "other", label: "Khác" },
 ];
 
-const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localStorage (nếu có)
+const MemberInfoPage = () => {
+  // Lấy thông tin đã đăng ký từ localStorage (nếu có)
   const storedInfo = JSON.parse(localStorage.getItem("memberInfo") || "{}");
   const [form, setForm] = useState({
     documentType: storedInfo.documentType || "cccd",
@@ -26,9 +27,6 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
     province: storedInfo.province || "",
     district: storedInfo.district || "",
     ward: storedInfo.ward || "",
-    provinceName: storedInfo.provinceName || "",
-    districtName: storedInfo.districtName || "",
-    wardName: storedInfo.wardName || "",
     address: storedInfo.address || "",
     email: storedInfo.email || "",
     phone: storedInfo.phone || "",
@@ -39,15 +37,16 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
   const [wardList, setWardList] = useState([]);
   const [isValid, setIsValid] = useState(false);
 
-  // Xác định trường nào đã được đăng ký (email hoặc phone) - bỏ logic cũ
-  // const registeredEmail = storedInfo.email || "";
-  // const registeredPhone = storedInfo.phone || "";
+  // Xác định trường nào đã được đăng ký (email hoặc phone)
+  const registeredEmail = storedInfo.email || "";
+  const registeredPhone = storedInfo.phone || "";
 
   // Load city/district/ward data
   useEffect(() => {
     axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json")
       .then(res => setCityList(res.data));
   }, []);
+
   useEffect(() => {
     if (form.province) {
       const city = cityList.find(c => c.Id === form.province);
@@ -55,7 +54,7 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
     } else {
       setDistrictList([]);
     }
-    // Không reset district và ward ở đây nữa vì đã xử lý trong handleChange
+    setForm(f => ({ ...f, district: "", ward: "" }));
   }, [form.province, cityList]);
 
   useEffect(() => {
@@ -65,7 +64,7 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
     } else {
       setWardList([]);
     }
-    // Không reset ward ở đây nữa vì đã xử lý trong handleChange
+    setForm(f => ({ ...f, ward: "" }));
   }, [form.district, districtList]);
 
   // Validation + enable/disable button
@@ -73,46 +72,23 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
     setIsValid(validate());
     // eslint-disable-next-line
   }, [form]);
+
   // Validation
   const validate = () => {
     const newErrors = {};
-    // Ràng buộc số giấy tờ
-    if (!form.documentNumber) {
-      newErrors.documentNumber = "Vui lòng nhập số giấy tờ.";
-    } else {
-      if (form.documentType === "cccd") {
-        if (!/^\d{12}$/.test(form.documentNumber)) {
-          newErrors.documentNumber = "Căn cước công dân phải gồm đúng 12 số.";
-        }
-      } else if (form.documentType === "cmnd") {
-        if (!/^\d{9}$/.test(form.documentNumber) && !/^\d{12}$/.test(form.documentNumber)) {
-          newErrors.documentNumber = "CMND phải gồm đúng 9 hoặc 12 số.";
-        }
-      }
-      // Hộ chiếu không kiểm tra độ dài
-    }
+    if (!form.documentNumber) newErrors.documentNumber = "Vui lòng nhập số giấy tờ.";
     if (!form.fullName) newErrors.fullName = "Vui lòng nhập họ và tên.";
-
-    // Validate ngày sinh - không được chọn ngày trong tương lai
-    if (!form.dob) {
-      newErrors.dob = "Vui lòng chọn ngày sinh.";
-    } else {
-      const today = new Date();
-      const selectedDate = new Date(form.dob);
-      if (selectedDate > today) {
-        newErrors.dob = "Vui lòng chọn đúng ngày sinh";
-      }
-    }
-
+    if (!form.dob) newErrors.dob = "Vui lòng chọn ngày sinh.";
     if (!form.province) newErrors.province = "Vui lòng chọn tỉnh/thành phố.";
     if (!form.district) newErrors.district = "Vui lòng chọn quận/huyện.";
     if (!form.ward) newErrors.ward = "Vui lòng chọn phường/xã.";
     if (!form.address) newErrors.address = "Vui lòng nhập số nhà, tên đường.";
-
-    // Email/phone: chỉ bắt buộc 1 trong 2
+    // Email/phone: chỉ bắt buộc 1 trong 2, nhưng nếu đã đăng ký thì không bắt buộc cái còn lại
     if (!form.email && !form.phone) {
-      newErrors.email = "Cần nhập email hoặc số điện thoại.";
-      newErrors.phone = "Cần nhập email hoặc số điện thoại.";
+      if (!registeredEmail && !registeredPhone) {
+        newErrors.email = "Cần nhập email hoặc số điện thoại.";
+        newErrors.phone = "Cần nhập email hoặc số điện thoại.";
+      }
     } else {
       if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) {
         newErrors.email = "Email không hợp lệ.";
@@ -123,62 +99,18 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }; const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // Lưu tên thay vì ID cho province, district, ward
-    if (name === 'province') {
-      const selectedCity = cityList.find(c => c.Id === value);
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-        provinceName: selectedCity ? selectedCity.Name : '',
-        // Reset district và ward khi thay đổi province
-        district: '',
-        ward: '',
-        districtName: '',
-        wardName: ''
-      }));
-    } else if (name === 'district') {
-      const selectedDistrict = districtList.find(d => d.Id === value);
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-        districtName: selectedDistrict ? selectedDistrict.Name : '',
-        // Reset ward khi thay đổi district
-        ward: '',
-        wardName: ''
-      }));
-    } else if (name === 'ward') {
-      const selectedWard = wardList.find(w => w.Id === value);
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-        wardName: selectedWard ? selectedWard.Name : ''
-      }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Tạo địa chỉ đầy đủ từ các thành phần
-      const fullAddress = [
-        form.address,
-        form.wardName,
-        form.districtName,
-        form.provinceName
-      ].filter(Boolean).join(', ');
-
-      const dataToSave = {
-        ...form,
-        fullAddress: fullAddress
-      };
-
-      localStorage.setItem("memberInfo", JSON.stringify(dataToSave));
+      localStorage.setItem("memberInfo", JSON.stringify(form));
       alert("Lưu thông tin thành công!");
-      console.log("Thông tin đã lưu:", dataToSave);
     }
   };
 
@@ -205,42 +137,20 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
                     <option key={d.value} value={d.value}>{d.label}</option>
                   ))}
                 </select>
-              </div>              <div className="form-group input-box">
+              </div>
+              <div className="form-group input-box">
                 <label style={{ fontSize: "1.1rem" }}>Số {form.documentType === "passport" ? "hộ chiếu" : form.documentType === "cmnd" ? "chứng minh nhân dân" : "căn cước công dân"} <span className="text-danger">*</span></label>
-                <input
-                  type="text"
-                  className={`form-control form-control-lg${errors.documentNumber ? " is-invalid" : ""}`}
-                  name="documentNumber"
-                  value={form.documentNumber}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  placeholder={`Nhập ${form.documentType === "passport" ? "số hộ chiếu" : form.documentType === "cmnd" ? "số CMND (9 hoặc 12 số)" : "số CCCD (12 số)"}`}
-                />
+                <input type="text" className={`form-control form-control-lg${errors.documentNumber ? " is-invalid" : ""}`} name="documentNumber" value={form.documentNumber} onChange={handleChange} style={{ fontSize: "1.1rem" }} />
                 {errors.documentNumber && <div className="invalid-feedback">{errors.documentNumber}</div>}
-              </div>              <div className="form-group input-box">
+              </div>
+              <div className="form-group input-box">
                 <label style={{ fontSize: "1.1rem" }}>Họ và tên <span className="text-danger">*</span></label>
-                <input
-                  type="text"
-                  className={`form-control form-control-lg${errors.fullName ? " is-invalid" : ""}`}
-                  name="fullName"
-                  value={form.fullName}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  placeholder="Nhập họ và tên đầy đủ"
-                />
+                <input type="text" className={`form-control form-control-lg${errors.fullName ? " is-invalid" : ""}`} name="fullName" value={form.fullName} onChange={handleChange} style={{ fontSize: "1.1rem" }} />
                 {errors.fullName && <div className="invalid-feedback">{errors.fullName}</div>}
               </div>
               <div className="form-group input-box">
                 <label style={{ fontSize: "1.1rem" }}>Ngày sinh <span className="text-danger">*</span></label>
-                <input
-                  type="date"
-                  className={`form-control form-control-lg${errors.dob ? " is-invalid" : ""}`}
-                  name="dob"
-                  value={form.dob}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  max={new Date().toISOString().split('T')[0]}
-                />
+                <input type="date" className={`form-control form-control-lg${errors.dob ? " is-invalid" : ""}`} name="dob" value={form.dob} onChange={handleChange} style={{ fontSize: "1.1rem" }} />
                 {errors.dob && <div className="invalid-feedback">{errors.dob}</div>}
               </div>
               <div className="form-group input-box">
@@ -282,45 +192,22 @@ const MemberInfoPage = () => {  // Lấy thông tin đã đăng ký từ localSt
                   ))}
                 </select>
                 {errors.ward && <div className="invalid-feedback">{errors.ward}</div>}
-              </div>              <div className="form-group input-box">
+              </div>
+              <div className="form-group input-box">
                 <label style={{ fontSize: "1.1rem" }}>Số nhà, tên đường <span className="text-danger">*</span></label>
-                <input
-                  type="text"
-                  className={`form-control form-control-lg${errors.address ? " is-invalid" : ""}`}
-                  name="address"
-                  value={form.address}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  placeholder="Nhập số nhà, tên đường"
-                />
+                <input type="text" className={`form-control form-control-lg${errors.address ? " is-invalid" : ""}`} name="address" value={form.address} onChange={handleChange} style={{ fontSize: "1.1rem" }} />
                 {errors.address && <div className="invalid-feedback">{errors.address}</div>}
               </div>
               <div className="form-group input-box">
-                <label style={{ fontSize: "1.1rem" }}>Email</label>
-                <input
-                  type="email"
-                  className={`form-control form-control-lg${errors.email ? " is-invalid" : ""}`}
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  placeholder="Nhập địa chỉ email"
-                />
+                <label style={{ fontSize: "1.1rem" }}>Email {registeredEmail ? <span className="text-success">(Đã đăng ký)</span> : null}</label>
+                <input type="email" className={`form-control form-control-lg${errors.email ? " is-invalid" : ""}`} name="email" value={form.email} onChange={handleChange} disabled={!!registeredEmail} style={{ fontSize: "1.1rem" }} />
                 {errors.email && <div className="invalid-feedback">{errors.email}</div>}
               </div>
               <div className="form-group input-box">
-                <label style={{ fontSize: "1.1rem" }}>Số điện thoại</label>
-                <input
-                  type="text"
-                  className={`form-control form-control-lg${errors.phone ? " is-invalid" : ""}`}
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  style={{ fontSize: "1.1rem" }}
-                  placeholder="Nhập số điện thoại (10 số, bắt đầu bằng 0)"
-                />
-                {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}              </div>
-
+                <label style={{ fontSize: "1.1rem" }}>Số điện thoại {registeredPhone ? <span className="text-success">(Đã đăng ký)</span> : null}</label>
+                <input type="text" className={`form-control form-control-lg${errors.phone ? " is-invalid" : ""}`} name="phone" value={form.phone} onChange={handleChange} disabled={!!registeredPhone} style={{ fontSize: "1.1rem" }} />
+                {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
+              </div>
             </div>
           </form>
           <div className="member-info-actions">

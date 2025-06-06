@@ -5,7 +5,7 @@ import GuestNavbar from "../../components/guest/GuestNavbar";
 import Footer from "../../components/common/Footer";
 import ScrollToTop from "../../components/common/ScrollToTop";
 
-const BloodDonationGuide = ({ CustomNavbar, hideNavbar }) => {
+const BloodDonationGuide = () => {
   const guideSteps = [
     {
       step: 1,
@@ -46,7 +46,7 @@ const BloodDonationGuide = ({ CustomNavbar, hideNavbar }) => {
 
   return (
     <>
-      {!hideNavbar && (CustomNavbar ? <CustomNavbar /> : <GuestNavbar />)}
+      <GuestNavbar />
       <div className="guest-home-page">
         <section className="donation-guide-section">
           <div className="guide-header">
