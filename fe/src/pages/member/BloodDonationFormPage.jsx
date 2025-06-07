@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Slidebar from "../../components/member/Slidebar.jsx";
+import authService from "../../services/authService";
 import "../../styles/pages/BloodDonationFormPage.scss";
 import MemberNavbar from "../../components/member/MemberNavbar.jsx";
 import CheckInformation from "../../components/member/CheckInformation.jsx";
 import TimeAndLocation from "../../components/member/TimeAndLocation.jsx";
 import QuestionForm from "../../components/member/QuestionForm.jsx";
-
 
 const BloodDonationFormPage = () => {
     const [step, setStep] = useState(0);
@@ -35,10 +35,29 @@ const BloodDonationFormPage = () => {
     const [questionnaireAnswers, setQuestionnaireAnswers] = useState({});
 
     useEffect(() => {
-        // Lấy thông tin từ localStorage nếu có
-        const info = JSON.parse(localStorage.getItem("memberInfo") || "{}");
-        if (info && Object.keys(info).length > 0) {
-            setForm(f => ({ ...f, ...info }));
+        // Lấy thông tin từ user profile trước, sau đó từ localStorage
+        const currentUser = authService.getCurrentUser();
+        const userProfile = currentUser?.profile || {};
+        const localInfo = JSON.parse(localStorage.getItem("memberInfo") || "{}");
+
+        // Ưu tiên thông tin từ user profile
+        const combinedInfo = {
+            ...localInfo,
+            ...userProfile,
+            dob: userProfile.dateOfBirth || localInfo.dob || "",
+            documentNumber: userProfile.documentNumber || localInfo.documentNumber || "",
+            fullName: userProfile.fullName || localInfo.fullName || "",
+            gender: userProfile.gender || localInfo.gender || "",
+            province: userProfile.province || localInfo.province || "",
+            district: userProfile.district || localInfo.district || "",
+            ward: userProfile.ward || localInfo.ward || "",
+            address: userProfile.address || localInfo.address || "",
+            email: userProfile.email || localInfo.email || "",
+            phone: userProfile.phone || localInfo.phone || "",
+        };
+
+        if (Object.keys(combinedInfo).length > 0) {
+            setForm((f) => ({ ...f, ...combinedInfo }));
         }
     }, []);
 
@@ -56,14 +75,16 @@ const BloodDonationFormPage = () => {
         if (!form.email && !form.phone) {
             newErrors.email = "Bắt buộc 1 trong 2";
             newErrors.phone = "Bắt buộc 1 trong 2";
-        } setErrors(newErrors);
+        }
+        setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
+    // Update questionnaire answer
     const updateQuestionnaireAnswer = (questionName, value) => {
-        setQuestionnaireAnswers(prev => ({
+        setQuestionnaireAnswers((prev) => ({
             ...prev,
-            [questionName]: value
+            [questionName]: value,
         }));
     };
 
