@@ -1,4 +1,5 @@
-
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Hien_mau.Data;
 using Hien_mau.Services;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,30 @@ namespace Hien_mau
                     Version = "v1",
                     Description = "Swagger HienMau UI trong .NET 9"
                 });
+            });
+
+            // Register FirebaseAdmin with google-services.json
+            builder.Services.AddSingleton(provider =>
+            {
+                var configuration = provider.GetRequiredService<IConfiguration>();
+                var projectRoot = Directory.GetCurrentDirectory();
+                var googleServicesPath = Path.Combine(projectRoot, "google-services.json");
+
+                if (!File.Exists(googleServicesPath))
+                {
+                    throw new FileNotFoundException("google-services.json not found in project root");
+                }
+
+                var serviceAccountJson = File.ReadAllText(googleServicesPath);
+                var projectId = configuration["Firebase:ProjectId"]
+                    ?? throw new InvalidOperationException("Firebase ProjectId is missing");
+
+                var firebaseApp = FirebaseApp.Create(new AppOptions
+                {
+                    Credential = GoogleCredential.FromJson(serviceAccountJson),
+                    ProjectId = projectId
+                });
+                return firebaseApp;
             });
 
             builder.Services.AddDbContext<Hien_mauContext>(options => 

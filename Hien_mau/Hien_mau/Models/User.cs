@@ -9,12 +9,16 @@ public partial class User
     [Key]
     public int UserId { get; set; }
 
+    [Required]
     public string FirebaseUid { get; set; } = null!;
 
+    [EmailAddress]
     public string? Email { get; set; }
 
     public string? Phone { get; set; }
 
+    // Password is not stored locally; Firebase handles it
+    [Obsolete("Password is managed by Firebase Authentication")]
     public string? Password { get; set; }
 
     public string? Name { get; set; }
