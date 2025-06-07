@@ -700,6 +700,17 @@ const QuestionForm = ({
                             className="btn btn-danger"
                             onClick={(e) => {
                                 e.preventDefault();
+                                // Danh sách các câu hỏi bắt buộc phải trả lời
+                                const requiredQuestions = [
+                                    'q1', 'q2', 'q3', 'q4a', 'q4b', 'q4c', 'q5a', 'q5b', 'q5c', 'q5d', 'q5e', 'q5f', 'q5g', 'q5h', 'q5i', 'q5j',
+                                    'q6a', 'q6b', 'q7a', 'q8a', 'q9a', 'q9b'
+                                ];
+                                const allAnswered = requiredQuestions.every(key => questionnaireAnswers[key] === 'yes' || questionnaireAnswers[key] === 'no');
+                                if (!allAnswered) {
+                                    setShowFail(true);
+                                    setShowSuccess(false);
+                                    return;
+                                }
                                 // Chỉ kiểm tra các câu trả lời loại trừ, bỏ qua q1 và q2_detail
                                 const hasYes = Object.keys(questionnaireAnswers).some(
                                     (key) => key !== 'q1' && key !== 'q2_detail' && questionnaireAnswers[key] === 'yes'
@@ -725,7 +736,17 @@ const QuestionForm = ({
                     {showFail && (
                         <div className="fail-notification">
                             <i className="bi bi-x-circle-fill"></i>
-                            ĐĂNG KÝ HIẾN MÁU KHÔNG THÀNH CÔNG DO KHÔNG ĐỦ ĐIỀU KIỆN. VUI LÒNG KIỂM TRA LẠI CÁC CÂU TRẢ LỜI!
+                            {(() => {
+                                const requiredQuestions = [
+                                    'q1', 'q2', 'q3', 'q4a', 'q4b', 'q4c', 'q5a', 'q5b', 'q5c', 'q5d', 'q5e', 'q5f', 'q5g', 'q5h', 'q5i', 'q5j',
+                                    'q6a', 'q6b', 'q7a', 'q8a', 'q9a', 'q9b'
+                                ];
+                                const unanswered = requiredQuestions.filter(key => questionnaireAnswers[key] !== 'yes' && questionnaireAnswers[key] !== 'no');
+                                if (unanswered.length > 0) {
+                                    return "Vui lòng trả lời đầy đủ tất cả các câu hỏi trong phiếu sàng lọc!";
+                                }
+                                return "ĐĂNG KÝ HIẾN MÁU KHÔNG THÀNH CÔNG DO KHÔNG ĐỦ ĐIỀU KIỆN. VUI LÒNG KIỂM TRA LẠI CÁC CÂU TRẢ LỜI!";
+                            })()}
                         </div>
                     )}
                 </div>
