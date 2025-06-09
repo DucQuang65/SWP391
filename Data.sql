@@ -13,11 +13,11 @@ GO
 -- Insert data into Users table
 INSERT INTO Users (FirebaseUID, Email, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
 VALUES
-    ('firebase_uid_1', NULL, NULL, NULL, 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
-    ('firebase_uid_2', NULL, NULL, NULL, 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
-    ('firebase_uid_3', NULL, NULL, NULL, 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL), -- BloodManager
-    ('firebase_uid_4', NULL, NULL, NULL, 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL), -- Admin
-    ('firebase_uid_5', NULL, NULL, NULL, 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL); -- Member
+    ('firebase_uid_1', 'vinhntqse180354@fpt.edu.vn', '123456', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
+    ('firebase_uid_2', 'kienlvse180681@fpt.edu.vn','234567', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
+    ('firebase_uid_3', 'xpnhi023@gmail.com','345678', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL), -- BloodManager
+    ('firebase_uid_4', 'vukhanhnhu@gmail.com','456789', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL), -- Admin
+    ('firebase_uid_5', 'ducquang0565@gmail.com', '567890', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL); -- Member
 GO
 
 -- Insert data into HospitalInfo table
