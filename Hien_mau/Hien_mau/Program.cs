@@ -31,28 +31,41 @@ namespace Hien_mau
                 });
             });
 
-            // Register FirebaseAdmin with google-services.json
-            builder.Services.AddSingleton(provider =>
+            //// Register FirebaseAdmin with google-services.json
+            //builder.Services.AddSingleton(provider =>
+            //{
+            //    var configuration = provider.GetRequiredService<IConfiguration>();
+            //    var projectRoot = Directory.GetCurrentDirectory();
+            //    var googleServicesPath = Path.Combine(projectRoot, "google-services.json");
+
+            //    if (!File.Exists(googleServicesPath))
+            //    {
+            //        throw new FileNotFoundException("google-services.json not found in project root");
+            //    }
+
+            //    var serviceAccountJson = File.ReadAllText(googleServicesPath);
+            //    var projectId = configuration["Firebase:ProjectId"]
+            //        ?? throw new InvalidOperationException("Firebase ProjectId is missing");
+
+            //    var firebaseApp = FirebaseApp.Create(new AppOptions
+            //    {
+            //        Credential = GoogleCredential.FromJson(serviceAccountJson),
+            //        ProjectId = projectId
+            //    });
+            //    return firebaseApp;
+            //});
+
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options =>
             {
-                var configuration = provider.GetRequiredService<IConfiguration>();
-                var projectRoot = Directory.GetCurrentDirectory();
-                var googleServicesPath = Path.Combine(projectRoot, "google-services.json");
-
-                if (!File.Exists(googleServicesPath))
-                {
-                    throw new FileNotFoundException("google-services.json not found in project root");
-                }
-
-                var serviceAccountJson = File.ReadAllText(googleServicesPath);
-                var projectId = configuration["Firebase:ProjectId"]
-                    ?? throw new InvalidOperationException("Firebase ProjectId is missing");
-
-                var firebaseApp = FirebaseApp.Create(new AppOptions
-                {
-                    Credential = GoogleCredential.FromJson(serviceAccountJson),
-                    ProjectId = projectId
-                });
-                return firebaseApp;
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.WithOrigins("https://mail-mate-ai-plugin-page.vercel.app", "http://localhost:3000", "https://localhost:3000") // FE domain
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();                             
+                    });
             });
 
             builder.Services.AddDbContext<Hien_mauContext>(options => 
@@ -76,6 +89,7 @@ namespace Hien_mau
                 c.RoutePrefix = ""; 
             });
 
+            app.UseCors("_myAllowSpecificOrigins");
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
