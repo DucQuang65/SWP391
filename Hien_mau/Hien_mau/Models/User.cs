@@ -16,9 +16,8 @@ public partial class User
     public string? Email { get; set; }
 
     public string? Phone { get; set; }
-
-    // Password is not stored locally; Firebase handles it
-    [Obsolete("Password is managed by Firebase Authentication")]
+    
+    [Required]
     public string? Password { get; set; }
 
     public string? Name { get; set; }

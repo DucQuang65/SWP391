@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Hien_mau.Services
 {
@@ -15,12 +16,11 @@ namespace Hien_mau.Services
     {
         private readonly Hien_mauContext _context;
         private readonly IConfiguration _configuration;
-        private readonly FirebaseApp _firebaseApp;
-        public AuthService(Hien_mauContext context, IConfiguration configuration, FirebaseApp firebaseApp)
+
+        public AuthService(Hien_mauContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
-            _firebaseApp = firebaseApp;
         }
         public async Task<(string? Token, string? IdToken)> LoginAsync(UserDto request)
         {
@@ -32,12 +32,12 @@ namespace Hien_mau.Services
                     throw new ArgumentException("IdToken is required");
                 }
 
-                // Verify IdToken with FirebaseAdmin
-                var decodedToken = await FirebaseAuth.GetAuth(_firebaseApp).VerifyIdTokenAsync(request.IdToken);
-                var firebaseUid = decodedToken.Uid;
+                //// Verify IdToken with FirebaseAdmin
+                //var decodedToken = await FirebaseAuth.GetAuth(_firebaseApp).VerifyIdTokenAsync(request.IdToken);
+                //var firebaseUid = decodedToken.Uid;
 
                 // Find user in local database
-                var localUser = await _context.Users.FirstOrDefaultAsync(u => u.FirebaseUid == firebaseUid);
+                var localUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email && u.Password == request.Password);
                 if (localUser == null)
                 {
                     return (null, null); // User not registered in local DB
@@ -76,13 +76,12 @@ namespace Hien_mau.Services
                 }
 
                 // Verify IdToken
-                var decodedToken = await FirebaseAuth.GetAuth(_firebaseApp).VerifyIdTokenAsync(request.IdToken);
-                var firebaseUid = decodedToken.Uid;
+                //var decodedToken = await FirebaseAuth.GetAuth(_firebaseApp).VerifyIdTokenAsync(request.IdToken);
+                //var firebaseUid = decodedToken.Uid;
 
                 // Create user in local database
                 var localUser = new User
                 {
-                    FirebaseUid = firebaseUid,
                     Email = request.Email,
                     Password = null, // Firebase handles password
                     Status = 1,

@@ -30,7 +30,19 @@ namespace Hien_mau
                     Description = "Swagger HienMau UI trong .NET 9"
                 });
             });
+            const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5101/", "http://localhost:5173/", "http://localhost:3000") // FE domain
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); // If use cookie                          
+                    });
+            });
             //// Register FirebaseAdmin with google-services.json
             //builder.Services.AddSingleton(provider =>
             //{
@@ -55,26 +67,13 @@ namespace Hien_mau
             //    return firebaseApp;
             //});
 
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    policy =>
-                    {
-                        policy.WithOrigins("https://mail-mate-ai-plugin-page.vercel.app", "http://localhost:3000", "https://localhost:3000") // FE domain
-                              .AllowAnyHeader()
-                              .AllowAnyMethod();                             
-                    });
-            });
-
-            builder.Services.AddDbContext<Hien_mauContext>(options => 
+            builder.Services.AddDbContext<Hien_mauContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
             builder.Services.AddScoped<IAuthService, AuthService>();
 
             var app = builder.Build();
-            
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -86,7 +85,7 @@ namespace Hien_mau
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "HienMau API v1");
-                c.RoutePrefix = ""; 
+                c.RoutePrefix = "";
             });
 
             app.UseCors("_myAllowSpecificOrigins");
