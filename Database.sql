@@ -15,11 +15,10 @@ CREATE TABLE Roles (
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
     FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
-
-
+	
     Email NVARCHAR(MAX), -- AES encrypted
+    Password NVARCHAR(MAX), -- Hash encrypted
     Phone NVARCHAR(11), -- AES encrypted
-	Password NVARCHAR(MAX),
 
     Name NVARCHAR(50), -- AES encrypted
     Age INT,
