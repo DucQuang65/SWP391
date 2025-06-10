@@ -24,21 +24,24 @@ namespace Hien_mau.Controllers
 
             var user = await _authService.RegisterAsync(request);
             if (user == null)
-                return BadRequest("Email already exists or invalid IdToken.");
+                return BadRequest("Email already exists.");
 
             return Ok(user);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<String>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(UserDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var (token, idToken) = await _authService.LoginAsync(request);
-            if (token == null || idToken == null)
-                return BadRequest("Invalid IdToken or user not registered");
-            return Ok(new { Token = token, IdToken = idToken });
+            var result = await _authService.LoginAsync(request);            
+            if (result == null)
+            {
+                return BadRequest("Invalid username or password");
+            }
+
+            return Ok(result);
         }
         
     }
