@@ -11,7 +11,7 @@ VALUES
 GO
 
 -- Insert data into Users table
-INSERT INTO Users (FirebaseUID, Email, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
+INSERT INTO Users (FirebaseUID, Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
 VALUES
     ('firebase_uid_1', 'vinhntqse180354@fpt.edu.vn', '123456', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
     ('firebase_uid_2', 'kienlvse180681@fpt.edu.vn','234567', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
@@ -681,7 +681,7 @@ GO
 -- Insert data into BloodRequests table
 INSERT INTO BloodRequests (UserID, BloodGroup, RhType, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
 VALUES
-    (1, 'A', 'Rh+', 2, 2, DATE Hugh(DAY, 1, GETDATE()), 'Surgery', 0, GETDATE()), -- High = 2
+    (1, 'A', 'Rh+', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Surgery', 0, GETDATE()), -- High = 2
     (2, 'O', 'Rh-', 1, 1, DATEADD(DAY, 2, GETDATE()), 'Accident', 0, GETDATE()), -- Medium = 1
     (3, 'B', 'Rh+', 3, 0, DATEADD(DAY, 3, GETDATE()), 'Cancer treatment', 1, GETDATE()), -- Low = 0
     (4, 'AB', 'Rh-', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Emergency', 2, GETDATE()),
