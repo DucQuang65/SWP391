@@ -14,7 +14,7 @@ CREATE TABLE Roles (
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
-    FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
+    --FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
 	
     Email NVARCHAR(MAX), -- AES encrypted
     Password NVARCHAR(MAX), -- Hash encrypted
