@@ -37,7 +37,7 @@ namespace Hien_mau
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:5101/", "http://localhost:5173/", "http://localhost:3000") // FE domain
+                        policy.WithOrigins("http://localhost:5101", "http://localhost:5173", "http://localhost:3000") // FE domain
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials(); // If use cookie                          
