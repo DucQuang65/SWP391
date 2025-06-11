@@ -9,16 +9,11 @@ public partial class User
     [Key]
     public int UserId { get; set; }
 
-    [Required]
-    public string FirebaseUid { get; set; } = null!;
-
-    [EmailAddress]
     public string? Email { get; set; }
 
-    public string? Phone { get; set; }
-    
-    [Required]
     public string? Password { get; set; }
+
+    public string? Phone { get; set; }
 
     public string? Name { get; set; }
 

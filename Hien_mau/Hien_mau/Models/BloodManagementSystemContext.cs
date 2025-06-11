@@ -54,7 +54,7 @@ public partial class BloodManagementSystemContext : DbContext
     {
         modelBuilder.Entity<Appointment>(entity =>
         {
-            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA2E4726109");
+            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA21A0652B9");
 
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
             entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
@@ -68,12 +68,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Appointme__UserI__06CD04F7");
+                .HasConstraintName("FK__Appointme__UserI__73BA3083");
         });
 
         modelBuilder.Entity<BlogPost>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__BlogPost__AA126038EA05CF83");
+            entity.HasKey(e => e.PostId).HasName("PK__BlogPost__AA12603831B9953A");
 
             entity.Property(e => e.PostId).HasColumnName("PostID");
             entity.Property(e => e.ImgUrl).HasMaxLength(255);
@@ -87,7 +87,7 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.BlogPosts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BlogPosts__UserI__5DCAEF64");
+                .HasConstraintName("FK__BlogPosts__UserI__4AB81AF0");
 
             entity.HasMany(d => d.Tags).WithMany(p => p.Posts)
                 .UsingEntity<Dictionary<string, object>>(
@@ -95,14 +95,14 @@ public partial class BloodManagementSystemContext : DbContext
                     r => r.HasOne<Tag>().WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__BlogPostT__TagID__619B8048"),
+                        .HasConstraintName("FK__BlogPostT__TagID__4E88ABD4"),
                     l => l.HasOne<BlogPost>().WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__BlogPostT__PostI__60A75C0F"),
+                        .HasConstraintName("FK__BlogPostT__PostI__4D94879B"),
                     j =>
                     {
-                        j.HasKey("PostId", "TagId").HasName("PK__BlogPost__7C45AF9CDE6D1139");
+                        j.HasKey("PostId", "TagId").HasName("PK__BlogPost__7C45AF9CEB04539E");
                         j.ToTable("BlogPostTags");
                         j.IndexerProperty<int>("PostId").HasColumnName("PostID");
                         j.IndexerProperty<int>("TagId").HasColumnName("TagID");
@@ -111,7 +111,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<BloodArticle>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__BloodArt__9C6270C8EDBA75BC");
+            entity.HasKey(e => e.ArticleId).HasName("PK__BloodArt__9C6270C89B17122F");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ImgUrl).HasMaxLength(255);
@@ -123,14 +123,14 @@ public partial class BloodManagementSystemContext : DbContext
                     r => r.HasOne<Tag>().WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ArticleTa__TagID__59063A47"),
+                        .HasConstraintName("FK__ArticleTa__TagID__45F365D3"),
                     l => l.HasOne<BloodArticle>().WithMany()
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ArticleTa__Artic__5812160E"),
+                        .HasConstraintName("FK__ArticleTa__Artic__44FF419A"),
                     j =>
                     {
-                        j.HasKey("ArticleId", "TagId").HasName("PK__ArticleT__4A35BF6C14FEFCB6");
+                        j.HasKey("ArticleId", "TagId").HasName("PK__ArticleT__4A35BF6C58A5200E");
                         j.ToTable("ArticleTags");
                         j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
                         j.IndexerProperty<int>("TagId").HasColumnName("TagID");
@@ -139,7 +139,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<BloodDonationHistory>(entity =>
         {
-            entity.HasKey(e => e.DonationId).HasName("PK__BloodDon__C5082EDB0A3F5DEE");
+            entity.HasKey(e => e.DonationId).HasName("PK__BloodDon__C5082EDB7E5E7028");
 
             entity.ToTable("BloodDonationHistory");
 
@@ -155,12 +155,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.BloodDonationHistories)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodDona__UserI__787EE5A0");
+                .HasConstraintName("FK__BloodDona__UserI__656C112C");
         });
 
         modelBuilder.Entity<BloodInventory>(entity =>
         {
-            entity.HasKey(e => e.InventoryId).HasName("PK__BloodInv__F5FDE6D37DA93017");
+            entity.HasKey(e => e.InventoryId).HasName("PK__BloodInv__F5FDE6D39CAFBF0F");
 
             entity.ToTable("BloodInventory");
 
@@ -176,7 +176,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<BloodRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__BloodReq__33A8519A8E38D8C9");
+            entity.HasKey(e => e.RequestId).HasName("PK__BloodReq__33A8519A5E6E7602");
 
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2);
@@ -192,12 +192,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.BloodRequests)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodRequ__UserI__6C190EBB");
+                .HasConstraintName("FK__BloodRequ__UserI__59063A47");
         });
 
         modelBuilder.Entity<BloodRequestHistory>(entity =>
         {
-            entity.HasKey(e => e.HistoryId).HasName("PK__BloodReq__4D7B4ADDA95FC1E3");
+            entity.HasKey(e => e.HistoryId).HasName("PK__BloodReq__4D7B4ADD2A9590D8");
 
             entity.ToTable("BloodRequestHistory");
 
@@ -212,17 +212,17 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.Request).WithMany(p => p.BloodRequestHistories)
                 .HasForeignKey(d => d.RequestId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodRequ__Reque__72C60C4A");
+                .HasConstraintName("FK__BloodRequ__Reque__5FB337D6");
 
             entity.HasOne(d => d.User).WithMany(p => p.BloodRequestHistories)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodRequ__UserI__73BA3083");
+                .HasConstraintName("FK__BloodRequ__UserI__60A75C0F");
         });
 
         modelBuilder.Entity<DonationReminder>(entity =>
         {
-            entity.HasKey(e => e.ReminderId).HasName("PK__Donation__01A830A774AE8A92");
+            entity.HasKey(e => e.ReminderId).HasName("PK__Donation__01A830A7CC08AD88");
 
             entity.Property(e => e.ReminderId).HasColumnName("ReminderID");
             entity.Property(e => e.IsSent).HasDefaultValue(false);
@@ -233,12 +233,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.DonationReminders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__DonationR__UserI__10566F31");
+                .HasConstraintName("FK__DonationR__UserI__7D439ABD");
         });
 
         modelBuilder.Entity<HospitalInfo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Hospital__3214EC27966E6218");
+            entity.HasKey(e => e.Id).HasName("PK__Hospital__3214EC2729398445");
 
             entity.ToTable("HospitalInfo");
 
@@ -255,7 +255,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E324650D0F5");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32FE1A77E5");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -271,12 +271,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Notifications)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Notificat__UserI__0C85DE4D");
+                .HasConstraintName("FK__Notificat__UserI__797309D9");
         });
 
         modelBuilder.Entity<PublicBloodRequest>(entity =>
         {
-            entity.HasKey(e => e.PublicRequestId).HasName("PK__PublicBl__FF814DC129491C57");
+            entity.HasKey(e => e.PublicRequestId).HasName("PK__PublicBl__FF814DC1ABB11A68");
 
             entity.Property(e => e.PublicRequestId).HasColumnName("PublicRequestID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2);
@@ -291,12 +291,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.Request).WithMany(p => p.PublicBloodRequests)
                 .HasForeignKey(d => d.RequestId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PublicBlo__Reque__7E37BEF6");
+                .HasConstraintName("FK__PublicBlo__Reque__6B24EA82");
         });
 
         modelBuilder.Entity<RequestComponent>(entity =>
         {
-            entity.HasKey(e => e.ComponentId).HasName("PK__RequestC__D79CF02E6C13C482");
+            entity.HasKey(e => e.ComponentId).HasName("PK__RequestC__D79CF02EABEB04D4");
 
             entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
             entity.Property(e => e.ComponentType).HasMaxLength(20);
@@ -305,14 +305,14 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.Request).WithMany(p => p.RequestComponents)
                 .HasForeignKey(d => d.RequestId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RequestCo__Reque__6EF57B66");
+                .HasConstraintName("FK__RequestCo__Reque__5BE2A6F2");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3A936B26CF");
+            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3A1246DAC5");
 
-            entity.HasIndex(e => e.RoleName, "UQ__Roles__8A2B61601195C05D").IsUnique();
+            entity.HasIndex(e => e.RoleName, "UQ__Roles__8A2B616068BC4A27").IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.RoleName).HasMaxLength(20);
@@ -320,7 +320,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<Tag>(entity =>
         {
-            entity.HasKey(e => e.TagId).HasName("PK__Tags__657CFA4C00539580");
+            entity.HasKey(e => e.TagId).HasName("PK__Tags__657CFA4C3FACCFF9");
 
             entity.Property(e => e.TagId)
                 .ValueGeneratedNever()
@@ -330,9 +330,7 @@ public partial class BloodManagementSystemContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC17C288B1");
-
-            entity.HasIndex(e => e.FirebaseUid, "UQ__Users__F8143ECAEBB3530D").IsUnique();
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC6A19F4D8");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2);
@@ -340,9 +338,6 @@ public partial class BloodManagementSystemContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Department).HasMaxLength(50);
-            entity.Property(e => e.FirebaseUid)
-                .HasMaxLength(128)
-                .HasColumnName("FirebaseUID");
             entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(11);
@@ -352,12 +347,12 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleID__4E88ABD4");
+                .HasConstraintName("FK__Users__RoleID__3B75D760");
         });
 
         modelBuilder.Entity<UserLocation>(entity =>
         {
-            entity.HasKey(e => e.LocationId).HasName("PK__UserLoca__E7FEA4776B071911");
+            entity.HasKey(e => e.LocationId).HasName("PK__UserLoca__E7FEA47736348EC7");
 
             entity.Property(e => e.LocationId).HasColumnName("LocationID");
             entity.Property(e => e.UpdatedAt)
@@ -368,7 +363,7 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.UserLocations)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UserLocat__UserI__02084FDA");
+                .HasConstraintName("FK__UserLocat__UserI__6EF57B66");
         });
 
         OnModelCreatingPartial(modelBuilder);

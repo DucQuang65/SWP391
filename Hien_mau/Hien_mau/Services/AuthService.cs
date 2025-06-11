@@ -131,10 +131,17 @@ namespace Hien_mau.Services
             {
                 return null;
             }
-            var user = new User();
+            var user = new User()
+            {
+                Email = request.Email,
+                Password = request.Password,
+                Status = 1,
+                RoleId = 1,
+                CreatedAt = DateTime.UtcNow
+            };
 
-            user.Email = request.Email;
-            user.Password = request.Password;
+            //user.Email = request.Email;
+            //user.Password = request.Password;
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
