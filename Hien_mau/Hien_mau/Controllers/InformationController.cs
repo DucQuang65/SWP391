@@ -1,4 +1,5 @@
 ﻿using Hien_mau.Data;
+using Hien_mau.Dto;
 using Hien_mau.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace Hien_mau.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserByID(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id); 
             if (user == null)
                 return NotFound();
 
@@ -43,19 +44,28 @@ namespace Hien_mau.Controllers
             return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, newUser);
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateUser(int id, User updatedUser)
-        //{
-        //    var user = await _context.Users.FindAsync(id);
-        //    if (user == null)
-        //        return NotFound();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, InformationDto informationDto)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound();
 
-            
+            user.Email = informationDto.Email;
+            user.Phone = informationDto.Phone;
+            user.Name = informationDto.Name;
+            user.Age = (int)informationDto.Age;
+            user.Gender = informationDto.Gender;
+            user.Address = informationDto.Address;
+            user.BloodGroup = informationDto.BloodGroup;
+            user.RhType = informationDto.RhType;
+            user.Department = informationDto.Department;
+            user.CreatedAt = (DateTime)informationDto.CreatedAt;
 
-        //    await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
