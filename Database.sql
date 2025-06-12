@@ -20,10 +20,16 @@ CREATE TABLE Users (
     Password NVARCHAR(MAX), -- Hash encrypted
     Phone NVARCHAR(11), -- AES encrypted
 
-    Name NVARCHAR(50), -- AES encrypted
+    IDCardType NVARCHAR(50),-- AES encrypted
+    IDCard NVARCHAR(12),-- AES encrypted
+    Name NVARCHAR(50),  -- AES encrypted
+    DateOfBirth DATETIME,
     Age INT,
     Gender NVARCHAR(10), -- Male, Female, Other
-    Address NVARCHAR(MAX), -- AES encrypted
+    City NVARCHAR(255), -- AES encrypted
+    District NVARCHAR(50), -- AES encrypted
+    Ward NVARCHAR(255),   -- AES encrypted
+    Address NVARCHAR(255), -- AES encrypted
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
 
