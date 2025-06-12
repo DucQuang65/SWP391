@@ -13,11 +13,11 @@ GO
 -- Insert data into Users table
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
 VALUES
-    ('vinhntqse180354@fpt.edu.vn','A1234@', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
-    ('kienlvse180681@fpt.edu.vn','A1234@', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
-    ('xpnhi023@gmail.com','A1234@', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL), -- BloodManager
-    ('vukhanhnhu@gmail.com','A1234@', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL), -- Admin
-    ('ducquang0565@gmail.com','A1234@', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL); -- Member
+    ('vinhntqse180354@fpt.edu.vn','Ab1234@', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
+    ('kienlvse180681@fpt.edu.vn','Ab1234@', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
+    ('xpnhi023@gmail.com','Ab1234@', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL), -- BloodManager
+    ('vukhanhnhu@gmail.com','Ab1234@', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL), -- Admin
+    ('ducquang0565@gmail.com','Ab1234@', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL); -- Member
 GO
 
 -- Insert data into HospitalInfo table
@@ -702,9 +702,7 @@ GO
 INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, Notes)
 VALUES
     (1, GETDATE(), 'A', 'Rh+', 'Plasma', 1, 'Routine donation'),
-    (2, GETDATE(), 'O', 'Rh-', 'Whole', 1, 'After 6
-
- months'),
+    (2, GETDATE(), 'O', 'Rh-', 'Whole', 1, 'After 6 months'),
     (3, GETDATE(), 'B', 'Rh+', 'Platelets', 1, 'First time donor'),
     (4, GETDATE(), 'AB', 'Rh-', 'RedCells', 1, 'Voluntary'),
     (5, GETDATE(), 'O', 'Rh+', 'Whole', 1, 'No issues');
