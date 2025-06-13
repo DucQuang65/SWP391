@@ -51,7 +51,7 @@ VALUES
     (15, N'Nhóm Máu'),
     (16, N'Kiến Thức Y Khoa'),
     (17, N'Quy Trình Xử Lý Máu'),
-    (18, N'Tổ Chức Hiến Máu'),
+    (18, N'Phần mềm'),
     (19, N'Cứu Người'),
     (20, N'Hiến Máu Toàn Phần'),
     (21, N'Hiến Tiểu Cầu'),
@@ -62,7 +62,8 @@ VALUES
     (26, N'Hiến Máu'),
     (27, N'Kêu Gọi Hiến Máu'),
     (28, N'Sự Kiện Hiến Máu'),
-    (29, N'Phòng Bệnh');
+    (29, N'Phòng Bệnh'),
+    (30, N'Tin tức');
 GO
 
 -- Insert data into BloodArticles table
@@ -250,7 +251,7 @@ Sau khi hiến máu, bạn nên:
 🔹Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
 
 5. Kết Luận
-👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', article9.jpg),
+👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 'article9.jpg'),
 
     -- Lưu ý hiến máu định kỳ
     (N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -303,7 +304,7 @@ Sau mỗi lần hiến máu, bạn nên:
 
 🔹Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', article10.jpg),
+👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg'),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
@@ -355,7 +356,7 @@ Lưu Ý Khi Hiến Máu Định Kỳ
 
 Kết Luận
 
-👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', article11.jpg),
+👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 'article11.jpg'),
 
     -- Hiểu về nhóm máu và vai trò
     (N'🩸 Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
@@ -445,7 +446,7 @@ Mỗi nhóm máu có vai trò riêng biệt trong công tác hiến máu cứu n
 7. Kết Luận
 🔹Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
 
-👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', article12.jpg),
+👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg'),
 
     -- Lưu và sử dụng máu hiến
     (N'🩸 Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
@@ -512,7 +513,7 @@ Nhu cầu máu luôn ở mức cao, nhất là trong:
 👉Việc hiến máu đều đặn và liên tục chính là nguồn lực quý giá giúp ngành y tế ứng phó với những tình huống khẩn cấp này.
 
 Kết Luận
-👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', article13.jpg),
+👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 'article13.jpg'),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
@@ -566,7 +567,7 @@ Tùy thuộc vào nhu cầu thực tế tại bệnh viện, bạn có thể đ�
 Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
-👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', article14.jpg),
+👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg'),
 
     -- Câu chuyện thật
     (N'🩸Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
@@ -613,7 +614,7 @@ Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
 
 Hiến máu không mất đi – chỉ là đang trao đi sự sống.
-Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', article15.jpg);
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg');
 GO
 
 -- Insert data into ArticleTags table
@@ -652,22 +653,104 @@ VALUES
 GO
 
 -- Insert data into BlogPosts table
-INSERT INTO BlogPosts (Title, Content, ImgUrl, UserID, PostedAt, Status)
+INSERT INTO News (Title, Content, ImgUrl, UserID, PostedAt)
 VALUES
-   
+   -- Sự kiến hiến máu
+(N'🩺 CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG 🩺',
+N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
+🩺 Chiến Dịch Hiến Máu Cộng Đồng 2025, hợp tác với các doanh nghiệp tại TP.HCM, là sự kiện ý nghĩa nhằm khắc phục tình trạng thiếu máu tại Trung Tâm Hiến Máu. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và giảm nguy cơ bệnh tim. Sự kiện này lan tỏa tinh thần tương thân tương ái, xây dựng cộng đồng đoàn kết, nhân văn.
+💖 Đây là bản hòa ca của lòng nhân ái, nơi những giọt máu hồng kết nối những trái tim, thắp sáng hy vọng cho những người cần máu khẩn cấp. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+🌟 Hãy cùng Trung Tâm Hiến Máu và các doanh nghiệp lan tỏa yêu thương! Nhanh tay đăng ký để chung tay cứu sống nhé.
+💉 Kết Nối Doanh Nghiệp, Sẻ Chia Sự Sống
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+🕒 Thời gian: 15/07/2025, 8:00 - 16:00
+🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+💪 Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 3, '01/07/2025'),
+
+    -- Ngày hiến máu thế giới
+(N'🌍 NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI 🌍',
+N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
+🩸 Ngày Hiến Máu Thế Giới 14/06/2025 là dịp để toàn cầu tôn vinh những người hiến máu và nâng cao nhận thức về tầm quan trọng của hiến máu nhân đạo. Với chủ đề **“Cảm ơn bạn, người hiến máu!”**, sự kiện nhấn mạnh vai trò của mỗi giọt máu trong việc cứu sống hàng triệu người. Tại Trung Tâm Hiến Máu, chúng tôi kêu gọi cộng đồng tham gia, đặc biệt những người có nhóm máu hiếm như O- và AB-, để cùng giải quyết tình trạng thiếu máu và mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
+💖 Đây không chỉ là một sự kiện, mà là bản hòa ca của lòng nhân ái, nơi những trái tim toàn cầu chung nhịp đập vì sự sống. Mỗi giọt máu bạn trao đi là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người.
+🌟 Sự chung tay của bạn là món quà ý nghĩa cho những bệnh nhân đang cần máu. Hãy nhanh tay đăng ký để cùng Trung Tâm Hiến Máu lan tỏa tình nhân ái nhé!
+🌐 Cảm Ơn Bạn – Người Hiến Máu Toàn Cầu
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+🕒 Thời gian: 14/06/2025, 7:00 - 17:00
+🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
+🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 2, '01/06/2025'),
+
+    -- Sinh viên hiến máu
+(N'🩸HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ🩸',
+N'🌟Một giọt máu cho đi – Một cuộc đời ở lại🌟
+🩸 Hiến Máu Nhân Đạo 2025 - Tiếp Nguồn Sinh Khí là dự án hiến máu được thực hiện hằng năm nhằm góp phần khắc phục tình trạng thiếu máu tại các ngân hàng máu trên địa bàn TP.HCM, đồng thời nâng cao nhận thức về hoạt động Hiến Máu Nhân Đạo – một nghĩa cử cao đẹp không chỉ giúp các bệnh nhân và các hoạt động y tế mà còn mang lại lợi ích sức khỏe cho chính người hiến. Qua đó, dự án mong muốn lan tỏa tinh thần tương thân tương ái, xây dựng lối sống tích cực, nhân văn trong cộng đồng sinh viên FPT nói riêng và xã hội nói chung.
+💖 Đây không chỉ là một sự kiện, mà còn là bản hòa ca của lòng nhân ái, nơi những trái tim cùng chung nhịp đập vì sự sẻ chia và tình yêu thương cuộc sống. Mỗi giọt máu được trao đi không chỉ mang lại cơ hội sống, mà còn là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người xung quanh.
+🌟 Sự chung tay của bạn sẽ là một niềm hy vọng, là món quà ý nghĩa dành tặng những người đang cần được tiếp sức. Và để thực hiện hóa được niềm hy vọng đó, hãy nhanh tay đăng ký tham gia để cùng SiTiGroup lan tỏa yêu thương nhé.
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+🕒 Thời gian : 28/04/2025.
+🎯 Địa điểm: Đại học FPT HCM.
+💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 3, 16/04/2025),
+
+    -- Chương trình máu hiếm
+(N'🩸 CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG 🩸',
+N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
+🩸 Chương Trình Đăng Ký Người Hiến Máu Hiếm 2025, khởi động từ 01/07/2025, là sáng kiến của Trung Tâm Hiến Máu nhằm xây dựng ngân hàng máu hiếm (O-, AB-). Máu hiếm là nguồn lực quý giá, cứu sống những bệnh nhân khó tìm máu tương thích. Tham gia chương trình mang lại lợi ích sức khỏe như kiểm tra định kỳ và nâng cao nhận thức về nhóm máu.
+💖 Đây là hành trình của những trái tim dũng cảm, nơi mỗi giọt máu hiếm là ngọn đèn soi sáng cho những ca bệnh hiểm nghèo. Sự tham gia của bạn là món quà vô giá, kết nối yêu thương.
+🌟 Nếu bạn có nhóm máu O- hoặc AB-, hãy đăng ký ngay để cùng Trung Tâm Hiến Máu cứu người! Liên hệ qua hệ thống hoặc số 02838554137.
+🌟 Máu Hiếm – Món Quà Vô Giá
+_______________________________
+THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
+🕒 Thời gian khởi động: 01/07/2025
+🎯 Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+💪 Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, '15/06/2025'),
+
+    -- Vinh danh người hiến máu
+(N'🩺 LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI 🩺',
+N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
+🩺 Lễ Vinh Danh Người Hiến Máu Xuất Sắc 2025, diễn ra vào 30/08/2025, là dịp để Trung Tâm Hiến Máu tri ân những người đã hiến máu nhiều lần, góp phần cứu sống hàng trăm bệnh nhân. Sự kiện lan tỏa tinh thần hiến máu, khuyến khích cộng đồng tham gia hành động nhân đạo, mang lại lợi ích sức khỏe và niềm vui sẻ chia.
+💖 Đây là bản giao hưởng của lòng biết ơn, nơi những trái tim nhân ái được tôn vinh, truyền cảm hứng cho mọi người. Sự hiện diện của bạn sẽ làm rực rỡ ý nghĩa của sự kiện.
+🌟 Hãy đến để cùng Trung Tâm Hiến Máu vinh danh những người hùng thầm lặng! Đăng ký tham dự qua hệ thống hoặc email trungtamhienmau@gmail.vn.
+🏅 Tri Ân Những Người Hùng Thầm Lặng
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+🕒 Thời gian: 30/08/2025, 18:00 - 20:00
+🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 2, '01/08/2025'),
+
+    -- Ra mắt ứng dụng
+    (N'🩸 RA MẮT ỨNG DỤNG HIẾN MÁU 2025 - KẾT NỐI SỰ SỐNG 🩸',
+N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
+🩸 Trung Tâm Hiến Máu hân hoan công bố ra mắt **Trung Tâm Hiến Máu**, khởi động từ 15/01/2026, mang đến cách thức dễ dàng và hiện đại để tham gia hiến máu. Ứng dụng cho phép đăng ký lịch hiến máu, nhận thông báo về nhu cầu máu khẩn cấp, theo dõi lịch sử hiến máu, và kiểm tra sức khỏe, góp phần giải quyết tình trạng thiếu máu tại TP.HCM. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
+💖 Đây không chỉ là một ứng dụng, mà là nhịp cầu kết nối những trái tim nhân ái, nơi mỗi thao tác trên màn hình là một cơ hội thắp sáng sự sống. Ứng dụng giúp bạn dễ dàng trở thành người hùng, đặc biệt với những người có nhóm máu hiếm như O- và AB-.
+🌟 Hãy tải ứng dụng ngay hôm nay để cùng Trung Tâm Hiến Máu lan tỏa yêu thương! Tải tại App Store, Google Play, hoặc liên hệ qua số 02838554137 để được hướng dẫn.
+📱 Hiến Máu Dễ Dàng – Chỉ Một Chạm
+_______________________________
+THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
+🕒 Thời gian khởi động: 15/01/2026
+🎯 Nơi tải ứng dụng: App Store, Google Play, hoặc truy cập hệ thống Trung Tâm Hiến Máu
+💪 Đối tượng tham gia: Tất cả những ai muốn tham gia hiến máu, đặc biệt người có nhóm máu hiếm
+🌟 Tính năng: Đăng ký lịch hiến máu, nhận thông báo khẩn cấp, theo dõi sức khỏe, kết nối cộng đồng hiến máu', 'mobile_app_launch.jpg', 4, '01/07/2025'),
+    
 GO
 
 -- Insert data into BlogPostTags table
-INSERT INTO BlogPostTags (PostID, TagID)
+INSERT INTO NewsTags (PostID, TagID)
 VALUES
-    -- Post 1:
-    (1, 9), (1, 12), (1, 37), (1, 38), (1, 39),
-    -- Post 2:
-    (2, 13), (2, 14), (2, 38), (2, 40), (2, 41),
-    -- Post 3:
-    (3, 12), (3, 13), (3, 42), (3, 43),
-    -- Post 4:
-    (4, 8), (4, 15), (4, 26), (4, 27);
+    -- Post 1: Sự kiến hiến máu
+    (1, 19), (1, 26), (1, 27), (1, 28), (1, 30),
+    -- Post 2: Ngày hiến máu thế giới
+    (2, 19), (2, 24), (2, 26), (2, 27), (2, 28), (2, 30),
+    -- Post 3: Sinh viên hiến máu
+    (3, 19), (3, 24), (3, 26), (3, 27), (3, 28), (3, 30),
+    -- Post 4: Chương trình máu hiếm 
+    (4, 16), (4, 19), (4, 24), (4, 26), (4, 27), (4, 28), (4, 30),
+    -- Post 5: Vinh danh người hiến máu
+    (5, 19), (5, 24), (5, 26), (5, 27), (5, 28), (5, 30),
+    -- Post 6: Ra mắt ứng dụng
+    (6, 18), (6, 30);
 GO
 
 -- Insert data into BloodInventory table
