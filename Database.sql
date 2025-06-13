@@ -61,7 +61,9 @@ CREATE TABLE BloodArticles (
     ArticleID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX) NOT NULL,
-    ImgUrl NVARCHAR(255)
+    ImgUrl NVARCHAR(255),
+	UserID INT NOT NULL,
+	FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 -- BloodTypeTags table: For sorting blood type tags
@@ -79,25 +81,24 @@ CREATE TABLE ArticleTags (
     FOREIGN KEY (TagID) REFERENCES Tags(TagID)
 );
 
--- BlogPosts table: Stores blog posts
-CREATE TABLE BlogPosts (
+-- News table: Stores blog posts
+CREATE TABLE News (
     PostID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX)NOT NULL,
     ImgUrl NVARCHAR(255),
     UserID INT NOT NULL,
     PostedAt DATETIME DEFAULT GETDATE(),
-    Status TINYINT DEFAULT 0, -- 0: Pending, 1: Approved, 2: Rejected
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 
--- BlogPostTags table: For sorting blogs
-CREATE TABLE BlogPostTags (
+-- NewsTags table: For sorting blogs
+CREATE TABLE NewsTags (
     PostID INT,
     TagID INT,
     PRIMARY KEY (PostID, TagID),
-    FOREIGN KEY (PostID) REFERENCES BlogPosts(PostID),
+    FOREIGN KEY (PostID) REFERENCES News(PostID),
     FOREIGN KEY (TagID) REFERENCES Tags(TagID)
 );
 

@@ -67,7 +67,7 @@ VALUES
 GO
 
 -- Insert data into BloodArticles table
-INSERT INTO BloodArticles (Title, Content, ImgUrl)
+INSERT INTO BloodArticles (Title, Content, ImgUrl, UserID)
 VALUES
     -- Nhóm A Rh+
     ('Giới thiệu nhóm máu A Rh+', 
@@ -84,7 +84,7 @@ Người có nhóm máu A Rh+:
 
 Lưu ý:
 - Trong truyền máu, yếu tố Rh đóng vai trò quan trọng. Người Rh+ có thể nhận máu Rh- nhưng ngược lại thì không an toàn.', 
-     'article1.jpg'),
+     'article1.jpg', 2),
 
     -- Nhóm A Rh-
     ('Giới thiệu nhóm máu A Rh-', 
@@ -101,7 +101,7 @@ Người có nhóm máu A Rh-:
 
 Lưu ý:
 - Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.', 
-     'article2.jpg'),
+     'article2.jpg', 2),
 
     -- Nhóm B Rh+
     ('Giới thiệu nhóm máu B Rh+', 
@@ -117,7 +117,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'article3.jpg'),
+     'article3.jpg', 2),
 
     -- Nhóm B Rh-
     ('Giới thiệu nhóm máu B Rh-', 
@@ -134,7 +134,7 @@ Người có nhóm máu B Rh-:
 
 Lưu ý:
 - Trong truyền máu, người Rh- cần thận trọng và **chỉ nên nhận từ Rh-** để tránh phản ứng miễn dịch.', 
-     'article4.jpg'),
+     'article4.jpg', 2),
 
     -- Nhóm AB Rh+
     ('Giới thiệu nhóm máu AB Rh+', 
@@ -151,7 +151,7 @@ Người có nhóm máu AB Rh+:
 
 Lưu ý:
 - AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.', 
-     'article5.jpg'),
+     'article5.jpg', 2),
 
     -- Nhóm AB Rh-
     ('Giới thiệu nhóm máu AB Rh-', 
@@ -168,7 +168,7 @@ Người có nhóm máu AB Rh-:
 
 Lưu ý:
 - Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.', 
-     'article6.jpg'),
+     'article6.jpg', 2),
 
     -- Nhóm O Rh+
     ('Giới thiệu nhóm máu O Rh+', 
@@ -185,7 +185,7 @@ Người có nhóm máu O Rh+:
 
 Lưu ý:
 - Không thể nhận từ các nhóm A, B, AB vì có kháng thể.', 
-     'article7.jpg'),
+     'article7.jpg', 2),
 
     -- Nhóm O Rh-
     ('Giới thiệu nhóm máu O Rh-', 
@@ -202,7 +202,7 @@ Người có nhóm máu O Rh-:
 
 Lưu ý:
 - O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.', 
-     'article8.jpg'),
+     'article8.jpg', 2),
     
     -- Hiến máu lần đầu
  (N'🩸 Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
@@ -251,7 +251,8 @@ Sau khi hiến máu, bạn nên:
 🔹Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
 
 5. Kết Luận
-👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 'article9.jpg'),
+👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
+'article9.jpg', 2),
 
     -- Lưu ý hiến máu định kỳ
     (N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -304,7 +305,7 @@ Sau mỗi lần hiến máu, bạn nên:
 
 🔹Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg'),
+👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 2),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
@@ -356,7 +357,8 @@ Lưu Ý Khi Hiến Máu Định Kỳ
 
 Kết Luận
 
-👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 'article11.jpg'),
+👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
+'article11.jpg', 2),
 
     -- Hiểu về nhóm máu và vai trò
     (N'🩸 Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
@@ -446,7 +448,7 @@ Mỗi nhóm máu có vai trò riêng biệt trong công tác hiến máu cứu n
 7. Kết Luận
 🔹Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
 
-👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg'),
+👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg', 2),
 
     -- Lưu và sử dụng máu hiến
     (N'🩸 Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
@@ -513,7 +515,8 @@ Nhu cầu máu luôn ở mức cao, nhất là trong:
 👉Việc hiến máu đều đặn và liên tục chính là nguồn lực quý giá giúp ngành y tế ứng phó với những tình huống khẩn cấp này.
 
 Kết Luận
-👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 'article13.jpg'),
+👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
+'article13.jpg', 2),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
@@ -567,7 +570,7 @@ Tùy thuộc vào nhu cầu thực tế tại bệnh viện, bạn có thể đ�
 Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
-👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg'),
+👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg', 2),
 
     -- Câu chuyện thật
     (N'🩸Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
@@ -614,7 +617,7 @@ Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
 
 Hiến máu không mất đi – chỉ là đang trao đi sự sống.
-Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg');
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg', 2);
 GO
 
 -- Insert data into ArticleTags table
@@ -666,7 +669,7 @@ _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian: 15/07/2025, 8:00 - 16:00
 🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 3, '01/07/2025'),
+💪 Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 2, 01/07/2025),
 
     -- Ngày hiến máu thế giới
 (N'🌍 NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI 🌍',
@@ -680,7 +683,7 @@ THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian: 14/06/2025, 7:00 - 17:00
 🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
 💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
-🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 2, '01/06/2025'),
+🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 2, 01/06/2025),
 
     -- Sinh viên hiến máu
 (N'🩸HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ🩸',
@@ -692,7 +695,7 @@ _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian : 28/04/2025.
 🎯 Địa điểm: Đại học FPT HCM.
-💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 3, 16/04/2025),
+💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 2, 16/04/2025),
 
     -- Chương trình máu hiếm
 (N'🩸 CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG 🩸',
@@ -705,7 +708,7 @@ _______________________________
 THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
 🕒 Thời gian khởi động: 01/07/2025
 🎯 Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, '15/06/2025'),
+💪 Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, 15/06/2025),
 
     -- Vinh danh người hiến máu
 (N'🩺 LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI 🩺',
@@ -718,22 +721,21 @@ _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian: 30/08/2025, 18:00 - 20:00
 🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 2, '01/08/2025'),
+💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 2, 01/08/2025),
 
-    -- Ra mắt ứng dụng
-    (N'🩸 RA MẮT ỨNG DỤNG HIẾN MÁU 2025 - KẾT NỐI SỰ SỐNG 🩸',
+    -- Hiến máu tiểu cầu
+(N'🩺 TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ 🩺',
 N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩸 Trung Tâm Hiến Máu hân hoan công bố ra mắt **Trung Tâm Hiến Máu**, khởi động từ 15/01/2026, mang đến cách thức dễ dàng và hiện đại để tham gia hiến máu. Ứng dụng cho phép đăng ký lịch hiến máu, nhận thông báo về nhu cầu máu khẩn cấp, theo dõi lịch sử hiến máu, và kiểm tra sức khỏe, góp phần giải quyết tình trạng thiếu máu tại TP.HCM. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
-💖 Đây không chỉ là một ứng dụng, mà là nhịp cầu kết nối những trái tim nhân ái, nơi mỗi thao tác trên màn hình là một cơ hội thắp sáng sự sống. Ứng dụng giúp bạn dễ dàng trở thành người hùng, đặc biệt với những người có nhóm máu hiếm như O- và AB-.
-🌟 Hãy tải ứng dụng ngay hôm nay để cùng Trung Tâm Hiến Máu lan tỏa yêu thương! Tải tại App Store, Google Play, hoặc liên hệ qua số 02838554137 để được hướng dẫn.
-📱 Hiến Máu Dễ Dàng – Chỉ Một Chạm
+🩸 Trung Tâm Hiến Máu kêu gọi cộng đồng tham gia **Chiến Dịch Hiến Tiểu Cầu 2025**, khởi động từ 01/11/2025, để hỗ trợ bệnh nhân ung thư, những người cần truyền tiểu cầu để ngăn ngừa xuất huyết trong quá trình hóa trị. Tiểu cầu, một thành phần quan trọng của máu, giúp đông máu và duy trì sự sống. Hiến tiểu cầu không chỉ cứu sống mà còn mang lại lợi ích sức khỏe như kích thích sản sinh tế bào mới và nâng cao tinh thần sẻ chia. Chiến dịch này nhằm nâng cao nhận thức về nhu cầu tiểu cầu và lan tỏa tinh thần nhân ái.
+💖 Đây không chỉ là một hành động hiến máu, mà là bản hòa ca của lòng nhân ái, nơi mỗi túi tiểu cầu là ngọn lửa hy vọng, thắp sáng cuộc sống cho những bệnh nhân ung thư đang chiến đấu từng ngày. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+🌟 Hãy đến Trung Tâm Hiến Máu để hiến tiểu cầu và hỗ trợ bệnh nhân ung thư! Nhanh tay đăng ký qua hệ thống hoặc liên hệ số 02838554137 để biết thêm chi tiết.
+💉 Tiểu Cầu – Ngọn Lửa Hy Vọng Cho Ung Thư
 _______________________________
 THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
-🕒 Thời gian khởi động: 15/01/2026
-🎯 Nơi tải ứng dụng: App Store, Google Play, hoặc truy cập hệ thống Trung Tâm Hiến Máu
-💪 Đối tượng tham gia: Tất cả những ai muốn tham gia hiến máu, đặc biệt người có nhóm máu hiếm
-🌟 Tính năng: Đăng ký lịch hiến máu, nhận thông báo khẩn cấp, theo dõi sức khỏe, kết nối cộng đồng hiến máu', 'mobile_app_launch.jpg', 4, '01/07/2025'),
-    
+🕒 Thời gian khởi động: 01/11/2025
+🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+
+🌟 Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu', 'event6.jpg', 2, 15/10/2025);
 GO
 
 -- Insert data into BlogPostTags table
@@ -749,8 +751,8 @@ VALUES
     (4, 16), (4, 19), (4, 24), (4, 26), (4, 27), (4, 28), (4, 30),
     -- Post 5: Vinh danh người hiến máu
     (5, 19), (5, 24), (5, 26), (5, 27), (5, 28), (5, 30),
-    -- Post 6: Ra mắt ứng dụng
-    (6, 18), (6, 30);
+    -- Post 6: Hiến máu tiểu cầu
+    (6, 19), (6, 21), (6, 24), (6, 26), (6, 27), (6, 28), (6, 30);
 GO
 
 -- Insert data into BloodInventory table
