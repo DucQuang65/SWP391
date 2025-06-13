@@ -13,11 +13,25 @@ GO
 -- Insert data into Users table
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
 VALUES
-    ('vinhntqse180354@fpt.edu.vn','Ab1234@', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL), -- Member
-    ('kienlvse180681@fpt.edu.vn','Ab1234@', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa A'), -- Doctor
-    ('xpnhi023@gmail.com','Ab1234@', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL), -- BloodManager
-    ('vukhanhnhu@gmail.com','Ab1234@', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL), -- Admin
-    ('ducquang0565@gmail.com','Ab1234@', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL); -- Member
+	-- Role: Member (RoleID = 1)
+    ('vinhntqse180354@fpt.edu.vn','Ab1234@', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL),
+	('ducquang0565@gmail.com','Ab1234@', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL),
+	('member3@fpt.edu.vn', 'Ab1234@', NULL, 'Tuan', 19, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL),
+
+	-- Role: Doctor (RoleID = 2)
+    ('kienlvse180681@fpt.edu.vn','Ab1234@', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa máu'),
+	('doctor2@fpt.edu.vn', 'Ab1234@', NULL, 'Hieu', 38, 'Male', NULL, 'A', 'Rh-', 1, 2, 'Khoa tim'),
+    ('doctor3@fpt.edu.vn', 'Ab1234@', NULL, 'Thao', 42, 'Female', NULL, 'O', 'Rh+', 1, 2, 'Khoa máu'),
+
+	-- Role: BloodManager (RoleID = 3)
+    ('xpnhi023@gmail.com','Ab1234@', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL),
+	('bloodmanager2@gmail.com', 'Ab1234@', NULL, 'Hoa', 29, 'Female', NULL, 'AB', 'Rh+', 1, 3, NULL),
+    ('bloodmanager3@gmail.com', 'Ab1234@', NULL, 'Phong', 36, 'Male', NULL, 'O', 'Rh+', 1, 3, NULL),
+
+	-- Role: Admin (RoleID = 4)
+	('admin1@gmail.com', 'Ab1234@', NULL, 'Linh', 31, 'Female', NULL, 'A', 'Rh+', 1, 4, NULL),
+    ('admin2@gmail.com', 'Ab1234@', NULL, 'Dung', 34, 'Male', NULL, 'B', 'Rh+', 1, 4, NULL),
+    ('vukhanhnhu@gmail.com','Ab1234@', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL);
 GO
 
 -- Insert data into HospitalInfo table
@@ -252,7 +266,7 @@ Sau khi hiến máu, bạn nên:
 
 5. Kết Luận
 👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
-'article9.jpg', 2),
+'article9.jpg', 6),
 
     -- Lưu ý hiến máu định kỳ
     (N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -305,7 +319,7 @@ Sau mỗi lần hiến máu, bạn nên:
 
 🔹Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 2),
+👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 6),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
@@ -358,7 +372,7 @@ Lưu Ý Khi Hiến Máu Định Kỳ
 Kết Luận
 
 👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
-'article11.jpg', 2),
+'article11.jpg', 6),
 
     -- Hiểu về nhóm máu và vai trò
     (N'🩸 Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
@@ -516,7 +530,7 @@ Nhu cầu máu luôn ở mức cao, nhất là trong:
 
 Kết Luận
 👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
-'article13.jpg', 2),
+'article13.jpg', 6),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
@@ -617,7 +631,7 @@ Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
 
 Hiến máu không mất đi – chỉ là đang trao đi sự sống.
-Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg', 2);
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg', 6);
 GO
 
 -- Insert data into ArticleTags table
@@ -683,7 +697,7 @@ THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian: 14/06/2025, 7:00 - 17:00
 🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
 💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
-🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 2, 01/06/2025),
+🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 6, 01/06/2025),
 
     -- Sinh viên hiến máu
 (N'🩸HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ🩸',
@@ -695,7 +709,7 @@ _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian : 28/04/2025.
 🎯 Địa điểm: Đại học FPT HCM.
-💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 2, 16/04/2025),
+💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 6, 16/04/2025),
 
     -- Chương trình máu hiếm
 (N'🩸 CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG 🩸',
@@ -721,7 +735,7 @@ _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
 🕒 Thời gian: 30/08/2025, 18:00 - 20:00
 🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 2, 01/08/2025),
+💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 6, 01/08/2025),
 
     -- Hiến máu tiểu cầu
 (N'🩺 TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ 🩺',
