@@ -39,7 +39,7 @@ VALUES
     (4, 'O'),
     (5, 'Rh+'),
     (6, 'Rh-'),
-    -- Tag bài viết về hiến máu
+    -- Tag bài viết
     (7, N'Tổng quan nhóm máu'),
     (8, N'Truyền máu'),
     (9, N'Hiến Máu Lần Đầu'),
@@ -58,25 +58,11 @@ VALUES
     (22, N'Kỹ Thuật Hiến Máu'),
     (23, N'Câu Chuyện Hiến Máu'),
     (24, N'Truyền Cảm Hứng'),
-    (25, N'Người Hiến Ẩn Danh'),
-    (26, N'Phân Loại Máu'),
-    (27, N'Hiến Máu'),
-    (28, N'Kêu Gọi Hiến Máu'),
-    (29, N'Sự Kiện Hiến Máu'),
-    (30, N'Ngày Hội Hiến Máu'),
-    (31, N'Đăng Ký Hiến Máu'),
-    (32, N'FAQ Hiến Máu'),
-    (33, N'Giải Đáp Thắc Mắc'),
-    (34, N'Hiểu Đúng Hiến Máu'),
-    (35, N'Hiến Máu Thường Xuyên'),
-    (36, N'Chăm Sóc Sức Khoẻ'),
-    (37, N'Lưu Ý Trước Hiến Máu'),
-    (38, N'Lưu Ý Sau Hiến Máu'),
-    (39, N'Hướng Dẫn Hiến Máu'),
-    (40, N'Dinh Dưỡng Cho Người Hiến Máu'),
-    (41, N'Theo Dõi Sức Khỏe'),
-    (42, N'Sức Khỏe Tinh Thần'),
-    (43, N'Phòng Bệnh');
+    (25, N'Phân Loại Máu'),
+    (26, N'Hiến Máu'),
+    (27, N'Kêu Gọi Hiến Máu'),
+    (28, N'Sự Kiện Hiến Máu'),
+    (29, N'Phòng Bệnh');
 GO
 
 -- Insert data into BloodArticles table
@@ -114,7 +100,7 @@ Người có nhóm máu A Rh-:
 
 Lưu ý:
 - Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.', 
-     'article1.jpg'),
+     'article2.jpg'),
 
     -- Nhóm B Rh+
     ('Giới thiệu nhóm máu B Rh+', 
@@ -130,7 +116,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'article1.jpg'),
+     'article3.jpg'),
 
     -- Nhóm B Rh-
     ('Giới thiệu nhóm máu B Rh-', 
@@ -147,7 +133,7 @@ Người có nhóm máu B Rh-:
 
 Lưu ý:
 - Trong truyền máu, người Rh- cần thận trọng và **chỉ nên nhận từ Rh-** để tránh phản ứng miễn dịch.', 
-     'article1.jpg'),
+     'article4.jpg'),
 
     -- Nhóm AB Rh+
     ('Giới thiệu nhóm máu AB Rh+', 
@@ -164,7 +150,7 @@ Người có nhóm máu AB Rh+:
 
 Lưu ý:
 - AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.', 
-     'article1.jpg'),
+     'article5.jpg'),
 
     -- Nhóm AB Rh-
     ('Giới thiệu nhóm máu AB Rh-', 
@@ -181,7 +167,7 @@ Người có nhóm máu AB Rh-:
 
 Lưu ý:
 - Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.', 
-     'article1.jpg'),
+     'article6.jpg'),
 
     -- Nhóm O Rh+
     ('Giới thiệu nhóm máu O Rh+', 
@@ -198,7 +184,7 @@ Người có nhóm máu O Rh+:
 
 Lưu ý:
 - Không thể nhận từ các nhóm A, B, AB vì có kháng thể.', 
-     'article1.jpg'),
+     'article7.jpg'),
 
     -- Nhóm O Rh-
     ('Giới thiệu nhóm máu O Rh-', 
@@ -215,34 +201,10 @@ Người có nhóm máu O Rh-:
 
 Lưu ý:
 - O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.', 
-     'article1.jpg');
-GO
-
--- Insert data into ArticleTags table
-INSERT INTO ArticleTags (ArticleID, TagID)
-VALUES
-    -- Bài 1: A Rh+
-    (1, 1), (1, 5), (1, 7), (1, 8),
-    -- Bài 2: A Rh−
-    (2, 1), (2, 6), (2, 7), (2, 8),
-    -- Bài 3: B Rh+
-    (3, 2), (3, 5), (3, 7), (3, 8),
-    -- Bài 4: B Rh−
-    (4, 2), (4, 6), (4, 7), (4, 8),
-    -- Bài 5: AB Rh+
-    (5, 3), (5, 5), (5, 7), (5, 8),
-    -- Bài 6: AB Rh−
-    (6, 3), (6, 6), (6, 7), (6, 8),
-    -- Bài 7: O Rh+
-    (7, 4), (7, 5), (7, 7), (7, 8),
-    -- Bài 8: O Rh−
-    (8, 4), (8, 6), (8, 7), (8, 8);
-GO
-
--- Insert data into BlogPosts table
-INSERT INTO BlogPosts (Title, Content, ImgUrl, UserID, PostedAt, Status)
-VALUES
-    (N'🩸 Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
+     'article8.jpg'),
+    
+    -- Hiến máu lần đầu
+ (N'🩸 Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
      N'1. Vì Sao Nên Hiến Máu?
 🔹Hiến máu là một hành động cao cả, mang lại cơ hội sống cho hàng triệu người mỗi năm. Mỗi đơn vị máu bạn hiến có thể cứu sống đến ba người nhờ việc tách thành các thành phần như hồng cầu, tiểu cầu và huyết tương.
 
@@ -288,9 +250,9 @@ Sau khi hiến máu, bạn nên:
 🔹Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
 
 5. Kết Luận
-👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
-     NULL, 2, '2025-05-19 16:03:52', 1),
+👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', article9.jpg),
 
+    -- Lưu ý hiến máu định kỳ
     (N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
      N'1. Khoảng Cách Giữa Các Lần Hiến Máu
 Để đảm bảo sức khỏe, người hiến máu cần tuân thủ khoảng cách tối thiểu giữa các lần hiến:
@@ -341,9 +303,9 @@ Sau mỗi lần hiến máu, bạn nên:
 
 🔹Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 
-     NULL, 2, '2025-05-21 16:03:52', 1),
+👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', article10.jpg),
 
+    -- Lợi ích hiến máu hiến máu định kỳ
     (N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
      N'Hiến Máu – Không Chỉ Là Cứu Người
 
@@ -393,9 +355,9 @@ Lưu Ý Khi Hiến Máu Định Kỳ
 
 Kết Luận
 
-👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
-     NULL, 2, '2025-05-23 16:03:52', 1),
+👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', article11.jpg),
 
+    -- Hiểu về nhóm máu và vai trò
     (N'🩸 Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
      N'1. Nhóm Máu Là Gì?
 Máu của mỗi người được phân loại dựa trên sự hiện diện hay vắng mặt của các kháng nguyên và kháng thể. Hai hệ thống phân loại nhóm máu phổ biến nhất hiện nay là:
@@ -483,9 +445,9 @@ Mỗi nhóm máu có vai trò riêng biệt trong công tác hiến máu cứu n
 7. Kết Luận
 🔹Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
 
-👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 
-     NULL, 2, '2025-05-25 16:03:52', 1),
+👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', article12.jpg),
 
+    -- Lưu và sử dụng máu hiến
     (N'🩸 Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
      N'Hành Trình Của Máu
 Bạn có bao giờ tự hỏi: Sau khi hiến máu, đơn vị máu ấy sẽ được xử lý và sử dụng ra sao? Hành trình của máu không dừng lại tại điểm hiến – mà nó bắt đầu một chuỗi quy trình y tế nghiêm ngặt để đảm bảo an toàn và hiệu quả trong cứu chữa.
@@ -550,9 +512,9 @@ Nhu cầu máu luôn ở mức cao, nhất là trong:
 👉Việc hiến máu đều đặn và liên tục chính là nguồn lực quý giá giúp ngành y tế ứng phó với những tình huống khẩn cấp này.
 
 Kết Luận
-👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
-     NULL, 2, '2025-05-28 16:03:52', 1),
+👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', article13.jpg),
 
+    -- Hiến toàn phần và hiến tiểu cầu
     (N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
      N'Không Chỉ Là “Hiến Máu” – Hãy Hiểu Đúng Hơn
 Khi nghe đến “hiến máu”, nhiều người chỉ nghĩ đơn giản là lấy máu từ cơ thể người hiến để truyền cho người cần. Tuy nhiên, trong y học hiện đại, máu có thể được phân loại và hiến tách biệt theo nhu cầu điều trị. Hai hình thức phổ biến nhất là hiến máu toàn phần và hiến tiểu cầu – mỗi loại đều có quy trình, mục đích và lợi ích riêng biệt.
@@ -604,9 +566,9 @@ Tùy thuộc vào nhu cầu thực tế tại bệnh viện, bạn có thể đ�
 Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
-👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 
-     NULL, 2, '2025-04-28 10:23:52', 1),
+👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', article14.jpg),
 
+    -- Câu chuyện thật
     (N'🩸Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
      N'Đằng Sau Một Túi Máu – Là Một Cuộc Đời
 Hiến máu là hành động giản dị nhưng mang ý nghĩa sâu sắc. Mỗi đơn vị máu bạn hiến tặng không chỉ là những giọt chất lỏng đỏ tươi – mà là niềm hy vọng sống còn của một con người, một gia đình, thậm chí cả một thế hệ.
@@ -651,8 +613,48 @@ Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
 
 Hiến máu không mất đi – chỉ là đang trao đi sự sống.
-Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 
-     NULL, 2, '2025-05-30 10:13:52', 1);
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', article15.jpg);
+GO
+
+-- Insert data into ArticleTags table
+INSERT INTO ArticleTags (ArticleID, TagID)
+VALUES
+    -- Bài 1: A Rh+
+    (1, 1), (1, 5), (1, 7), (1, 8), (1, 15), (1, 26),
+    -- Bài 2: A Rh−
+    (2, 1), (2, 6), (2, 7), (2, 8), (2, 15), (2, 26),
+    -- Bài 3: B Rh+
+    (3, 2), (3, 5), (3, 7), (3, 8), (3, 15), (3, 26),
+    -- Bài 4: B Rh−
+    (4, 2), (4, 6), (4, 7), (4, 8), (4, 15), (4, 26),
+    -- Bài 5: AB Rh+
+    (5, 3), (5, 5), (5, 7), (5, 8), (5, 15), (5, 26),
+    -- Bài 6: AB Rh−
+    (6, 3), (6, 6), (6, 7), (6, 8), (6, 15), (6,26),
+    -- Bài 7: O Rh+
+    (7, 4), (7, 5), (7, 7), (7, 8), (7, 15), (7, 26),
+    -- Bài 8: O Rh−
+    (8, 4), (8, 6), (8, 7), (8, 8), (8, 15), (8, 26),
+    -- Bài 9: Hiến máu lần đầu
+    (9, 12), (9, 14), (9, 9), (9, 10), (9, 11), (9, 26),
+    -- Bài 10: Lưu ý hiến máu định kỳ
+    (10, 13), (10, 14), (10, 10), (10, 12), (10, 26),
+    -- Bài 11: Lợi ích hiến máu hiến máu định kỳ
+    (11, 12), (11, 13), (11, 14), (11, 30), (11, 26), (11, 29),
+    -- Bài 12: Hiểu về nhóm máu và vai trò
+    (12, 7), (12, 8), (12, 15), (12, 16), (12, 26),
+    -- Bài 13: Lưu và sử dụng máu hiến
+    (13, 16), (13, 17), (13, 25), (13, 26),
+    -- Bài 14: Hiến toàn phần và hiến tiểu cầu
+    (14, 16), (14, 20), (14, 21), (14, 22), (14, 26),
+    -- Bài 15: Câu chuyện thật
+    (15, 12), (15, 19), (15, 23), (15, 24), (15, 26), (15, 27);
+GO
+
+-- Insert data into BlogPosts table
+INSERT INTO BlogPosts (Title, Content, ImgUrl, UserID, PostedAt, Status)
+VALUES
+   
 GO
 
 -- Insert data into BlogPostTags table
