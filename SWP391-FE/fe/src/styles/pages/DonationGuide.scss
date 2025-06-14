@@ -1,0 +1,221 @@
+@use '../base/variables' as vars;
+@use '../base/mixin' as mix;
+
+.main-title,
+.merriweather-title,
+h1,
+h2,
+h3 {
+  @include mix.heading();
+}
+
+.main-desc,
+.merriweather-content,
+p,
+li {
+  @include mix.text();
+}
+
+.button,
+.cta-button {
+  font-family: vars.$font-primary;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.guest-home-page {
+  width: 100%;
+  overflow-x: hidden;
+
+  .donation-guide-section {
+    padding: vars.$spacing-xl 40px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    max-width: 100%;
+    margin: 0 auto;
+
+    .guide-header {
+      margin-bottom: vars.$spacing-xl;
+      text-align: center;
+
+      .guide-title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: vars.$spacing-md;
+        gap: 20px;
+
+        .guide-line {
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, vars.$secondary-color, vars.$secondary-hover);
+          border-radius: 2px;
+        }
+
+        .merriweather-title {
+          @include mix.heading(2.5rem, vars.$dark-blue);
+          font-weight: 900;
+          text-align: center;
+          margin: 0;
+          text-transform: uppercase;
+          color: vars.$dark-blue; /* Sử dụng màu dark-blue từ variables */
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .merriweather-content {
+      @include mix.text(1.2rem, vars.$text-secondary);
+      text-align: center;
+      margin-bottom: vars.$spacing-xl;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+      color: vars.$text-color;
+    }
+
+    .guide-step-section {
+      max-width: 1200px;
+      margin: 0 auto vars.$spacing-lg auto;
+      padding: vars.$spacing-md;
+      display: flex;
+      align-items: stretch;
+      gap: vars.$spacing-lg;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+
+      &.odd {
+        flex-direction: row;
+      }
+
+      &.even {
+        flex-direction: row-reverse;
+      }
+
+      &.light-bg {
+        background: #ffffff;
+      }
+
+      &.dark-bg {
+        background: #f1f5f9;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-content {
+        flex: 1;
+        padding: vars.$spacing-lg;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+
+        .step-number {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(135deg, vars.$primary-color, #4dabf5);
+          color: vars.$white;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: vars.$spacing-md;
+          box-shadow: 0 2px 6px rgba(45, 108, 176, 0.2);
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+
+        .step-details {
+          .step-title {
+            @include mix.heading(1.6rem, vars.$dark-blue);
+            font-weight: 800;
+            margin-bottom: vars.$spacing-sm;
+            line-height: 1.4;
+            color: #1e3a8a;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #2b6cb0;
+            }
+          }
+
+          .step-content-text {
+            @include mix.text(1.1rem, vars.$text-secondary);
+            line-height: 1.8;
+            margin: 0;
+            color: #475569;
+          }
+        }
+      }
+
+      .step-image {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+
+    @include mix.tablet {
+      padding: vars.$spacing-sm vars.$spacing-xs;
+      flex-direction: column;
+      gap: vars.$spacing-md;
+
+      &.odd,
+      &.even {
+        flex-direction: column;
+      }
+
+      .step-content {
+        padding: vars.$spacing-md;
+
+        .step-number {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+
+        .step-details {
+          .step-title {
+            font-size: 1.3rem;
+          }
+
+          .step-content-text {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .step-image {
+        margin-top: vars.$spacing-md;
+
+        img {
+          height: 250px;
+        }
+      }
+    }
+  }
+
+  // Xóa toàn bộ block .scroll-to-top-btn ở file này, chỉ dùng style chung ở components/ScrollToTop.scss
+}

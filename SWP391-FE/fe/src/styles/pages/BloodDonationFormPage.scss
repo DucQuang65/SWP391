@@ -1,0 +1,545 @@
+@use '../base/variables' as vars;
+@use '../base/mixin' as mix;
+
+.blood-donation-form-page {
+  @include mix.body-base;
+  min-height: 100vh;
+  padding: vars.$spacing-lg 0;
+
+  .registration-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 vars.$spacing-base;
+
+    .page-header {
+      text-align: center;
+      margin-bottom: vars.$spacing-xl;
+
+      h1 {
+        @include mix.heading(vars.$font-size-3xl, vars.$font-weight-bold, vars.$primary-color);
+        margin-bottom: vars.$spacing-sm;
+      }
+
+      p {
+        @include mix.text(vars.$font-size-lg, vars.$text-secondary);
+      }
+
+      .progress-steps {
+        @include mix.flex-between;
+        margin-top: vars.$spacing-xl;
+        position: relative;
+        padding: 0 vars.$spacing-xl;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 20px;
+          left: vars.$spacing-xl;
+          right: vars.$spacing-xl;
+          height: 2px;
+          background: vars.$border-light;
+          z-index: 1;
+        }
+
+        .step {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          flex: 1;
+
+          .step-number {
+            @include mix.flex-center;
+            width: 40px;
+            height: 40px;
+            border-radius: vars.$border-radius-full;
+            background: vars.$background-card;
+            border: 2px solid vars.$border-light;
+            margin: 0 auto vars.$spacing-sm;
+            font-weight: vars.$font-weight-semibold;
+            color: vars.$text-secondary;
+            transition: all 0.3s;
+          }
+
+          .step-text {
+            @include mix.text(vars.$font-size-sm, vars.$text-secondary);
+          }
+
+          &.active {
+            .step-number {
+              background: vars.$primary-color;
+              border-color: vars.$primary-color;
+              color: vars.$white;
+            }
+
+            .step-text {
+              color: vars.$primary-color;
+              font-weight: vars.$font-weight-semibold;
+            }
+          }
+
+          &.completed {
+            .step-number {
+              background: vars.$success-color;
+              border-color: vars.$success-color;
+              color: vars.$white;
+            }
+          }
+        }
+      }
+    }
+
+    .form-card {
+      @include mix.card-base;
+      @include mix.shadow-elevation(2);
+      padding: vars.$spacing-xl;
+      margin-bottom: vars.$spacing-xl;
+
+      h2 {
+        @include mix.heading(vars.$font-size-2xl, vars.$font-weight-semibold);
+        margin-bottom: vars.$spacing-sm;
+      }
+
+      p {
+        @include mix.text(vars.$font-size-base, vars.$text-secondary);
+        margin-bottom: vars.$spacing-lg;
+      }
+
+      .form-section {
+        margin-bottom: vars.$spacing-xl;
+
+        h3 {
+          @include mix.heading(vars.$font-size-lg, vars.$font-weight-semibold);
+          margin-bottom: vars.$spacing-md;
+        }
+
+        .form-row {
+          @include mix.flex-between;
+          gap: vars.$spacing-md;
+          margin-bottom: vars.$spacing-md;
+
+          @include mix.tablet {
+            flex-direction: column;
+            gap: vars.$spacing-sm;
+          }
+        }
+
+        .form-group {
+          flex: 1;
+
+          label {
+            @include mix.form-label;
+          }
+
+          input,
+          select {
+            @include mix.form-input;
+          }
+        }
+      }
+
+      .checkbox-list,
+      .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: vars.$spacing-sm;
+
+        .checkbox-item,
+        .radio-item {
+          @include mix.flex-align(flex-start, center);
+          gap: vars.$spacing-sm;
+          cursor: pointer;
+
+          input[type="checkbox"],
+          input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+          }
+
+          span {
+            @include mix.text(vars.$font-size-base, vars.$text-primary);
+          }
+        }
+      }
+
+      .form-actions {
+        @include mix.flex-between;
+        margin-top: vars.$spacing-xl;
+        gap: vars.$spacing-md;
+
+        .btn {
+          flex: 1;
+          max-width: 200px;
+
+          &.btn-primary {
+            @include mix.button-primary;
+          }
+
+          &.btn-secondary {
+            @include mix.button-secondary;
+          }
+        }
+      }
+    }
+
+    .result-section {
+      .result-card {
+        @include mix.card-base;
+        @include mix.shadow-elevation(2);
+        padding: vars.$spacing-xl;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        border-radius: vars.$border-radius-lg;
+        transition: all 0.3s ease;
+
+        .result-icon {
+          font-size: vars.$font-size-4xl;
+          margin-bottom: vars.$spacing-md;
+          display: inline-block;
+          padding: vars.$spacing-lg;
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .result-content {
+          h2 {
+            @include mix.heading(vars.$font-size-2xl, vars.$font-weight-bold);
+            margin-bottom: vars.$spacing-sm;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          p {
+            @include mix.text(vars.$font-size-lg, vars.$text-secondary);
+            margin-bottom: vars.$spacing-lg;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+
+        &.failed {
+          border: 2px solid vars.$error-color;
+          background: linear-gradient(135deg, rgba(vars.$error-color, 0.05) 0%, rgba(vars.$error-color, 0.1) 100%);
+
+          .result-icon {
+            color: vars.$error-color;
+            background: rgba(vars.$error-color, 0.1);
+            animation: shake 0.5s ease-in-out;
+          }
+
+          h2 {
+            color: vars.$error-color;
+          }
+
+          .result-actions {
+            @include mix.flex-center;
+            gap: vars.$spacing-md;
+            margin-top: vars.$spacing-xl;
+            padding-top: vars.$spacing-xl;
+            border-top: 1px solid vars.$border-light;
+
+            .btn {
+              min-width: 200px;
+              padding: vars.$spacing-md vars.$spacing-lg;
+              font-size: vars.$font-size-base;
+              font-weight: vars.$font-weight-semibold;
+              border-radius: vars.$border-radius-lg;
+              transition: all 0.3s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: vars.$spacing-sm;
+
+              &.btn-primary {
+                @include mix.button-primary;
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(vars.$primary-color, 0.2);
+                }
+
+                &::before {
+                  content: '🏠';
+                  font-size: vars.$font-size-lg;
+                }
+              }
+
+              &.btn-secondary {
+                @include mix.button-secondary;
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(vars.$text-secondary, 0.2);
+                }
+
+                &::before {
+                  content: '🔄';
+                  font-size: vars.$font-size-lg;
+                }
+              }
+            }
+          }
+        }
+
+        &.scheduled {
+          border: 2px solid vars.$success-color;
+          background: linear-gradient(135deg, rgba(vars.$success-color, 0.05) 0%, rgba(vars.$success-color, 0.1) 100%);
+
+          .result-icon {
+            color: vars.$success-color;
+            background: rgba(vars.$success-color, 0.1);
+            animation: bounce 0.5s ease-in-out;
+          }
+
+          h2 {
+            color: vars.$success-color;
+          }
+
+          .appointment-summary {
+            text-align: left;
+            margin-top: vars.$spacing-xl;
+            padding: vars.$spacing-xl;
+            background: vars.$white;
+            border-radius: vars.$border-radius-lg;
+            border: 1px solid vars.$border-light;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+            h3 {
+              @include mix.heading(vars.$font-size-lg, vars.$font-weight-semibold);
+              margin-bottom: vars.$spacing-lg;
+              color: vars.$primary-color;
+              display: flex;
+              align-items: center;
+              gap: vars.$spacing-sm;
+              padding-bottom: vars.$spacing-sm;
+              border-bottom: 2px solid vars.$border-light;
+
+              &::before {
+                content: '📅';
+                font-size: vars.$font-size-xl;
+              }
+            }
+
+            .appointment-details {
+              display: grid;
+              gap: vars.$spacing-md;
+
+              .detail-item {
+                @include mix.text(vars.$font-size-base, vars.$text-primary);
+                padding: vars.$spacing-lg;
+                background: vars.$background-light;
+                border-radius: vars.$border-radius-lg;
+                border: 1px solid vars.$border-light;
+                display: flex;
+                align-items: center;
+                gap: vars.$spacing-lg;
+                transition: all 0.3s ease;
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                  border-color: vars.$primary-color;
+                }
+
+                &::before {
+                  font-size: vars.$font-size-xl;
+                  width: 40px;
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background: rgba(vars.$primary-color, 0.1);
+                  border-radius: 50%;
+                }
+
+                strong {
+                  font-weight: vars.$font-weight-semibold;
+                  color: vars.$primary-color;
+                  min-width: 120px;
+                }
+
+                &:nth-child(1)::before {
+                  content: '📅';
+                }
+
+                &:nth-child(2)::before {
+                  content: '⏰';
+                }
+
+                &:nth-child(3)::before {
+                  content: '🏥';
+                }
+
+                &:nth-child(4)::before {
+                  content: '📍';
+                }
+              }
+            }
+          }
+
+          .result-actions {
+            @include mix.flex-center;
+            gap: vars.$spacing-md;
+            margin-top: vars.$spacing-xl;
+            padding-top: vars.$spacing-xl;
+            border-top: 1px solid vars.$border-light;
+
+            .btn {
+              min-width: 200px;
+              padding: vars.$spacing-md vars.$spacing-lg;
+              font-size: vars.$font-size-base;
+              font-weight: vars.$font-weight-semibold;
+              border-radius: vars.$border-radius-lg;
+              transition: all 0.3s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: vars.$spacing-sm;
+
+              &.btn-primary {
+                @include mix.button-primary;
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(vars.$primary-color, 0.2);
+                }
+
+                &::before {
+                  content: '🏠';
+                  font-size: vars.$font-size-lg;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Responsive adjustments
+@include mix.tablet {
+  .blood-donation-form-page {
+    .registration-content {
+      .page-header {
+        .progress-steps {
+          padding: 0 vars.$spacing-md;
+        }
+      }
+
+      .form-card {
+        padding: vars.$spacing-lg;
+      }
+    }
+
+    .result-section {
+      .result-card {
+        padding: vars.$spacing-lg;
+        margin: vars.$spacing-md;
+
+        .result-icon {
+          width: 80px;
+          height: 80px;
+          font-size: vars.$font-size-3xl;
+        }
+
+        &.scheduled {
+          .appointment-summary {
+            padding: vars.$spacing-lg;
+
+            .appointment-details {
+              .detail-item {
+                padding: vars.$spacing-md;
+                flex-direction: column;
+                text-align: center;
+                gap: vars.$spacing-sm;
+
+                strong {
+                  min-width: auto;
+                }
+              }
+            }
+          }
+
+          .result-actions {
+            flex-direction: column;
+            width: 100%;
+
+            .btn {
+              width: 100%;
+            }
+          }
+        }
+
+        &.failed {
+          .result-actions {
+            flex-direction: column;
+            width: 100%;
+
+            .btn {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mix.mobile {
+  .blood-donation-form-page {
+    .registration-content {
+      .page-header {
+        .progress-steps {
+          padding: 0 vars.$spacing-sm;
+
+          .step {
+            .step-text {
+              font-size: vars.$font-size-xs;
+            }
+          }
+        }
+      }
+
+      .form-card {
+        padding: vars.$spacing-md;
+      }
+    }
+  }
+}

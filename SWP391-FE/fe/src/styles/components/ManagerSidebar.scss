@@ -1,0 +1,294 @@
+@use '../base/variables' as vars;
+@use '../base/mixin' as mix;
+
+.manager-sidebar {
+  width: 280px;
+  height: 100vh;
+  background: vars.$manager-bg;
+  color: vars.$manager-text;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: 2px 0 10px vars.$manager-shadow;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-right: 1px solid vars.$manager-border;
+  font-family: vars.$font-manager;
+
+  &.collapsed {
+    width: 80px;
+
+    .sidebar-header {
+      padding: vars.$spacing-md;
+
+      .toggle-btn {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 1rem;
+      }
+
+      .subtitle {
+        display: none;
+      }
+    }
+
+    .sidebar-nav {
+      .nav-item {
+        justify-content: center;
+        padding: vars.$spacing-md;
+
+        .nav-icon {
+          font-size: 1.3rem;
+        }
+
+        .nav-text {
+          display: none;
+        }
+      }
+    }
+
+    .sidebar-footer {
+      padding: 0 vars.$spacing-sm;
+
+      .logout-btn .logout-text {
+        display: none;
+      }
+    }
+  }
+
+  .sidebar-header {
+    padding: vars.$spacing-lg;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid vars.$manager-border;
+    background: vars.$manager-bg;
+
+    .toggle-btn {
+      position: absolute;
+      top: vars.$spacing-md;
+      right: vars.$spacing-md;
+      background: vars.$manager-bg;
+      border: 1px solid vars.$manager-border;
+      color: vars.$manager-text;
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      z-index: 1001;
+
+      &:hover {
+        background: vars.$manager-hover;
+        color: vars.$manager-primary;
+        border-color: vars.$manager-primary;
+      }
+    }
+
+    .logo {
+      @include mix.heading(1.5rem, vars.$manager-primary);
+      font-weight: 700;
+      margin-bottom: vars.$spacing-xs;
+      letter-spacing: 0.5px;
+      font-family: vars.$font-manager;
+    }
+
+    .subtitle {
+      @include mix.text(0.9rem, vars.$manager-text-light);
+      font-weight: 400;
+      font-family: vars.$font-manager;
+    }
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px);
+    padding: vars.$spacing-md 0;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: vars.$manager-bg-light;
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: vars.$manager-border;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: vars.$manager-text-light;
+      }
+    }
+
+    // Firefox scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: vars.$manager-border vars.$manager-bg-light;
+
+    .nav-item {
+      @include mix.text(0.95rem, vars.$manager-text);
+      padding: 12px vars.$spacing-lg;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      margin: 0 vars.$spacing-sm;
+      border-radius: 8px;
+      font-family: vars.$font-manager;
+
+      .nav-icon {
+        font-size: 1.1rem;
+        min-width: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: vars.$manager-text-light;
+      }
+
+      .nav-text {
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        background: vars.$manager-hover;
+        color: vars.$manager-primary;
+
+        .nav-icon {
+          color: vars.$manager-primary;
+        }
+      }
+
+      &.active {
+        background: rgba(vars.$manager-primary, 0.1);
+        color: vars.$manager-primary;
+        font-weight: 600;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 60%;
+          background: vars.$manager-primary;
+          border-radius: 2px;
+        }
+
+        .nav-icon {
+          color: vars.$manager-primary;
+        }
+
+        .nav-text {
+          color: vars.$manager-primary;
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: vars.$spacing-lg;
+    border-top: 1px solid vars.$manager-border;
+    margin-top: auto;
+    background: vars.$manager-bg;
+
+    .logout-btn {
+      @include mix.flex-align(center, center);
+      gap: 8px;
+      text-decoration: none;
+      background: vars.$manager-primary;
+      color: vars.$white;
+      padding: 12px vars.$spacing-lg;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      width: 100%;
+      border: none;
+      font-family: vars.$font-manager;
+      font-size: 0.9rem;
+
+      &:hover {
+        background: darken(vars.$manager-primary, 10%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px vars.$manager-shadow;
+      }
+
+      .logout-icon {
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .logout-text {
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  // Responsive Design
+  @include mix.tablet {
+    width: 240px;
+
+    .nav-item {
+      font-size: 0.9rem;
+      padding: 10px vars.$spacing-md;
+    }
+
+    .logout-btn {
+      padding: 10px vars.$spacing-md;
+      font-size: 0.85rem;
+    }
+  }
+
+  @include mix.mobile {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: column;
+    padding: vars.$spacing-md 0;
+
+    .sidebar-nav {
+      display: none;
+    }
+
+    .sidebar-footer {
+      padding: 0 vars.$spacing-md;
+    }
+  }
+}
+
+// Sidebar overlay for mobile
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: none;
+
+  @include mix.mobile {
+    display: block;
+  }
+}

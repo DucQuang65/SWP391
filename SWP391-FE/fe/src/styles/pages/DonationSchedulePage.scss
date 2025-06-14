@@ -1,0 +1,1497 @@
+@use '../base/variables' as vars;
+@use '../base/mixin' as mix;
+
+.donation-schedule-page {
+  display: flex;
+  min-height: 100vh;
+  background: vars.$manager-bg-light;
+  font-family: vars.$font-manager;
+
+  .schedule-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: vars.$spacing-lg;
+    transition: margin-left 0.3s ease;
+
+    &.collapsed {
+      margin-left: 80px;
+    }
+
+    .page-header {
+      background: vars.$manager-bg;
+      color: vars.$manager-text;
+      padding: vars.$spacing-lg;
+      border-radius: 12px;
+      margin-bottom: vars.$spacing-lg;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+      @include mix.flex-align(space-between, flex-start);
+
+      .header-content {
+        h1 {
+          margin: 0 0 0.5rem 0;
+          font-size: 1.8rem;
+          font-weight: 600;
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1rem;
+          color: vars.$manager-text-light;
+          font-weight: 400;
+          font-family: vars.$font-manager;
+        }
+      }
+
+      .btn {
+        padding: 12px vars.$spacing-lg;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: vars.$font-manager;
+        font-size: 0.9rem;
+
+        &.btn-primary {
+          background: vars.$manager-primary;
+          color: vars.$white;
+          border: 1px solid vars.$manager-primary;
+
+          &:hover:not(:disabled) {
+            background: darken(vars.$manager-primary, 10%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px vars.$manager-shadow;
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    // Tabs Navigation
+    .tabs-navigation {
+      background: vars.$manager-bg;
+      padding: vars.$spacing-sm;
+      border-radius: 12px;
+      margin-bottom: vars.$spacing-lg;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+      @include mix.flex-align(center, center);
+      gap: 4px;
+
+      .tab-btn {
+        padding: 12px vars.$spacing-lg;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: transparent;
+        color: vars.$manager-text-light;
+        font-size: 0.9rem;
+        font-family: vars.$font-manager;
+
+        &:hover {
+          color: vars.$manager-primary;
+          background: vars.$manager-hover;
+        }
+
+        &.active {
+          background: vars.$manager-primary;
+          color: vars.$white;
+        }
+      }
+    }
+
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: vars.$spacing-md;
+      margin-bottom: vars.$spacing-lg;
+
+      .stat-card {
+        background: vars.$manager-bg;
+        padding: vars.$spacing-lg;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px vars.$manager-shadow;
+        border: 1px solid vars.$manager-border;
+        @include mix.flex-align(flex-start, center);
+        gap: vars.$spacing-md;
+        transition: all 0.3s ease;
+        font-family: vars.$font-manager;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px vars.$manager-shadow;
+        }
+
+        .stat-icon {
+          font-size: 1.5rem;
+          flex-shrink: 0;
+        }
+
+        .stat-content {
+          .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+            color: vars.$manager-text;
+            font-family: vars.$font-manager;
+          }
+
+          .stat-label {
+            color: vars.$manager-text-light;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: vars.$font-manager;
+          }
+        }
+
+        &.today {
+          border-left: 3px solid vars.$info-color;
+          .stat-icon { color: vars.$info-color; }
+        }
+
+        &.upcoming {
+          border-left: 3px solid vars.$warning-color;
+          .stat-icon { color: vars.$warning-color; }
+        }
+
+        &.completed {
+          border-left: 3px solid vars.$success-color;
+          .stat-icon { color: vars.$success-color; }
+        }
+
+        &.total {
+          border-left: 3px solid vars.$manager-primary;
+          .stat-icon { color: vars.$manager-primary; }
+        }
+      }
+    }
+
+    .filters-section {
+      background: vars.$manager-bg;
+      padding: vars.$spacing-lg;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+      margin-bottom: vars.$spacing-lg;
+      @include mix.flex-align(flex-start, center);
+      gap: vars.$spacing-lg;
+      flex-wrap: wrap;
+      font-family: vars.$font-manager;
+
+      .filter-group {
+        @include mix.flex-align(flex-start, center);
+        gap: 8px;
+
+        label {
+          font-weight: 500;
+          color: vars.$manager-text;
+          font-size: 0.9rem;
+          font-family: vars.$font-manager;
+        }
+
+        select {
+          padding: 8px 12px;
+          border: 1px solid vars.$manager-border;
+          border-radius: 6px;
+          font-size: 0.9rem;
+          background: vars.$manager-bg;
+          transition: all 0.3s ease;
+          font-weight: 400;
+          min-width: 150px;
+          font-family: vars.$font-manager;
+          color: vars.$manager-text;
+
+          &:focus {
+            outline: none;
+            border-color: vars.$manager-primary;
+            box-shadow: 0 0 0 2px rgba(vars.$manager-primary, 0.1);
+          }
+        }
+      }
+    }
+
+    .donations-section {
+      .loading-state {
+        text-align: center;
+        padding: 3rem;
+        color: #6c757d;
+
+        .loading-spinner {
+          width: 40px;
+          height: 40px;
+          border: 4px solid #f8f9fa;
+          border-top: 4px solid #28a745;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem;
+        }
+
+        p {
+          font-size: 1.1rem;
+          margin: 0;
+        }
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 4rem;
+        color: #6c757d;
+
+        .empty-icon {
+          font-size: 5rem;
+          display: block;
+          margin-bottom: 1.5rem;
+        }
+
+        h3 {
+          margin: 0 0 1rem 0;
+          color: #495057;
+          font-size: 1.5rem;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1.1rem;
+          line-height: 1.5;
+        }
+      }
+
+      .donations-list {
+        .donation-card {
+          background: vars.$manager-bg;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px vars.$manager-shadow;
+          border: 1px solid vars.$manager-border;
+          margin-bottom: vars.$spacing-lg;
+          transition: all 0.3s ease;
+          overflow: hidden;
+          font-family: vars.$font-manager;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px vars.$manager-shadow;
+          }
+
+          .donation-header {
+            padding: vars.$spacing-lg;
+            background: vars.$manager-bg;
+            border-bottom: 1px solid vars.$manager-border;
+            @include mix.flex-align(space-between, flex-start);
+            flex-wrap: wrap;
+            gap: vars.$spacing-md;
+
+            .donor-info {
+              flex: 1;
+              min-width: 250px;
+
+              .donor-name {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: vars.$manager-text;
+                margin-bottom: 8px;
+                font-family: vars.$font-manager;
+              }
+
+              .donor-contact {
+                color: vars.$manager-text-light;
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+                font-family: vars.$font-manager;
+              }
+
+              .blood-type-badge {
+                background: vars.$manager-primary;
+                color: vars.$white;
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-weight: 600;
+                font-size: 0.85rem;
+                display: inline-block;
+                font-family: vars.$font-manager;
+              }
+            }
+
+            .appointment-info {
+              text-align: center;
+              min-width: 150px;
+
+              .appointment-date {
+                font-size: 1rem;
+                font-weight: 600;
+                color: vars.$manager-text;
+                margin-bottom: 4px;
+                font-family: vars.$font-manager;
+              }
+
+              .appointment-time {
+                color: vars.$manager-text-light;
+                font-weight: 500;
+                font-size: 0.9rem;
+                font-family: vars.$font-manager;
+              }
+            }
+
+            .status-info {
+              text-align: right;
+              min-width: 120px;
+
+              .status-badge {
+                color: vars.$white;
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-weight: 500;
+                font-size: 0.85rem;
+                display: inline-block;
+                margin-bottom: 4px;
+                font-family: vars.$font-manager;
+              }
+            }
+          }
+
+          .donation-details {
+            padding: vars.$spacing-lg;
+
+            .detail-section {
+              margin-bottom: vars.$spacing-lg;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+
+              h4 {
+                margin: 0 0 12px 0;
+                color: vars.$manager-text;
+                font-size: 1rem;
+                font-weight: 600;
+                font-family: vars.$font-manager;
+              }
+
+              .health-info,
+              .location-info,
+              .emergency-contact {
+                @include mix.flex-align(flex-start, flex-start);
+                gap: vars.$spacing-sm;
+                flex-wrap: wrap;
+
+                span {
+                  background: vars.$manager-bg-light;
+                  padding: 6px 12px;
+                  border-radius: 6px;
+                  font-size: 0.85rem;
+                  font-weight: 500;
+                  color: vars.$manager-text;
+                  font-family: vars.$font-manager;
+                }
+              }
+
+              .location-info {
+                .address {
+                  color: vars.$manager-text-light;
+                  font-size: 0.9rem;
+                  margin-bottom: 8px;
+                  font-family: vars.$font-manager;
+                }
+
+                .distance {
+                  font-weight: 600;
+                  font-family: vars.$font-manager;
+
+                  &.very-close { color: vars.$success-color; }
+                  &.close { color: vars.$info-color; }
+                  &.moderate { color: vars.$warning-color; }
+                  &.far { color: vars.$error-color; }
+
+                  .travel-time {
+                    font-size: 0.8rem;
+                    color: vars.$manager-text-light;
+                    font-weight: 400;
+                    margin-left: 8px;
+                    font-family: vars.$font-manager;
+                  }
+                }
+              }
+
+              .notes {
+                background: vars.$manager-bg-light;
+                padding: vars.$spacing-md;
+                border-radius: 6px;
+                color: vars.$manager-text;
+                font-style: italic;
+                border-left: 3px solid vars.$info-color;
+                font-family: vars.$font-manager;
+                font-size: 0.9rem;
+              }
+            }
+          }
+
+          .donation-actions {
+            padding: vars.$spacing-md vars.$spacing-lg;
+            background: vars.$manager-bg-light;
+            border-top: 1px solid vars.$manager-border;
+            @include mix.flex-align(flex-end, center);
+            gap: vars.$spacing-sm;
+            flex-wrap: wrap;
+
+            .btn {
+              padding: 8px vars.$spacing-md;
+              border: none;
+              border-radius: 6px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              text-decoration: none;
+              font-size: 0.85rem;
+              font-family: vars.$font-manager;
+
+              &.btn-info {
+                background: vars.$info-color;
+                color: vars.$white;
+                border: 1px solid vars.$info-color;
+
+                &:hover {
+                  background: darken(vars.$info-color, 10%);
+                  transform: translateY(-1px);
+                  box-shadow: 0 2px 8px vars.$manager-shadow;
+                  text-decoration: none;
+                  color: vars.$white;
+                }
+              }
+
+              &.btn-outline {
+                background: transparent;
+                border: 1px solid vars.$manager-primary;
+                color: vars.$manager-primary;
+
+                &:hover {
+                  background: vars.$manager-primary;
+                  color: vars.$white;
+                  transform: translateY(-1px);
+                  text-decoration: none;
+                }
+              }
+
+              &.btn-success {
+                background: vars.$success-color;
+                color: vars.$white;
+                border: 1px solid vars.$success-color;
+                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+
+                &:hover {
+                  background: darken(vars.$success-color, 10%);
+                  transform: translateY(-1px);
+                  box-shadow: 0 2px 8px vars.$manager-shadow;
+                  text-decoration: none;
+                  color: vars.$white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Process Section
+    .process-section {
+      .process-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: vars.$spacing-md;
+        margin-bottom: vars.$spacing-lg;
+
+        .stat-card {
+          background: vars.$manager-bg;
+          padding: vars.$spacing-lg;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px vars.$manager-shadow;
+          border: 1px solid vars.$manager-border;
+          text-align: center;
+          transition: all 0.3s ease;
+          font-family: vars.$font-manager;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px vars.$manager-shadow;
+          }
+
+          .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: vars.$manager-text;
+            font-family: vars.$font-manager;
+          }
+
+          .stat-label {
+            color: vars.$manager-text-light;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: vars.$font-manager;
+          }
+
+          &.testing {
+            border-left: 4px solid #ffc107;
+            .stat-number { color: #ffc107; }
+          }
+
+          &.completed {
+            border-left: 4px solid #28a745;
+            .stat-number { color: #28a745; }
+          }
+
+          &.stored {
+            border-left: 4px solid #17a2b8;
+            .stat-number { color: #17a2b8; }
+          }
+
+          &.total {
+            border-left: 4px solid #6f42c1;
+            .stat-number { color: #6f42c1; }
+          }
+        }
+      }
+
+      .process-donations-list {
+        .process-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 20px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          margin-bottom: 1.5rem;
+          transition: all 0.3s ease;
+          overflow: hidden;
+
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+          }
+
+          .process-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .donor-info {
+              flex: 1;
+              min-width: 200px;
+
+              .donor-name {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #495057;
+                margin-bottom: 0.5rem;
+              }
+
+              .donor-id {
+                color: #6c757d;
+                font-size: 0.9rem;
+                margin-bottom: 0.75rem;
+              }
+
+              .blood-type-badge {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                padding: 0.5rem 0.75rem;
+                border-radius: 10px;
+                font-weight: 700;
+                font-size: 0.9rem;
+                display: inline-block;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+              }
+            }
+
+            .donation-info {
+              text-align: center;
+              min-width: 150px;
+
+              .donation-date {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #495057;
+                margin-bottom: 0.5rem;
+              }
+
+              .quantity {
+                color: #6c757d;
+                font-weight: 600;
+              }
+            }
+
+            .status-info {
+              text-align: right;
+              min-width: 120px;
+
+              .status-badge {
+                color: white;
+                padding: 0.5rem 0.75rem;
+                border-radius: 10px;
+                font-weight: 700;
+                font-size: 0.9rem;
+                display: inline-block;
+              }
+            }
+          }
+
+          .process-details {
+            padding: 1.5rem;
+
+            .test-results {
+              margin-bottom: 1.5rem;
+
+              h4 {
+                margin: 0 0 1rem 0;
+                color: #495057;
+                font-size: 1.1rem;
+                font-weight: 700;
+              }
+
+              .results-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin-bottom: 1rem;
+
+                .result-item {
+                  background: rgba(255, 255, 255, 0.5);
+                  padding: 0.75rem;
+                  border-radius: 10px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  .label {
+                    font-weight: 600;
+                    color: #6c757d;
+                  }
+
+                  .value {
+                    font-weight: 700;
+                    color: #495057;
+                  }
+                }
+              }
+
+              .blood-tests {
+                h5 {
+                  margin: 0 0 0.75rem 0;
+                  color: #495057;
+                  font-weight: 700;
+                }
+
+                .tests-grid {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                  gap: 0.75rem;
+
+                  .test-item {
+                    background: rgba(255, 255, 255, 0.5);
+                    padding: 0.5rem 0.75rem;
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .test-name {
+                      font-weight: 600;
+                      color: #6c757d;
+                      font-size: 0.9rem;
+                    }
+
+                    .test-result {
+                      font-weight: 700;
+                      font-size: 0.9rem;
+
+                      &.negative {
+                        color: #28a745;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .process-info {
+              margin-bottom: 1.5rem;
+
+              .info-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+                &:last-child {
+                  border-bottom: none;
+                }
+
+                .label {
+                  font-weight: 600;
+                  color: #6c757d;
+                }
+
+                .value {
+                  font-weight: 700;
+                  color: #495057;
+                }
+              }
+            }
+
+            .notes-section {
+              h4 {
+                margin: 0 0 0.75rem 0;
+                color: #495057;
+                font-weight: 700;
+              }
+
+              p {
+                background: rgba(255, 255, 255, 0.5);
+                padding: 1rem;
+                border-radius: 10px;
+                color: #495057;
+                font-style: italic;
+                margin: 0;
+                border-left: 4px solid #17a2b8;
+              }
+            }
+          }
+
+          .process-actions {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+
+            .btn {
+              padding: 0.5rem 1rem;
+              border: none;
+              border-radius: 10px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              font-size: 0.9rem;
+
+              &.btn-info {
+                background: linear-gradient(135deg, #17a2b8, #20c997);
+                color: white;
+                box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+                }
+              }
+
+              &.btn-success {
+                background: linear-gradient(135deg, #28a745, #20c997);
+                color: white;
+                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .workflow-modal {
+      background: white;
+      border-radius: 20px;
+      max-width: 800px;
+      width: 95%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+      .modal-header {
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 20px 20px 0 0;
+
+        h3 {
+          margin: 0;
+          background: linear-gradient(45deg, #28a745, #20c997);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: 1.3rem;
+          font-weight: 700;
+        }
+
+        .close-btn {
+          background: linear-gradient(45deg, #dc3545, #c82333);
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+          }
+        }
+      }
+
+      .modal-body {
+        padding: 2rem;
+
+        .donor-summary {
+          margin-bottom: 2rem;
+          text-align: center;
+
+          h4 {
+            margin: 0 0 0.5rem 0;
+            color: #495057;
+            font-size: 1.2rem;
+          }
+
+          p {
+            margin: 0;
+            color: #6c757d;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive
+// Responsive Design
+@include mix.tablet {
+  .donation-schedule-page {
+    .schedule-content {
+      margin-left: 240px;
+      padding: vars.$spacing-md;
+
+      &.collapsed {
+        margin-left: 80px;
+      }
+
+      .page-header {
+        padding: vars.$spacing-md;
+
+        .header-content h1 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .stats-section {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: vars.$spacing-sm;
+      }
+    }
+  }
+}
+
+@include mix.mobile {
+  .donation-schedule-page {
+    .schedule-content {
+      margin-left: 0;
+      padding: vars.$spacing-sm;
+
+      .page-header {
+        padding: vars.$spacing-sm;
+        flex-direction: column;
+        align-items: stretch;
+        gap: vars.$spacing-sm;
+
+        .header-content h1 {
+          font-size: 1.3rem;
+        }
+      }
+
+      .stats-section {
+        grid-template-columns: 1fr;
+        gap: vars.$spacing-sm;
+
+        .stat-card {
+          padding: vars.$spacing-md;
+          flex-direction: column;
+          text-align: center;
+
+          .stat-icon {
+            font-size: 1.2rem;
+          }
+
+          .stat-content .stat-number {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .filters-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: vars.$spacing-sm;
+
+        .filter-group {
+          flex-direction: column;
+          align-items: stretch;
+
+          select {
+            min-width: auto;
+          }
+        }
+      }
+
+      .donations-section .donations-list .donation-card {
+        .donation-header {
+          flex-direction: column;
+          align-items: stretch;
+          text-align: left;
+
+          .appointment-info,
+          .status-info {
+            text-align: left;
+          }
+        }
+
+        .donation-details .detail-section {
+          .health-info,
+          .location-info,
+          .emergency-contact {
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+
+        .donation-actions {
+          justify-content: center;
+        }
+      }
+    }
+
+    // Enhanced Ant Design Components Styling
+    .main-content {
+      .ant-tabs {
+        background: vars.$manager-bg;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px vars.$manager-shadow;
+        border: 1px solid vars.$manager-border;
+        overflow: hidden;
+
+        .ant-tabs-tab {
+          padding: 16px 24px;
+          font-weight: 600;
+          font-size: 1rem;
+          font-family: vars.$font-manager;
+
+          &.ant-tabs-tab-active {
+            .ant-tabs-tab-btn {
+              color: vars.$manager-primary;
+            }
+          }
+
+          .anticon {
+            margin-right: 8px;
+          }
+        }
+
+        .ant-tabs-content-holder {
+          padding: 24px;
+        }
+      }
+    }
+
+    // Enhanced Statistics Cards for Ant Design
+    .stats-section {
+      .ant-card {
+        border-radius: 12px;
+        border: 1px solid vars.$manager-border;
+        box-shadow: 0 2px 8px vars.$manager-shadow;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-content {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+          }
+
+          .stat-info {
+            flex: 1;
+
+            .stat-number {
+              font-size: 2rem;
+              font-weight: 700;
+              margin: 0;
+              line-height: 1;
+              font-family: vars.$font-manager;
+            }
+
+            .stat-label {
+              font-size: 0.9rem;
+              color: vars.$manager-text-light;
+              margin: 4px 0 0 0;
+              font-family: vars.$font-manager;
+            }
+          }
+        }
+
+        &.today {
+          .stat-icon {
+            background: linear-gradient(135deg, vars.$manager-primary, lighten(vars.$manager-primary, 10%));
+            color: vars.$white;
+          }
+          .stat-number {
+            color: vars.$manager-primary;
+          }
+        }
+
+        &.upcoming {
+          .stat-icon {
+            background: linear-gradient(135deg, vars.$info-color, lighten(vars.$info-color, 10%));
+            color: vars.$white;
+          }
+          .stat-number {
+            color: vars.$info-color;
+          }
+        }
+
+        &.completed {
+          .stat-icon {
+            background: linear-gradient(135deg, vars.$success-color, lighten(vars.$success-color, 10%));
+            color: vars.$white;
+          }
+          .stat-number {
+            color: vars.$success-color;
+          }
+        }
+
+        &.total {
+          .stat-icon {
+            background: linear-gradient(135deg, vars.$warning-color, lighten(vars.$warning-color, 10%));
+            color: vars.$white;
+          }
+          .stat-number {
+            color: vars.$warning-color;
+          }
+        }
+      }
+    }
+
+    // Enhanced Filters Card
+    .filters-card {
+      border-radius: 12px;
+      border: 1px solid vars.$manager-border;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+
+      .filter-group {
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 600;
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+        }
+
+        .ant-select,
+        .ant-input {
+          border-radius: 8px;
+          border: 1px solid vars.$manager-border;
+          font-family: vars.$font-manager;
+
+          &:hover,
+          &:focus {
+            border-color: vars.$manager-primary;
+            box-shadow: 0 0 0 2px rgba(vars.$manager-primary, 0.1);
+          }
+        }
+      }
+    }
+
+    // Enhanced Tables
+    .donations-table-card,
+    .process-donations-card,
+    .requests-table-card {
+      border-radius: 12px;
+      border: 1px solid vars.$manager-border;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+
+      .ant-table {
+        .ant-table-thead > tr > th {
+          background: linear-gradient(135deg, vars.$manager-primary, lighten(vars.$manager-primary, 5%));
+          color: vars.$white;
+          font-weight: 600;
+          border: none;
+          padding: 16px;
+          font-family: vars.$font-manager;
+
+          &:first-child {
+            border-top-left-radius: 8px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 8px;
+          }
+        }
+
+        .ant-table-tbody > tr {
+          &:hover > td {
+            background: rgba(vars.$manager-primary, 0.02);
+          }
+
+          > td {
+            padding: 16px;
+            border-bottom: 1px solid vars.$manager-border;
+            font-family: vars.$font-manager;
+          }
+        }
+
+        .ant-tag {
+          border-radius: 6px;
+          font-weight: 600;
+          padding: 4px 12px;
+          font-family: vars.$font-manager;
+        }
+
+        .ant-btn {
+          border-radius: 6px;
+          font-weight: 500;
+          font-family: vars.$font-manager;
+
+          &:hover {
+            transform: translateY(-1px);
+          }
+        }
+      }
+    }
+
+    // Process Workflow Modal
+    .process-workflow {
+      .donor-summary {
+        background: rgba(vars.$manager-bg-light, 0.5);
+        padding: 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+
+        .summary-item {
+          margin-bottom: 8px;
+          font-family: vars.$font-manager;
+
+          strong {
+            color: vars.$manager-text;
+          }
+        }
+      }
+
+      .workflow-steps {
+        .ant-steps {
+          .ant-steps-item {
+            &.ant-steps-item-active {
+              .ant-steps-item-icon {
+                background: vars.$manager-primary;
+                border-color: vars.$manager-primary;
+              }
+            }
+
+            &.ant-steps-item-finish {
+              .ant-steps-item-icon {
+                background: vars.$success-color;
+                border-color: vars.$success-color;
+              }
+            }
+          }
+        }
+      }
+
+      .action-section {
+        background: rgba(vars.$manager-primary, 0.05);
+        padding: 16px;
+        border-radius: 8px;
+        text-align: center;
+
+        h4 {
+          color: vars.$manager-primary;
+          margin-bottom: 8px;
+          font-family: vars.$font-manager;
+        }
+
+        p {
+          color: vars.$manager-text-light;
+          margin-bottom: 16px;
+          font-family: vars.$font-manager;
+        }
+      }
+
+      .notes-section {
+        h4 {
+          color: vars.$manager-text;
+          margin-bottom: 8px;
+          font-family: vars.$font-manager;
+        }
+
+        p {
+          color: vars.$manager-text-light;
+          background: rgba(vars.$manager-bg-light, 0.5);
+          padding: 12px;
+          border-radius: 6px;
+          margin: 0;
+          font-family: vars.$font-manager;
+        }
+      }
+    }
+
+    // Detail Modal
+    .donation-details,
+    .request-details {
+      .detail-item {
+        margin-bottom: 12px;
+        font-family: vars.$font-manager;
+
+        strong {
+          color: vars.$manager-text;
+          display: inline-block;
+          min-width: 120px;
+        }
+
+        a {
+          color: vars.$manager-primary;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    // Action Section Styling (matching EligibleDonorsPage)
+    .action-section {
+      .action-info {
+        h4 {
+          color: vars.$manager-text;
+          margin-bottom: vars.$spacing-sm;
+          font-family: vars.$font-manager;
+          font-weight: 600;
+        }
+
+        p {
+          margin: 0 0 vars.$spacing-md 0;
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+          line-height: 1.5;
+          background: vars.$manager-bg-light;
+          padding: vars.$spacing-sm;
+          border-radius: 6px;
+          border-left: 3px solid vars.$manager-primary;
+        }
+
+        .ant-btn {
+          font-family: vars.$font-manager;
+          font-weight: 600;
+        }
+      }
+    }
+
+    // Responsive Design for Mobile
+    @media (max-width: 768px) {
+      .schedule-content {
+        margin-left: 0;
+        padding: 12px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 16px;
+
+        .header-info h1 {
+          font-size: 1.5rem;
+        }
+
+        .header-actions {
+          width: 100%;
+        }
+      }
+
+      .main-content {
+        .ant-tabs-content-holder {
+          padding: 16px;
+        }
+      }
+
+      .filters-card {
+        .ant-row {
+          .ant-col {
+            margin-bottom: 16px;
+          }
+        }
+      }
+
+      // Mobile Table Adjustments
+      .donations-table-card,
+      .process-donations-card,
+      .requests-table-card {
+        .ant-table {
+          .ant-table-thead > tr > th {
+            padding: 8px;
+            font-size: 0.8rem;
+          }
+
+          .ant-table-tbody > tr > td {
+            padding: 8px;
+            font-size: 0.8rem;
+          }
+
+          // Hide less important columns on mobile
+          .ant-table-column-title {
+            &:nth-child(n+4) {
+              display: none;
+            }
+          }
+
+          .ant-table-cell {
+            &:nth-child(n+4) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      // Mobile Modal Adjustments
+      .ant-modal {
+        margin: 16px;
+        max-width: calc(100vw - 32px);
+
+        .ant-modal-content {
+          .ant-modal-body {
+            padding: 16px;
+          }
+        }
+      }
+
+      .process-workflow {
+        .donor-summary {
+          .ant-row {
+            .ant-col {
+              margin-bottom: 8px;
+            }
+          }
+        }
+
+        .workflow-steps {
+          .ant-steps {
+            .ant-steps-item {
+              .ant-steps-item-title {
+                font-size: 0.9rem;
+              }
+
+              .ant-steps-item-description {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+      }
+
+      .action-section {
+        .action-info {
+          h4 {
+            font-size: 1rem;
+          }
+
+          p {
+            font-size: 0.9rem;
+            padding: 12px;
+          }
+        }
+      }
+    }
+
+    // Animation Keyframes
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Hover Effects
+    .ant-btn {
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .ant-card {
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+}
