@@ -23,21 +23,27 @@ namespace Hien_mau.Controllers
         {
             var users = await _context.Users.Select(u => new InformationDto
         {
-            UserID = u.UserId,
-            Email = u.Email,
-            Password = u.Password,
-            Phone = u.Phone,
-            Name = u.Name,
-            Age = (int)u.Age,
-            Gender = u.Gender,
-            Address = u.Address,
-            BloodGroup = u.BloodGroup,
-            RhType = u.RhType,
-            Status = u.Status,
-            RoleID = u.RoleId,
-            Department = u.Department,
-            CreatedAt = (DateTime)u.CreatedAt
-        }).ToListAsync();
+                UserID = u.UserId,
+                Email = u.Email,
+                Password = u.Password,
+                Phone = u.Phone,
+                IDCardType = u.IdcardType,
+                IDCard = u.Idcard,
+                Name = u.Name,
+                DateOfBirth = (DateTime)u.DateOfBirth,
+                Age = (int)u.Age,
+                Gender = u.Gender,
+                City = u.City,
+                District = u.District,
+                Ward = u.Ward,
+                Address = u.Address,
+                BloodGroup = u.BloodGroup,
+                RhType = u.RhType,
+                Status = u.Status,
+                RoleID = u.RoleId,
+                Department = u.Department,
+                CreatedAt = (DateTime)u.CreatedAt
+            }).ToListAsync();
 
             return Ok(users);
         }
@@ -55,9 +61,15 @@ namespace Hien_mau.Controllers
                 Email = user.Email,
                 Password = user.Password,
                 Phone = user.Phone,
+                IDCardType = user.IdcardType,
+                IDCard = user.Idcard,
                 Name = user.Name,
+                DateOfBirth = (DateTime)user.DateOfBirth,
                 Age = (int)user.Age,
                 Gender = user.Gender,
+                City = user.City,
+                District = user.District,
+                Ward = user.Ward,
                 Address = user.Address,
                 BloodGroup = user.BloodGroup,
                 RhType = user.RhType,
@@ -88,16 +100,23 @@ namespace Hien_mau.Controllers
                 Email = informationDto.Email,
                 Password = informationDto.Password,
                 Phone = informationDto.Phone,
+                IdcardType = informationDto.IDCardType,
+                Idcard = informationDto.IDCard,
                 Name = informationDto.Name,
+                DateOfBirth = informationDto.DateOfBirth,
                 Age = informationDto.Age,
                 Gender = informationDto.Gender,
+                City = informationDto.City,
+                District = informationDto.District,
+                Ward = informationDto.Ward,
                 Address = informationDto.Address,
                 BloodGroup = informationDto.BloodGroup,
                 RhType = informationDto.RhType,
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
                 Department = informationDto.Department,
-                CreatedAt = DateTime.Now
+                CreatedAt = informationDto.CreatedAt
+
             };
 
             _context.Users.Add(newUser);
@@ -106,13 +125,18 @@ namespace Hien_mau.Controllers
             // Map sang InformationDto để trả về
             var result = new InformationDto
             {
-                UserID = informationDto.UserID,
                 Email = informationDto.Email,
                 Password = informationDto.Password,
                 Phone = informationDto.Phone,
+                IDCardType = informationDto.IDCardType,
+                IDCard = informationDto.IDCard,
                 Name = informationDto.Name,
+                DateOfBirth = informationDto.DateOfBirth,
                 Age = informationDto.Age,
                 Gender = informationDto.Gender,
+                City = informationDto.City,
+                District = informationDto.District,
+                Ward = informationDto.Ward,
                 Address = informationDto.Address,
                 BloodGroup = informationDto.BloodGroup,
                 RhType = informationDto.RhType,
@@ -133,15 +157,25 @@ namespace Hien_mau.Controllers
                 return NotFound();
 
             user.Email = informationDto.Email;
+            user.Password = informationDto.Password;
             user.Phone = informationDto.Phone;
+            user.IdcardType = informationDto.IDCardType;
+            user.Idcard = informationDto.IDCard;
             user.Name = informationDto.Name;
-            user.Age = (int)informationDto.Age;
+            user.DateOfBirth = informationDto.DateOfBirth;
+            user.Age = informationDto.Age;
             user.Gender = informationDto.Gender;
+            user.City = informationDto.City;
+            user.District = informationDto.District;
+            user.Ward = informationDto.Ward;
             user.Address = informationDto.Address;
             user.BloodGroup = informationDto.BloodGroup;
             user.RhType = informationDto.RhType;
+            user.Status = informationDto.Status;
+            user.RoleId = informationDto.RoleID;
             user.Department = informationDto.Department;
-            user.CreatedAt = (DateTime)informationDto.CreatedAt;
+            user.CreatedAt = informationDto.CreatedAt;
+
 
             await _context.SaveChangesAsync();
 
