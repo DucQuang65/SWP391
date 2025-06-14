@@ -14,24 +14,24 @@ GO
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
 VALUES
 	-- Role: Member (RoleID = 1)
-    ('vinhntqse180354@fpt.edu.vn','Ab1234@', NULL, 'Vinh', 30, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL),
-	('ducquang0565@gmail.com','Ab1234@', NULL, 'Duc', 25, 'Male', NULL, 'O', 'Rh+', 1, 1, NULL),
-	('member3@fpt.edu.vn', 'Ab1234@', NULL, 'Tuan', 19, 'Male', NULL, 'A', 'Rh+', 1, 1, NULL),
+    ('vinhntqse180354@fpt.edu.vn','Ab1234@', '0901234567', 'Vinh', 30, 'Male', N'123 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
+	('ducquang0565@gmail.com','Ab1234@', '0987654321', 'Duc', 25, 'Male', N'45 Lê Lợi, Phường 1, Quận 3, TP.HCM', 'O', 'Rh+', 1, 1, NULL),
+	('member3@fpt.edu.vn', 'Ab1234@', '0931234567', 'Tuan', 19, 'Male', N'67 Trần Phú, Phường 4, Quận 5, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
 
 	-- Role: Doctor (RoleID = 2)
-    ('kienlvse180681@fpt.edu.vn','Ab1234@', NULL, 'Kien', 45, 'Female', NULL, 'O', 'Rh-', 1, 2, 'Khoa máu'),
-	('doctor2@fpt.edu.vn', 'Ab1234@', NULL, 'Hieu', 38, 'Male', NULL, 'A', 'Rh-', 1, 2, 'Khoa tim'),
-    ('doctor3@fpt.edu.vn', 'Ab1234@', NULL, 'Thao', 42, 'Female', NULL, 'O', 'Rh+', 1, 2, 'Khoa máu'),
+    ('kienlvse180681@fpt.edu.vn','Ab1234@', '0912345678', 'Kien', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 'O', 'Rh-', 1, 2, 'Khoa máu'),
+	('doctor2@fpt.edu.vn', 'Ab1234@', '0971234567', 'Hieu', 38, 'Male', N'234 Nguyễn Văn Cừ, Phường Cầu Kho, Quận 1, TP.HCM', 'A', 'Rh-', 1, 2, 'Khoa tim'),
+    ('doctor3@fpt.edu.vn', 'Ab1234@', '0941234567', 'Thao', 42, 'Female', N'56 Nguyễn Trãi, Phường 3, Quận 5, TP.HCM', 'O', 'Rh+', 1, 2, 'Khoa máu'),
 
 	-- Role: BloodManager (RoleID = 3)
-    ('xpnhi023@gmail.com','Ab1234@', NULL, 'Nhi', 35, 'Male', NULL, 'B', 'Rh+', 1, 3, NULL),
-	('bloodmanager2@gmail.com', 'Ab1234@', NULL, 'Hoa', 29, 'Female', NULL, 'AB', 'Rh+', 1, 3, NULL),
-    ('bloodmanager3@gmail.com', 'Ab1234@', NULL, 'Phong', 36, 'Male', NULL, 'O', 'Rh+', 1, 3, NULL),
+    ('xpnhi023@gmail.com','Ab1234@', '0961234567', 'Nhi', 35, 'Male', N'78 Cách Mạng Tháng Tám, Phường 6, Quận 3, TP.HCM', 'B', 'Rh+', 1, 3, NULL),
+	('bloodmanager2@gmail.com', 'Ab1234@', '0991234567', 'Hoa', 29, 'Female', N'90 Huỳnh Tấn Phát, Phường Tân Thuận Đông, Quận 7, TP.HCM', 'AB', 'Rh+', 1, 3, NULL),
+    ('bloodmanager3@gmail.com', 'Ab1234@', '0701234567', 'Phong', 36, 'Male', N'12 Lê Văn Sỹ, Phường 13, Quận 3, TP.HCM', 'O', 'Rh+', 1, 3, NULL),
 
 	-- Role: Admin (RoleID = 4)
-	('admin1@gmail.com', 'Ab1234@', NULL, 'Linh', 31, 'Female', NULL, 'A', 'Rh+', 1, 4, NULL),
-    ('admin2@gmail.com', 'Ab1234@', NULL, 'Dung', 34, 'Male', NULL, 'B', 'Rh+', 1, 4, NULL),
-    ('vukhanhnhu@gmail.com','Ab1234@', NULL, 'Nhu', 28, 'Female', NULL, 'AB', 'Rh-', 1, 4, NULL);
+	('admin1@gmail.com', 'Ab1234@', '0771234567', 'Linh', 31, 'Female', N'34 Bùi Thị Xuân, Phường 2, Quận Tân Bình, TP.HCM', 'A', 'Rh+', 1, 4, NULL),
+    ('admin2@gmail.com', 'Ab1234@', '0881234567', 'Dung', 34, 'Male', N'56 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP.HCM', 'B', 'Rh+', 1, 4, NULL),
+    ('vukhanhnhu@gmail.com','Ab1234@', '0791234567', 'Nhu', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 'AB', 'Rh-', 1, 4, NULL);
 GO
 
 -- Insert data into HospitalInfo table
