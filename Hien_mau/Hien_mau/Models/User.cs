@@ -15,11 +15,23 @@ public partial class User
 
     public string? Phone { get; set; }
 
+    public string? IdcardType { get; set; }
+
+    public string? Idcard { get; set; }
+
     public string? Name { get; set; }
+
+    public DateTime? DateOfBirth { get; set; }
 
     public int? Age { get; set; }
 
     public string? Gender { get; set; }
+
+    public string? City { get; set; }
+
+    public string? District { get; set; }
+
+    public string? Ward { get; set; }
 
     public string? Address { get; set; }
 
@@ -37,7 +49,7 @@ public partial class User
 
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
-    public virtual ICollection<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();
+    public virtual ICollection<BloodArticle> BloodArticles { get; set; } = new List<BloodArticle>();
 
     public virtual ICollection<BloodDonationHistory> BloodDonationHistories { get; set; } = new List<BloodDonationHistory>();
 
@@ -46,6 +58,8 @@ public partial class User
     public virtual ICollection<BloodRequest> BloodRequests { get; set; } = new List<BloodRequest>();
 
     public virtual ICollection<DonationReminder> DonationReminders { get; set; } = new List<DonationReminder>();
+
+    public virtual ICollection<News> News { get; set; } = new List<News>();
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 

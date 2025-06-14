@@ -21,7 +21,25 @@ namespace Hien_mau.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetUsers()
         {
-            return Ok(await _context.Users.ToListAsync());
+            var users = await _context.Users.Select(u => new InformationDto
+        {
+            UserID = u.UserId,
+            Email = u.Email,
+            Password = u.Password,
+            Phone = u.Phone,
+            Name = u.Name,
+            Age = (int)u.Age,
+            Gender = u.Gender,
+            Address = u.Address,
+            BloodGroup = u.BloodGroup,
+            RhType = u.RhType,
+            Status = u.Status,
+            RoleID = u.RoleId,
+            Department = u.Department,
+            CreatedAt = (DateTime)u.CreatedAt
+        }).ToListAsync();
+
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
@@ -31,17 +49,80 @@ namespace Hien_mau.Controllers
             if (user == null)
                 return NotFound();
 
-            return Ok(user);
+            var information = new InformationDto
+            {
+                UserID = user.UserId,
+                Email = user.Email,
+                Password = user.Password,
+                Phone = user.Phone,
+                Name = user.Name,
+                Age = (int)user.Age,
+                Gender = user.Gender,
+                Address = user.Address,
+                BloodGroup = user.BloodGroup,
+                RhType = user.RhType,
+                Status = user.Status,
+                RoleID = user.RoleId,
+                Department = user.Department,
+                CreatedAt = (DateTime)user.CreatedAt
+            };
+
+            return Ok(information);
         }
+
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser(User newUser)
+        public async Task<ActionResult<User>> AddUser(InformationDto informationDto)
         {
-            if (newUser == null)
+            //if (newUser == null)
+            //    return BadRequest();
+
+            //_context.Users.Add(newUser);
+            //await _context.SaveChangesAsync();
+            //return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, newUser);
+
+            if (informationDto == null)
                 return BadRequest();
+
+            var newUser = new User
+            {
+                Email = informationDto.Email,
+                Password = informationDto.Password,
+                Phone = informationDto.Phone,
+                Name = informationDto.Name,
+                Age = informationDto.Age,
+                Gender = informationDto.Gender,
+                Address = informationDto.Address,
+                BloodGroup = informationDto.BloodGroup,
+                RhType = informationDto.RhType,
+                Status = informationDto.Status,
+                RoleId = informationDto.RoleID,
+                Department = informationDto.Department,
+                CreatedAt = DateTime.Now
+            };
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, newUser);
+
+            // Map sang InformationDto để trả về
+            var result = new InformationDto
+            {
+                UserID = informationDto.UserID,
+                Email = informationDto.Email,
+                Password = informationDto.Password,
+                Phone = informationDto.Phone,
+                Name = informationDto.Name,
+                Age = informationDto.Age,
+                Gender = informationDto.Gender,
+                Address = informationDto.Address,
+                BloodGroup = informationDto.BloodGroup,
+                RhType = informationDto.RhType,
+                Status = informationDto.Status,
+                RoleID = informationDto.RoleID,
+                Department = informationDto.Department,
+                CreatedAt = informationDto.CreatedAt
+            };
+
+            return CreatedAtAction(nameof(GetUserByID), new { id = informationDto.UserID }, result);
         }
 
         [HttpPut("{id}")]

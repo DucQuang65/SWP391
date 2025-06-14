@@ -13,5 +13,5 @@ public partial class Tag
 
     public virtual ICollection<BloodArticle> Articles { get; set; } = new List<BloodArticle>();
 
-    public virtual ICollection<BlogPost> Posts { get; set; } = new List<BlogPost>();
+    public virtual ICollection<News> Posts { get; set; } = new List<News>();
 }

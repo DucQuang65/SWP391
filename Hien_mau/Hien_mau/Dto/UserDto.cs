@@ -6,6 +6,7 @@ namespace Hien_mau.Dto
     {
         [Required, EmailAddress]
         public string Email { get; set; } = null!;
+
         [Required]
         [MinLength(6)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{6,}$",
