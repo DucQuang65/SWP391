@@ -31,6 +31,10 @@ namespace Hien_mau.Controllers
                     a.Title,
                     a.Content,
                     a.ImgUrl,
+                    UserName = _context.Users
+                    .Where(u => u.UserId == a.UserId)
+                    .Select(u => u.Name)
+                    .FirstOrDefault(),
                     Tags = a.Tags.Select(t => t.TagName).ToList()
                 })
                 .ToListAsync();
@@ -49,6 +53,10 @@ namespace Hien_mau.Controllers
                     a.Title,
                     a.Content,
                     a.ImgUrl,
+                    UserName = _context.Users
+                    .Where(u => u.UserId == a.UserId)
+                    .Select(u => u.Name)
+                    .FirstOrDefault(),
                     Tags = a.Tags.Select(t => t.TagName).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -70,11 +78,18 @@ namespace Hien_mau.Controllers
                 return BadRequest("Title and Content are required.");
             }
 
+            var userExists = await _context.Users.AnyAsync(u => u.UserId == dto.UserId);
+            if (!userExists)
+            {
+                return BadRequest($"UserId {dto.UserId} does not exist in Users table.");
+            }
+
             var article = new BloodArticle
             {
                 Title = dto.Title,
                 Content = dto.Content,
-                ImgUrl = dto.ImgUrl
+                ImgUrl = dto.ImgUrl,
+                UserId = dto.UserId
             };
 
             // Chỉ truy vấn Tags nếu cần
@@ -100,6 +115,10 @@ namespace Hien_mau.Controllers
                 article.Title,
                 article.Content,
                 article.ImgUrl,
+                UserName = await _context.Users
+                .Where(u => u.UserId == article.UserId)
+                .Select(u => u.Name)
+                .FirstOrDefaultAsync(),
                 TagNames = article.Tags.Select(t => t.TagName).ToList()
             };
 

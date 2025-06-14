@@ -11,11 +11,11 @@ namespace Hien_mau.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogPostsController : ControllerBase
+    public class NewsController : ControllerBase
     {
         private readonly Hien_mauContext _context;
 
-        public BlogPostsController(Hien_mauContext context)
+        public NewsController(Hien_mauContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace Hien_mau.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetBlogPosts()
         {
-            var blogs = await _context.BlogPosts
+            var blogs = await _context.News
                 .Select(p => new
                 {
                     p.PostId,
@@ -36,7 +36,7 @@ namespace Hien_mau.Controllers
                         .Select(u => u.Name)
                         .FirstOrDefault(),
                     p.PostedAt,
-                    p.Status, // Status là byte
+                    
                     Tags = p.Tags.Select(t => t.TagName).ToList()
                 })
                 .ToListAsync();
@@ -47,7 +47,7 @@ namespace Hien_mau.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<object>> GetBlogPost(int id)
         {
-            var blog = await _context.BlogPosts
+            var blog = await _context.News
                 .Where(p => p.PostId == id)
                 .Select(p => new
                 {
@@ -60,7 +60,7 @@ namespace Hien_mau.Controllers
                         .Select(u => u.Name)
                         .FirstOrDefault(),
                     p.PostedAt,
-                    p.Status, // Status là byte
+                   
                     Tags = p.Tags.Select(t => t.TagName).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -74,7 +74,7 @@ namespace Hien_mau.Controllers
 
         // POST: api/BlogPosts
         [HttpPost]
-        public async Task<ActionResult<object>> CreateBlogPost([FromBody] BlogPostCreateDto dto)
+        public async Task<ActionResult<object>> CreateBlogPost([FromBody] NewsCreateDto dto)
         {
             // Kiểm tra dữ liệu đầu vào
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
@@ -89,20 +89,17 @@ namespace Hien_mau.Controllers
                 return BadRequest("Invalid UserId.");
             }
 
-            // Kiểm tra Status hợp lệ
-            if (dto.Status.HasValue && dto.Status != 0 && dto.Status != 1 && dto.Status != 2)
-            {
-                return BadRequest("Status must be 0, 1, or 2.");
-            }
+     
+            
 
-            var blog = new BlogPost
+            var news = new News
             {
                 Title = dto.Title,
                 Content = dto.Content,
                 ImgUrl = dto.ImgUrl,
                 UserId = dto.UserId,
                 PostedAt = DateTime.UtcNow,
-                Status = dto.Status ?? 0 // Status là byte
+                
             };
 
             // Chỉ truy vấn Tags nếu cần
@@ -115,55 +112,51 @@ namespace Hien_mau.Controllers
                 {
                     return BadRequest("One or more TagIds are invalid.");
                 }
-                blog.Tags = tags;
+                news.Tags = tags;
             }
 
-            _context.BlogPosts.Add(blog);
+            _context.News.Add(news);
             await _context.SaveChangesAsync();
 
             // Trả về đối tượng không chứa vòng lặp
             var response = new
             {
-                blog.PostId,
-                blog.Title,
-                blog.Content,
-                blog.ImgUrl,
-                blog.UserId,
-                blog.PostedAt,
-                blog.Status, // Status là byte
-                TagNames = blog.Tags.Select(t => t.TagName).ToList()
+                news.PostId,
+                news.Title,
+                news.Content,
+                news.ImgUrl,
+                news.UserId,
+                news.PostedAt,
+               
+                TagNames = news.Tags.Select(t => t.TagName).ToList()
             };
 
-            return CreatedAtAction(nameof(GetBlogPost), new { id = blog.PostId }, response);
+            return CreatedAtAction(nameof(GetBlogPost), new { id = news.PostId }, response);
         }
 
         // PUT: api/BlogPosts/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBlogPost(int id, [FromBody] BlogPostUpdateDto dto)
+        public async Task<IActionResult> UpdateBlogPost(int id, [FromBody] NewsUpdateDto dto)
         {
-            var blog = await _context.BlogPosts
+            var news = await _context.News
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.PostId == id);
 
-            if (blog == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            // Kiểm tra Status hợp lệ
-            if (dto.Status.HasValue && dto.Status != 0 && dto.Status != 1 && dto.Status != 2)
-            {
-                return BadRequest("Status must be 0, 1, or 2.");
-            }
+           
 
-            blog.Title = dto.Title;
-            blog.Content = dto.Content;
-            blog.ImgUrl = dto.ImgUrl;
-            blog.Status = dto.Status ?? blog.Status;
+            news.Title = dto.Title;
+            news.Content = dto.Content;
+            news.ImgUrl = dto.ImgUrl;
+           
 
             if (dto.TagIds != null)
             {
-                blog.Tags.Clear();
+                news.Tags.Clear();
                 var tags = await _context.Tags
                     .Where(t => dto.TagIds.Contains(t.TagId))
                     .ToListAsync();
@@ -171,7 +164,7 @@ namespace Hien_mau.Controllers
                 {
                     return BadRequest("One or more TagIds are invalid.");
                 }
-                blog.Tags = tags;
+                news.Tags = tags;
             }
 
             await _context.SaveChangesAsync();
@@ -181,7 +174,7 @@ namespace Hien_mau.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id)
         {
-            var blog = await _context.BlogPosts
+            var blog = await _context.News
                 .Include(p => p.Tags) // Nạp Tags để xử lý quan hệ
                 .FirstOrDefaultAsync(p => p.PostId == id);
 
@@ -193,7 +186,7 @@ namespace Hien_mau.Controllers
             // Xóa các bản ghi liên quan trong BlogPostTags
             blog.Tags.Clear();
 
-            _context.BlogPosts.Remove(blog);
+            _context.News.Remove(blog);
             await _context.SaveChangesAsync();
             return NoContent();
         }
