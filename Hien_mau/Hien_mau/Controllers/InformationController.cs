@@ -115,8 +115,7 @@ namespace Hien_mau.Controllers
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
                 Department = informationDto.Department,
-                CreatedAt = informationDto.CreatedAt
-
+                CreatedAt = DateTime.UtcNow
             };
 
             _context.Users.Add(newUser);
@@ -174,9 +173,9 @@ namespace Hien_mau.Controllers
             user.Status = informationDto.Status;
             user.RoleId = informationDto.RoleID;
             user.Department = informationDto.Department;
-            user.CreatedAt = informationDto.CreatedAt;
+            user.CreatedAt = DateTime.UtcNow;
 
-
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
             return NoContent();

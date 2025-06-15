@@ -4,7 +4,7 @@ using Hien_mau.Data;
 using Hien_mau.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore;
+
 
 namespace Hien_mau
 {
@@ -37,7 +37,8 @@ namespace Hien_mau
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:5101", "http://localhost:5173", "http://localhost:3000") // FE domain
+                        policy.WithOrigins("http://localhost:5101", "http://localhost:5173",
+                            "http://localhost:3000", "https://blooddonationsystem.vercel.app") // FE domain
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials(); // If use cookie                          
@@ -78,7 +79,7 @@ namespace Hien_mau
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
-                app.MapScalarApiReference();
+                
             }
 
             app.UseSwagger();
