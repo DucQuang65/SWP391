@@ -219,321 +219,321 @@ Lưu ý:
      'article8.jpg', 2),
     
     -- Hiến máu lần đầu
- (N'🩸 Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
+ (N' Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
      N'1. Vì Sao Nên Hiến Máu?
-🔹Hiến máu là một hành động cao cả, mang lại cơ hội sống cho hàng triệu người mỗi năm. Mỗi đơn vị máu bạn hiến có thể cứu sống đến ba người nhờ việc tách thành các thành phần như hồng cầu, tiểu cầu và huyết tương.
+Hiến máu là một hành động cao cả, mang lại cơ hội sống cho hàng triệu người mỗi năm. Mỗi đơn vị máu bạn hiến có thể cứu sống đến ba người nhờ việc tách thành các thành phần như hồng cầu, tiểu cầu và huyết tương.
 
 Ngoài ra, hiến máu còn giúp bạn:
 
-🔹Kiểm tra sức khỏe miễn phí: Trước khi hiến, bạn sẽ được kiểm tra huyết áp, nhịp tim, và xét nghiệm máu.
+Kiểm tra sức khỏe miễn phí: Trước khi hiến, bạn sẽ được kiểm tra huyết áp, nhịp tim, và xét nghiệm máu.
 
-🔹Cải thiện tuần hoàn máu: Việc hiến máu định kỳ giúp kích thích cơ thể sản sinh máu mới.
+Cải thiện tuần hoàn máu: Việc hiến máu định kỳ giúp kích thích cơ thể sản sinh máu mới.
 
-🔹Giảm nguy cơ mắc bệnh tim mạch: Một số nghiên cứu cho thấy hiến máu có thể giảm lượng sắt dư thừa, từ đó giảm nguy cơ bệnh tim.
+Giảm nguy cơ mắc bệnh tim mạch: Một số nghiên cứu cho thấy hiến máu có thể giảm lượng sắt dư thừa, từ đó giảm nguy cơ bệnh tim.
 
 2. Chuẩn Bị Trước Khi Hiến Máu
 Để đảm bảo quá trình hiến máu diễn ra suôn sẻ, bạn nên:
 
-🔹Ngủ đủ giấc: Ít nhất 7–8 tiếng trước ngày hiến máu.
+Ngủ đủ giấc: Ít nhất 7–8 tiếng trước ngày hiến máu.
 
-🔹Ăn nhẹ: Tránh ăn thực phẩm nhiều dầu mỡ; nên ăn nhẹ trước khi hiến máu khoảng 2 tiếng.
+Ăn nhẹ: Tránh ăn thực phẩm nhiều dầu mỡ; nên ăn nhẹ trước khi hiến máu khoảng 2 tiếng.
 
-🔹Uống đủ nước: Giúp duy trì huyết áp ổn định và dễ dàng lấy máu.
+Uống đủ nước: Giúp duy trì huyết áp ổn định và dễ dàng lấy máu.
 
-🔹Mang theo giấy tờ tùy thân: CMND/CCCD hoặc giấy tờ hợp lệ khác.
+Mang theo giấy tờ tùy thân: CMND/CCCD hoặc giấy tờ hợp lệ khác.
 
 3. Quy Trình Hiến Máu Diễn Ra Như Thế Nào?
 Quy trình hiến máu thường bao gồm các bước sau:
 
-🔹Đăng ký: Điền thông tin cá nhân và lịch sử y tế.
+Đăng ký: Điền thông tin cá nhân và lịch sử y tế.
 
-🔹Khám sàng lọc: Kiểm tra huyết áp, nhịp tim, và xét nghiệm máu nhanh.
+Khám sàng lọc: Kiểm tra huyết áp, nhịp tim, và xét nghiệm máu nhanh.
 
-🔹Hiến máu: Quá trình lấy máu kéo dài khoảng 10–15 phút.
+Hiến máu: Quá trình lấy máu kéo dài khoảng 10–15 phút.
 
-🔹Nghỉ ngơi: Sau khi hiến, bạn sẽ được nghỉ ngơi và ăn nhẹ để phục hồi.
+Nghỉ ngơi: Sau khi hiến, bạn sẽ được nghỉ ngơi và ăn nhẹ để phục hồi.
 
 4. Lưu Ý Sau Khi Hiến Máu
 Sau khi hiến máu, bạn nên:
 
-🔹Uống nhiều nước: Giúp cơ thể nhanh chóng bù đắp lượng máu đã mất.
+Uống nhiều nước: Giúp cơ thể nhanh chóng bù đắp lượng máu đã mất.
 
-🔹Tránh vận động mạnh: Trong 24 giờ đầu tiên, hạn chế các hoạt động thể chất nặng.
+Tránh vận động mạnh: Trong 24 giờ đầu tiên, hạn chế các hoạt động thể chất nặng.
 
-🔹Ăn uống đầy đủ: Bổ sung thực phẩm giàu sắt như thịt đỏ, rau xanh đậm.
+Ăn uống đầy đủ: Bổ sung thực phẩm giàu sắt như thịt đỏ, rau xanh đậm.
 
-🔹Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
+Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ với cơ sở y tế gần nhất.
 
 5. Kết Luận
-👉Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
+Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
 'article9.jpg', 6),
 
     -- Lưu ý hiến máu định kỳ
-    (N'🩸 Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
+    (N' Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
      N'1. Khoảng Cách Giữa Các Lần Hiến Máu
 Để đảm bảo sức khỏe, người hiến máu cần tuân thủ khoảng cách tối thiểu giữa các lần hiến:
 
-🔹Hiến máu toàn phần: ít nhất 12 tuần (3 tháng) giữa hai lần hiến.
+Hiến máu toàn phần: ít nhất 12 tuần (3 tháng) giữa hai lần hiến.
 
-🔹Hiến tiểu cầu hoặc huyết tương: có thể thực hiện sau mỗi 2 tuần, tùy theo chỉ định của cơ sở y tế.
+Hiến tiểu cầu hoặc huyết tương: có thể thực hiện sau mỗi 2 tuần, tùy theo chỉ định của cơ sở y tế.
 
-🔹Việc tuân thủ khoảng cách này giúp cơ thể có đủ thời gian để phục hồi và tái tạo lượng máu đã hiến.
+Việc tuân thủ khoảng cách này giúp cơ thể có đủ thời gian để phục hồi và tái tạo lượng máu đã hiến.
 
 2. Chế Độ Dinh Dưỡng Hợp Lý
 Người hiến máu thường xuyên nên duy trì chế độ ăn uống cân đối, giàu chất sắt và vitamin:
 
-🔹Thực phẩm giàu sắt: thịt đỏ, gan, rau xanh đậm, đậu, hạt.
+Thực phẩm giàu sắt: thịt đỏ, gan, rau xanh đậm, đậu, hạt.
 
-🔹Vitamin C: cam, chanh, dâu tây, giúp tăng cường hấp thu sắt.
+Vitamin C: cam, chanh, dâu tây, giúp tăng cường hấp thu sắt.
 
-🔹Tránh: các thực phẩm nhiều chất béo và đồ uống có cồn trước khi hiến máu.
+Tránh: các thực phẩm nhiều chất béo và đồ uống có cồn trước khi hiến máu.
 
-🔹Chế độ dinh dưỡng hợp lý giúp duy trì lượng hemoglobin ổn định và hỗ trợ quá trình tái tạo máu.
+Chế độ dinh dưỡng hợp lý giúp duy trì lượng hemoglobin ổn định và hỗ trợ quá trình tái tạo máu.
 
 3. Lối Sống Lành Mạnh
 Để đảm bảo sức khỏe khi hiến máu thường xuyên, bạn nên:
 
-🔹Ngủ đủ giấc: ngủ từ 7–8 tiếng mỗi đêm.
+Ngủ đủ giấc: ngủ từ 7–8 tiếng mỗi đêm.
 
-🔹Tập thể dục đều đặn: duy trì hoạt động thể chất nhẹ nhàng như đi bộ, yoga.
+Tập thể dục đều đặn: duy trì hoạt động thể chất nhẹ nhàng như đi bộ, yoga.
 
-🔹Tránh căng thẳng: thực hành thiền, hít thở sâu để giảm stress.
+Tránh căng thẳng: thực hành thiền, hít thở sâu để giảm stress.
 
-🔹Lối sống lành mạnh giúp cơ thể phục hồi nhanh chóng sau mỗi lần hiến máu.
+Lối sống lành mạnh giúp cơ thể phục hồi nhanh chóng sau mỗi lần hiến máu.
 
 4. Theo Dõi Sức Khỏe Định Kỳ
-🔹Người hiến máu thường xuyên nên kiểm tra sức khỏe định kỳ:
+Người hiến máu thường xuyên nên kiểm tra sức khỏe định kỳ:
 
-🔹Xét nghiệm máu: kiểm tra hemoglobin, sắt huyết thanh.
+Xét nghiệm máu: kiểm tra hemoglobin, sắt huyết thanh.
 
-🔹Khám tổng quát: đánh giá tổng thể tình trạng sức khỏe.
+Khám tổng quát: đánh giá tổng thể tình trạng sức khỏe.
 
-🔹Việc theo dõi sức khỏe giúp phát hiện sớm các vấn đề và đảm bảo an toàn khi tiếp tục hiến máu.
+Việc theo dõi sức khỏe giúp phát hiện sớm các vấn đề và đảm bảo an toàn khi tiếp tục hiến máu.
 
 5. Lưu Ý Sau Khi Hiến Máu
 Sau mỗi lần hiến máu, bạn nên:
 
-🔹Uống nhiều nước: giúp cơ thể bù đắp lượng dịch đã mất.
+Uống nhiều nước: giúp cơ thể bù đắp lượng dịch đã mất.
 
-🔹Ăn nhẹ: bổ sung năng lượng bằng bữa ăn nhẹ sau hiến máu.
+Ăn nhẹ: bổ sung năng lượng bằng bữa ăn nhẹ sau hiến máu.
 
-🔹Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
+Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-👉Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 6),
+Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 6),
 
     -- Lợi ích hiến máu hiến máu định kỳ
-    (N'🩸 Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
+    (N' Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
      N'Hiến Máu – Không Chỉ Là Cứu Người
 
 Hiến máu từ lâu được biết đến là một hành động nhân đạo cao đẹp, giúp cứu sống hàng triệu người mỗi năm. Tuy nhiên, ít ai biết rằng việc hiến máu định kỳ cũng mang lại nhiều lợi ích thiết thực cho chính người hiến.
 
 Khi bạn hiến máu đều đặn, cơ thể không chỉ được kích thích sản sinh máu mới mà còn tạo điều kiện để bạn:
 
-🔹Giảm lượng sắt dư thừa: Duy trì mức sắt ổn định giúp hạn chế nguy cơ mắc bệnh tim và gan.
+Giảm lượng sắt dư thừa: Duy trì mức sắt ổn định giúp hạn chế nguy cơ mắc bệnh tim và gan.
 
-🔹Cải thiện tuần hoàn máu: Việc hiến máu thúc đẩy quá trình sản sinh tế bào máu mới, giúp máu lưu thông tốt hơn.
+Cải thiện tuần hoàn máu: Việc hiến máu thúc đẩy quá trình sản sinh tế bào máu mới, giúp máu lưu thông tốt hơn.
 
-🔹Tầm soát bệnh: Mỗi lần hiến máu đều được kiểm tra miễn phí các chỉ số như huyết áp, nhịp tim, và xét nghiệm máu giúp phát hiện sớm các bệnh lý tiềm ẩn.
+Tầm soát bệnh: Mỗi lần hiến máu đều được kiểm tra miễn phí các chỉ số như huyết áp, nhịp tim, và xét nghiệm máu giúp phát hiện sớm các bệnh lý tiềm ẩn.
 
-🔹Tăng cường sức khỏe tinh thần: Cảm giác được giúp đỡ người khác mang lại sự hài lòng, giảm stress và nâng cao chất lượng cuộc sống.
+Tăng cường sức khỏe tinh thần: Cảm giác được giúp đỡ người khác mang lại sự hài lòng, giảm stress và nâng cao chất lượng cuộc sống.
 
 Lợi Ích Với Tâm Trạng Và Cuộc Sống
 
 Không chỉ cải thiện thể chất, hiến máu còn giúp cải thiện tinh thần đáng kể:
 
-🔹Giảm căng thẳng: Khi làm việc tốt, cơ thể tiết ra hormone hạnh phúc giúp bạn cảm thấy tích cực hơn.
+Giảm căng thẳng: Khi làm việc tốt, cơ thể tiết ra hormone hạnh phúc giúp bạn cảm thấy tích cực hơn.
 
-🔹Xây dựng thói quen sống lành mạnh: Người hiến máu thường xuyên sẽ chú ý hơn đến dinh dưỡng, giấc ngủ và luyện tập để đảm bảo đủ điều kiện sức khỏe.
+Xây dựng thói quen sống lành mạnh: Người hiến máu thường xuyên sẽ chú ý hơn đến dinh dưỡng, giấc ngủ và luyện tập để đảm bảo đủ điều kiện sức khỏe.
 
-🔹Gắn kết cộng đồng: Hiến máu là một hoạt động kết nối mọi người, lan tỏa yêu thương và trách nhiệm xã hội.
+Gắn kết cộng đồng: Hiến máu là một hoạt động kết nối mọi người, lan tỏa yêu thương và trách nhiệm xã hội.
 
 Hiến Máu Bao Nhiêu Lần Là Đủ?
 
-🔹Tùy vào loại hiến máu, mỗi người có thể hiến với tần suất khác nhau:
+Tùy vào loại hiến máu, mỗi người có thể hiến với tần suất khác nhau:
 
-🔹Hiến máu toàn phần: Tối đa 4 lần/năm đối với nam và 3 lần/năm với nữ.
+Hiến máu toàn phần: Tối đa 4 lần/năm đối với nam và 3 lần/năm với nữ.
 
-🔹Hiến tiểu cầu/huyết tương: Có thể lặp lại sau mỗi 2 tuần, nhưng không quá 24 lần/năm.
+Hiến tiểu cầu/huyết tương: Có thể lặp lại sau mỗi 2 tuần, nhưng không quá 24 lần/năm.
 
-🔹Điều quan trọng là bạn cần theo dõi sức khỏe và tuân thủ hướng dẫn từ nhân viên y tế để đảm bảo an toàn.
+Điều quan trọng là bạn cần theo dõi sức khỏe và tuân thủ hướng dẫn từ nhân viên y tế để đảm bảo an toàn.
 
 Lưu Ý Khi Hiến Máu Định Kỳ
 
 Để đảm bảo hiến máu hiệu quả và an toàn, hãy:
 
-🔹Ăn uống đầy đủ trước và sau hiến máu.
+Ăn uống đầy đủ trước và sau hiến máu.
 
-🔹Uống nhiều nước để hỗ trợ quá trình tuần hoàn.
+Uống nhiều nước để hỗ trợ quá trình tuần hoàn.
 
-🔹Tránh vận động mạnh sau hiến máu ít nhất 24 giờ.
+Tránh vận động mạnh sau hiến máu ít nhất 24 giờ.
 
-🔹Giữ tâm trạng thoải mái và ngủ đủ giấc trước ngày hiến máu.
+Giữ tâm trạng thoải mái và ngủ đủ giấc trước ngày hiến máu.
 
 Kết Luận
 
-👉Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
+Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
 'article11.jpg', 6),
 
     -- Hiểu về nhóm máu và vai trò
-    (N'🩸 Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
+    (N' Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
      N'1. Nhóm Máu Là Gì?
 Máu của mỗi người được phân loại dựa trên sự hiện diện hay vắng mặt của các kháng nguyên và kháng thể. Hai hệ thống phân loại nhóm máu phổ biến nhất hiện nay là:
 
-🔹Hệ ABO: Gồm 4 nhóm chính – A, B, AB và O.
+Hệ ABO: Gồm 4 nhóm chính – A, B, AB và O.
 
-🔹Hệ Rh: Dựa trên sự hiện diện (+) hoặc không có (-) của yếu tố Rh (Rhesus) trên bề mặt hồng cầu.
+Hệ Rh: Dựa trên sự hiện diện (+) hoặc không có (-) của yếu tố Rh (Rhesus) trên bề mặt hồng cầu.
 
 Khi kết hợp lại, ta có 8 nhóm máu phổ biến: A+, A−, B+, B−, AB+, AB−, O+, O−.
 
 2. Các Nhóm Máu Phổ Biến Như Thế Nào?
 Tỷ lệ các nhóm máu không đồng đều ở từng khu vực và quốc gia. Tại Việt Nam, thống kê y học cho thấy:
 
-🔹O+: Chiếm khoảng 42% dân số – nhóm máu phổ biến nhất.
+O+: Chiếm khoảng 42% dân số – nhóm máu phổ biến nhất.
 
-🔹A+: Khoảng 25% – cũng rất phổ biến.
+A+: Khoảng 25% – cũng rất phổ biến.
 
-🔹B+: Chiếm khoảng 23%.
+B+: Chiếm khoảng 23%.
 
-🔹AB+: Khoảng 7%.
+AB+: Khoảng 7%.
 
-🔹Nhóm Rh− (âm tính): Rất hiếm, chỉ khoảng 0.04% dân số.
+Nhóm Rh− (âm tính): Rất hiếm, chỉ khoảng 0.04% dân số.
 
-👉Sự phân bố này ảnh hưởng rất lớn đến nhu cầu và khả năng tiếp nhận máu khi truyền.
+Sự phân bố này ảnh hưởng rất lớn đến nhu cầu và khả năng tiếp nhận máu khi truyền.
 
 3. Vì Sao Nhóm Máu Quan Trọng Trong Hiến Máu?
 Trong truyền máu, việc phù hợp nhóm máu giữa người cho và người nhận là vô cùng quan trọng. Nếu truyền sai nhóm máu, có thể xảy ra phản ứng miễn dịch nghiêm trọng, thậm chí gây tử vong.
 
 Một số quy tắc cơ bản:
 
-🔹Nhóm O− là nhóm máu "phổ quát", có thể cho tất cả các nhóm máu khác trong trường hợp khẩn cấp.
+Nhóm O− là nhóm máu "phổ quát", có thể cho tất cả các nhóm máu khác trong trường hợp khẩn cấp.
 
-🔹Nhóm O+ có thể cho O+, A+, B+ và AB+.
+Nhóm O+ có thể cho O+, A+, B+ và AB+.
 
-🔹Nhóm A− có thể cho A− và A+, AB− và AB+.
+Nhóm A− có thể cho A− và A+, AB− và AB+.
 
-🔹Nhóm A+ có thể cho A+ và AB+.
+Nhóm A+ có thể cho A+ và AB+.
 
-🔹Nhóm B− có thể cho B− và B+, AB− và AB+.
+Nhóm B− có thể cho B− và B+, AB− và AB+.
 
-🔹Nhóm B+ có thể cho B+ và AB+.
+Nhóm B+ có thể cho B+ và AB+.
 
-🔹Nhóm AB− có thể cho AB− và AB+.
+Nhóm AB− có thể cho AB− và AB+.
 
-🔹Nhóm AB+ chỉ có thể cho AB+, nhưng lại có thể nhận máu từ tất cả các nhóm – gọi là "người nhận phổ quát".
+Nhóm AB+ chỉ có thể cho AB+, nhưng lại có thể nhận máu từ tất cả các nhóm – gọi là "người nhận phổ quát".
 
-👉Tuy nhiên, các nguyên tắc trên chỉ áp dụng cho truyền máu toàn phần hoặc hồng cầu, còn với tiểu cầu hoặc huyết tương, nguyên tắc có thể khác biệt.
+Tuy nhiên, các nguyên tắc trên chỉ áp dụng cho truyền máu toàn phần hoặc hồng cầu, còn với tiểu cầu hoặc huyết tương, nguyên tắc có thể khác biệt.
 
 Nhóm máu đặc biệt:
-🔹O− (người cho máu toàn phần phổ quát): Có thể cho bất kỳ nhóm máu nào.
+O− (người cho máu toàn phần phổ quát): Có thể cho bất kỳ nhóm máu nào.
 
-🔹AB+ (người nhận máu toàn phần phổ quát): Có thể nhận máu từ bất kỳ nhóm nào.
+AB+ (người nhận máu toàn phần phổ quát): Có thể nhận máu từ bất kỳ nhóm nào.
 
-👉Tuy nhiên, điều này chỉ đúng với máu toàn phần hoặc khối hồng cầu. Với tiểu cầu, huyết tương hay các thành phần khác, quy tắc truyền có thể khác.
+Tuy nhiên, điều này chỉ đúng với máu toàn phần hoặc khối hồng cầu. Với tiểu cầu, huyết tương hay các thành phần khác, quy tắc truyền có thể khác.
 
 4. Ai Là Người Cần Máu?
 Máu được sử dụng trong rất nhiều trường hợp y tế:
 
-🔹Người gặp tai nạn, mất máu cấp.
+Người gặp tai nạn, mất máu cấp.
 
-🔹Bệnh nhân phẫu thuật (đặc biệt là các ca mổ lớn).
+Bệnh nhân phẫu thuật (đặc biệt là các ca mổ lớn).
 
-🔹Người bệnh tan máu bẩm sinh, ung thư máu, suy tủy.
+Người bệnh tan máu bẩm sinh, ung thư máu, suy tủy.
 
-🔹Phụ nữ mang thai bị băng huyết hoặc biến chứng thai sản.
+Phụ nữ mang thai bị băng huyết hoặc biến chứng thai sản.
 
-🔹Trẻ sinh non hoặc sơ sinh thiếu máu.
+Trẻ sinh non hoặc sơ sinh thiếu máu.
 
-👉Do đó, nhu cầu về máu luôn cao và diễn ra liên tục. Việc hiểu rõ nhóm máu giúp người dân chủ động hơn trong việc hiến máu phù hợp.
+Do đó, nhu cầu về máu luôn cao và diễn ra liên tục. Việc hiểu rõ nhóm máu giúp người dân chủ động hơn trong việc hiến máu phù hợp.
 
 5. Vai Trò Của Các Nhóm Máu Trong Hiến Máu
 Mỗi nhóm máu có vai trò riêng biệt trong công tác hiến máu cứu người:
 
-🔹Nhóm O−: Rất quý hiếm. Dù chỉ chiếm tỷ lệ nhỏ, nhưng cực kỳ quan trọng trong cấp cứu khẩn cấp vì có thể truyền cho tất cả các nhóm máu.
+Nhóm O−: Rất quý hiếm. Dù chỉ chiếm tỷ lệ nhỏ, nhưng cực kỳ quan trọng trong cấp cứu khẩn cấp vì có thể truyền cho tất cả các nhóm máu.
 
-🔹Nhóm O+ và A+: Do số lượng lớn người sở hữu nhóm máu này nên lượng máu dự trữ cần duy trì đều đặn. Các bệnh viện thường xuyên cần máu từ nhóm này.
+Nhóm O+ và A+: Do số lượng lớn người sở hữu nhóm máu này nên lượng máu dự trữ cần duy trì đều đặn. Các bệnh viện thường xuyên cần máu từ nhóm này.
 
-🔹Nhóm AB: Dù ít người mang nhóm máu này, nhưng huyết tương AB lại là loại phổ quát – có thể truyền cho mọi nhóm máu. Do đó, người nhóm AB được khuyến khích hiến huyết tương định kỳ.
+Nhóm AB: Dù ít người mang nhóm máu này, nhưng huyết tương AB lại là loại phổ quát – có thể truyền cho mọi nhóm máu. Do đó, người nhóm AB được khuyến khích hiến huyết tương định kỳ.
 
-🔹Rh−: Do tỉ lệ cực thấp, nên người nhóm máu Rh− được xem là "kho máu hiếm". Họ nên tham gia ngân hàng máu hiếm để hỗ trợ khi có ca bệnh cần khẩn cấp.
+Rh−: Do tỉ lệ cực thấp, nên người nhóm máu Rh− được xem là "kho máu hiếm". Họ nên tham gia ngân hàng máu hiếm để hỗ trợ khi có ca bệnh cần khẩn cấp.
 
 6. Bạn Đã Biết Nhóm Máu Của Mình Chưa?
-🔹Rất nhiều người chưa biết nhóm máu của mình – điều này tiềm ẩn rủi ro trong các tình huống cấp cứu. Khi đi hiến máu, bạn sẽ được xét nghiệm miễn phí nhóm máu và biết được thông tin quan trọng này. Ngoài ra, bạn có thể yêu cầu cấp thẻ người hiến máu để lưu trữ và sử dụng trong các trường hợp khẩn cấp.
+Rất nhiều người chưa biết nhóm máu của mình – điều này tiềm ẩn rủi ro trong các tình huống cấp cứu. Khi đi hiến máu, bạn sẽ được xét nghiệm miễn phí nhóm máu và biết được thông tin quan trọng này. Ngoài ra, bạn có thể yêu cầu cấp thẻ người hiến máu để lưu trữ và sử dụng trong các trường hợp khẩn cấp.
 
 7. Kết Luận
-🔹Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
+Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
 
-👉Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg', 2),
+Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg', 2),
 
     -- Lưu và sử dụng máu hiến
-    (N'🩸 Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
+    (N' Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
      N'Hành Trình Của Máu
 Bạn có bao giờ tự hỏi: Sau khi hiến máu, đơn vị máu ấy sẽ được xử lý và sử dụng ra sao? Hành trình của máu không dừng lại tại điểm hiến – mà nó bắt đầu một chuỗi quy trình y tế nghiêm ngặt để đảm bảo an toàn và hiệu quả trong cứu chữa.
 
 1. Tiếp Nhận Và Bảo Quản
 Ngay sau khi bạn hiến máu, túi máu được:
 
-🔹Gắn mã số định danh duy nhất.
+Gắn mã số định danh duy nhất.
 
-🔹Đặt vào hộp chuyên dụng bảo quản lạnh (khoảng 2–6°C).
+Đặt vào hộp chuyên dụng bảo quản lạnh (khoảng 2–6°C).
 
-🔹Vận chuyển về trung tâm huyết học hoặc ngân hàng máu trong thời gian ngắn nhất.
+Vận chuyển về trung tâm huyết học hoặc ngân hàng máu trong thời gian ngắn nhất.
 
-👉Tại đây, máu sẽ được lưu trữ tạm thời trong điều kiện tiêu chuẩn trước khi phân tách và xét nghiệm.
+Tại đây, máu sẽ được lưu trữ tạm thời trong điều kiện tiêu chuẩn trước khi phân tách và xét nghiệm.
 
 2. Xét Nghiệm Và Kiểm Tra
 Mỗi đơn vị máu đều phải trải qua các bước xét nghiệm nghiêm ngặt:
 
-🔹Kiểm tra nhóm máu: ABO và Rh.
+Kiểm tra nhóm máu: ABO và Rh.
 
-🔹Sàng lọc bệnh truyền nhiễm: HIV, viêm gan B và C, giang mai, sốt rét, v.v.
+Sàng lọc bệnh truyền nhiễm: HIV, viêm gan B và C, giang mai, sốt rét, v.v.
 
-🔹Kiểm tra kháng thể bất thường để đảm bảo tương thích khi truyền.
+Kiểm tra kháng thể bất thường để đảm bảo tương thích khi truyền.
 
-🔹Chỉ những đơn vị máu đạt tiêu chuẩn an toàn tuyệt đối mới được đưa vào sử dụng.
+Chỉ những đơn vị máu đạt tiêu chuẩn an toàn tuyệt đối mới được đưa vào sử dụng.
 
 3. Phân Tách Các Thành Phần Máu
 Một đơn vị máu toàn phần có thể được tách ra thành nhiều thành phần khác nhau, phục vụ cho các mục đích điều trị cụ thể:
 
-🔹Hồng cầu: Truyền cho bệnh nhân thiếu máu, mất máu cấp.
+Hồng cầu: Truyền cho bệnh nhân thiếu máu, mất máu cấp.
 
-🔹Tiểu cầu: Dành cho người bị xuất huyết giảm tiểu cầu, bệnh ung thư.
+Tiểu cầu: Dành cho người bị xuất huyết giảm tiểu cầu, bệnh ung thư.
 
-🔹Huyết tương tươi đông lạnh: Dùng trong cấp cứu, bệnh rối loạn đông máu.
+Huyết tương tươi đông lạnh: Dùng trong cấp cứu, bệnh rối loạn đông máu.
 
-👉Nhờ quá trình này, một đơn vị máu có thể cứu được từ 2 đến 3 bệnh nhân, giúp tối ưu hóa giá trị của máu hiến.
+Nhờ quá trình này, một đơn vị máu có thể cứu được từ 2 đến 3 bệnh nhân, giúp tối ưu hóa giá trị của máu hiến.
 
 4. Cung Ứng Cho Bệnh Viện Và Trung Tâm Y Tế
 Sau khi phân tích và xử lý, máu sẽ được phân phối đến:
 
-🔹Bệnh viện đa khoa, trung tâm cấp cứu.
+Bệnh viện đa khoa, trung tâm cấp cứu.
 
-🔹Trung tâm điều trị ung thư, sản khoa.
+Trung tâm điều trị ung thư, sản khoa.
 
-🔹Cơ sở phẫu thuật, hồi sức tích cực, v.v.
+Cơ sở phẫu thuật, hồi sức tích cực, v.v.
 
-👉Tại đây, máu được truyền trực tiếp cho bệnh nhân theo chỉ định của bác sĩ, góp phần quan trọng trong việc cứu sống hàng triệu người mỗi năm.
+Tại đây, máu được truyền trực tiếp cho bệnh nhân theo chỉ định của bác sĩ, góp phần quan trọng trong việc cứu sống hàng triệu người mỗi năm.
 
 5. Những Trường Hợp Cần Máu Cấp Bách
 Nhu cầu máu luôn ở mức cao, nhất là trong:
 
-🔹Tai nạn giao thông, chấn thương nặng.
+Tai nạn giao thông, chấn thương nặng.
 
-🔹Phẫu thuật lớn (tim mạch, ghép tạng).
+Phẫu thuật lớn (tim mạch, ghép tạng).
 
-🔹Bệnh lý huyết học như tan máu bẩm sinh, suy tủy.
+Bệnh lý huyết học như tan máu bẩm sinh, suy tủy.
 
-🔹Sản phụ mất máu sau sinh.
+Sản phụ mất máu sau sinh.
 
-🔹Bệnh nhân ung thư cần truyền tiểu cầu.
+Bệnh nhân ung thư cần truyền tiểu cầu.
 
-👉Việc hiến máu đều đặn và liên tục chính là nguồn lực quý giá giúp ngành y tế ứng phó với những tình huống khẩn cấp này.
+Việc hiến máu đều đặn và liên tục chính là nguồn lực quý giá giúp ngành y tế ứng phó với những tình huống khẩn cấp này.
 
 Kết Luận
-👉Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
+Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
 'article13.jpg', 6),
 
     -- Hiến toàn phần và hiến tiểu cầu
-    (N'🩸Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
+    (N'Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
      N'Không Chỉ Là “Hiến Máu” – Hãy Hiểu Đúng Hơn
 Khi nghe đến “hiến máu”, nhiều người chỉ nghĩ đơn giản là lấy máu từ cơ thể người hiến để truyền cho người cần. Tuy nhiên, trong y học hiện đại, máu có thể được phân loại và hiến tách biệt theo nhu cầu điều trị. Hai hình thức phổ biến nhất là hiến máu toàn phần và hiến tiểu cầu – mỗi loại đều có quy trình, mục đích và lợi ích riêng biệt.
 
@@ -542,28 +542,28 @@ Hãy cùng khám phá sự khác biệt để lựa chọn hình thức hiến m
 1. Hiến Máu Toàn Phần – Đơn Giản Và Phổ Biến
 Hiến máu toàn phần là hình thức hiến máu truyền thống, trong đó khoảng 350–450ml máu được lấy ra từ tĩnh mạch người hiến, bao gồm tất cả các thành phần máu như: hồng cầu, bạch cầu, tiểu cầu và huyết tương.
 
-🔹 Thời gian thực hiện: Khoảng 10–15 phút.
-🔹 Thời gian phục hồi: Từ 1–2 tháng, do cơ thể cần tái tạo đủ hồng cầu.
-🔹 Tần suất hiến máu:
+ Thời gian thực hiện: Khoảng 10–15 phút.
+ Thời gian phục hồi: Từ 1–2 tháng, do cơ thể cần tái tạo đủ hồng cầu.
+ Tần suất hiến máu:
 
 Nam giới: Tối đa 4 lần/năm
 
 Nữ giới: Tối đa 3 lần/năm
 
-🔹 Ứng dụng lâm sàng: Máu toàn phần có thể được truyền trực tiếp hoặc phân tách thành nhiều thành phần để phục vụ nhiều bệnh nhân khác nhau.
+ Ứng dụng lâm sàng: Máu toàn phần có thể được truyền trực tiếp hoặc phân tách thành nhiều thành phần để phục vụ nhiều bệnh nhân khác nhau.
 
-👉 Ưu điểm: Nhanh chóng, dễ thực hiện, phù hợp với hầu hết người lần đầu hiến máu.
+ Ưu điểm: Nhanh chóng, dễ thực hiện, phù hợp với hầu hết người lần đầu hiến máu.
 
 2. Hiến Tiểu Cầu – Chính Xác Và Chuyên Biệt
 Hiến tiểu cầu là phương pháp trong đó máy tách tiểu cầu tự động sẽ thu lấy tiểu cầu từ máu người hiến, sau đó trả lại hồng cầu và huyết tương về cơ thể.
 
-🔹 Thời gian thực hiện: 60–90 phút do cần quá trình lọc máu liên tục.
-🔹 Thời gian phục hồi: Nhanh hơn, thường chỉ sau vài ngày.
-🔹 Tần suất hiến máu: Có thể 2 tuần/lần, tối đa 24 lần/năm.
+ Thời gian thực hiện: 60–90 phút do cần quá trình lọc máu liên tục.
+ Thời gian phục hồi: Nhanh hơn, thường chỉ sau vài ngày.
+ Tần suất hiến máu: Có thể 2 tuần/lần, tối đa 24 lần/năm.
 
-🔹 Ứng dụng lâm sàng: Tiểu cầu rất cần thiết cho bệnh nhân ung thư, người điều trị hóa chất, xuất huyết nặng hoặc rối loạn đông máu.
+ Ứng dụng lâm sàng: Tiểu cầu rất cần thiết cho bệnh nhân ung thư, người điều trị hóa chất, xuất huyết nặng hoặc rối loạn đông máu.
 
-👉 Ưu điểm: Cung cấp tiểu cầu chất lượng cao, hỗ trợ điều trị cho các ca bệnh đặc biệt cần truyền gấp.
+ Ưu điểm: Cung cấp tiểu cầu chất lượng cao, hỗ trợ điều trị cho các ca bệnh đặc biệt cần truyền gấp.
 
 3. So Sánh Nhanh: Toàn Phần vs. Tiểu Cầu
 Tiêu chí	Hiến máu toàn phần	Hiến tiểu cầu
@@ -584,10 +584,10 @@ Tùy thuộc vào nhu cầu thực tế tại bệnh viện, bạn có thể đ�
 Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
-👉 Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg', 2),
+ Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg', 2),
 
     -- Câu chuyện thật
-    (N'🩸Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
+    (N'Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
      N'Đằng Sau Một Túi Máu – Là Một Cuộc Đời
 Hiến máu là hành động giản dị nhưng mang ý nghĩa sâu sắc. Mỗi đơn vị máu bạn hiến tặng không chỉ là những giọt chất lỏng đỏ tươi – mà là niềm hy vọng sống còn của một con người, một gia đình, thậm chí cả một thế hệ.
 
@@ -625,7 +625,7 @@ Duy trì sự sống cho những người bị bệnh máu mãn tính như tan m
 
 Mang đến cơ hội sống cho trẻ sơ sinh thiếu máu, người cần phẫu thuật tim mạch, ghép tạng...
 
-👉 Một người hiến máu, có thể cứu tới 3 người bệnh khi máu được tách thành các thành phần khác nhau.
+ Một người hiến máu, có thể cứu tới 3 người bệnh khi máu được tách thành các thành phần khác nhau.
 
 Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
@@ -673,83 +673,83 @@ GO
 INSERT INTO News (Title, Content, ImgUrl, UserID, PostedAt)
 VALUES
    -- Sự kiến hiến máu
-(N'🩺 CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG 🩺',
-N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩺 Chiến Dịch Hiến Máu Cộng Đồng 2025, hợp tác với các doanh nghiệp tại TP.HCM, là sự kiện ý nghĩa nhằm khắc phục tình trạng thiếu máu tại Trung Tâm Hiến Máu. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và giảm nguy cơ bệnh tim. Sự kiện này lan tỏa tinh thần tương thân tương ái, xây dựng cộng đồng đoàn kết, nhân văn.
-💖 Đây là bản hòa ca của lòng nhân ái, nơi những giọt máu hồng kết nối những trái tim, thắp sáng hy vọng cho những người cần máu khẩn cấp. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
-🌟 Hãy cùng Trung Tâm Hiến Máu và các doanh nghiệp lan tỏa yêu thương! Nhanh tay đăng ký để chung tay cứu sống nhé.
-💉 Kết Nối Doanh Nghiệp, Sẻ Chia Sự Sống
+(N' CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Chiến Dịch Hiến Máu Cộng Đồng 2025, hợp tác với các doanh nghiệp tại TP.HCM, là sự kiện ý nghĩa nhằm khắc phục tình trạng thiếu máu tại Trung Tâm Hiến Máu. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và giảm nguy cơ bệnh tim. Sự kiện này lan tỏa tinh thần tương thân tương ái, xây dựng cộng đồng đoàn kết, nhân văn.
+ Đây là bản hòa ca của lòng nhân ái, nơi những giọt máu hồng kết nối những trái tim, thắp sáng hy vọng cho những người cần máu khẩn cấp. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+ Hãy cùng Trung Tâm Hiến Máu và các doanh nghiệp lan tỏa yêu thương! Nhanh tay đăng ký để chung tay cứu sống nhé.
+ Kết Nối Doanh Nghiệp, Sẻ Chia Sự Sống
 _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
-🕒 Thời gian: 15/07/2025, 8:00 - 16:00
-🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 2, 01/07/2025),
+ Thời gian: 15/07/2025, 8:00 - 16:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 2, 01/07/2025),
 
     -- Ngày hiến máu thế giới
-(N'🌍 NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI 🌍',
-N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩸 Ngày Hiến Máu Thế Giới 14/06/2025 là dịp để toàn cầu tôn vinh những người hiến máu và nâng cao nhận thức về tầm quan trọng của hiến máu nhân đạo. Với chủ đề **“Cảm ơn bạn, người hiến máu!”**, sự kiện nhấn mạnh vai trò của mỗi giọt máu trong việc cứu sống hàng triệu người. Tại Trung Tâm Hiến Máu, chúng tôi kêu gọi cộng đồng tham gia, đặc biệt những người có nhóm máu hiếm như O- và AB-, để cùng giải quyết tình trạng thiếu máu và mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
-💖 Đây không chỉ là một sự kiện, mà là bản hòa ca của lòng nhân ái, nơi những trái tim toàn cầu chung nhịp đập vì sự sống. Mỗi giọt máu bạn trao đi là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người.
-🌟 Sự chung tay của bạn là món quà ý nghĩa cho những bệnh nhân đang cần máu. Hãy nhanh tay đăng ký để cùng Trung Tâm Hiến Máu lan tỏa tình nhân ái nhé!
-🌐 Cảm Ơn Bạn – Người Hiến Máu Toàn Cầu
+(N' NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Ngày Hiến Máu Thế Giới 14/06/2025 là dịp để toàn cầu tôn vinh những người hiến máu và nâng cao nhận thức về tầm quan trọng của hiến máu nhân đạo. Với chủ đề **“Cảm ơn bạn, người hiến máu!”**, sự kiện nhấn mạnh vai trò của mỗi giọt máu trong việc cứu sống hàng triệu người. Tại Trung Tâm Hiến Máu, chúng tôi kêu gọi cộng đồng tham gia, đặc biệt những người có nhóm máu hiếm như O- và AB-, để cùng giải quyết tình trạng thiếu máu và mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
+ Đây không chỉ là một sự kiện, mà là bản hòa ca của lòng nhân ái, nơi những trái tim toàn cầu chung nhịp đập vì sự sống. Mỗi giọt máu bạn trao đi là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người.
+ Sự chung tay của bạn là món quà ý nghĩa cho những bệnh nhân đang cần máu. Hãy nhanh tay đăng ký để cùng Trung Tâm Hiến Máu lan tỏa tình nhân ái nhé!
+ Cảm Ơn Bạn – Người Hiến Máu Toàn Cầu
 _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
-🕒 Thời gian: 14/06/2025, 7:00 - 17:00
-🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
-🌟 Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 6, 01/06/2025),
+ Thời gian: 14/06/2025, 7:00 - 17:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
+ Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 6, 01/06/2025),
 
     -- Sinh viên hiến máu
-(N'🩸HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ🩸',
-N'🌟Một giọt máu cho đi – Một cuộc đời ở lại🌟
-🩸 Hiến Máu Nhân Đạo 2025 - Tiếp Nguồn Sinh Khí là dự án hiến máu được thực hiện hằng năm nhằm góp phần khắc phục tình trạng thiếu máu tại các ngân hàng máu trên địa bàn TP.HCM, đồng thời nâng cao nhận thức về hoạt động Hiến Máu Nhân Đạo – một nghĩa cử cao đẹp không chỉ giúp các bệnh nhân và các hoạt động y tế mà còn mang lại lợi ích sức khỏe cho chính người hiến. Qua đó, dự án mong muốn lan tỏa tinh thần tương thân tương ái, xây dựng lối sống tích cực, nhân văn trong cộng đồng sinh viên FPT nói riêng và xã hội nói chung.
-💖 Đây không chỉ là một sự kiện, mà còn là bản hòa ca của lòng nhân ái, nơi những trái tim cùng chung nhịp đập vì sự sẻ chia và tình yêu thương cuộc sống. Mỗi giọt máu được trao đi không chỉ mang lại cơ hội sống, mà còn là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người xung quanh.
-🌟 Sự chung tay của bạn sẽ là một niềm hy vọng, là món quà ý nghĩa dành tặng những người đang cần được tiếp sức. Và để thực hiện hóa được niềm hy vọng đó, hãy nhanh tay đăng ký tham gia để cùng SiTiGroup lan tỏa yêu thương nhé.
+(N'HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ',
+N'Một giọt máu cho đi – Một cuộc đời ở lại
+ Hiến Máu Nhân Đạo 2025 - Tiếp Nguồn Sinh Khí là dự án hiến máu được thực hiện hằng năm nhằm góp phần khắc phục tình trạng thiếu máu tại các ngân hàng máu trên địa bàn TP.HCM, đồng thời nâng cao nhận thức về hoạt động Hiến Máu Nhân Đạo – một nghĩa cử cao đẹp không chỉ giúp các bệnh nhân và các hoạt động y tế mà còn mang lại lợi ích sức khỏe cho chính người hiến. Qua đó, dự án mong muốn lan tỏa tinh thần tương thân tương ái, xây dựng lối sống tích cực, nhân văn trong cộng đồng sinh viên FPT nói riêng và xã hội nói chung.
+ Đây không chỉ là một sự kiện, mà còn là bản hòa ca của lòng nhân ái, nơi những trái tim cùng chung nhịp đập vì sự sẻ chia và tình yêu thương cuộc sống. Mỗi giọt máu được trao đi không chỉ mang lại cơ hội sống, mà còn là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người xung quanh.
+ Sự chung tay của bạn sẽ là một niềm hy vọng, là món quà ý nghĩa dành tặng những người đang cần được tiếp sức. Và để thực hiện hóa được niềm hy vọng đó, hãy nhanh tay đăng ký tham gia để cùng SiTiGroup lan tỏa yêu thương nhé.
 _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
-🕒 Thời gian : 28/04/2025.
-🎯 Địa điểm: Đại học FPT HCM.
-💪 Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 6, 16/04/2025),
+ Thời gian : 28/04/2025.
+ Địa điểm: Đại học FPT HCM.
+ Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 6, 16/04/2025),
 
     -- Chương trình máu hiếm
-(N'🩸 CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG 🩸',
-N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩸 Chương Trình Đăng Ký Người Hiến Máu Hiếm 2025, khởi động từ 01/07/2025, là sáng kiến của Trung Tâm Hiến Máu nhằm xây dựng ngân hàng máu hiếm (O-, AB-). Máu hiếm là nguồn lực quý giá, cứu sống những bệnh nhân khó tìm máu tương thích. Tham gia chương trình mang lại lợi ích sức khỏe như kiểm tra định kỳ và nâng cao nhận thức về nhóm máu.
-💖 Đây là hành trình của những trái tim dũng cảm, nơi mỗi giọt máu hiếm là ngọn đèn soi sáng cho những ca bệnh hiểm nghèo. Sự tham gia của bạn là món quà vô giá, kết nối yêu thương.
-🌟 Nếu bạn có nhóm máu O- hoặc AB-, hãy đăng ký ngay để cùng Trung Tâm Hiến Máu cứu người! Liên hệ qua hệ thống hoặc số 02838554137.
-🌟 Máu Hiếm – Món Quà Vô Giá
+(N' CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Chương Trình Đăng Ký Người Hiến Máu Hiếm 2025, khởi động từ 01/07/2025, là sáng kiến của Trung Tâm Hiến Máu nhằm xây dựng ngân hàng máu hiếm (O-, AB-). Máu hiếm là nguồn lực quý giá, cứu sống những bệnh nhân khó tìm máu tương thích. Tham gia chương trình mang lại lợi ích sức khỏe như kiểm tra định kỳ và nâng cao nhận thức về nhóm máu.
+ Đây là hành trình của những trái tim dũng cảm, nơi mỗi giọt máu hiếm là ngọn đèn soi sáng cho những ca bệnh hiểm nghèo. Sự tham gia của bạn là món quà vô giá, kết nối yêu thương.
+ Nếu bạn có nhóm máu O- hoặc AB-, hãy đăng ký ngay để cùng Trung Tâm Hiến Máu cứu người! Liên hệ qua hệ thống hoặc số 02838554137.
+ Máu Hiếm – Món Quà Vô Giá
 _______________________________
 THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
-🕒 Thời gian khởi động: 01/07/2025
-🎯 Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, 15/06/2025),
+ Thời gian khởi động: 01/07/2025
+ Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, 15/06/2025),
 
     -- Vinh danh người hiến máu
-(N'🩺 LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI 🩺',
-N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩺 Lễ Vinh Danh Người Hiến Máu Xuất Sắc 2025, diễn ra vào 30/08/2025, là dịp để Trung Tâm Hiến Máu tri ân những người đã hiến máu nhiều lần, góp phần cứu sống hàng trăm bệnh nhân. Sự kiện lan tỏa tinh thần hiến máu, khuyến khích cộng đồng tham gia hành động nhân đạo, mang lại lợi ích sức khỏe và niềm vui sẻ chia.
-💖 Đây là bản giao hưởng của lòng biết ơn, nơi những trái tim nhân ái được tôn vinh, truyền cảm hứng cho mọi người. Sự hiện diện của bạn sẽ làm rực rỡ ý nghĩa của sự kiện.
-🌟 Hãy đến để cùng Trung Tâm Hiến Máu vinh danh những người hùng thầm lặng! Đăng ký tham dự qua hệ thống hoặc email trungtamhienmau@gmail.vn.
-🏅 Tri Ân Những Người Hùng Thầm Lặng
+(N' LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Lễ Vinh Danh Người Hiến Máu Xuất Sắc 2025, diễn ra vào 30/08/2025, là dịp để Trung Tâm Hiến Máu tri ân những người đã hiến máu nhiều lần, góp phần cứu sống hàng trăm bệnh nhân. Sự kiện lan tỏa tinh thần hiến máu, khuyến khích cộng đồng tham gia hành động nhân đạo, mang lại lợi ích sức khỏe và niềm vui sẻ chia.
+ Đây là bản giao hưởng của lòng biết ơn, nơi những trái tim nhân ái được tôn vinh, truyền cảm hứng cho mọi người. Sự hiện diện của bạn sẽ làm rực rỡ ý nghĩa của sự kiện.
+ Hãy đến để cùng Trung Tâm Hiến Máu vinh danh những người hùng thầm lặng! Đăng ký tham dự qua hệ thống hoặc email trungtamhienmau@gmail.vn.
+ Tri Ân Những Người Hùng Thầm Lặng
 _______________________________
 THÔNG TIN CHI TIẾT SỰ KIỆN:
-🕒 Thời gian: 30/08/2025, 18:00 - 20:00
-🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 6, 01/08/2025),
+ Thời gian: 30/08/2025, 18:00 - 20:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 6, 01/08/2025),
 
     -- Hiến máu tiểu cầu
-(N'🩺 TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ 🩺',
-N'🌟 Một giọt máu cho đi – Một cuộc đời ở lại 🌟
-🩸 Trung Tâm Hiến Máu kêu gọi cộng đồng tham gia **Chiến Dịch Hiến Tiểu Cầu 2025**, khởi động từ 01/11/2025, để hỗ trợ bệnh nhân ung thư, những người cần truyền tiểu cầu để ngăn ngừa xuất huyết trong quá trình hóa trị. Tiểu cầu, một thành phần quan trọng của máu, giúp đông máu và duy trì sự sống. Hiến tiểu cầu không chỉ cứu sống mà còn mang lại lợi ích sức khỏe như kích thích sản sinh tế bào mới và nâng cao tinh thần sẻ chia. Chiến dịch này nhằm nâng cao nhận thức về nhu cầu tiểu cầu và lan tỏa tinh thần nhân ái.
-💖 Đây không chỉ là một hành động hiến máu, mà là bản hòa ca của lòng nhân ái, nơi mỗi túi tiểu cầu là ngọn lửa hy vọng, thắp sáng cuộc sống cho những bệnh nhân ung thư đang chiến đấu từng ngày. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
-🌟 Hãy đến Trung Tâm Hiến Máu để hiến tiểu cầu và hỗ trợ bệnh nhân ung thư! Nhanh tay đăng ký qua hệ thống hoặc liên hệ số 02838554137 để biết thêm chi tiết.
-💉 Tiểu Cầu – Ngọn Lửa Hy Vọng Cho Ung Thư
+(N' TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Trung Tâm Hiến Máu kêu gọi cộng đồng tham gia **Chiến Dịch Hiến Tiểu Cầu 2025**, khởi động từ 01/11/2025, để hỗ trợ bệnh nhân ung thư, những người cần truyền tiểu cầu để ngăn ngừa xuất huyết trong quá trình hóa trị. Tiểu cầu, một thành phần quan trọng của máu, giúp đông máu và duy trì sự sống. Hiến tiểu cầu không chỉ cứu sống mà còn mang lại lợi ích sức khỏe như kích thích sản sinh tế bào mới và nâng cao tinh thần sẻ chia. Chiến dịch này nhằm nâng cao nhận thức về nhu cầu tiểu cầu và lan tỏa tinh thần nhân ái.
+ Đây không chỉ là một hành động hiến máu, mà là bản hòa ca của lòng nhân ái, nơi mỗi túi tiểu cầu là ngọn lửa hy vọng, thắp sáng cuộc sống cho những bệnh nhân ung thư đang chiến đấu từng ngày. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+ Hãy đến Trung Tâm Hiến Máu để hiến tiểu cầu và hỗ trợ bệnh nhân ung thư! Nhanh tay đăng ký qua hệ thống hoặc liên hệ số 02838554137 để biết thêm chi tiết.
+ Tiểu Cầu – Ngọn Lửa Hy Vọng Cho Ung Thư
 _______________________________
 THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
-🕒 Thời gian khởi động: 01/11/2025
-🎯 Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
-💪 Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+
-🌟 Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu', 'event6.jpg', 2, 15/10/2025);
+ Thời gian khởi động: 01/11/2025
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+
+ Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu', 'event6.jpg', 2, 15/10/2025);
 GO
 
 -- Insert data into BlogPostTags table
