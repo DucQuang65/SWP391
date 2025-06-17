@@ -62,8 +62,9 @@ CREATE TABLE BloodArticles (
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX) NOT NULL,
     ImgUrl NVARCHAR(255),
-	UserID INT NOT NULL,
-	FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UserID INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 -- BloodTypeTags table: For sorting blood type tags
