@@ -3,6 +3,7 @@ using Hien_mau.Dto;
 using Hien_mau.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,59 +21,81 @@ namespace Hien_mau.Controllers
             _context = context;
         }
 
-        // GET: api/BlogPosts (Without Pagination)
+        // GET: api/News
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetBlogPosts()
         {
             var blogs = await _context.News
-                .Select(p => new
-                {
-                    p.PostId,
-                    p.Title,
-                    p.Content,
-                    p.ImgUrl,
-                    UserName = _context.Users
-                        .Where(u => u.UserId == p.UserId)
-                        .Select(u => u.Name)
-                        .FirstOrDefault(),
-                    p.PostedAt,
-                    
-                    Tags = p.Tags.Select(t => t.TagName).ToList()
-                })
                 .ToListAsync();
-            return Ok(blogs);
+
+            // Cập nhật PostedAt nếu là giá trị mặc định ban đầu
+            foreach (var blog in blogs)
+            {
+                if (blog.PostedAt < new DateTime(2025, 1, 1))
+                {
+                    blog.PostedAt = DateTime.Now;
+                    _context.News.Update(blog);
+                }
+            }
+            await _context.SaveChangesAsync();
+
+            var response = blogs.Select(p => new
+            {
+                p.PostId,
+                p.Title,
+                p.Content,
+                p.ImgUrl,
+                p.UserId,
+                RoleID = _context.Users
+                    .Where(u => u.UserId == p.UserId)
+                    .Select(u => u.RoleId)
+                    .FirstOrDefault(),
+                p.PostedAt,
+                Tags = p.Tags.Select(t => t.TagName).ToList()
+            }).ToList();
+
+            return Ok(response);
         }
 
-        // GET: api/BlogPosts/5
+        // GET: api/News/5
         [HttpGet("{id}")]
         public async Task<ActionResult<object>> GetBlogPost(int id)
         {
             var blog = await _context.News
-                .Where(p => p.PostId == id)
-                .Select(p => new
-                {
-                    p.PostId,
-                    p.Title,
-                    p.Content,
-                    p.ImgUrl,
-                    UserName = _context.Users
-                        .Where(u => u.UserId == p.UserId)
-                        .Select(u => u.Name)
-                        .FirstOrDefault(),
-                    p.PostedAt,
-                   
-                    Tags = p.Tags.Select(t => t.TagName).ToList()
-                })
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(p => p.PostId == id);
 
             if (blog == null)
             {
                 return NotFound();
             }
-            return Ok(blog);
+
+            // Cập nhật PostedAt nếu là giá trị mặc định ban đầu
+            if (blog.PostedAt < new DateTime(2025, 1, 1))
+            {
+                blog.PostedAt = DateTime.Now;
+                _context.News.Update(blog);
+                await _context.SaveChangesAsync();
+            }
+
+            var response = new
+            {
+                blog.PostId,
+                blog.Title,
+                blog.Content,
+                blog.ImgUrl,
+                blog.UserId,
+                RoleID = await _context.Users
+                    .Where(u => u.UserId == blog.UserId)
+                    .Select(u => u.RoleId)
+                    .FirstOrDefaultAsync(),
+                blog.PostedAt,
+                TagNames = blog.Tags.Select(t => t.TagName).ToList()
+            };
+
+            return Ok(response);
         }
 
-        // POST: api/BlogPosts
+        // POST: api/News
         [HttpPost]
         public async Task<ActionResult<object>> CreateBlogPost([FromBody] NewsCreateDto dto)
         {
@@ -89,8 +112,7 @@ namespace Hien_mau.Controllers
                 return BadRequest("Invalid UserId.");
             }
 
-     
-            
+            var postedAt = DateTime.Now; // Lấy múi giờ địa phương
 
             var news = new News
             {
@@ -98,8 +120,7 @@ namespace Hien_mau.Controllers
                 Content = dto.Content,
                 ImgUrl = dto.ImgUrl,
                 UserId = dto.UserId,
-                PostedAt = DateTime.UtcNow,
-                
+                PostedAt = postedAt
             };
 
             // Chỉ truy vấn Tags nếu cần
@@ -127,14 +148,13 @@ namespace Hien_mau.Controllers
                 news.ImgUrl,
                 news.UserId,
                 news.PostedAt,
-               
                 TagNames = news.Tags.Select(t => t.TagName).ToList()
             };
 
             return CreatedAtAction(nameof(GetBlogPost), new { id = news.PostId }, response);
         }
 
-        // PUT: api/BlogPosts/5
+        // PUT: api/News/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBlogPost(int id, [FromBody] NewsUpdateDto dto)
         {
@@ -147,12 +167,15 @@ namespace Hien_mau.Controllers
                 return NotFound();
             }
 
-           
+            // Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content))
+            {
+                return BadRequest("Title and Content are required.");
+            }
 
             news.Title = dto.Title;
             news.Content = dto.Content;
             news.ImgUrl = dto.ImgUrl;
-           
 
             if (dto.TagIds != null)
             {
@@ -171,11 +194,12 @@ namespace Hien_mau.Controllers
             return NoContent();
         }
 
+        // DELETE: api/News/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id)
         {
             var blog = await _context.News
-                .Include(p => p.Tags) // Nạp Tags để xử lý quan hệ
+                .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.PostId == id);
 
             if (blog == null)
@@ -183,7 +207,7 @@ namespace Hien_mau.Controllers
                 return NotFound();
             }
 
-            // Xóa các bản ghi liên quan trong BlogPostTags
+            // Xóa các bản ghi liên quan trong NewsTags
             blog.Tags.Clear();
 
             _context.News.Remove(blog);

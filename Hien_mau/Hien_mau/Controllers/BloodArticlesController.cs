@@ -3,6 +3,7 @@ using Hien_mau.Dto;
 using Hien_mau.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,20 +26,35 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBloodArticles()
         {
             var articles = await _context.BloodArticles
-                .Select(a => new
-                {
-                    a.ArticleId,
-                    a.Title,
-                    a.Content,
-                    a.ImgUrl,
-                    UserName = _context.Users
-                    .Where(u => u.UserId == a.UserId)
-                    .Select(u => u.Name)
-                    .FirstOrDefault(),
-                    Tags = a.Tags.Select(t => t.TagName).ToList()
-                })
                 .ToListAsync();
-            return Ok(articles);
+
+            
+            foreach (var article in articles)
+            {
+                if (article.CreatedAt < new DateTime(2025, 1, 1))
+                {
+                    article.CreatedAt = DateTime.Now;
+                    _context.BloodArticles.Update(article);
+                }
+            }
+            await _context.SaveChangesAsync();
+
+            var response = articles.Select(a => new
+            {
+                a.ArticleId,
+                a.Title,
+                a.Content,
+                a.ImgUrl,
+                a.CreatedAt,
+                a.UserId,
+                RoleID = _context.Users
+                    .Where(u => u.UserId == a.UserId)
+                    .Select(u => u.RoleId)
+                    .FirstOrDefault(),
+                Tags = a.Tags.Select(t => t.TagName).ToList()
+            }).ToList();
+
+            return Ok(response);
         }
 
         // GET: api/BloodArticles/5
@@ -46,26 +62,37 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> GetBloodArticle(int id)
         {
             var article = await _context.BloodArticles
-                .Where(a => a.ArticleId == id)
-                .Select(a => new
-                {
-                    a.ArticleId,
-                    a.Title,
-                    a.Content,
-                    a.ImgUrl,
-                    UserName = _context.Users
-                    .Where(u => u.UserId == a.UserId)
-                    .Select(u => u.Name)
-                    .FirstOrDefault(),
-                    Tags = a.Tags.Select(t => t.TagName).ToList()
-                })
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(a => a.ArticleId == id);
 
             if (article == null)
             {
                 return NotFound();
             }
-            return Ok(article);
+
+            // Cập nhật CreatedAt nếu là giá trị mặc định ban đầu
+            if (article.CreatedAt < new DateTime(2025, 1, 1))
+            {
+                article.CreatedAt = DateTime.Now;
+                _context.BloodArticles.Update(article);
+                await _context.SaveChangesAsync();
+            }
+
+            var response = new
+            {
+                article.ArticleId,
+                article.Title,
+                article.Content,
+                article.ImgUrl,
+                article.CreatedAt,
+                article.UserId,
+                RoleID = await _context.Users
+                    .Where(u => u.UserId == article.UserId)
+                    .Select(u => u.RoleId)
+                    .FirstOrDefaultAsync(),
+                TagNames = article.Tags.Select(t => t.TagName).ToList()
+            };
+
+            return Ok(response);
         }
 
         // POST: api/BloodArticles
@@ -73,9 +100,9 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> CreateBloodArticle([FromBody] BloodArticleCreateDto dto)
         {
             // Kiểm tra dữ liệu đầu vào
-            if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content))
+            if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
             {
-                return BadRequest("Title and Content are required.");
+                return BadRequest("Title, Content, and UserId are required.");
             }
 
             var userExists = await _context.Users.AnyAsync(u => u.UserId == dto.UserId);
@@ -84,12 +111,15 @@ namespace Hien_mau.Controllers
                 return BadRequest($"UserId {dto.UserId} does not exist in Users table.");
             }
 
+            var createdAt = DateTime.Now; // Lấy múi giờ địa phương
+
             var article = new BloodArticle
             {
                 Title = dto.Title,
                 Content = dto.Content,
                 ImgUrl = dto.ImgUrl,
-                UserId = dto.UserId
+                UserId = dto.UserId,
+                CreatedAt = createdAt
             };
 
             // Chỉ truy vấn Tags nếu cần
@@ -115,10 +145,12 @@ namespace Hien_mau.Controllers
                 article.Title,
                 article.Content,
                 article.ImgUrl,
-                UserName = await _context.Users
-                .Where(u => u.UserId == article.UserId)
-                .Select(u => u.Name)
-                .FirstOrDefaultAsync(),
+                article.CreatedAt,
+                article.UserId,
+                RoleID = await _context.Users
+                    .Where(u => u.UserId == article.UserId)
+                    .Select(u => u.RoleId)
+                    .FirstOrDefaultAsync(),
                 TagNames = article.Tags.Select(t => t.TagName).ToList()
             };
 
