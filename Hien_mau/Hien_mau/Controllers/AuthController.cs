@@ -39,8 +39,7 @@ namespace Hien_mau.Controllers
             if (result == null)
             {
                 return BadRequest("Invalid username or password");
-            }
-
+            }            
             return Ok(result);
         }
         

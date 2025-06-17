@@ -1,4 +1,5 @@
-﻿using Hien_mau.Data;
+﻿using Azure.Core;
+using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Models;
 using Microsoft.AspNetCore.Http;
@@ -64,8 +65,8 @@ namespace Hien_mau.Controllers
                 IDCardType = user.IdcardType,
                 IDCard = user.Idcard,
                 Name = user.Name,
-                DateOfBirth = (DateTime)user.DateOfBirth,
-                Age = (int)user.Age,
+                DateOfBirth = user.DateOfBirth,
+                Age = user.Age,
                 Gender = user.Gender,
                 City = user.City,
                 District = user.District,
@@ -76,7 +77,7 @@ namespace Hien_mau.Controllers
                 Status = user.Status,
                 RoleID = user.RoleId,
                 Department = user.Department,
-                CreatedAt = (DateTime)user.CreatedAt
+                CreatedAt = user.CreatedAt
             };
 
             return Ok(information);
@@ -92,7 +93,20 @@ namespace Hien_mau.Controllers
             //await _context.SaveChangesAsync();
             //return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, newUser);
 
+            //var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email);
+
+            //if (informationDto == null || string.IsNullOrEmpty(informationDto.Email) || emailExists)
+            //    return BadRequest();
+
             if (informationDto == null)
+                return BadRequest();
+
+            if (string.IsNullOrEmpty(informationDto.Email))
+                return BadRequest();
+
+            var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email);
+
+            if (emailExists)
                 return BadRequest();
 
             var newUser = new User
