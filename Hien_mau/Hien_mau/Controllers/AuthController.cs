@@ -39,7 +39,10 @@ namespace Hien_mau.Controllers
             if (result == null)
             {
                 return BadRequest("Invalid username or password");
-            }            
+            }
+            if (result == "Account is banned")
+                return Unauthorized();
+
             return Ok(result);
         }
         

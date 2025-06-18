@@ -126,7 +126,7 @@ namespace Hien_mau.Controllers
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
                 Department = informationDto.Department,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now
             };
 
             _context.Users.Add(newUser);

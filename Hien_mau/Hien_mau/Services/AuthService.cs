@@ -58,15 +58,16 @@ namespace Hien_mau.Services
             //    return (null, null);
             //}
 
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await context.Users.FirstOrDefaultAsync
+                (u => u.Email == request.Email && u.Password == request.Password);
+
             if (user is null)
             {
                 return null;
             }
-            if (user.Password != request.Password)
-            {
-                return null;
-            }
+
+            if (user.Status == 0)
+                return ("Account is banned");
 
             return CreateToken(user);
         }
