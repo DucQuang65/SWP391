@@ -20,7 +20,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUsers()
+        public async Task<ActionResult<List<InformationDto>>> GetUsers()
         {
             var users = await _context.Users.Select(u => new InformationDto
         {
@@ -31,8 +31,8 @@ namespace Hien_mau.Controllers
                 IDCardType = u.IdcardType,
                 IDCard = u.Idcard,
                 Name = u.Name,
-                DateOfBirth = (DateTime)u.DateOfBirth,
-                Age = (int)u.Age,
+                DateOfBirth = u.DateOfBirth,
+                Age = u.Age,
                 Gender = u.Gender,
                 City = u.City,
                 District = u.District,
@@ -43,7 +43,7 @@ namespace Hien_mau.Controllers
                 Status = u.Status,
                 RoleID = u.RoleId,
                 Department = u.Department,
-                CreatedAt = (DateTime)u.CreatedAt
+                CreatedAt = u.CreatedAt
             }).ToListAsync();
 
             return Ok(users);
@@ -98,10 +98,7 @@ namespace Hien_mau.Controllers
             //if (informationDto == null || string.IsNullOrEmpty(informationDto.Email) || emailExists)
             //    return BadRequest();
 
-            if (informationDto == null)
-                return BadRequest();
-
-            if (string.IsNullOrEmpty(informationDto.Email))
+            if (informationDto == null || string.IsNullOrEmpty(informationDto.Email))
                 return BadRequest();
 
             var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email);
@@ -129,37 +126,16 @@ namespace Hien_mau.Controllers
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
                 Department = informationDto.Department,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now
             };
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            // Map sang InformationDto để trả về
-            var result = new InformationDto
-            {
-                Email = informationDto.Email,
-                Password = informationDto.Password,
-                Phone = informationDto.Phone,
-                IDCardType = informationDto.IDCardType,
-                IDCard = informationDto.IDCard,
-                Name = informationDto.Name,
-                DateOfBirth = informationDto.DateOfBirth,
-                Age = informationDto.Age,
-                Gender = informationDto.Gender,
-                City = informationDto.City,
-                District = informationDto.District,
-                Ward = informationDto.Ward,
-                Address = informationDto.Address,
-                BloodGroup = informationDto.BloodGroup,
-                RhType = informationDto.RhType,
-                Status = informationDto.Status,
-                RoleID = informationDto.RoleID,
-                Department = informationDto.Department,
-                CreatedAt = informationDto.CreatedAt
-            };
+            informationDto.UserID = newUser.UserId;
+            informationDto.CreatedAt = newUser.CreatedAt;
 
-            return CreatedAtAction(nameof(GetUserByID), new { id = informationDto.UserID }, result);
+            return CreatedAtAction(nameof(GetUserByID), new { id = informationDto.UserID }, informationDto);
         }
 
         [HttpPut("{id}")]
@@ -169,8 +145,16 @@ namespace Hien_mau.Controllers
             if (user == null)
                 return NotFound();
 
-            user.Email = informationDto.Email;
-            user.Password = informationDto.Password;
+            if (!string.IsNullOrEmpty(informationDto.Email) && informationDto.Email != user.Email)
+            {
+                var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email && u.UserId != id);
+                if (emailExists)
+                    return BadRequest();
+                user.Email = informationDto.Email;
+            }
+            if (!string.IsNullOrEmpty(informationDto.Password))
+                user.Password = informationDto.Password;
+
             user.Phone = informationDto.Phone;
             user.IdcardType = informationDto.IDCardType;
             user.Idcard = informationDto.IDCard;
@@ -187,7 +171,6 @@ namespace Hien_mau.Controllers
             user.Status = informationDto.Status;
             user.RoleId = informationDto.RoleID;
             user.Department = informationDto.Department;
-            user.CreatedAt = DateTime.UtcNow;
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
