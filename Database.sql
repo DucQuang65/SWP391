@@ -10,7 +10,6 @@ CREATE TABLE Roles (
     RoleName NVARCHAR(20) NOT NULL UNIQUE -- Guest, Member, Staff-Doctor, Staff-BloodManager, Admin
 );
 
-
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
@@ -32,7 +31,8 @@ CREATE TABLE Users (
     Address NVARCHAR(255), -- AES encrypted
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
-
+	Weight FLOAT, -- Weight in kg
+    Height FLOAT, -- Height in cm
 
     Status TINYINT NOT NULL, -- 0: inactive, 1: active, 2: banned
     RoleID INT NOT NULL,
@@ -40,7 +40,6 @@ CREATE TABLE Users (
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
-
 
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
@@ -54,7 +53,6 @@ CREATE TABLE HospitalInfo (
     Latitude FLOAT NOT NULL,
     Longitude FLOAT NOT NULL
 );
-
 
 -- BloodArticles table: Stores public blood group articles
 CREATE TABLE BloodArticles (
@@ -93,7 +91,6 @@ CREATE TABLE News (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-
 -- NewsTags table: For sorting blogs
 CREATE TABLE NewsTags (
     PostID INT,
@@ -103,6 +100,17 @@ CREATE TABLE NewsTags (
     FOREIGN KEY (TagID) REFERENCES Tags(TagID)
 );
 
+-- ActivityLog table: Tracks News and Article activities for Admin
+CREATE TABLE ActivityLog (
+    LogID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    ActivityType NVARCHAR(50) NOT NULL, -- e.g., CreateArticle, UpdateArticle, DeleteArticle, CreateNews, UpdateNews, DeleteNews
+    EntityID INT NOT NULL, -- ArticleID or PostID
+    EntityType NVARCHAR(20) NOT NULL, -- Article or News
+    Description NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
 
 -- BloodInventory table: Stores blood stock
 CREATE TABLE BloodInventory (
@@ -114,7 +122,6 @@ CREATE TABLE BloodInventory (
     IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
     LastUpdated DATETIME DEFAULT GETDATE()
 );
-
 
 -- BloodRequests table: Stores blood requests
 CREATE TABLE BloodRequests (
@@ -132,28 +139,25 @@ CREATE TABLE BloodRequests (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-
 -- RequestComponents table: Stores blood components for requests
 CREATE TABLE RequestComponents (
     ComponentID INT PRIMARY KEY IDENTITY(1,1),
     RequestID INT NOT NULL,
-    ComponentType NVARCHAR(20) NOT NULL, -- RedCells, Plasma, Platelets
+    ComponentType NVARCHAR(20) NOT NULL, -- RedCells, Plasma, Platelets, Whole
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
 );
-
 
 -- BloodRequestHistory table: Tracks request status changes
 CREATE TABLE BloodRequestHistory (
     HistoryID INT PRIMARY KEY IDENTITY(1,1),
     RequestID INT NOT NULL,
     UserID INT NOT NULL, -- Staff-Doctor or Staff-BloodManager
-    Status TINYINT NOT NULL, -- 0: Pending, 1: Verified, 2: Processing, 3: Connected, 4: Completed, 5: Rejected
+    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho 5: Rejected
     Notes NVARCHAR(255),
     TimeStamp DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
 
 -- BloodDonationHistory table: Stores donation records
 CREATE TABLE BloodDonationHistory (
@@ -164,11 +168,10 @@ CREATE TABLE BloodDonationHistory (
     RhType NVARCHAR(3) NOT NULL,
     ComponentType NVARCHAR(20) NOT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
-    IsSuccessful BIT DEFAULT 1,
+	IsSuccess BIT DEFAULT 1,
     Notes NVARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
 
 -- PublicBloodRequests table: Stores public urgent requests
 CREATE TABLE PublicBloodRequests (
@@ -183,7 +186,6 @@ CREATE TABLE PublicBloodRequests (
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
 );
 
-
 -- UserLocations table: Stores user locations
 CREATE TABLE UserLocations (
     LocationID INT PRIMARY KEY IDENTITY(1,1),
@@ -194,7 +196,6 @@ CREATE TABLE UserLocations (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-
 -- Appointments table: Stores appointment created
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
@@ -202,10 +203,10 @@ CREATE TABLE Appointments (
     AppointmentDate DATETIME  NOT NULL, -- Ngày giờ hẹn khám
     Status TINYINT DEFAULT 0, -- 0: Đang chờ, 1: Đã xác nhận, 2: Hủy      
     Notes NVARCHAR(255),
+	TimeSlot NVARCHAR(50),
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
 
 -- Notifications table: Stores user notifications
 CREATE TABLE Notifications (
@@ -219,7 +220,6 @@ CREATE TABLE Notifications (
     SentAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
 
 -- DonationReminders table: Stores donation reminders
 CREATE TABLE DonationReminders (

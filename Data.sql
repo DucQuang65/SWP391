@@ -46,38 +46,42 @@ GO
 -- Insert data into Tags table
 INSERT INTO Tags (TagID, TagName)
 VALUES
+-- Insert data into Tags table
+INSERT INTO Tags (TagID, TagName)
+VALUES
     -- Nhóm máu
-    (1, 'A'),
-    (2, 'B'),
-    (3, 'AB'),
-    (4, 'O'),
-    (5, 'Rh+'),
-    (6, 'Rh-'),
+    (1, 'A+'),
+    (2, 'A-'),
+    (3, 'B+'),
+    (4, 'B-'),
+    (5, 'AB+'),
+    (6, 'AB-'),
+    (7, 'O+'),
+    (8, 'O-'),
     -- Tag bài viết
-    (7, N'Tổng quan nhóm máu'),
-    (8, N'Truyền máu'),
-    (9, N'Hiến Máu Lần Đầu'),
-    (10, N'Chuẩn Bị Trước Hiến Máu'),
-    (11, N'Quy Trình Hiến Máu'),
-    (12, N'Lợi Ích Hiến Máu'),
-    (13, N'Hiến Máu Định Kỳ'),
-    (14, N'Sức Khoẻ'),
-    (15, N'Nhóm Máu'),
-    (16, N'Kiến Thức Y Khoa'),
-    (17, N'Quy Trình Xử Lý Máu'),
-    (18, N'Phần mềm'),
-    (19, N'Cứu Người'),
-    (20, N'Hiến Máu Toàn Phần'),
-    (21, N'Hiến Tiểu Cầu'),
-    (22, N'Kỹ Thuật Hiến Máu'),
-    (23, N'Câu Chuyện Hiến Máu'),
-    (24, N'Truyền Cảm Hứng'),
-    (25, N'Phân Loại Máu'),
-    (26, N'Hiến Máu'),
-    (27, N'Kêu Gọi Hiến Máu'),
-    (28, N'Sự Kiện Hiến Máu'),
-    (29, N'Phòng Bệnh'),
-    (30, N'Tin tức');
+    (9, N'Tổng quan nhóm máu'),
+    (10, N'Truyền máu'),
+    (11, N'Hiến Máu Lần Đầu'),
+    (12, N'Chuẩn Bị Trước Hiến Máu'),
+    (13, N'Quy Trình Hiến Máu'),
+    (14, N'Lợi Ích Hiến Máu'),
+    (15, N'Hiến Máu Định Kỳ'),
+    (16, N'Sức Khoẻ'),
+    (17, N'Nhóm Máu'),
+    (18, N'Kiến Thức Y Khoa'),
+    (19, N'Quy Trình Xử Lý Máu'),
+    (20, N'Cứu Người'),
+    (21, N'Hiến Máu Toàn Phần'),
+    (22, N'Hiến Tiểu Cầu'),
+    (23, N'Kỹ Thuật Hiến Máu'),
+    (24, N'Câu Chuyện Hiến Máu'),
+    (25, N'Truyền Cảm Hứng'),
+    (26, N'Phân Loại Máu'),
+    (27, N'Hiến Máu'),
+    (28, N'Kêu Gọi Hiến Máu'),
+    (29, N'Sự Kiện Hiến Máu'),
+    (30, N'Phòng Bệnh'),
+    (31, N'Tin tức');
 GO
 
 -- Insert data into BloodArticles table
