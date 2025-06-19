@@ -47,6 +47,7 @@ public partial class Hien_mauContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserLocation> UserLocations { get; set; }
+   
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=MyDB");
@@ -55,21 +56,19 @@ public partial class Hien_mauContext : DbContext
     {
         modelBuilder.Entity<Appointment>(entity =>
         {
-            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA21BEC5904");
-
+            entity.HasKey(e => e.AppointmentId);
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
-            entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.Notes).HasMaxLength(255);
-            entity.Property(e => e.Status).HasDefaultValue((byte)0);
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
+            entity.Property(e => e.TimeSlot).HasMaxLength(50);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Appointments)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Appointme__UserI__18EBB532");
+                .HasConstraintName("FK_Appointments_Users");
         });
 
         modelBuilder.Entity<BloodArticle>(entity =>
@@ -360,6 +359,8 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.RhType).HasMaxLength(3);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.Ward).HasMaxLength(255);
+            entity.Property(e => e.Weight).HasColumnType("float"); 
+            entity.Property(e => e.Height).HasColumnType("float"); 
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
@@ -382,6 +383,7 @@ public partial class Hien_mauContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__UserLocat__UserI__14270015");
         });
+       
 
         OnModelCreatingPartial(modelBuilder);
     }
