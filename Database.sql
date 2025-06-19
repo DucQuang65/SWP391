@@ -34,7 +34,7 @@ CREATE TABLE Users (
 	Weight FLOAT, -- Weight in kg
     Height FLOAT, -- Height in cm
 
-    Status TINYINT NOT NULL, -- 0: inactive, 1: active, 2: banned
+    Status TINYINT NOT NULL, -- 0: inactive, 1: active
     RoleID INT NOT NULL,
     Department NVARCHAR(50), -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
