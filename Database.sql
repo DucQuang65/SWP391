@@ -200,7 +200,7 @@ CREATE TABLE UserLocations (
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
-    AppointmentDate DATETIME  NOT NULL, -- Ngày giờ hẹn khám
+    AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
     Status TINYINT DEFAULT 0, -- 0: Đang chờ, 1: Đã xác nhận, 2: Hủy      
     Notes NVARCHAR(255),
 	TimeSlot NVARCHAR(50),
