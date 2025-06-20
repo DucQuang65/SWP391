@@ -42,6 +42,7 @@ public partial class User
     public byte Status { get; set; }
 
     public int RoleId { get; set; }
+
     public float? Weight { get; set; } 
 
     public float? Height { get; set; } 
@@ -49,6 +50,7 @@ public partial class User
     public string? Department { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+    public virtual ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>();
 
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 

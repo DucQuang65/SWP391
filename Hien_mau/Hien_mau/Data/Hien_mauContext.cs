@@ -15,6 +15,7 @@ public partial class Hien_mauContext : DbContext
         : base(options)
     {
     }
+    public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
     public virtual DbSet<Appointment> Appointments { get; set; }
 
@@ -54,6 +55,26 @@ public partial class Hien_mauContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ActivityLog>(entity =>
+        {
+            entity.HasKey(e => e.LogId);
+            entity.Property(e => e.LogId).HasColumnName("LogId");
+            entity.Property(e => e.UserID).HasColumnName("UserID");
+            entity.Property(e => e.ActivityType).HasMaxLength(50);
+            entity.Property(e => e.EntityId).HasColumnName("EntityId");
+            entity.Property(e => e.EntityType).HasMaxLength(20);
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+            //ActivityLog.cs sets CreatedAt = DateTime.Now ensure consistency
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.ActivityLogs)
+                .HasForeignKey(d => d.UserID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ActivityLogs_Users");
+        });
         modelBuilder.Entity<Appointment>(entity =>
         {
             entity.HasKey(e => e.AppointmentId);

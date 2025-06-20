@@ -24,7 +24,7 @@ namespace Hien_mau.Models
         [StringLength(255)]
         public string? Description { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         [Required]
         public virtual User User { get; set; } = null!;
