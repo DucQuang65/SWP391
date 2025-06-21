@@ -22,11 +22,12 @@ namespace Hien_mau.Controllers
         [HttpGet]
         public async Task<ActionResult<List<InformationDto>>> GetUsers()
         {
-            var users = await _context.Users.Select(u => new InformationDto
+            var users = await _context.Users
+                .Where(u => u.Status == 1)
+                .Select(u => new InformationDto
         {
                 UserID = u.UserId,
                 Email = u.Email,
-                Password = u.Password,
                 Phone = u.Phone,
                 IDCardType = u.IdcardType,
                 IDCard = u.Idcard,
@@ -52,35 +53,38 @@ namespace Hien_mau.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserByID(int id)
         {
-            var user = await _context.Users.FindAsync(id); 
+            //var user = await _context.Users.FindAsync(id); 
+            //if (user == null)
+            //    return NotFound();
+
+            var user = await _context.Users
+           .Where(u => u.UserId == id)
+           .Select(u => new InformationDto{
+                UserID = u.UserId,
+                Email = u.Email,
+                Phone = u.Phone,
+                IDCardType = u.IdcardType,
+                IDCard = u.Idcard,
+                Name = u.Name,
+                DateOfBirth = u.DateOfBirth,
+                Age = u.Age,
+                Gender = u.Gender,
+                City = u.City,
+                District = u.District,
+                Ward = u.Ward,
+                Address = u.Address,
+                BloodGroup = u.BloodGroup,
+                RhType = u.RhType,
+                Status = u.Status,
+                RoleID = u.RoleId,
+                Department = u.Department,
+                CreatedAt = u.CreatedAt
+            }).FirstOrDefaultAsync();
+
             if (user == null)
                 return NotFound();
 
-            var information = new InformationDto
-            {
-                UserID = user.UserId,
-                Email = user.Email,
-                Password = user.Password,
-                Phone = user.Phone,
-                IDCardType = user.IdcardType,
-                IDCard = user.Idcard,
-                Name = user.Name,
-                DateOfBirth = user.DateOfBirth,
-                Age = user.Age,
-                Gender = user.Gender,
-                City = user.City,
-                District = user.District,
-                Ward = user.Ward,
-                Address = user.Address,
-                BloodGroup = user.BloodGroup,
-                RhType = user.RhType,
-                Status = user.Status,
-                RoleID = user.RoleId,
-                Department = user.Department,
-                CreatedAt = user.CreatedAt
-            };
-
-            return Ok(information);
+            return Ok(user);
         }
 
         [HttpPost]
@@ -102,9 +106,11 @@ namespace Hien_mau.Controllers
                 return BadRequest();
 
             var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email);
-
             if (emailExists)
                 return BadRequest();
+
+            var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
             var newUser = new User
             {
@@ -126,7 +132,7 @@ namespace Hien_mau.Controllers
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
                 Department = informationDto.Department,
-                CreatedAt = DateTime.Now
+                CreatedAt = vietNamTime
             };
 
             _context.Users.Add(newUser);
@@ -175,7 +181,7 @@ namespace Hien_mau.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -188,7 +194,7 @@ namespace Hien_mau.Controllers
             _context.Users.Remove(User);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
     }
 }
