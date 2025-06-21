@@ -26,9 +26,10 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBloodArticles()
         {
             var articles = await _context.BloodArticles
-                .ToListAsync();
+        .Include(a => a.Tags) 
+        .ToListAsync();
 
-            
+
             foreach (var article in articles)
             {
                 if (article.CreatedAt < new DateTime(2025, 1, 1))
@@ -62,7 +63,8 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> GetBloodArticle(int id)
         {
             var article = await _context.BloodArticles
-                .FirstOrDefaultAsync(a => a.ArticleId == id);
+         .Include(a => a.Tags) 
+         .FirstOrDefaultAsync(a => a.ArticleId == id);
 
             if (article == null)
             {

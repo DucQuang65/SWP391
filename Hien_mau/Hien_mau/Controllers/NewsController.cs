@@ -26,12 +26,14 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBlogPosts()
         {
             var blogs = await _context.News
+                .Include(p => p.Tags) 
+                .Include(p => p.User) 
                 .ToListAsync();
 
             // Cập nhật PostedAt nếu là giá trị mặc định ban đầu
             foreach (var blog in blogs)
             {
-                if (blog.PostedAt < new DateTime(2025, 1, 1))
+                if (blog.PostedAt < new DateTime(2025, 6, 1))
                 {
                     blog.PostedAt = DateTime.Now;
                     _context.News.Update(blog);
@@ -62,7 +64,10 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> GetBlogPost(int id)
         {
             var blog = await _context.News
-                .FirstOrDefaultAsync(p => p.PostId == id);
+                 .Include(p => p.Tags) 
+                 .Include(p => p.User) 
+                 .FirstOrDefaultAsync(p => p.PostId == id);
+
 
             if (blog == null)
             {

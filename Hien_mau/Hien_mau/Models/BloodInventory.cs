@@ -5,7 +5,12 @@ using System.ComponentModel.DataAnnotations;
 namespace Hien_mau.Models;
 
 public partial class BloodInventory
+
 {
+
+
+
+
     [Key]
     public int InventoryId { get; set; }
 
@@ -18,6 +23,7 @@ public partial class BloodInventory
     public int Quantity { get; set; }
 
     public bool? IsRare { get; set; }
+    public byte Status { get; set; }
 
     public DateTime? LastUpdated { get; set; }
 }
