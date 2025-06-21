@@ -1,9 +1,13 @@
-﻿using FirebaseAdmin;
+﻿using Audit.Core;
+using Audit.WebApi;
+using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Hien_mau.Data;
 using Hien_mau.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 
 namespace Hien_mau
@@ -14,7 +18,7 @@ namespace Hien_mau
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddScoped<ActivityLogger>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -71,6 +75,23 @@ namespace Hien_mau
             builder.Services.AddDbContext<Hien_mauContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
+            // Thêm authentication và authorization
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    };
+                });
+
             builder.Services.AddScoped<IAuthService, AuthService>();
 
             var app = builder.Build();
@@ -92,8 +113,8 @@ namespace Hien_mau
             app.UseCors("_myAllowSpecificOrigins");
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -16,6 +16,7 @@ namespace Hien_mau.Dto
         public string Title { get; set; }
         public string Content { get; set; }
         public string? ImgUrl { get; set; }
+        public int UserId { get; set; }
         public List<int>? TagIds { get; set; }
     }
 }

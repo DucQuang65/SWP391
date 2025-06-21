@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Audit.EntityFramework" Version="30.0.1" />
+    <PackageReference Include="Audit.EntityFramework.Core" Version="30.0.1" />
+    <PackageReference Include="Audit.NET" Version="30.0.1" />
+    <PackageReference Include="Audit.WebApi.Core" Version="30.0.1" />
     <PackageReference Include="FirebaseAdmin" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />

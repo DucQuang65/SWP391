@@ -1,8 +1,10 @@
 ﻿using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Models;
+using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,8 +101,8 @@ namespace Hien_mau.Controllers
 
         // POST: api/BloodArticles
         [HttpPost]
-        public async Task<ActionResult<object>> CreateBloodArticle([FromBody] BloodArticleCreateDto dto)
-        {
+        public async Task<ActionResult<object>> CreateBloodArticle([FromBody] BloodArticleCreateDto dto, [FromServices] ActivityLogger logger)
+        { 
             // Kiểm tra dữ liệu đầu vào
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
             {
@@ -139,6 +141,8 @@ namespace Hien_mau.Controllers
 
             _context.BloodArticles.Add(article);
             await _context.SaveChangesAsync();
+            // Ghi log
+            await logger.LogAsync(dto.UserId, "Create", "Article", article.ArticleId, $"Tạo bài viết: {dto.Title}");
 
             // Trả về đối tượng không chứa vòng lặp
             var response = new
@@ -161,7 +165,7 @@ namespace Hien_mau.Controllers
 
         // PUT: api/BloodArticles/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBloodArticle(int id, [FromBody] BloodArticleUpdateDto dto)
+        public async Task<IActionResult> UpdateBloodArticle(int id, [FromBody] BloodArticleUpdateDto dto, [FromServices] ActivityLogger logger)
         {
             var article = await _context.BloodArticles
                 .Include(a => a.Tags)
@@ -196,12 +200,14 @@ namespace Hien_mau.Controllers
             }
 
             await _context.SaveChangesAsync();
+            // Ghi log
+            await logger.LogAsync(dto.UserId, "Update", "Article", article.ArticleId, $"Cập nhật bài viết: {dto.Title}");
             return NoContent();
         }
 
         // DELETE: api/BloodArticles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBloodArticle(int id)
+        public async Task<IActionResult> DeleteBloodArticle(int id, [FromQuery] int userId, [FromServices] ActivityLogger logger)
         {
             var article = await _context.BloodArticles
                 .Include(a => a.Tags)
@@ -217,6 +223,8 @@ namespace Hien_mau.Controllers
 
             _context.BloodArticles.Remove(article);
             await _context.SaveChangesAsync();
+            // Ghi log
+            await logger.LogAsync(userId, "Delete", "Article", article.ArticleId, $"Xoá bài viết: {article.Title}");
             return NoContent();
         }
     }
