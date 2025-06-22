@@ -26,4 +26,5 @@ public partial class BloodInventory
     public byte Status { get; set; }
 
     public DateTime? LastUpdated { get; set; }
+    public ICollection<BloodInventoryHistory> Histories { get; set; } = new List<BloodInventoryHistory>();
 }

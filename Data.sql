@@ -19,9 +19,9 @@ VALUES
 	('member3@fpt.edu.vn', 'Ab1234@', '0931234567', 'Tuan', 19, 'Male', N'67 Trần Phú, Phường 4, Quận 5, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
 
 	-- Role: Doctor (RoleID = 2)
-    ('kienlvse180681@fpt.edu.vn','Ab1234@', '0912345678', 'Kien', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 'O', 'Rh-', 1, 2, 'Khoa máu'),
-	('doctor2@fpt.edu.vn', 'Ab1234@', '0971234567', 'Hieu', 38, 'Male', N'234 Nguyễn Văn Cừ, Phường Cầu Kho, Quận 1, TP.HCM', 'A', 'Rh-', 1, 2, 'Khoa tim'),
-    ('doctor3@fpt.edu.vn', 'Ab1234@', '0941234567', 'Thao', 42, 'Female', N'56 Nguyễn Trãi, Phường 3, Quận 5, TP.HCM', 'O', 'Rh+', 1, 2, 'Khoa máu'),
+    ('kienlvse180681@fpt.edu.vn','Ab1234@', '0912345678', 'Kien', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 'O', 'Rh-', 1, 2, 'Khoa Huyết học'),
+	('doctor2@fpt.edu.vn', 'Ab1234@', '0971234567', 'Hieu', 38, 'Male', N'234 Nguyễn Văn Cừ, Phường Cầu Kho, Quận 1, TP.HCM', 'A', 'Rh-', 1, 2, 'Khoa Tim mạch'),
+    ('doctor3@fpt.edu.vn', 'Ab1234@', '0941234567', 'Thao', 42, 'Female', N'56 Nguyễn Trãi, Phường 3, Quận 5, TP.HCM', 'O', 'Rh+', 1, 2, 'Khoa Huyết học'),
 
 	-- Role: BloodManager (RoleID = 3)
     ('xpnhi023@gmail.com','Ab1234@', '0961234567', 'Nhi', 35, 'Male', N'78 Cách Mạng Tháng Tám, Phường 6, Quận 3, TP.HCM', 'B', 'Rh+', 1, 3, NULL),
@@ -31,7 +31,31 @@ VALUES
 	-- Role: Admin (RoleID = 4)
 	('admin1@gmail.com', 'Ab1234@', '0771234567', 'Linh', 31, 'Female', N'34 Bùi Thị Xuân, Phường 2, Quận Tân Bình, TP.HCM', 'A', 'Rh+', 1, 4, NULL),
     ('admin2@gmail.com', 'Ab1234@', '0881234567', 'Dung', 34, 'Male', N'56 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP.HCM', 'B', 'Rh+', 1, 4, NULL),
-    ('vukhanhnhu@gmail.com','Ab1234@', '0791234567', 'Nhu', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 'AB', 'Rh-', 1, 4, NULL);
+    ('vukhanhnhu@gmail.com','Ab1234@', '0791234567', 'Nhu', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 'AB', 'Rh-', 1, 4, NULL),
+
+	-- Khoa Nhi
+	('lan.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111001', 'Lan', 40, 'Female', N'12 Pasteur, Quận 1, TP.HCM', 'B', 'Rh+', 1, 2, N'Khoa Nhi'),
+    ('hoang.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111002', 'Hoàng', 35, 'Male', N'23 Nguyễn Đình Chiểu, Quận 3, TP.HCM', 'O', 'Rh+', 1, 2, N'Khoa Nhi'),
+
+    -- Khoa Cấp Cứu
+    ('minh.capcuu@fpt.edu.vn', 'Ab1234@', '0922222001', 'Minh', 46, 'Male', N'90 Hai Bà Trưng, Quận 3, TP.HCM', 'AB', 'Rh-', 1, 2, N'Khoa Cấp Cứu'),
+    ('thu.capcuu@fpt.edu.vn', 'Ab1234@', '0922222002', 'Thu', 38, 'Female', N'77 Nguyễn Thái Học, Quận 1, TP.HCM', 'A', 'Rh+', 1, 2, N'Khoa Cấp Cứu'),
+
+    -- Khoa Giải phẫu
+    ('hoa.giaiphau@fpt.edu.vn', 'Ab1234@', '0933333001', 'Hoa', 39, 'Female', N'76 Lý Tự Trọng, Quận 1, TP.HCM', 'A', 'Rh+', 1, 2, N'Khoa Giải phẫu'),
+    ('vuong.giaiphau@fpt.edu.vn', 'Ab1234@', '0933333002', 'Vương', 44, 'Male', N'21 Trần Hưng Đạo, Quận 5, TP.HCM', 'B', 'Rh-', 1, 2, N'Khoa Giải phẫu'),
+
+    -- Khoa Tim mạch
+    ('tung.timmach@fpt.edu.vn', 'Ab1234@', '0944444001', 'Tùng', 50, 'Male', N'55 Võ Thị Sáu, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, N'Khoa Tim mạch'),
+    ('hien.timmach@fpt.edu.vn', 'Ab1234@', '0944444002', 'Hiền', 36, 'Female', N'34 Nguyễn Văn Trỗi, Phú Nhuận, TP.HCM', 'AB', 'Rh+', 1, 2, N'Khoa Tim mạch'),
+
+    -- Khoa Ngoại
+    ('dung.ngoai@fpt.edu.vn', 'Ab1234@', '0955555001', 'Dung', 33, 'Female', N'123 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 'B', 'Rh+', 1, 2, N'Khoa Ngoại'),
+    ('khoa.ngoai@fpt.edu.vn', 'Ab1234@', '0955555002', 'Khoa', 47, 'Male', N'9 Phạm Văn Đồng, TP Thủ Đức, TP.HCM', 'A', 'Rh-', 1, 2, N'Khoa Ngoại'),
+
+    -- Khoa Huyết học
+    ('phong.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, N'Khoa Huyết học'),
+    ('trang.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, N'Khoa Huyết học');
 GO
 
 -- Insert data into HospitalInfo table

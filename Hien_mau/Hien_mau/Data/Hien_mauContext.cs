@@ -15,6 +15,7 @@ public partial class Hien_mauContext : DbContext
         : base(options)
     {
     }
+    public virtual DbSet<BloodInventoryHistory> BloodInventoryHistories { get; set; }
     public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
     public virtual DbSet<Appointment> Appointments { get; set; }
@@ -404,7 +405,33 @@ public partial class Hien_mauContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__UserLocat__UserI__14270015");
         });
-       
+
+        modelBuilder.Entity<BloodInventoryHistory>(entity =>
+        {
+            entity.HasKey(e => e.HistoryId).HasName("PK__BloodInvHist__4D7B4ADDD8C51D74");
+            entity.ToTable("BloodInventoryHistory"); 
+            entity.Property(e => e.HistoryId).HasColumnName("HistoryID");
+            entity.Property(e => e.InventoryId).HasColumnName("InventoryID");
+            entity.Property(e => e.BloodGroup).HasMaxLength(2);
+            entity.Property(e => e.RhType).HasMaxLength(3);
+            entity.Property(e => e.ComponentType).HasMaxLength(20);
+            entity.Property(e => e.ActionType).HasMaxLength(10).IsRequired();
+            entity.Property(e => e.Quantity).IsRequired();
+            entity.Property(e => e.Reason).HasMaxLength(255);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.PerformedBy).HasColumnName("PerformedBy").IsRequired();
+            entity.Property(e => e.PerformedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
+            entity.HasOne(d => d.Inventory)
+                .WithMany(p => p.Histories)
+                .HasForeignKey(d => d.InventoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__BloodInvHist__InventoryID");
+            entity.HasOne(d => d.PerformedByUser)
+                .WithMany(p => p.BloodInventoryHistories)
+                .HasForeignKey(d => d.PerformedBy)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__BloodInvHist__PerformedBy");
+        });
 
         OnModelCreatingPartial(modelBuilder);
     }
