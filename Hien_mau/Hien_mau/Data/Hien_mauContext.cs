@@ -61,7 +61,7 @@ public partial class Hien_mauContext : DbContext
             entity.HasKey(e => e.LogId);
             entity.Property(e => e.LogId).HasColumnName("LogId");
             entity.Property(e => e.UserID).HasColumnName("UserID");
-            entity.Property(e => e.ActivityType).HasMaxLength(50);
+            //entity.Property(e => e.ActivityType).HasMaxLength(50);
             entity.Property(e => e.EntityId).HasColumnName("EntityId");
             entity.Property(e => e.EntityType).HasMaxLength(20);
             entity.Property(e => e.Description).HasMaxLength(255);

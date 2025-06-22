@@ -21,13 +21,13 @@ namespace Hien_mau.Data
             return log.LogId;
         }
 
-        public override async Task<object> InsertEventAsync(AuditEvent auditEvent)
-        {
-            var log = CreateActivityLog(auditEvent);
-            _context.ActivityLogs.Add(log);
-            await _context.SaveChangesAsync();
-            return log.LogId;
-        }
+        //public override async Task<object> InsertEventAsync(AuditEvent auditEvent)
+        //{
+        //    var log = CreateActivityLog(auditEvent);
+        //    _context.ActivityLogs.Add(log);
+        //    await _context.SaveChangesAsync();
+        //    return log.LogId;
+        //}
 
         private ActivityLog CreateActivityLog(AuditEvent auditEvent)
         {

@@ -53,10 +53,6 @@ namespace Hien_mau.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserByID(int id)
         {
-            //var user = await _context.Users.FindAsync(id); 
-            //if (user == null)
-            //    return NotFound();
-
             var user = await _context.Users
            .Where(u => u.UserId == id && u.Status == 1)
            .Select(u => new InformationDto{
@@ -89,19 +85,7 @@ namespace Hien_mau.Controllers
 
         [HttpPost]
         public async Task<ActionResult<User>> AddUser(InformationDto informationDto)
-        {
-            //if (newUser == null)
-            //    return BadRequest();
-
-            //_context.Users.Add(newUser);
-            //await _context.SaveChangesAsync();
-            //return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, newUser);
-
-            //var emailExists = await _context.Users.AnyAsync(u => u.Email == informationDto.Email);
-
-            //if (informationDto == null || string.IsNullOrEmpty(informationDto.Email) || emailExists)
-            //    return BadRequest();
-
+        {            
             if (informationDto == null || string.IsNullOrEmpty(informationDto.Email))
                 return BadRequest();
 
