@@ -4,9 +4,11 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Hien_mau.Data;
 using Hien_mau.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 
 
@@ -17,8 +19,6 @@ namespace Hien_mau
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddScoped<ActivityLogger>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -74,6 +74,9 @@ namespace Hien_mau
 
             builder.Services.AddDbContext<Hien_mauContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ActivityLogger>();
+
 
             // Thêm authentication và authorization
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -87,12 +90,11 @@ namespace Hien_mau
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                        IssuerSigningKey = GetIssuerSigningKey(builder.Configuration)
                     };
                 });
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
@@ -119,6 +121,15 @@ namespace Hien_mau
             app.MapControllers();
 
             app.Run();
+        }
+        private static SecurityKey GetIssuerSigningKey(IConfiguration configuration)
+        {
+            var jwtKey = configuration["Jwt:Key"];
+            if (string.IsNullOrEmpty(jwtKey))
+            {
+                throw new InvalidOperationException("Jwt:Key is missing in configuration.");
+            }
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         }
     }
 }

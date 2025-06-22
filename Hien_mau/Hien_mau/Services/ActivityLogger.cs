@@ -24,7 +24,7 @@ namespace Hien_mau.Services
             var log = new ActivityLog
             {
                 UserID = userId,
-                EventType = action,
+                ActivityType = action,
                 EntityType = entityType,
                 EntityId = entityId,
                 OldValues = TruncateJson(oldValues, 4000),

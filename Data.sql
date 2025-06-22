@@ -46,9 +46,6 @@ GO
 -- Insert data into Tags table
 INSERT INTO Tags (TagID, TagName)
 VALUES
--- Insert data into Tags table
-INSERT INTO Tags (TagID, TagName)
-VALUES
     -- Nhóm máu
     (1, 'A+'),
     (2, 'A-'),
@@ -773,16 +770,6 @@ VALUES
     (6, 19), (6, 21), (6, 24), (6, 26), (6, 27), (6, 28), (6, 30);
 GO
 
--- Insert data into BloodInventory table
-INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare)
-VALUES
-    ('A', 'Rh+', 'Whole', 10, 0),
-    ('B', 'Rh-', 'RedCells', 5, 0),
-    ('AB', 'Rh-', 'Plasma', 2, 1),
-    ('O', 'Rh+', 'Platelets', 8, 0),
-    ('A', 'Rh-', 'Whole', 3, 0);
-GO
-
 -- Insert data into BloodRequests table
 INSERT INTO BloodRequests (UserID, BloodGroup, RhType, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
 VALUES
@@ -804,13 +791,55 @@ VALUES
 GO
 
 -- Insert data into BloodDonationHistory table
-INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, Notes)
+INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, LastUpdated)
 VALUES
-    (1, GETDATE(), 'A', 'Rh+', 'Plasma', 1, 'Routine donation'),
-    (2, GETDATE(), 'O', 'Rh-', 'Whole', 1, 'After 6 months'),
-    (3, GETDATE(), 'B', 'Rh+', 'Platelets', 1, 'First time donor'),
-    (4, GETDATE(), 'AB', 'Rh-', 'RedCells', 1, 'Voluntary'),
-    (5, GETDATE(), 'O', 'Rh+', 'Whole', 1, 'No issues');
+    -- A+ (not rare)
+    ('A', 'Rh+', 'Whole', 15, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('A', 'Rh+', 'RedCells', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('A', 'Rh+', 'Plasma', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('A', 'Rh+', 'Platelets', 8, 0, 1, '2025-06-23 08:00:00'), -- Low
+
+    -- A- (rare)
+    ('A', 'Rh-', 'Whole', 3, 1, 1, '2025-06-23 08:00:00'), -- Low
+    ('A', 'Rh-', 'RedCells', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('A', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('A', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
+
+    -- B+ (not rare)
+    ('B', 'Rh+', 'Whole', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('B', 'Rh+', 'RedCells', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('B', 'Rh+', 'Plasma', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('B', 'Rh+', 'Platelets', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
+
+    -- B- (rare)
+    ('B', 'Rh-', 'Whole', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('B', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('B', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('B', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
+
+    -- AB+ (not rare)
+    ('AB', 'Rh+', 'Whole', 7, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('AB', 'Rh+', 'RedCells', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh+', 'Plasma', 4, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh+', 'Platelets', 3, 0, 1, '2025-06-23 08:00:00'), -- Low
+
+    -- AB- (rare)
+    ('AB', 'Rh-', 'Whole', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('AB', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('AB', 'Rh-', 'Plasma', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh-', 'Platelets', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+
+    -- O+ (not rare)
+    ('O', 'Rh+', 'Whole', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('O', 'Rh+', 'RedCells', 18, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('O', 'Rh+', 'Plasma', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('O', 'Rh+', 'Platelets', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
+
+    -- O- (rare)
+    ('O', 'Rh-', 'Whole', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('O', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('O', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('O', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'); -- Low
 GO
 
 -- Insert data into Notifications table
@@ -821,4 +850,10 @@ VALUES
     (3, 'Cảm ơn', 'Cảm ơn bạn đã hiến máu!', 'Report', 1, GETDATE()),
     (4, 'Yêu cầu máu đã chấp nhận', 'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
     (5, 'Có 1 bài viết mới', 'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
+GO
+
+INSERT INTO UserLocations (UserID, Latitude, Longitude, UpdatedAt)
+VALUES
+    (1, 10.776, 106.701, '2025-06-23 08:00:00'),
+    (2, 10.780, 106.690, '2025-06-23 08:00:00');
 GO

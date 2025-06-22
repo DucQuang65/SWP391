@@ -13,7 +13,7 @@ namespace Hien_mau.Models
 
         [Required]
         [StringLength(50)]
-        public string EventType { get; set; } = null!;
+        public string ActivityType { get; set; } = null!;
 
         public int? EntityId { get; set; }
 
@@ -27,12 +27,13 @@ namespace Hien_mau.Models
         [StringLength(4000)]
         public string? NewValues { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [StringLength(255)]
+        public string? Description { get; set; }
 
         [Required]
         public virtual User User { get; set; } = null!;
 
-        [StringLength(255)]
-        public string? Description { get; set; }
     }
 }

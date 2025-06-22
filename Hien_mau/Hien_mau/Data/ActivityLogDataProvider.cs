@@ -35,7 +35,7 @@ namespace Hien_mau.Data
             return new ActivityLog
             {
                 UserID = userId,
-                EventType = auditEvent.EventType ?? "Unknown",
+                ActivityType = auditEvent.EventType ?? "Unknown",
                 EntityType = auditEvent.CustomFields.GetValueOrDefault("EntityType")?.ToString() ?? "Unknown",
                 EntityId = auditEvent.CustomFields.GetValueOrDefault("EntityId") is string entityStr && int.TryParse(entityStr, out var eid) ? eid : null,
                 OldValues = auditEvent.CustomFields.GetValueOrDefault("OldValues")?.ToString(),

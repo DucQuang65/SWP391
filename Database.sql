@@ -107,6 +107,8 @@ CREATE TABLE ActivityLog (
     ActivityType NVARCHAR(50) NOT NULL, -- e.g., CreateArticle, UpdateArticle, DeleteArticle, CreateNews, UpdateNews, DeleteNews
     EntityID INT NOT NULL, -- ArticleID or PostID
     EntityType NVARCHAR(20) NOT NULL, -- Article or News
+	OldValues NVARCHAR(4000),
+	NewValues NVARCHAR(4000),
     Description NVARCHAR(255),
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
@@ -120,6 +122,7 @@ CREATE TABLE BloodInventory (
     ComponentType NVARCHAR(20) NOT NULL, -- Whole, RedCells, Plasma, Platelets
     Quantity INT NOT NULL CHECK (Quantity >= 0),
     IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
+	Status TINYINT, -- 0: Khan cap, 1: thieu mau, 2: trung binh, 3: an toan
     LastUpdated DATETIME DEFAULT GETDATE()
 );
 
