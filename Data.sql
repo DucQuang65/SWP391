@@ -814,38 +814,38 @@ VALUES
     (5, 5, 0, GETDATE());
 GO
 
--- Insert data into BloodDonationHistory table
+-- Insert data into BloodInventory
 INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, LastUpdated)
 VALUES
     -- A+ (not rare)
-    ('A', 'Rh+', 'Whole', 15, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('A', 'Rh+', 'RedCells', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('A', 'Rh+', 'Plasma', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('A', 'Rh+', 'Platelets', 8, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('A', 'Rh+', 'Whole', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('A', 'Rh+', 'RedCells', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('A', 'Rh+', 'Plasma', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('A', 'Rh+', 'Platelets', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
 
     -- A- (rare)
     ('A', 'Rh-', 'Whole', 3, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('A', 'Rh-', 'RedCells', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('A', 'Rh-', 'RedCells', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
     ('A', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
     ('A', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
 
     -- B+ (not rare)
-    ('B', 'Rh+', 'Whole', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('B', 'Rh+', 'RedCells', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('B', 'Rh+', 'Plasma', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
-    ('B', 'Rh+', 'Platelets', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('B', 'Rh+', 'Whole', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('B', 'Rh+', 'RedCells', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('B', 'Rh+', 'Plasma', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('B', 'Rh+', 'Platelets', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
 
     -- B- (rare)
-    ('B', 'Rh-', 'Whole', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('B', 'Rh-', 'Whole', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
     ('B', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
     ('B', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
     ('B', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
 
     -- AB+ (not rare)
-    ('AB', 'Rh+', 'Whole', 7, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('AB', 'Rh+', 'RedCells', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
-    ('AB', 'Rh+', 'Plasma', 4, 0, 1, '2025-06-23 08:00:00'), -- Low
-    ('AB', 'Rh+', 'Platelets', 3, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh+', 'Whole', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('AB', 'Rh+', 'RedCells', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh+', 'Plasma', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
+    ('AB', 'Rh+', 'Platelets', 4, 0, 1, '2025-06-23 08:00:00'), -- Low
 
     -- AB- (rare)
     ('AB', 'Rh-', 'Whole', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
@@ -854,16 +854,120 @@ VALUES
     ('AB', 'Rh-', 'Platelets', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
 
     -- O+ (not rare)
-    ('O', 'Rh+', 'Whole', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('O', 'Rh+', 'RedCells', 18, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('O', 'Rh+', 'Plasma', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('O', 'Rh+', 'Platelets', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
+    ('O', 'Rh+', 'Whole', 25, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('O', 'Rh+', 'RedCells', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('O', 'Rh+', 'Plasma', 18, 0, 3, '2025-06-23 08:00:00'), -- Safe
+    ('O', 'Rh+', 'Platelets', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
 
     -- O- (rare)
-    ('O', 'Rh-', 'Whole', 2, 1, 0, '2025-06-23 08:00:00'), -- Critical
+    ('O', 'Rh-', 'Whole', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
     ('O', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
     ('O', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
     ('O', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'); -- Low
+GO
+
+-- Insert data into BloodInventoryHistory
+INSERT INTO BloodInventoryHistory (InventoryID, BloodGroup, RhType, ComponentType, ActionType, Quantity, Reason, Notes, PerformedBy, PerformedAt)
+VALUES
+    -- A+ (Performed by UserID: 7, Nhi, BloodManager)
+    (1, 'A', 'Rh+', 'Whole', 'Add', 10, 'Received from donation', 'Routine stock update', 7, '2025-06-23 09:00:00'),
+    (2, 'A', 'Rh+', 'RedCells', 'Add', 8, 'Processed from whole blood', NULL, 7, '2025-06-23 09:30:00'),
+    (3, 'A', 'Rh+', 'Plasma', 'Remove', 2, 'Supplied for surgery', 'Urgent request', 7, '2025-06-24 10:00:00'),
+    (4, 'A', 'Rh+', 'Platelets', 'Add', 5, 'Received from donation', 'Community event', 7, '2025-06-25 11:00:00'),
+
+    -- A- (Performed by UserID: 8, Hoa, BloodManager)
+    (5, 'A', 'Rh-', 'Whole', 'Add', 3, 'Rare blood donation', 'Critical stock', 8, '2025-06-23 09:00:00'),
+    (6, 'A', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 8, '2025-06-24 10:30:00'),
+    (7, 'A', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 8, '2025-06-25 11:30:00'),
+    (8, 'A', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 8, '2025-06-26 12:00:00'),
+
+    -- B+ (Performed by UserID: 9, Phong, BloodManager)
+    (9, 'B', 'Rh+', 'Whole', 'Add', 6, 'Received from donation', 'Routine stock', 9, '2025-06-23 09:00:00'),
+    (10, 'B', 'Rh+', 'RedCells', 'Remove', 2, 'Supplied for cancer treatment', NULL, 9, '2025-06-24 11:00:00'),
+    (11, 'B', 'Rh+', 'Plasma', 'Add', 4, 'Processed from whole blood', 'Stock update', 9, '2025-06-25 12:00:00'),
+    (12, 'B', 'Rh+', 'Platelets', 'Add', 3, 'Received from donation', 'Community event', 9, '2025-06-26 13:00:00'),
+
+    -- B- (Performed by UserID: 7, Nhi, BloodManager)
+    (13, 'B', 'Rh-', 'Whole', 'Add', 2, 'Rare blood donation', 'Critical stock', 7, '2025-06-23 09:30:00'),
+    (14, 'B', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Surgery', 7, '2025-06-24 11:30:00'),
+    (15, 'B', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 7, '2025-06-25 12:30:00'),
+    (16, 'B', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 7, '2025-06-26 14:00:00'),
+
+    -- AB+ (Performed by UserID: 8, Hoa, BloodManager)
+    (17, 'AB', 'Rh+', 'Whole', 'Add', 5, 'Received from donation', 'Routine stock', 8, '2025-06-23 10:00:00'),
+    (18, 'AB', 'Rh+', 'RedCells', 'Remove', 2, 'Supplied for surgery', NULL, 8, '2025-06-24 12:00:00'),
+    (19, 'AB', 'Rh+', 'Plasma', 'Add', 3, 'Processed from whole blood', 'Stock update', 8, '2025-06-25 13:00:00'),
+    (20, 'AB', 'Rh+', 'Platelets', 'Add', 2, 'Received from donation', 'Community event', 8, '2025-06-26 14:30:00'),
+
+    -- AB- (Performed by UserID: 9, Phong, BloodManager)
+    (21, 'AB', 'Rh-', 'Whole', 'Add', 1, 'Rare blood donation', 'Critical stock', 9, '2025-06-23 10:30:00'),
+    (22, 'AB', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 9, '2025-06-24 12:30:00'),
+    (23, 'AB', 'Rh-', 'Plasma', 'Add', 2, 'Processed from donation', NULL, 9, '2025-06-25 13:30:00'),
+    (24, 'AB', 'Rh-', 'Platelets', 'Add', 1, 'Received from donation', 'Rare blood', 9, '2025-06-26 15:00:00'),
+
+    -- O+ (Performed by UserID: 7, Nhi, BloodManager)
+    (25, 'O', 'Rh+', 'Whole', 'Add', 15, 'Received from donation', 'Routine stock', 7, '2025-06-23 11:00:00'),
+    (26, 'O', 'Rh+', 'RedCells', 'Remove', 5, 'Supplied for surgery', 'Urgent request', 7, '2025-06-24 13:00:00'),
+    (27, 'O', 'Rh+', 'Plasma', 'Add', 10, 'Processed from whole blood', 'Stock update', 7, '2025-06-25 14:00:00'),
+    (28, 'O', 'Rh+', 'Platelets', 'Add', 8, 'Received from donation', 'Community event', 7, '2025-06-26 15:30:00'),
+
+    -- O- (Performed by UserID: 8, Hoa, BloodManager)
+    (29, 'O', 'Rh-', 'Whole', 'Add', 2, 'Rare blood donation', 'Critical stock', 8, '2025-06-23 11:30:00'),
+    (30, 'O', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 8, '2025-06-24 13:30:00'),
+    (31, 'O', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 8, '2025-06-25 14:30:00'),
+    (32, 'O', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 8, '2025-06-26 16:00:00');
+GO
+
+-- Insert data into BloodDonationHistory table
+INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, IsSuccess, Notes)
+VALUES
+    -- A+ (UserID: 1, Vinh, A+)
+    (1, '2025-06-07 08:00:00', 'A', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
+    (1, '2025-06-12 09:00:00', 'A', 'Rh+', 'Plasma', 1, 1, 'Voluntary donation'),
+    (1, '2025-06-18 10:00:00', 'A', 'Rh+', 'Platelets', 1, 1, 'For cancer patient'),
+    (1, '2025-06-25 11:00:00', 'A', 'Rh+', 'RedCells', 1, 1, 'Emergency support'),
+
+    -- A- (UserID: 5, Hieu, A-)
+    (5, '2025-06-08 08:30:00', 'A', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
+    (5, '2025-06-14 09:30:00', 'A', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
+    (5, '2025-06-20 10:30:00', 'A', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
+    (5, '2025-06-27 11:30:00', 'A', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- B+ (UserID: 7, Nhi, B+)
+    (7, '2025-06-09 09:00:00', 'B', 'Rh+', 'Whole', 1, 1, 'Community event'),
+    (7, '2025-06-15 10:00:00', 'B', 'Rh+', 'Plasma', 1, 1, 'Routine donation'),
+    (7, '2025-06-21 11:00:00', 'B', 'Rh+', 'Platelets', 1, 1, 'For surgery'),
+    (7, '2025-06-28 12:00:00', 'B', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- B- (UserID: 18, Vuong, B-)
+    (10, '2025-06-10 09:30:00', 'B', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
+    (10, '2025-06-16 10:30:00', 'B', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
+    (10, '2025-06-22 11:30:00', 'B', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
+    (10, '2025-06-29 12:30:00', 'B', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- AB+ (UserID: 8, Hoa, AB+)
+    (8, '2025-06-11 10:00:00', 'AB', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
+    (8, '2025-06-17 11:00:00', 'AB', 'Rh+', 'Plasma', 1, 1, 'Universal plasma donor'),
+    (8, '2025-06-23 12:00:00', 'AB', 'Rh+', 'Platelets', 1, 1, 'For cancer patient'),
+    (8, '2025-06-30 13:00:00', 'AB', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- AB- (UserID: 12, Nhu, AB-)
+    (11, '2025-06-07 10:30:00', 'AB', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
+    (11, '2025-06-13 11:30:00', 'AB', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
+    (11, '2025-06-19 12:30:00', 'AB', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
+    (11, '2025-06-26 13:30:00', 'AB', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- O+ (UserID: 2, Duc, O+)
+    (2, '2025-06-08 11:00:00', 'O', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
+    (2, '2025-06-14 12:00:00', 'O', 'Rh+', 'Plasma', 1, 1, 'Community event'),
+    (2, '2025-06-20 13:00:00', 'O', 'Rh+', 'Platelets', 1, 1, 'For surgery'),
+    (2, '2025-06-27 14:00:00', 'O', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+
+    -- O- (UserID: 4, Kien, O-)
+    (4, '2025-06-09 11:30:00', 'O', 'Rh-', 'Whole', 1, 1, 'Universal donor'),
+    (4, '2025-06-15 12:30:00', 'O', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
+    (4, '2025-06-21 13:30:00', 'O', 'Rh-', 'Platelets', 1, 1, 'Rare blood donation'),
+    (4, '2025-06-28 14:30:00', 'O', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation');
 GO
 
 -- Insert data into Notifications table

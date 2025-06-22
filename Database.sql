@@ -122,8 +122,22 @@ CREATE TABLE BloodInventory (
     ComponentType NVARCHAR(20) NOT NULL, -- Whole, RedCells, Plasma, Platelets
     Quantity INT NOT NULL CHECK (Quantity >= 0),
     IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
-	Status TINYINT, -- 0: Khan cap, 1: thieu mau, 2: trung binh, 3: an toan
+	Status TINYINT NOT NULL, -- 0: Khan cap, 1: thieu mau, 2: trung binh, 3: an toan
     LastUpdated DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE BloodInventoryHistory (
+    HistoryID INT PRIMARY KEY IDENTITY(1,1),
+    InventoryID INT NULL FOREIGN KEY REFERENCES BloodInventory(InventoryID),
+    BloodGroup NVARCHAR(2) NULL,
+    RhType NVARCHAR(3) NULL,
+    ComponentType NVARCHAR(20) NULL,
+    ActionType NVARCHAR(10) NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    Reason NVARCHAR(255) NULL,
+    Notes NVARCHAR(255) NULL,
+    PerformedBy INT NOT NULL FOREIGN KEY REFERENCES Users(UserID),
+    PerformedAt DATETIME DEFAULT GETDATE()
 );
 
 -- BloodRequests table: Stores blood requests
