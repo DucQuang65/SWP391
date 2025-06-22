@@ -58,7 +58,7 @@ namespace Hien_mau.Controllers
             //    return NotFound();
 
             var user = await _context.Users
-           .Where(u => u.UserId == id)
+           .Where(u => u.UserId == id && u.Status == 1)
            .Select(u => new InformationDto{
                 UserID = u.UserId,
                 Email = u.Email,
