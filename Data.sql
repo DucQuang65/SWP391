@@ -33,6 +33,7 @@ VALUES
     ('admin2@gmail.com', 'Ab1234@', '0881234567', 'Dung', 34, 'Male', N'56 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP.HCM', 'B', 'Rh+', 1, 4, NULL),
     ('vukhanhnhu@gmail.com','Ab1234@', '0791234567', 'Nhu', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 'AB', 'Rh-', 1, 4, NULL),
 
+	-- Khoa Nhi
 	('lan.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111001', 'Lan', 40, 'Female', N'12 Pasteur, Quận 1, TP.HCM', 'B', 'Rh+', 1, 2, N'Khoa Nhi'),
     ('hoang.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111002', 'Hoàng', 35, 'Male', N'23 Nguyễn Đình Chiểu, Quận 3, TP.HCM', 'O', 'Rh+', 1, 2, N'Khoa Nhi'),
 
