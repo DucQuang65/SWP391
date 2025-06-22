@@ -19,7 +19,7 @@ public class BloodDonationController : ControllerBase
         _context = context;
     }
 
-    // GET /api/users/{userId}
+  
     [HttpGet("users/{userId}")]
     public async Task<IActionResult> GetUser(int userId)
     {
@@ -42,13 +42,13 @@ public class BloodDonationController : ControllerBase
 
         if (user == null)
         {
-            return NotFound(new { error = "Không tìm thấy người dùng" });
+            return NotFound(new { error = "User Not Found" });
         }
 
         return Ok(user);
     }
 
-    // GET /api/blood-donation-submissions
+
     [HttpGet("blood-donation-submissions")]
     public async Task<IActionResult> GetAllSubmissions()
     {
@@ -80,7 +80,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submissions);
     }
 
-    // GET /api/blood-donation-submissions/{submissionId}
+
     [HttpGet("blood-donation-submissions/{AppointmentId}")]
     public async Task<IActionResult> GetSubmissionById(int AppointmentId)
     {
@@ -111,32 +111,32 @@ public class BloodDonationController : ControllerBase
 
         if (submission == null)
         {
-            return NotFound(new { error = "Không tìm thấy bản ghi đăng ký hiến máu" });
+            return NotFound(new { error = "Blood donation submission not found!" });
         }
 
         return Ok(submission);
     }
 
-    // POST /api/blood-donation-submissions
+ 
     [HttpPost("blood-donation-submissions")]
     public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(new { error = "Dữ liệu không hợp lệ" });
+            return BadRequest(new { error = "Invalid data" });
         }
 
         // Kiểm tra timeSlot hợp lệ
         if (request.TimeSlot != "Sáng (7:00-12:00)" && request.TimeSlot != "Chiều (13:00-17:00)")
         {
-            return BadRequest(new { error = "Khung giờ không hợp lệ, phải là 'Sáng (7:00-12:00)' hoặc 'Chiều (13:00-17:00)'" });
+            return BadRequest(new { error = "Invalid time slot. It must be either 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'." });
         }
 
         // Cập nhật Weight và Height cho user
         var user = await _context.Users.FindAsync(request.UserId);
         if (user == null)
         {
-            return NotFound(new { error = "Người dùng không tồn tại" });
+            return NotFound(new { error = "User does not exist" });
         }
 
         user.Weight = request.Weight;
@@ -171,12 +171,12 @@ public class BloodDonationController : ControllerBase
         var appointment = await _context.Appointments.FindAsync(appointmentId);
         if (appointment == null)
         {
-            return NotFound(new { error = "Không tìm thấy bản ghi đăng ký hiến máu" });
+            return NotFound(new { error = "Blood donation submission not found!" });
         }
 
         _context.Appointments.Remove(appointment);
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = "Xóa bản ghi đăng ký hiến máu thành công" });
+        return Ok(new { message = "Deleted successfully" });
     }
 }
