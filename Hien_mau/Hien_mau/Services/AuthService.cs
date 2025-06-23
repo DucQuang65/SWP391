@@ -90,8 +90,7 @@ namespace Hien_mau.Services
             {
                 new Claim(ClaimTypes.Email, user.Email!),
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Role, user.RoleId.ToString())
-                //new Claim("FirebaseUid", user.FirebaseUid)
+                new Claim(ClaimTypes.Role, user.RoleId.ToString())               
             };
 
             var key = new SymmetricSecurityKey(
