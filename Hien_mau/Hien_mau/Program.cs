@@ -136,15 +136,6 @@ namespace Hien_mau
             app.MapControllers();
 
             app.Run();
-        }
-        private static SecurityKey GetIssuerSigningKey(IConfiguration configuration)
-        {
-            var jwtKey = configuration["Jwt:Key"];
-            if (string.IsNullOrEmpty(jwtKey))
-            {
-                throw new InvalidOperationException("Jwt:Key is missing in configuration.");
-            }
-            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-        }
+        }        
     }
 }

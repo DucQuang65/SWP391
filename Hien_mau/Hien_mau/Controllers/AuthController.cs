@@ -56,7 +56,7 @@ namespace Hien_mau.Controllers
         {
             var properties = new AuthenticationProperties
             {
-                RedirectUri = "/api/auth/google-callback"
+                RedirectUri = "/api/Auth/google-callback"
             };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
