@@ -86,6 +86,11 @@ namespace Hien_mau.Controllers
                     return StatusCode(500, "Failed to create user");
             }
 
+            if (user.Status == 0)
+            {
+                return BadRequest("Tài khoản của bạn đã bị vô hiệu hóa");
+            }
+
             var token = _authService.CreateToken(user);
 
             return Ok(token);          

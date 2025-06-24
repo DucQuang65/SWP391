@@ -7,10 +7,6 @@ namespace Hien_mau.Models;
 public partial class BloodInventory
 
 {
-
-
-
-
     [Key]
     public int InventoryId { get; set; }
 

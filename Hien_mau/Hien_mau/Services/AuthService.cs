@@ -70,13 +70,16 @@ namespace Hien_mau.Services
 
         public async Task<User> CreateUserFromGoogleAsync(string email, string name)
         {
+            var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
+
             var user = new User
             {
                 Email = email,
-                Name = name,
+                //Name = name,
                 Status = 1,
                 RoleId = 1,
-                CreatedAt = DateTime.Now
+                CreatedAt = vietNamTime
             };
 
             _context.Users.Add(user);
