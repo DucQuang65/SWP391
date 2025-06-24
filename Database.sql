@@ -1,4 +1,4 @@
-CREATE DATABASE BloodManagementSystem;
+﻿CREATE DATABASE BloodManagementSystem;
 GO
 
 USE BloodManagementSystem;
@@ -112,21 +112,48 @@ CREATE TABLE ActivityLog (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- BloodInventory table: Stores blood stock
+-- Create BloodInventory table first
 CREATE TABLE BloodInventory (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
-    ComponentType NVARCHAR(20) NOT NULL, -- Whole, RedCells, Plasma, Platelets
+    ComponentType NVARCHAR(20) NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
     Quantity INT NOT NULL CHECK (Quantity >= 0),
     IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
-	Status TINYINT NOT NULL, -- 0: Khan cap, 1: thieu mau, 2: trung binh, 3: an toan
-    LastUpdated DATETIME DEFAULT GETDATE()
+    Status TINYINT NOT NULL, -- 0: Khẩn cấp, 1: Thiếu máu, 2: Trung bình, 3: An toàn
+    LastUpdated DATETIME DEFAULT GETDATE(),
+    BagType NVARCHAR(5), -- 250ml, 350ml, 450ml
+    ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
+    ExpirationDate DATETIME -- Expiration date
 );
+GO
 
+-- Create trigger in a separate batch
+CREATE TRIGGER trg_SetExpirationDate
+ON BloodInventory
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE bi
+    SET ExpirationDate = 
+        CASE 
+            WHEN i.ComponentType = 'Toàn phần' THEN DATEADD(DAY, 35, i.ReceivedDate)
+            WHEN i.ComponentType = 'Hồng cầu' THEN DATEADD(DAY, 42, i.ReceivedDate)
+            WHEN i.ComponentType = 'Tiểu cầu' THEN DATEADD(DAY, 5, i.ReceivedDate)
+            WHEN i.ComponentType = 'Huyết tương' THEN DATEADD(DAY, 365, i.ReceivedDate)
+        END
+    FROM BloodInventory bi
+    INNER JOIN inserted i ON bi.InventoryID = i.InventoryID
+    WHERE i.ReceivedDate IS NOT NULL;
+END;
+GO
+
+-- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistory (
     HistoryID INT PRIMARY KEY IDENTITY(1,1),
-    InventoryID INT NULL FOREIGN KEY REFERENCES BloodInventory(InventoryID),
+    InventoryID INT NULL,
     BloodGroup NVARCHAR(2) NULL,
     RhType NVARCHAR(3) NULL,
     ComponentType NVARCHAR(20) NULL,
@@ -135,8 +162,13 @@ CREATE TABLE BloodInventoryHistory (
     Reason NVARCHAR(255) NULL,
     Notes NVARCHAR(255) NULL,
     PerformedBy INT NOT NULL FOREIGN KEY REFERENCES Users(UserID),
-    PerformedAt DATETIME DEFAULT GETDATE()
+    PerformedAt DATETIME DEFAULT GETDATE(),
+    BagType NVARCHAR(5),
+    ReceivedDate DATETIME, -- Date received
+    ExpirationDate DATETIME, -- Expiration date
+	FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
 );
+GO
 
 -- BloodRequests table: Stores blood requests
 CREATE TABLE BloodRequests (
@@ -167,7 +199,7 @@ CREATE TABLE BloodRequestHistory (
     HistoryID INT PRIMARY KEY IDENTITY(1,1),
     RequestID INT NOT NULL,
     UserID INT NOT NULL, -- Staff-Doctor or Staff-BloodManager
-    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho 5: Rejected
+    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho, 5: Rejected
     Notes NVARCHAR(255),
     TimeStamp DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID),
@@ -188,19 +220,6 @@ CREATE TABLE BloodDonationHistory (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- PublicBloodRequests table: Stores public urgent requests
-CREATE TABLE PublicBloodRequests (
-    PublicRequestID INT PRIMARY KEY IDENTITY(1,1),
-    RequestID INT NOT NULL,
-    BloodGroup NVARCHAR(2) NOT NULL,
-    RhType NVARCHAR(3) NOT NULL,
-    Quantity INT NOT NULL CHECK (Quantity > 0),
-    Deadline DATETIME NOT NULL,
-    IsRare BIT DEFAULT 0,
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
-);
-
 -- UserLocations table: Stores user locations
 CREATE TABLE UserLocations (
     LocationID INT PRIMARY KEY IDENTITY(1,1),
@@ -216,7 +235,7 @@ CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
     AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
-    Status TINYINT DEFAULT 0, -- 0: Đang chờ, 1: Đã xác nhận, 2: Hủy      
+    Status TINYINT DEFAULT 0, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho 5: Rejected
     Notes NVARCHAR(255),
 	TimeSlot NVARCHAR(50),
     CreatedAt DATETIME DEFAULT GETDATE(),

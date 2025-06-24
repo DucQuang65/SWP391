@@ -1,4 +1,4 @@
-USE BloodManagementSystem;
+﻿USE BloodManagementSystem;
 GO
 
 -- Insert data into Roles table
@@ -109,7 +109,7 @@ GO
 INSERT INTO BloodArticles (Title, Content, ImgUrl, UserID)
 VALUES
     -- Nhóm A Rh+
-    ('Giới thiệu nhóm máu A Rh+', 
+    (N'Giới thiệu nhóm máu A Rh+', 
      N'Nhóm máu A Rh+ là một trong những nhóm máu phổ biến ở người.
 
 Đặc điểm:
@@ -126,7 +126,7 @@ Lưu ý:
      'article1.jpg', 2),
 
     -- Nhóm A Rh-
-    ('Giới thiệu nhóm máu A Rh-', 
+    (N'Giới thiệu nhóm máu A Rh-', 
      N'Nhóm máu A Rh- là nhóm máu hiếm hơn A Rh+.
 
 Đặc điểm:
@@ -143,7 +143,7 @@ Lưu ý:
      'article2.jpg', 2),
 
     -- Nhóm B Rh+
-    ('Giới thiệu nhóm máu B Rh+', 
+    (N'Giới thiệu nhóm máu B Rh+', 
      N'Nhóm máu B Rh+ có những đặc điểm:
 
 - Có kháng nguyên B trên hồng cầu.
@@ -159,7 +159,7 @@ Lưu ý:
      'article3.jpg', 2),
 
     -- Nhóm B Rh-
-    ('Giới thiệu nhóm máu B Rh-', 
+    (N'Giới thiệu nhóm máu B Rh-', 
      N'Nhóm máu B Rh- là một trong những nhóm máu hiếm.
 
 Đặc điểm:
@@ -176,7 +176,7 @@ Lưu ý:
      'article4.jpg', 2),
 
     -- Nhóm AB Rh+
-    ('Giới thiệu nhóm máu AB Rh+', 
+    (N'Giới thiệu nhóm máu AB Rh+', 
      N'Nhóm máu AB Rh+ là nhóm máu **hiếm và đặc biệt**.
 
 Đặc điểm:
@@ -193,7 +193,7 @@ Lưu ý:
      'article5.jpg', 2),
 
     -- Nhóm AB Rh-
-    ('Giới thiệu nhóm máu AB Rh-', 
+    (N'Giới thiệu nhóm máu AB Rh-', 
      N'Nhóm máu AB Rh- là một trong những nhóm máu **hiếm nhất**.
 
 Đặc điểm:
@@ -210,7 +210,7 @@ Lưu ý:
      'article6.jpg', 2),
 
     -- Nhóm O Rh+
-    ('Giới thiệu nhóm máu O Rh+', 
+    (N'Giới thiệu nhóm máu O Rh+', 
      N'Nhóm máu O Rh+ là nhóm máu phổ biến nhất tại nhiều quốc gia.
 
 Đặc điểm:
@@ -227,7 +227,7 @@ Lưu ý:
      'article7.jpg', 2),
 
     -- Nhóm O Rh-
-    ('Giới thiệu nhóm máu O Rh-', 
+    (N'Giới thiệu nhóm máu O Rh-', 
      N'Nhóm máu O Rh- được xem là nhóm máu **cho phổ thông** trong truyền máu khẩn cấp.
 
 Đặc điểm:
@@ -815,108 +815,217 @@ VALUES
 GO
 
 -- Insert data into BloodInventory
-INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, LastUpdated)
+INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
 VALUES
-    -- A+ (not rare)
-    ('A', 'Rh+', 'Whole', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('A', 'Rh+', 'RedCells', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('A', 'Rh+', 'Plasma', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('A', 'Rh+', 'Platelets', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
-
-    -- A- (rare)
-    ('A', 'Rh-', 'Whole', 3, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('A', 'Rh-', 'RedCells', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('A', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('A', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-
-    -- B+ (not rare)
-    ('B', 'Rh+', 'Whole', 12, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('B', 'Rh+', 'RedCells', 10, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('B', 'Rh+', 'Plasma', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('B', 'Rh+', 'Platelets', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
-
-    -- B- (rare)
-    ('B', 'Rh-', 'Whole', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('B', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('B', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('B', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-
-    -- AB+ (not rare)
-    ('AB', 'Rh+', 'Whole', 8, 0, 2, '2025-06-23 08:00:00'), -- Average
-    ('AB', 'Rh+', 'RedCells', 6, 0, 1, '2025-06-23 08:00:00'), -- Low
-    ('AB', 'Rh+', 'Plasma', 5, 0, 1, '2025-06-23 08:00:00'), -- Low
-    ('AB', 'Rh+', 'Platelets', 4, 0, 1, '2025-06-23 08:00:00'), -- Low
-
-    -- AB- (rare)
-    ('AB', 'Rh-', 'Whole', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('AB', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('AB', 'Rh-', 'Plasma', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('AB', 'Rh-', 'Platelets', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-
-    -- O+ (not rare)
-    ('O', 'Rh+', 'Whole', 25, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('O', 'Rh+', 'RedCells', 20, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('O', 'Rh+', 'Plasma', 18, 0, 3, '2025-06-23 08:00:00'), -- Safe
-    ('O', 'Rh+', 'Platelets', 15, 0, 2, '2025-06-23 08:00:00'), -- Average
-
-    -- O- (rare)
-    ('O', 'Rh-', 'Whole', 2, 1, 1, '2025-06-23 08:00:00'), -- Low
-    ('O', 'Rh-', 'RedCells', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('O', 'Rh-', 'Plasma', 1, 1, 0, '2025-06-23 08:00:00'), -- Critical
-    ('O', 'Rh-', 'Platelets', 2, 1, 1, '2025-06-23 08:00:00'); -- Low
+-- A+ (12 records: 3 per ComponentType)
+('A', 'Rh+', N'Toàn phần', 10, 0, 2, '450ml', '2025-06-07', NULL),
+('A', 'Rh+', N'Toàn phần', 15, 0, 3, '350ml', '2025-06-08', NULL),
+('A', 'Rh+', N'Toàn phần', 8, 0, 1, '250ml', '2025-06-09', NULL),
+('A', 'Rh+', N'Hồng cầu', 12, 0, 2, '450ml', '2025-06-10', NULL),
+('A', 'Rh+', N'Hồng cầu', 9, 0, 3, '350ml', '2025-06-11', NULL),
+('A', 'Rh+', N'Hồng cầu', 11, 0, 0, '250ml', '2025-06-12', NULL),
+('A', 'Rh+', N'Huyết tương', 14, 0, 2, '450ml', '2025-06-13', NULL),
+('A', 'Rh+', N'Huyết tương', 16, 0, 3, '350ml','2025-06-14', NULL),
+('A', 'Rh+', N'Huyết tương', 7, 0, 1, '250ml', '2025-06-15', NULL),
+('A', 'Rh+', N'Tiểu cầu', 5, 0, 2, '450ml', '2025-06-16', NULL),
+('A', 'Rh+', N'Tiểu cầu', 6, 0, 3, '350ml', '2025-06-17', NULL),
+('A', 'Rh+', N'Tiểu cầu', 4, 0, 1, '250ml', '2025-06-18', NULL),
+-- A- (12 records: 3 per ComponentType, rare)
+('A', 'Rh-', N'Toàn phần', 8, 1, 1, '450ml', '2025-06-19', NULL),
+('A', 'Rh-', N'Toàn phần', 10, 1, 2, '350ml', '2025-06-20', NULL),
+('A', 'Rh-', N'Toàn phần', 7, 1, 0, '250ml', '2025-06-21', NULL),
+('A', 'Rh-', N'Hồng cầu', 9, 1, 1, '450ml', '2025-06-22', NULL),
+('A', 'Rh-', N'Hồng cầu', 11, 1, 2, '350ml', '2025-06-23', NULL),
+('A', 'Rh-', N'Hồng cầu', 8, 1, 0, '250ml', '2025-06-24', NULL),
+('A', 'Rh-', N'Huyết tương', 12, 1, 1, '450ml', '2025-06-07', NULL),
+('A', 'Rh-', N'Huyết tương', 14, 1, 2, '350ml', '2025-06-08', NULL),
+('A', 'Rh-', N'Huyết tương', 10, 1, 0, '250ml', '2025-06-09', NULL),
+('A', 'Rh-', N'Tiểu cầu', 3, 1, 1, '450ml', '2025-06-10', NULL),
+('A', 'Rh-', N'Tiểu cầu', 4, 1, 2, '350ml', '2025-06-11', NULL),
+('A', 'Rh-', N'Tiểu cầu', 2, 1, 0, '250ml', '2025-06-12', NULL),
+-- B+ (12 records: 3 per ComponentType)
+('B', 'Rh+', N'Toàn phần', 11, 0, 2, '450ml', '2025-06-13', NULL),
+('B', 'Rh+', N'Toàn phần', 13, 0, 3, '350ml', '2025-06-14', NULL),
+('B', 'Rh+', N'Toàn phần', 9, 0, 1, '250ml', '2025-06-15', NULL),
+('B', 'Rh+', N'Hồng cầu', 10, 0, 2, '450ml', '2025-06-16', NULL),
+('B', 'Rh+', N'Hồng cầu', 12, 0, 3, '350ml', '2025-06-17', NULL),
+('B', 'Rh+', N'Hồng cầu', 8, 0, 1, '250ml', '2025-06-18', NULL),
+('B', 'Rh+', N'Huyết tương', 14, 0, 2, '450ml', '2025-06-19', NULL),
+('B', 'Rh+', N'Huyết tương', 16, 0, 3, '350ml', '2025-06-20', NULL),
+('B', 'Rh+', N'Huyết tương', 12, 0, 1, '250ml', '2025-06-21', NULL),
+('B', 'Rh+', N'Tiểu cầu', 4, 0, 2, '450ml', '2025-06-22', NULL),
+('B', 'Rh+', N'Tiểu cầu', 5, 0, 3, '350ml', '2025-06-23', NULL),
+('B', 'Rh+', N'Tiểu cầu', 3, 0, 1, '250ml', '2025-06-24', NULL),
+-- B- (12 records: 3 per ComponentType, rare)
+('B', 'Rh-', N'Toàn phần', 7, 1, 0, '450ml','2025-06-07', NULL),
+('B', 'Rh-', N'Toàn phần', 9, 1, 1, '350ml', '2025-06-08', NULL),
+('B', 'Rh-', N'Toàn phần', 6, 1, 2, '250ml', '2025-06-09', NULL),
+('B', 'Rh-', N'Hồng cầu', 8, 1, 0, '450ml', '2025-06-10', NULL),
+('B', 'Rh-', N'Hồng cầu', 10, 1, 1, '350ml','2025-06-11', NULL),
+('B', 'Rh-', N'Hồng cầu', 7, 1, 2, '250ml', '2025-06-12', NULL),
+('B', 'Rh-', N'Huyết tương', 11, 1, 0, '450ml', '2025-06-13', NULL),
+('B', 'Rh-', N'Huyết tương', 13, 1, 1, '350ml','2025-06-14', NULL),
+('B', 'Rh-', N'Huyết tương', 9, 1, 2, '250ml','2025-06-15', NULL),
+('B', 'Rh-', N'Tiểu cầu', 2, 1, 0, '450ml', '2025-06-16', NULL),
+('B', 'Rh-', N'Tiểu cầu', 3, 1, 1, '350ml', '2025-06-17', NULL),
+('B', 'Rh-', N'Tiểu cầu', 2, 1, 2, '250ml', '2025-06-18', NULL),
+-- AB+ (12 records: 3 per ComponentType)
+('AB', 'Rh+', N'Toàn phần', 12, 0, 3, '450ml', '2025-06-19', NULL),
+('AB', 'Rh+', N'Toàn phần', 14, 0, 2, '350ml', '2025-06-20', NULL),
+('AB', 'Rh+', N'Toàn phần', 10, 0, 1, '250ml', '2025-06-21', NULL),
+('AB', 'Rh+', N'Hồng cầu', 11, 0, 3, '450ml', '2025-06-22', NULL),
+('AB', 'Rh+', N'Hồng cầu', 13, 0, 2, '350ml', '2025-06-23', NULL),
+('AB', 'Rh+', N'Hồng cầu', 9, 0, 1, '250ml', '2025-06-24', NULL),
+('AB', 'Rh+', N'Huyết tương', 15, 0, 3, '450ml', '2025-06-07', NULL),
+('AB', 'Rh+', N'Huyết tương', 17, 0, 2, '350ml', '2025-06-08', NULL),
+('AB', 'Rh+', N'Huyết tương', 13, 0, 1, '250ml','2025-06-09', NULL),
+('AB', 'Rh+', N'Tiểu cầu', 5, 0, 3, '450ml', '2025-06-10', NULL),
+('AB', 'Rh+', N'Tiểu cầu', 6, 0, 2, '350ml', '2025-06-11', NULL),
+('AB', 'Rh+', N'Tiểu cầu', 4, 0, 1, '250ml', '2025-06-12', NULL),
+-- AB- (12 records: 3 per ComponentType, rare)
+('AB', 'Rh-', N'Toàn phần', 6, 1, 0, '450ml', '2025-06-13', NULL),
+('AB', 'Rh-', N'Toàn phần', 8, 1, 1, '350ml', '2025-06-14', NULL),
+('AB', 'Rh-', N'Toàn phần', 5, 1, 2, '250ml', '2025-06-15', NULL),
+('AB', 'Rh-', N'Hồng cầu', 7, 1, 0, '450ml', '2025-06-16', NULL),
+('AB', 'Rh-', N'Hồng cầu', 9, 1, 1, '350ml', '2025-06-17', NULL),
+('AB', 'Rh-', N'Hồng cầu', 6, 1, 2, '250ml', '2025-06-18', NULL),
+('AB', 'Rh-', N'Huyết tương', 10, 1, 0, '450ml', '2025-06-19', NULL),
+('AB', 'Rh-', N'Huyết tương', 12, 1, 1, '350ml', '2025-06-20', NULL),
+('AB', 'Rh-', N'Huyết tương', 8, 1, 2, '250ml', '2025-06-21', NULL),
+('AB', 'Rh-', N'Tiểu cầu', 2, 1, 0, '450ml', '2025-06-22', NULL),
+('AB', 'Rh-', N'Tiểu cầu', 3, 1, 1, '350ml', '2025-06-23', NULL),
+('AB', 'Rh-', N'Tiểu cầu', 2, 1, 2, '250ml', '2025-06-24', NULL),
+-- O+ (12 records: 3 per ComponentType)
+('O', 'Rh+', N'Toàn phần', 13, 0, 3, '450ml', '2025-06-07', NULL),
+('O', 'Rh+', N'Toàn phần', 15, 0, 2, '350ml', '2025-06-08', NULL),
+('O', 'Rh+', N'Toàn phần', 11, 0, 1, '250ml', '2025-06-09', NULL),
+('O', 'Rh+', N'Hồng cầu', 12, 0, 3, '450ml', '2025-06-10', NULL),
+('O', 'Rh+', N'Hồng cầu', 14, 0, 2, '350ml', '2025-06-11', NULL),
+('O', 'Rh+', N'Hồng cầu', 10, 0, 1, '250ml', '2025-06-12', NULL),
+('O', 'Rh+', N'Huyết tương', 16, 0, 3, '450ml', '2025-06-13', NULL),
+('O', 'Rh+', N'Huyết tương', 18, 0, 2, '350ml', '2025-06-14', NULL),
+('O', 'Rh+', N'Huyết tương', 14, 0, 1, '250ml', '2025-06-15', NULL),
+('O', 'Rh+', N'Tiểu cầu', 6, 0, 3, '450ml', '2025-06-16', NULL),
+('O', 'Rh+', N'Tiểu cầu', 7, 0, 2, '350ml', '2025-06-17', NULL),
+('O', 'Rh+', N'Tiểu cầu', 5, 0, 1, '250ml', '2025-06-18', NULL),
+-- O- (12 records: 3 per ComponentType, rare)
+('O', 'Rh-', N'Toàn phần', 7, 1, 0, '450ml', '2025-06-19', NULL),
+('O', 'Rh-', N'Toàn phần', 9, 1, 1, '350ml', '2025-06-20', NULL),
+('O', 'Rh-', N'Toàn phần', 6, 1, 2, '250ml', '2025-06-21', NULL),
+('O', 'Rh-', N'Hồng cầu', 8, 1, 0, '450ml', '2025-06-22', NULL),
+('O', 'Rh-', N'Hồng cầu', 10, 1, 1, '350ml', '2025-06-23', NULL),
+('O', 'Rh-', N'Hồng cầu', 7, 1, 2, '250ml', '2025-06-24', NULL),
+('O', 'Rh-', N'Huyết tương', 11, 1, 0, '450ml', '2025-06-07', NULL),
+('O', 'Rh-', N'Huyết tương', 13, 1, 1, '350ml', '2025-06-08', NULL),
+('O', 'Rh-', N'Huyết tương', 9, 1, 2, '250ml', '2025-06-09', NULL),
+('O', 'Rh-', N'Tiểu cầu', 2, 1, 0, '450ml', '2025-06-10', NULL),
+('O', 'Rh-', N'Tiểu cầu', 3, 1, 1, '350ml', '2025-06-11', NULL),
+('O', 'Rh-', N'Tiểu cầu', 2, 1, 2, '250ml', '2025-06-12', NULL);
 GO
 
 -- Insert data into BloodInventoryHistory
-INSERT INTO BloodInventoryHistory (InventoryID, BloodGroup, RhType, ComponentType, ActionType, Quantity, Reason, Notes, PerformedBy, PerformedAt)
+INSERT INTO BloodInventoryHistory
+(BloodGroup, RhType, ComponentType, ActionType, Quantity, Reason, Notes, PerformedBy, BagType, ReceivedDate, ExpirationDate)
 VALUES
-    -- A+ (Performed by UserID: 7, Nhi, BloodManager)
-    (1, 'A', 'Rh+', 'Whole', 'Add', 10, 'Received from donation', 'Routine stock update', 7, '2025-06-23 09:00:00'),
-    (2, 'A', 'Rh+', 'RedCells', 'Add', 8, 'Processed from whole blood', NULL, 7, '2025-06-23 09:30:00'),
-    (3, 'A', 'Rh+', 'Plasma', 'Remove', 2, 'Supplied for surgery', 'Urgent request', 7, '2025-06-24 10:00:00'),
-    (4, 'A', 'Rh+', 'Platelets', 'Add', 5, 'Received from donation', 'Community event', 7, '2025-06-25 11:00:00'),
+('A', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Nhập kho', N'Thủ công', 7, '250ml', '2025-06-07', '2025-07-19'),
+('O', 'Rh-', N'Huyết tương', N'Xuất', 2, N'Cấp phát cho bệnh nhân', N'Thủ công', 8, '450ml', '2025-06-08', '2026-06-08'),
+('B', 'Rh+', N'Toàn phần', N'Hủy', 1, N'Quá hạn sử dụng', N'Thủ công', 9, '350ml', '2025-06-09', '2025-07-14'),
+('AB', 'Rh+', N'Tiểu cầu', N'Thêm', 4, N'Nhập kho', N'Thủ công', 7, '250ml', '2025-06-10', '2025-06-15'),
+('A', 'Rh-', N'Huyết tương', N'Hủy', 2, N'Quá hạn sử dụng', N'Thủ công', 8, '350ml', '2025-06-11', '2026-06-11'),
+('O', 'Rh+', N'Hồng cầu', N'Xuất', 3, N'Cấp phát cho bệnh nhân', N'Thủ công', 9, '450ml', '2025-06-12', '2025-07-24'),
+('B', 'Rh-', N'Toàn phần', N'Thêm', 1, N'Nhập kho', N'Thủ công', 7, '250ml', '2025-06-13', '2025-07-18'),
+('A', 'Rh+', N'Tiểu cầu', N'Hủy', 2, N'Nhiễm khuẩn', N'Thủ công', 8, '350ml', '2025-06-14', '2025-06-19'),
+('AB', 'Rh-', N'Huyết tương', N'Thêm', 3, N'Nhập kho', N'Thủ công', 9, '450ml', '2025-06-15', '2026-06-15'),
+('O', 'Rh+', N'Hồng cầu', N'Hủy', 4, N'Quá hạn sử dụng', N'Thủ công', 7, '350ml', '2025-06-16', '2025-07-28'),
+('A', 'Rh+', N'Toàn phần', N'Xuất', 2, N'Dùng cho phẫu thuật', N'Thủ công', 8, '250ml', '2025-06-17', '2025-07-22'),
+('B', 'Rh+', N'Toàn phần', N'Thêm', 3, N'Nhập kho', N'Thủ công', 9, '450ml', '2025-06-18', '2025-07-23'),
+('AB', 'Rh+', N'Hồng cầu', N'Hủy', 1, N'Máu bị hỏng', N'Thủ công', 7, '350ml', '2025-06-19', '2025-07-31'),
+('A', 'Rh-', N'Huyết tương', N'Thêm', 2, N'Nhập kho', N'Thủ công', 8, '250ml', '2025-06-20', '2026-06-20'),
+('O', 'Rh-', N'Tiểu cầu', N'Hủy', 1, N'Nhiễm khuẩn', N'Thủ công', 9, '450ml', '2025-06-21', '2025-06-26'),
+('B', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Nhập kho', N'Thủ công', 7, '350ml', '2025-06-22', '2025-08-03'),
+('A', 'Rh+', N'Toàn phần', N'Xuất', 2, N'Cấp cứu', N'Thủ công', 8, '250ml', '2025-06-23', '2025-07-28'),
+('AB', 'Rh-', N'Toàn phần', N'Hủy', 1, N'Quá hạn sử dụng', N'Thủ công', 9, '450ml', '2025-06-24', '2025-07-29'),
+('O', 'Rh+', N'Huyết tương', N'Thêm', 2, N'Nhập kho', N'Thủ công', 7, '350ml', '2025-06-25', '2026-06-25'),
+('A', 'Rh-', N'Toàn phần', N'Hủy', 1, N'Không đạt tiêu chuẩn', N'Thủ công', 8, '450ml', '2025-06-26', '2025-07-31'),
+('B', 'Rh+', N'Tiểu cầu', N'Thêm', 4, N'Nhập kho', N'Thủ công', 9, '250ml', '2025-06-27', '2025-07-02'),
+('A', 'Rh+', N'Hồng cầu', N'Hủy', 3, N'Máu đông', N'Thủ công', 7, '450ml', '2025-06-28', '2025-08-09'),
+('AB', 'Rh-', N'Tiểu cầu', N'Thêm', 2, N'Nhập kho', N'Thủ công', 8, '350ml', '2025-06-29', '2025-07-04'),
+('O', 'Rh+', N'Toàn phần', N'Hủy', 1, N'Túi máu rách', N'Thủ công', 9, '250ml', '2025-06-30', '2025-08-04'),
+('A', 'Rh+', N'Huyết tương', N'Xuất', 3, N'Chuyển viện', N'Thủ công', 7, '450ml', '2025-07-01', '2026-07-01'),
+('B', 'Rh+', N'Tiểu cầu', N'Hủy', 2, N'Nhiễm khuẩn', N'Thủ công', 8, '350ml', '2025-07-02', '2025-07-07'),
+('AB', 'Rh+', N'Hồng cầu', N'Thêm', 5, N'Nhập kho', N'Thủ công', 9, '250ml', '2025-07-03', '2025-08-14'),
+('O', 'Rh-', N'Tiểu cầu', N'Xuất', 3, N'Cấp phát nội bộ', N'Thủ công', 7, '450ml', '2025-07-04', '2025-07-09'),
+('A', 'Rh+', N'Toàn phần', N'Thêm', 4, N'Nhập kho', N'Thủ công', 8, '350ml', '2025-07-05', '2025-08-09'),
+('B', 'Rh-', N'Huyết tương', N'Hủy', 1, N'Máu bị hỏng', N'Thủ công', 9, '250ml', '2025-07-06', '2026-07-06'),
+('AB', 'Rh-', N'Huyết tương', N'Xuất', 2, N'Dùng cho ca ghép tạng', N'Thủ công', 7, '450ml', '2025-07-07', '2026-07-07'),
+('O', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Nhập kho', N'Thủ công', 8, '350ml', '2025-07-08', '2025-08-19'),
+('B', 'Rh+', N'Toàn phần', N'Hủy', 1, N'Túi bị rò rỉ', N'Thủ công', 9, '250ml', '2025-06-13', '2025-07-18'),
+('A', 'Rh-', N'Hồng cầu', N'Xuất', 2, N'Cấp phát cho khoa nội', N'Thủ công', 7, '450ml', '2025-06-14', '2025-07-26'),
+('AB', 'Rh+', N'Tiểu cầu', N'Hủy', 3, N'Nhiễm khuẩn', N'Thủ công', 8, '350ml', '2025-06-15', '2025-06-20'),
+('O', 'Rh-', N'Huyết tương', N'Thêm', 4, N'Nhập kho', N'Thủ công', 9, '450ml', '2025-06-16', '2026-06-16'),
+('B', 'Rh+', N'Toàn phần', N'Thêm', 3, N'Tài trợ', N'Thủ công', 7, '350ml', '2025-06-17', '2025-07-22'),
+('A', 'Rh+', N'Hồng cầu', N'Xuất', 2, N'Trường hợp khẩn cấp', N'Thủ công', 8, '250ml', '2025-06-18', '2025-07-30'),
+('AB', 'Rh-', N'Tiểu cầu', N'Thêm', 5, N'Hiến máu', N'Thủ công', 9, '450ml', '2025-06-19', '2025-06-24'),
+('O', 'Rh+', N'Huyết tương', N'Hủy', 1, N'Quá hạn', N'Thủ công', 7, '350ml', '2025-06-20', '2026-06-20'),
+('B', 'Rh-', N'Hồng cầu', N'Thêm', 4, N'Hiến máu', N'Thủ công', 8, '250ml', '2025-06-21', '2025-08-02'),
+('A', 'Rh+', N'Toàn phần', N'Xuất', 3, N'Dùng cho trẻ em', N'Thủ công', 9, '450ml', '2025-06-22', '2025-07-27'),
+('AB', 'Rh+', N'Hồng cầu', N'Hủy', 2, N'Máu không đạt chất lượng', N'Thủ công', 7, '350ml', '2025-06-23', '2025-08-03'),
+('O', 'Rh-', N'Toàn phần', N'Thêm', 3, N'Nhập kho', N'Thủ công', 8, '250ml', '2025-06-24', '2025-07-29'),
+('B', 'Rh+', N'Tiểu cầu', N'Hủy', 1, N'Máu đông', N'Thủ công', 9, '450ml', '2025-06-25', '2025-06-30'),
+('A', 'Rh-', N'Huyết tương', N'Xuất', 2, N'Chuyển viện', N'Thủ công', 7, '350ml', '2025-06-26', '2026-06-26'),
+('AB', 'Rh-', N'Toàn phần', N'Hủy', 2, N'Túi máu bị rách', N'Thủ công', 8, '250ml', '2025-06-27', '2025-08-01'),
+('O', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Hiến máu', N'Thủ công', 9, '450ml', '2025-06-28', '2025-08-09'),
+('B', 'Rh+', N'Huyết tương', N'Hủy', 2, N'Quá hạn', N'Thủ công', 7, '350ml', '2025-06-29', '2026-06-29'),
+('A', 'Rh+', N'Toàn phần', N'Thêm', 4, N'Nhập kho', N'Thủ công', 8, '250ml', '2025-06-30', '2025-08-04'),
+('AB', 'Rh+', N'Hồng cầu', N'Xuất', 3, N'Cấp cứu', N'Thủ công', 9, '450ml', '2025-07-01', '2025-08-12'),
+('O', 'Rh-', N'Toàn phần', N'Hủy', 1, N'Không đạt tiêu chuẩn', N'Thủ công', 7, '350ml', '2025-07-02', '2025-08-06'),
+('B', 'Rh-', N'Tiểu cầu', N'Thêm', 5, N'Hiến máu', N'Thủ công', 8, '250ml', '2025-07-03', '2025-07-08'),
+('A', 'Rh+', N'Huyết tương', N'Hủy', 3, N'Máu bị hỏng', N'Thủ công', 9, '450ml', '2025-07-04', '2026-07-04'),
+('AB', 'Rh-', N'Tiểu cầu', N'Xuất', 2, N'Phẫu thuật', N'Thủ công', 7, '350ml', '2025-07-05', '2025-07-10'),
+('O', 'Rh+', N'Hồng cầu', N'Thêm', 4, N'Nhập kho', N'Thủ công', 8, '250ml', '2025-07-06', '2025-08-17'),
+('B', 'Rh+', N'Toàn phần', N'Hủy', 2, N'Thử nghiệm lỗi', N'Thủ công', 9, '450ml', '2025-07-07', '2025-08-11'),
+('A', 'Rh-', N'Huyết tương', N'Thêm', 3, N'Hiến máu', N'Thủ công', 7, '350ml', '2025-07-08', '2026-07-08'),
+('AB', 'Rh+', N'Toàn phần', N'Xuất', 1, N'Cấp phát BV', N'Thủ công', 8, '250ml', '2025-07-09', '2025-08-13'),
+('O', 'Rh-', N'Huyết tương', N'Hủy', 1, N'Quá hạn sử dụng', N'Thủ công', 9, '450ml', '2025-07-10', '2026-07-10'),
+('B', 'Rh+', N'Tiểu cầu', N'Thêm', 3, N'Hiến máu', N'Thủ công', 7, '350ml', '2025-07-11', '2025-07-16'),
+('A', 'Rh+', N'Hồng cầu', N'Hủy', 2, N'Máu bị đông', N'Thủ công', 8, '250ml', '2025-07-12', '2025-08-23'),
+('AB', 'Rh-', N'Huyết tương', N'Thêm', 4, N'Hiến máu', N'Thủ công', 9, '450ml', '2025-07-13', '2026-07-13'),
+('O', 'Rh+', N'Toàn phần', N'Xuất', 3, N'Cấp cứu BV', N'Thủ công', 7, '350ml', '2025-07-13', '2025-08-17'),
+('B', 'Rh-', N'Hồng cầu', N'Hủy', 1, N'Máu vỡ túi', N'Thủ công', 8, '250ml', '2025-07-13', '2025-08-24'),
+('A', 'Rh+', N'Toàn phần', N'Thêm', 3, N'Hiến máu', N'Thủ công', 9, '450ml', '2025-07-12', '2025-08-16'),
+('AB', 'Rh-', N'Tiểu cầu', N'Xuất', 2, N'Cấp phát khẩn', N'Thủ công', 7, '350ml', '2025-07-11', '2025-07-16'),
+('O', 'Rh+', N'Huyết tương', N'Hủy', 1, N'Máu đổi màu', N'Thủ công', 8, '250ml', '2025-07-10', '2026-07-10'),
+('B', 'Rh-', N'Toàn phần', N'Thêm', 4, N'Nhập kho', N'Thủ công', 9, '450ml', '2025-07-09', '2025-08-13'),
+('A', 'Rh-', N'Hồng cầu', N'Hủy', 2, N'Máu đông đặc', N'Thủ công', 7, '350ml', '2025-07-08', '2025-08-19'),
+('AB', 'Rh+', N'Huyết tương', N'Thêm', 3, N'Hiến máu', N'Thủ công', 8, '250ml', '2025-07-07', '2026-07-07'),
+('O', 'Rh-', N'Tiểu cầu', N'Xuất', 1, N'Truyền máu ngoại viện', N'Thủ công', 9, '450ml', '2025-07-06', '2025-07-11'),
+('B', 'Rh+', N'Hồng cầu', N'Hủy', 1, N'Máu không đạt', N'Thủ công', 7, '350ml', '2025-07-05', '2025-08-16'),
+('A', 'Rh+', N'Toàn phần', N'Xuất', 2, N'Cấp cứu phẫu thuật', N'Thủ công', 8, '250ml', '2025-07-04', '2025-08-08'),
+('AB', 'Rh-', N'Huyết tương', N'Hủy', 3, N'Bị hư khi vận chuyển', N'Thủ công', 9, '450ml', '2025-07-03', '2026-07-03'),
+('O', 'Rh+', N'Hồng cầu', N'Thêm', 4, N'Hiến máu', N'Thủ công', 7, '350ml', '2025-07-02', '2025-08-13'),
+('B', 'Rh-', N'Tiểu cầu', N'Xuất', 1, N'Cấp cứu tuyến huyện', N'Thủ công', 8, '250ml', '2025-07-01', '2025-07-06'),
+('A', 'Rh-', N'Hồng cầu', N'Hủy', 2, N'Phát hiện vi khuẩn', N'Thủ công', 9, '450ml', '2025-06-30', '2025-08-11'),
+('AB', 'Rh+', N'Toàn phần', N'Thêm', 5, N'Hiến máu', N'Thủ công', 7, '350ml', '2025-06-29', '2025-08-03'),
+('O', 'Rh-', N'Huyết tương', N'Hủy', 1, N'Quá thời gian bảo quản', N'Thủ công', 8, '250ml', '2025-06-28', '2026-06-28'),
+('B', 'Rh+', N'Hồng cầu', N'Thêm', 4, N'Hiến máu tình nguyện', N'Thủ công', 9, '450ml', '2025-06-27', '2025-08-08'),
+('A', 'Rh+', N'Toàn phần', N'Xuất', 3, N'Cấp phát BV tỉnh', N'Thủ công', 7, '350ml', '2025-06-26', '2025-07-31'),
+('AB', 'Rh-', N'Tiểu cầu', N'Hủy', 2, N'Bảo quản sai nhiệt độ', N'Thủ công', 8, '250ml', '2025-06-25', '2025-06-30'),
+('O', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Hiến máu cộng đồng', N'Thủ công', 9, '450ml', '2025-06-24', '2025-08-05'),
+('B', 'Rh-', N'Huyết tương', N'Hủy', 1, N'Máu không đạt chất lượng', N'Thủ công', 7, '350ml', '2025-06-23', '2026-06-23'),
+('A', 'Rh-', N'Toàn phần', N'Hủy', 1, N'Rách túi', N'Thủ công', 8, '250ml', '2025-06-22', '2025-07-27'),
+('AB', 'Rh+', N'Hồng cầu', N'Thêm', 3, N'Hiến máu nhân đạo', N'Thủ công', 9, '450ml', '2025-06-21', '2025-08-02'),
+('O', 'Rh-', N'Tiểu cầu', N'Xuất', 2, N'Cấp phát cấp cứu', N'Thủ công', 7, '350ml', '2025-06-20', '2025-06-25'),
+('B', 'Rh+', N'Huyết tương', N'Hủy', 2, N'Thử nghiệm sai sót', N'Thủ công', 8, '250ml', '2025-06-19', '2026-06-19'),
+('A', 'Rh+', N'Toàn phần', N'Thêm', 4, N'Hiến máu nội viện', N'Thủ công', 9, '450ml', '2025-06-18', '2025-07-23'),
+('AB', 'Rh-', N'Tiểu cầu', N'Hủy', 1, N'Máu đông', N'Thủ công', 7, '350ml', '2025-06-17', '2025-06-22'),
+('O', 'Rh+', N'Hồng cầu', N'Xuất', 3, N'Cấp cứu khoa sản', N'Thủ công', 8, '250ml', '2025-06-16', '2025-07-28'),
+('B', 'Rh-', N'Toàn phần', N'Thêm', 2, N'Hiến máu', N'Thủ công', 9, '450ml', '2025-06-15', '2025-07-20'),
+('A', 'Rh-', N'Hồng cầu', N'Hủy', 1, N'Túi máu hỏng', N'Thủ công', 7, '350ml', '2025-06-14', '2025-07-26'),
+('AB', 'Rh+', N'Huyết tương', N'Thêm', 5, N'Hiến máu', N'Thủ công', 8, '250ml', '2025-06-13', '2026-06-13'),
+('O', 'Rh-', N'Tiểu cầu', N'Xuất', 2, N'Cấp cứu tai nạn', N'Thủ công', 9, '450ml', '2025-06-12', '2025-06-17');
 
-    -- A- (Performed by UserID: 8, Hoa, BloodManager)
-    (5, 'A', 'Rh-', 'Whole', 'Add', 3, 'Rare blood donation', 'Critical stock', 8, '2025-06-23 09:00:00'),
-    (6, 'A', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 8, '2025-06-24 10:30:00'),
-    (7, 'A', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 8, '2025-06-25 11:30:00'),
-    (8, 'A', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 8, '2025-06-26 12:00:00'),
-
-    -- B+ (Performed by UserID: 9, Phong, BloodManager)
-    (9, 'B', 'Rh+', 'Whole', 'Add', 6, 'Received from donation', 'Routine stock', 9, '2025-06-23 09:00:00'),
-    (10, 'B', 'Rh+', 'RedCells', 'Remove', 2, 'Supplied for cancer treatment', NULL, 9, '2025-06-24 11:00:00'),
-    (11, 'B', 'Rh+', 'Plasma', 'Add', 4, 'Processed from whole blood', 'Stock update', 9, '2025-06-25 12:00:00'),
-    (12, 'B', 'Rh+', 'Platelets', 'Add', 3, 'Received from donation', 'Community event', 9, '2025-06-26 13:00:00'),
-
-    -- B- (Performed by UserID: 7, Nhi, BloodManager)
-    (13, 'B', 'Rh-', 'Whole', 'Add', 2, 'Rare blood donation', 'Critical stock', 7, '2025-06-23 09:30:00'),
-    (14, 'B', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Surgery', 7, '2025-06-24 11:30:00'),
-    (15, 'B', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 7, '2025-06-25 12:30:00'),
-    (16, 'B', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 7, '2025-06-26 14:00:00'),
-
-    -- AB+ (Performed by UserID: 8, Hoa, BloodManager)
-    (17, 'AB', 'Rh+', 'Whole', 'Add', 5, 'Received from donation', 'Routine stock', 8, '2025-06-23 10:00:00'),
-    (18, 'AB', 'Rh+', 'RedCells', 'Remove', 2, 'Supplied for surgery', NULL, 8, '2025-06-24 12:00:00'),
-    (19, 'AB', 'Rh+', 'Plasma', 'Add', 3, 'Processed from whole blood', 'Stock update', 8, '2025-06-25 13:00:00'),
-    (20, 'AB', 'Rh+', 'Platelets', 'Add', 2, 'Received from donation', 'Community event', 8, '2025-06-26 14:30:00'),
-
-    -- AB- (Performed by UserID: 9, Phong, BloodManager)
-    (21, 'AB', 'Rh-', 'Whole', 'Add', 1, 'Rare blood donation', 'Critical stock', 9, '2025-06-23 10:30:00'),
-    (22, 'AB', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 9, '2025-06-24 12:30:00'),
-    (23, 'AB', 'Rh-', 'Plasma', 'Add', 2, 'Processed from donation', NULL, 9, '2025-06-25 13:30:00'),
-    (24, 'AB', 'Rh-', 'Platelets', 'Add', 1, 'Received from donation', 'Rare blood', 9, '2025-06-26 15:00:00'),
-
-    -- O+ (Performed by UserID: 7, Nhi, BloodManager)
-    (25, 'O', 'Rh+', 'Whole', 'Add', 15, 'Received from donation', 'Routine stock', 7, '2025-06-23 11:00:00'),
-    (26, 'O', 'Rh+', 'RedCells', 'Remove', 5, 'Supplied for surgery', 'Urgent request', 7, '2025-06-24 13:00:00'),
-    (27, 'O', 'Rh+', 'Plasma', 'Add', 10, 'Processed from whole blood', 'Stock update', 7, '2025-06-25 14:00:00'),
-    (28, 'O', 'Rh+', 'Platelets', 'Add', 8, 'Received from donation', 'Community event', 7, '2025-06-26 15:30:00'),
-
-    -- O- (Performed by UserID: 8, Hoa, BloodManager)
-    (29, 'O', 'Rh-', 'Whole', 'Add', 2, 'Rare blood donation', 'Critical stock', 8, '2025-06-23 11:30:00'),
-    (30, 'O', 'Rh-', 'RedCells', 'Remove', 1, 'Emergency transfusion', 'Accident case', 8, '2025-06-24 13:30:00'),
-    (31, 'O', 'Rh-', 'Plasma', 'Add', 1, 'Processed from donation', NULL, 8, '2025-06-25 14:30:00'),
-    (32, 'O', 'Rh-', 'Platelets', 'Add', 2, 'Received from donation', 'Rare blood', 8, '2025-06-26 16:00:00');
 GO
+
 
 -- Insert data into BloodDonationHistory table
 INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, IsSuccess, Notes)
