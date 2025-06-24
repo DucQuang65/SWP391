@@ -16,6 +16,7 @@ public partial class Hien_mauContext : DbContext
     {
     }
     public virtual DbSet<BloodInventoryHistory> BloodInventoryHistories { get; set; }
+
     public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
     public virtual DbSet<Appointment> Appointments { get; set; }
@@ -59,14 +60,11 @@ public partial class Hien_mauContext : DbContext
         modelBuilder.Entity<ActivityLog>(entity =>
         {
             entity.HasKey(e => e.LogId);
-            entity.Property(e => e.LogId).HasColumnName("LogId");
-            entity.Property(e => e.UserID).HasColumnName("UserID");
-            //entity.Property(e => e.ActivityType).HasMaxLength(50);
-            entity.Property(e => e.EntityId).HasColumnName("EntityId");
-            entity.Property(e => e.EntityType).HasMaxLength(20);
-            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.UserID);
+            entity.Property(e => e.ActivityType);
+            entity.Property(e => e.EntityType);
+            entity.Property(e => e.Description);
             entity.Property(e => e.CreatedAt)
-            //ActivityLog.cs sets CreatedAt = DateTime.Now ensure consistency
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 

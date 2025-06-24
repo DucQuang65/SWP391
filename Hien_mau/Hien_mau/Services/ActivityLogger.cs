@@ -14,7 +14,7 @@ namespace Hien_mau.Services
             _context = context;
         }
 
-        public async Task LogAsync(int userId, string action, string entityType, int? entityId = null, string? oldValues = null, string? newValues = null, string? description = null)
+        public async Task LogAsync(int userId, string action, string entityType, int? entityId = null, string? description = null)
         {
             if (!await _context.Users.AnyAsync(u => u.UserId == userId))
             {
@@ -27,23 +27,12 @@ namespace Hien_mau.Services
                 ActivityType = action,
                 EntityType = entityType,
                 EntityId = entityId,
-                OldValues = TruncateJson(oldValues, 4000),
-                NewValues = TruncateJson(newValues, 4000),
+                Description = description,
                 CreatedAt = DateTime.Now,
-                Description = description
             };
 
             _context.ActivityLogs.Add(log);
             await _context.SaveChangesAsync();
-        }
-
-        private string TruncateJson(string json, int maxLength)
-        {
-            if (string.IsNullOrEmpty(json) || json.Length <= maxLength)
-            {
-                return json;
-            }
-            return json.Substring(0, maxLength - 3) + "...";
         }
     }
 }

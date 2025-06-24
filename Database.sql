@@ -107,9 +107,7 @@ CREATE TABLE ActivityLog (
     ActivityType NVARCHAR(50) NOT NULL, -- e.g., CreateArticle, UpdateArticle, DeleteArticle, CreateNews, UpdateNews, DeleteNews
     EntityID INT NOT NULL, -- ArticleID or PostID
     EntityType NVARCHAR(20) NOT NULL, -- Article or News
-	OldValues NVARCHAR(4000),
-	NewValues NVARCHAR(4000),
-    Description NVARCHAR(255),
+    Description NVARCHAR(MAX),
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );

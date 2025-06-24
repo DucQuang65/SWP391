@@ -1,5 +1,4 @@
 ﻿using Hien_mau.Data;
-using Hien_mau.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,79 +16,27 @@ namespace Hien_mau.Controllers
         }
 
         // GET: api/ActivityLogController
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetAuditLogs()
+        [HttpGet("admin")]
+        public async Task<ActionResult<IEnumerable<object>>> GetAllLogs()
         {
             var logs = await _context.ActivityLogs
                 .Include(l => l.User)
                 .OrderByDescending(l => l.CreatedAt)
-                .Take(200) // limit to avoid overload
-                .ToListAsync();
+                .Take(100)
+                .Select(l => new {
+                    l.LogId,
+                    l.UserID,
+                    UserName = l.User.Name,
+                    RoleName = l.User.Role.RoleName,
+                    l.ActivityType,
+                    l.EntityType,
+                    l.EntityId,
+                    l.Description,
+                    l.CreatedAt
+                }).ToListAsync();
 
-            var result = logs.Select(l => new
-            {
-                l.LogId,
-                l.UserID,
-                UserName = l.User.Name,
-                l.ActivityType,
-                l.EntityType,
-                l.EntityId,
-                l.OldValues,
-                l.NewValues,
-                l.CreatedAt
-            });
-
-            return Ok(result);
+            return Ok(logs);
         }
 
-        // GET: api/AuditLog/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<object>> GetAuditLog(int id)
-        {
-            var log = await _context.ActivityLogs
-                .Include(l => l.User)
-                .FirstOrDefaultAsync(l => l.LogId == id);
-
-            if (log == null) return NotFound();
-
-            return Ok(new
-            {
-                log.LogId,
-                log.UserID,
-                UserName = log.User.Name,
-                log.ActivityType,
-                log.EntityType,
-                log.EntityId,
-                log.OldValues,
-                log.NewValues,
-                log.CreatedAt
-            });
-        }
-
-        // GET: api/AuditLog/by-user/3
-        [HttpGet("by-user/{userId}")]
-        public async Task<ActionResult<IEnumerable<object>>> GetAuditLogsByUser(int userId)
-        {
-            var logs = await _context.ActivityLogs
-                .Include(l => l.User)
-                .Where(l => l.UserID == userId)
-                .OrderByDescending(l => l.CreatedAt)
-                .ToListAsync();
-
-            var result = logs.Select(l => new
-            {
-                l.LogId,
-                l.UserID,
-                UserName = l.User.Name,
-                l.ActivityType,
-                l.EntityType,
-                l.EntityId,
-                l.OldValues,
-                l.NewValues,
-                l.CreatedAt
-            });
-
-            return Ok(result);
-        }
     }
 }
