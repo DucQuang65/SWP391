@@ -29,6 +29,7 @@ CREATE TABLE Users (
     District NVARCHAR(50), -- AES encrypted
     Ward NVARCHAR(255),   -- AES encrypted
     Address NVARCHAR(255), -- AES encrypted
+	Distance DOUBLE, -- Distance: user address-hospital
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
 	Weight FLOAT, -- Weight in kg
@@ -217,16 +218,6 @@ CREATE TABLE BloodDonationHistory (
     Quantity INT NOT NULL CHECK (Quantity > 0),
 	IsSuccess BIT DEFAULT 1,
     Notes NVARCHAR(255),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
-
--- UserLocations table: Stores user locations
-CREATE TABLE UserLocations (
-    LocationID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL,
-    Latitude FLOAT NOT NULL,
-    Longitude FLOAT NOT NULL,
-    UpdatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
