@@ -199,7 +199,7 @@ CREATE TABLE BloodRequestHistory (
     HistoryID INT PRIMARY KEY IDENTITY(1,1),
     RequestID INT NOT NULL,
     UserID INT NOT NULL, -- Staff-Doctor or Staff-BloodManager
-    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho, 5: Rejected
+    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4-- Nhập kho
     Notes NVARCHAR(255),
     TimeStamp DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID),
@@ -235,7 +235,7 @@ CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
     AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
-    Status TINYINT DEFAULT 0, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--  Nhập kho 5: Rejected
+    Status TINYINT DEFAULT 0, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--Nhập kho
     Notes NVARCHAR(255),
 	TimeSlot NVARCHAR(50),
     CreatedAt DATETIME DEFAULT GETDATE(),
