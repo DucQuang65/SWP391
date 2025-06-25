@@ -86,6 +86,7 @@ namespace Hien_mau
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+
             })
             .AddCookie()
             .AddGoogle(options =>
@@ -105,8 +106,9 @@ namespace Hien_mau
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                    System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    //IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                    //System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    IssuerSigningKey = GetIssuerSigningKey(builder.Configuration)
                 };
             });
 
@@ -137,6 +139,15 @@ namespace Hien_mau
             app.MapControllers();
 
             app.Run();
-        }        
+        }
+        private static SecurityKey GetIssuerSigningKey(IConfiguration configuration)
+        {
+            var jwtKey = configuration["Jwt:Key"];
+            if (string.IsNullOrEmpty(jwtKey))
+            {
+                throw new InvalidOperationException("Jwt:Key is missing in configuration.");
+            }
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+        }
     }
 }

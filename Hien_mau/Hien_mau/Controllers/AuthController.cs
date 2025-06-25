@@ -58,6 +58,8 @@ namespace Hien_mau.Controllers
             {
                 RedirectUri = "/api/Auth/google-callback"
             };
+            //var redirectUrl = Url.Action(nameof(GoogleResponse), "Auth", null, Request.Scheme);
+            //var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
