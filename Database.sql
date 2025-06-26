@@ -42,6 +42,20 @@ CREATE TABLE Users (
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
 
+CREATE TRIGGER trg_CalculateAge
+ON Users
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE u
+    SET Age = DATEDIFF(YEAR, i.DateOfBirth, GETDATE())
+    FROM Users u
+    INNER JOIN inserted i ON u.UserID = i.UserID
+    WHERE i.DateOfBirth IS NOT NULL;
+END;
+
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
     ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
@@ -253,6 +267,7 @@ CREATE TABLE DonationReminders (
     SentAt DATETIME,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
  CREATE TABLE Patients (
  PatientID INT PRIMARY KEY IDENTITY(1,1),
  FullName NVARCHAR(50),
@@ -263,3 +278,4 @@ CREATE TABLE DonationReminders (
  Address NVARCHAR(255),
  Email NVARCHAR(255),
  );
+ GO
