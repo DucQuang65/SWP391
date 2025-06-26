@@ -15,8 +15,8 @@ CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
     --FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
 	
-    Email NVARCHAR(MAX), -- AES encrypted
-    Password NVARCHAR(MAX), -- Hash encrypted
+    Email NVARCHAR(255), -- AES encrypted
+    Password NVARCHAR(255), -- Hash encrypted
     Phone NVARCHAR(11), -- AES encrypted
 
     IDCardType NVARCHAR(50),-- AES encrypted
@@ -29,13 +29,13 @@ CREATE TABLE Users (
     District NVARCHAR(50), -- AES encrypted
     Ward NVARCHAR(255),   -- AES encrypted
     Address NVARCHAR(255), -- AES encrypted
-	Distance DOUBLE, -- Distance: user address-hospital
+	Distance FLOAT, -- Distance: user address-hospital
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
 	Weight FLOAT, -- Weight in kg
     Height FLOAT, -- Height in cm
 
-    Status TINYINT NOT NULL, -- 0: inactive, 1: active
+    Status TINYINT DEFAULT 1, -- 0: inactive, 1: active
     RoleID INT NOT NULL,
     Department NVARCHAR(50), -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
@@ -127,7 +127,6 @@ CREATE TABLE BloodInventory (
     ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
     ExpirationDate DATETIME -- Expiration date
 );
-GO
 
 -- Create trigger in a separate batch
 CREATE TRIGGER trg_SetExpirationDate
@@ -149,7 +148,6 @@ BEGIN
     INNER JOIN inserted i ON bi.InventoryID = i.InventoryID
     WHERE i.ReceivedDate IS NOT NULL;
 END;
-GO
 
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistory (
@@ -169,7 +167,6 @@ CREATE TABLE BloodInventoryHistory (
     ExpirationDate DATETIME, -- Expiration date
 	FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
 );
-GO
 
 -- BloodRequests table: Stores blood requests
 CREATE TABLE BloodRequests (
@@ -229,6 +226,7 @@ CREATE TABLE Appointments (
     Status TINYINT DEFAULT 0, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--Nhập kho
     Notes NVARCHAR(255),
 	TimeSlot NVARCHAR(50),
+	Cancel BIT DEFAULT 0,
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
@@ -255,3 +253,13 @@ CREATE TABLE DonationReminders (
     SentAt DATETIME,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+ CREATE TABLE Patients (
+ PatientID INT PRIMARY KEY IDENTITY(1,1),
+ FullName NVARCHAR(50),
+ Gender NVARCHAR(10),
+ DateOfBirth DATETIME,
+ Age INT,
+ Phone NVARCHAR(11),
+ Address NVARCHAR(255),
+ Email NVARCHAR(255),
+ );

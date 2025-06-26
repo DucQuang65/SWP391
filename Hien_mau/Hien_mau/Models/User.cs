@@ -35,17 +35,19 @@ public partial class User
 
     public string? Address { get; set; }
 
+    public float? Distance { get; set; }
+
     public string? BloodGroup { get; set; }
 
     public string? RhType { get; set; }
 
+    public float? Weight { get; set; }
+
+    public float? Height { get; set; }
+
     public byte Status { get; set; }
 
     public int RoleId { get; set; }
-
-    public float? Weight { get; set; } 
-
-    public float? Height { get; set; } 
 
     public string? Department { get; set; }
 
@@ -70,7 +72,6 @@ public partial class User
 
     public virtual Role Role { get; set; } = null!;
 
-    public virtual ICollection<UserLocation> UserLocations { get; set; } = new List<UserLocation>();
     public ICollection<BloodInventoryHistory> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistory>();
 
 

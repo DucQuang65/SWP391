@@ -1031,52 +1031,52 @@ GO
 INSERT INTO BloodDonationHistory (UserID, DonationDate, BloodGroup, RhType, ComponentType, Quantity, IsSuccess, Notes)
 VALUES
     -- A+ (UserID: 1, Vinh)
-    (1, '2025-06-23 08:00:00', 'A', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
-    (1, '2025-06-24 09:00:00', 'A', 'Rh+', 'Plasma', 1, 1, 'Voluntary donation'),
-    (1, '2025-06-25 10:00:00', 'A', 'Rh+', 'Platelets', 1, 1, 'For cancer patient'),
-    (1, '2025-06-26 11:00:00', 'A', 'Rh+', 'RedCells', 1, 1, 'Emergency support'),
+    (1, '2025-06-23 08:00:00', 'A', 'Rh+', N'Toàn phần', 1, 1, N'Hiến máu định kỳ'),
+    (1, '2025-06-24 09:00:00', 'A', 'Rh+', N'Huyết tương', 1, 1, N'Hiến máu tình nguyện'),
+    (1, '2025-06-25 10:00:00', 'A', 'Rh+', N'Tiểu cầu', 1, 1, N'Cho bệnh nhân ung thư'),
+    (1, '2025-06-26 11:00:00', 'A', 'Rh+', N'Hồng cầu', 1, 1, N'Cho cấp cứu'),
 
     -- A- (UserID: 5, Hieu)
-    (5, '2025-06-23 08:30:00', 'A', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
-    (5, '2025-06-24 09:30:00', 'A', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
-    (5, '2025-06-25 10:30:00', 'A', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
-    (5, '2025-06-26 11:30:00', 'A', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+    (5, '2025-06-23 08:30:00', 'A', 'Rh-', N'Toàn phần', 1, 1, N'Hiến máu hiếm'),
+    (5, '2025-06-24 09:30:00', 'A', 'Rh-', N'Huyết tương', 1, 1, N'Cho cấp cứu'),
+    (5, '2025-06-25 10:30:00', 'A', 'Rh-', N'Tiểu cầu', 1, 1, N'Hiến máu định kỳ'),
+    (5, '2025-06-26 11:30:00', 'A', 'Rh-', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- B+ (UserID: 7, Nhi)
-    (7, '2025-06-23 09:00:00', 'B', 'Rh+', 'Whole', 1, 1, 'Community event'),
-    (7, '2025-06-24 10:00:00', 'B', 'Rh+', 'Plasma', 1, 1, 'Routine donation'),
-    (7, '2025-06-25 11:00:00', 'B', 'Rh+', 'Platelets', 1, 1, 'For surgery'),
-    (7, '2025-06-26 12:00:00', 'B', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+    (7, '2025-06-23 09:00:00', 'B', 'Rh+', N'Toàn phần', 1, 1, N'Cho sự kiện cộng đồng'),
+    (7, '2025-06-24 10:00:00', 'B', 'Rh+', N'Huyết tương', 1, 1, N'Hiến máu định kỳ'),
+    (7, '2025-06-25 11:00:00', 'B', 'Rh+', N'Tiểu cầu', 1, 1, N'Cho phẫu thuật'),
+    (7, '2025-06-26 12:00:00', 'B', 'Rh+', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- B- (UserID: 18, Vương)
-    (18, '2025-06-23 09:30:00', 'B', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
-    (18, '2025-06-24 10:30:00', 'B', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
-    (18, '2025-06-25 11:30:00', 'B', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
-    (18, '2025-06-26 12:30:00', 'B', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+    (18, '2025-06-23 09:30:00', 'B', 'Rh-', N'Toàn phần', 1, 1, N'Hiến máu hiếm'),
+    (18, '2025-06-24 10:30:00', 'B', 'Rh-', N'Huyết tương', 1, 1, N'Cho cấp cứu'),
+    (18, '2025-06-25 11:30:00', 'B', 'Rh-', N'Tiểu cầu', 1, 1, N'Hiến máu định kỳ'),
+    (18, '2025-06-26 12:30:00', 'B', 'Rh-', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- AB+ (UserID: 8, Hoa)
-    (8, '2025-06-23 10:00:00', 'AB', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
-    (8, '2025-06-24 11:00:00', 'AB', 'Rh+', 'Plasma', 1, 1, 'Universal plasma donor'),
-    (8, '2025-06-25 12:00:00', 'AB', 'Rh+', 'Platelets', 1, 1, 'For cancer patient'),
-    (8, '2025-06-26 13:00:00', 'AB', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+    (8, '2025-06-23 10:00:00', 'AB', 'Rh+', N'Toàn phần', 1, 1, N'Hiến máu định kỳ'),
+    (8, '2025-06-24 11:00:00', 'AB', 'Rh+', N'Huyết tương', 1, 1, N'Cho kho máu thế giới'),
+    (8, '2025-06-25 12:00:00', 'AB', 'Rh+', N'Tiểu cầu', 1, 1, N'Cho bệnh nhân ung thư'),
+    (8, '2025-06-26 13:00:00', 'AB', 'Rh+', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- AB- (UserID: 12, Nhu)
-    (12, '2025-06-23 10:30:00', 'AB', 'Rh-', 'Whole', 1, 1, 'Rare blood donation'),
-    (12, '2025-06-24 11:30:00', 'AB', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
-    (12, '2025-06-25 12:30:00', 'AB', 'Rh-', 'Platelets', 1, 1, 'Routine donation'),
-    (12, '2025-06-26 13:30:00', 'AB', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation'),
+    (12, '2025-06-23 10:30:00', 'AB', 'Rh-', N'Toàn phần', 1, 1, N'Hiến máu hiếm'),
+    (12, '2025-06-24 11:30:00', 'AB', 'Rh-', N'Huyết tương', 1, 1, N'Cho cấp cứu'),
+    (12, '2025-06-25 12:30:00', 'AB', 'Rh-', N'Tiểu cầu', 1, 1, N'Hiến máu định kỳ'),
+    (12, '2025-06-26 13:30:00', 'AB', 'Rh-', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- O+ (UserID: 2, Duc)
-    (2, '2025-06-23 11:00:00', 'O', 'Rh+', 'Whole', 1, 1, 'Routine donation'),
-    (2, '2025-06-24 12:00:00', 'O', 'Rh+', 'Plasma', 1, 1, 'Community event'),
-    (2, '2025-06-25 13:00:00', 'O', 'Rh+', 'Platelets', 1, 1, 'For surgery'),
-    (2, '2025-06-26 14:00:00', 'O', 'Rh+', 'RedCells', 1, 1, 'Voluntary donation'),
+    (2, '2025-06-23 11:00:00', 'O', 'Rh+', N'Toàn phần', 1, 1, N'Hiến máu định kỳ'),
+    (2, '2025-06-24 12:00:00', 'O', 'Rh+', N'Huyết tương', 1, 1, N'Cho sự kiện cộng đồng'),
+    (2, '2025-06-25 13:00:00', 'O', 'Rh+', N'Tiểu cầu', 1, 1,  N'Cho phẫu thuật'),
+    (2, '2025-06-26 14:00:00', 'O', 'Rh+', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện'),
 
     -- O- (UserID: 4, Kien)
-    (4, '2025-06-23 11:30:00', 'O', 'Rh-', 'Whole', 1, 1, 'Universal donor'),
-    (4, '2025-06-24 12:30:00', 'O', 'Rh-', 'Plasma', 1, 1, 'Emergency support'),
-    (4, '2025-06-25 13:30:00', 'O', 'Rh-', 'Platelets', 1, 1, 'Rare blood donation'),
-    (4, '2025-06-26 14:30:00', 'O', 'Rh-', 'RedCells', 1, 1, 'Voluntary donation');
+    (4, '2025-06-23 11:30:00', 'O', 'Rh-', N'Toàn phần', 1, 1, N'Cho quốc tế'),
+    (4, '2025-06-24 12:30:00', 'O', 'Rh-', N'Huyết tương', 1, 1, N'Cho cấp cứu'),
+    (4, '2025-06-25 13:30:00', 'O', 'Rh-', N'Tiểu cầu', 1, 1, N'Hiến máu hiếm'),
+    (4, '2025-06-26 14:30:00', 'O', 'Rh-', N'Hồng cầu', 1, 1, N'Hiến máu tình nguyện');
 GO
 
 -- Insert data into Notifications table

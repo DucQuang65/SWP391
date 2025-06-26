@@ -48,8 +48,6 @@ public partial class Hien_mauContext : DbContext
     public virtual DbSet<Tag> Tags { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    public virtual DbSet<UserLocation> UserLocations { get; set; }
    
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -358,50 +356,32 @@ public partial class Hien_mauContext : DbContext
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC841FE99C");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.Address).HasMaxLength(255);
-            entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            entity.Property(e => e.City).HasMaxLength(255);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
-            entity.Property(e => e.Department).HasMaxLength(50);
-            entity.Property(e => e.District).HasMaxLength(50);
-            entity.Property(e => e.Gender).HasMaxLength(10);
-            entity.Property(e => e.Idcard)
-                .HasMaxLength(12)
-                .HasColumnName("IDCard");
-            entity.Property(e => e.IdcardType)
-                .HasMaxLength(50)
-                .HasColumnName("IDCardType");
-            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(11);
-            entity.Property(e => e.RhType).HasMaxLength(3);
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.IdcardType).HasMaxLength(50).HasColumnName("IDCardType");
+            entity.Property(e => e.Idcard).HasMaxLength(12).HasColumnName("IDCard");
+            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
+            entity.Property(e => e.Age).HasColumnName("Age");
+            entity.Property(e => e.Gender).HasMaxLength(10);
+            entity.Property(e => e.City).HasMaxLength(255);
+            entity.Property(e => e.District).HasMaxLength(255);
             entity.Property(e => e.Ward).HasMaxLength(255);
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.Distance).HasColumnName("Distance");
+            entity.Property(e => e.BloodGroup).HasMaxLength(2);
+            entity.Property(e => e.RhType).HasMaxLength(3);
             entity.Property(e => e.Weight).HasColumnType("float"); 
-            entity.Property(e => e.Height).HasColumnType("float"); 
-
+            entity.Property(e => e.Height).HasColumnType("float");
+            entity.Property(e => e.Status).HasDefaultValue((byte)1);
+            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.Department).HasMaxLength(50);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Users__RoleID__60A75C0F");
-        });
-
-        modelBuilder.Entity<UserLocation>(entity =>
-        {
-            entity.HasKey(e => e.LocationId).HasName("PK__UserLoca__E7FEA4775613203D");
-
-            entity.Property(e => e.LocationId).HasColumnName("LocationID");
-            entity.Property(e => e.UpdatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.User).WithMany(p => p.UserLocations)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UserLocat__UserI__14270015");
         });
 
         modelBuilder.Entity<BloodInventoryHistory>(entity =>

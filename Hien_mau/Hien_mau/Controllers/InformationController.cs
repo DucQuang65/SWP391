@@ -39,9 +39,11 @@ namespace Hien_mau.Controllers
                 District = u.District,
                 Ward = u.Ward,
                 Address = u.Address,
+                Distance = u.Distance,
                 BloodGroup = u.BloodGroup,
                 RhType = u.RhType,
-                Status = u.Status,
+                Weight = u.Weight,
+                Height = u.Height,
                 RoleID = u.RoleId,
                 Department = u.Department,
                 CreatedAt = u.CreatedAt
@@ -69,8 +71,11 @@ namespace Hien_mau.Controllers
                 District = u.District,
                 Ward = u.Ward,
                 Address = u.Address,
+                Distance = u.Distance,
                 BloodGroup = u.BloodGroup,
                 RhType = u.RhType,
+                Weight = u.Weight,
+                Height = u.Height,
                 Status = u.Status,
                 RoleID = u.RoleId,
                 Department = u.Department,
@@ -156,8 +161,11 @@ namespace Hien_mau.Controllers
             user.District = informationDto.District;
             user.Ward = informationDto.Ward;
             user.Address = informationDto.Address;
+            user.Distance = informationDto.Distance;
             user.BloodGroup = informationDto.BloodGroup;
             user.RhType = informationDto.RhType;
+            user.Weight = informationDto.Weight;
+            user.Height = informationDto.Height;
             user.Status = informationDto.Status;
             user.RoleId = informationDto.RoleID;
             user.Department = informationDto.Department;
@@ -174,8 +182,11 @@ namespace Hien_mau.Controllers
             var User = await _context.Users.FindAsync(id);
             if (User == null)
                 return NotFound();
-
-            _context.Users.Remove(User);
+            var updateUser = new User
+            {
+                Status = 0 // Set status to 0 for soft delete
+            };
+            _context.Users.Add(updateUser);
             await _context.SaveChangesAsync();
 
             return Ok();
