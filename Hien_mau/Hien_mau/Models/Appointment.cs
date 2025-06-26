@@ -16,6 +16,7 @@ public partial class Appointment
     public string TimeSlot { get; set; }
 
     public string? Notes { get; set; }
+    public DateTime? LastDonationDate { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 

@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Hien_mau.Data;
 using Hien_mau.Models;
+using Hien_mau.Dto;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Hien_mau.Dto;
 
 namespace Hien_mau.Controllers;
 
@@ -19,7 +20,7 @@ public class BloodDonationController : ControllerBase
         _context = context;
     }
 
-  
+    // GET: api/users/{userId}
     [HttpGet("users/{userId}")]
     public async Task<IActionResult> GetUser(int userId)
     {
@@ -33,10 +34,10 @@ public class BloodDonationController : ControllerBase
                 u.DateOfBirth,
                 u.Gender,
                 u.Address,
-                u.Weight,
-                u.Height,
                 u.BloodGroup,
-                u.RhType
+                u.RhType,
+                u.Weight,
+                u.Height
             })
             .FirstOrDefaultAsync();
 
@@ -48,66 +49,61 @@ public class BloodDonationController : ControllerBase
         return Ok(user);
     }
 
-
+    // GET: api/blood-donation-submissions
     [HttpGet("blood-donation-submissions")]
     public async Task<IActionResult> GetAllSubmissions()
     {
         var submissions = await _context.Appointments
-            .Join(_context.Users,
-                a => a.UserId,
-                u => u.UserId,
-                (a, u) => new
-                {
-                    AppointmentId = a.AppointmentId,
-                    UserId = a.UserId,
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    DateOfBirth = u.DateOfBirth,
-                    Gender = u.Gender,
-                    Address = u.Address,
-                    Weight = u.Weight,
-                    Height = u.Height,
-                    BloodGroup = u.BloodGroup,
-                    RhType = u.RhType,
-                    RequestedDonationDate = a.AppointmentDate,
-                    TimeSlot = a.TimeSlot,
-                    Notes = a.Notes,
-                    CreatedAt = a.CreatedAt
-                })
+            .Include(a => a.User)
+            .Select(a => new AppointmentDetailDto
+            {
+                Name = a.User.Name,
+                Email = a.User.Email,
+                Phone = a.User.Phone,
+                BloodGroup = a.User.BloodGroup,
+                Address = a.User.Address,
+                DateOfBirth = a.User.DateOfBirth,
+                Gender = a.User.Gender,
+                RhType = a.User.RhType,
+                Weight = (float)a.User.Weight,
+                Height = (float)a.User.Height,
+                AppointmentId = a.AppointmentId,
+                UserId = a.UserId,
+                CreatedAt = a.CreatedAt,
+                TimeSlot = a.TimeSlot,
+                LastDonationDate = a.LastDonationDate
+            })
             .ToListAsync();
 
         return Ok(submissions);
     }
 
-
-    [HttpGet("blood-donation-submissions/{AppointmentId}")]
-    public async Task<IActionResult> GetSubmissionById(int AppointmentId)
+    // GET: api/blood-donation-submissions/{appointmentId}
+    [HttpGet("blood-donation-submissions/{appointmentId}")]
+    public async Task<IActionResult> GetSubmissionById(int appointmentId)
     {
         var submission = await _context.Appointments
-            .Join(_context.Users,
-                a => a.UserId,
-                u => u.UserId,
-                (a, u) => new
-                {
-                    AppointmentId = a.AppointmentId,
-                    UserId = a.UserId,
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    DateOfBirth = u.DateOfBirth,
-                    Gender = u.Gender,
-                    Address = u.Address,
-                    Weight = u.Weight,
-                    Height = u.Height,
-                    BloodGroup = u.BloodGroup,
-                    RhType = u.RhType,
-                    RequestedDonationDate = a.AppointmentDate,
-                    TimeSlot = a.TimeSlot,
-                    Notes = a.Notes,
-                    CreatedAt = a.CreatedAt
-                })
-            .FirstOrDefaultAsync(a => a.AppointmentId == AppointmentId);
+            .Include(a => a.User)
+            .Where(a => a.AppointmentId == appointmentId)
+            .Select(a => new AppointmentDetailDto
+            {
+                Name = a.User.Name,
+                Email = a.User.Email,
+                Phone = a.User.Phone,
+                BloodGroup = a.User.BloodGroup,
+                Address = a.User.Address,
+                DateOfBirth = a.User.DateOfBirth,
+                Gender = a.User.Gender,
+                RhType = a.User.RhType,
+                Weight = (float)a.User.Weight,
+                Height = (float)a.User.Height,
+                AppointmentId = a.AppointmentId,
+                UserId = a.UserId,
+                CreatedAt = a.CreatedAt,
+                TimeSlot = a.TimeSlot,
+                LastDonationDate = a.LastDonationDate
+            })
+            .FirstOrDefaultAsync();
 
         if (submission == null)
         {
@@ -117,7 +113,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submission);
     }
 
- 
+    // POST: api/blood-donation-submissions
     [HttpPost("blood-donation-submissions")]
     public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request)
     {
@@ -126,45 +122,60 @@ public class BloodDonationController : ControllerBase
             return BadRequest(new { error = "Invalid data" });
         }
 
-        // Kiểm tra timeSlot hợp lệ
-        if (request.TimeSlot != "Sáng (7:00-12:00)" && request.TimeSlot != "Chiều (13:00-17:00)")
+        // Kiểm tra TimeSlot hợp lệ
+        var validTimeSlots = new[] { "Sáng (7:00-12:00)", "Chiều (13:00-17:00)" };
+        if (!validTimeSlots.Contains(request.TimeSlot))
         {
             return BadRequest(new { error = "Invalid time slot. It must be either 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'." });
         }
 
-        // Cập nhật Weight và Height cho user
+        // Kiểm tra LastDonationDate không được là ngày tương lai
+        if (request.LastDonationDate.HasValue && request.LastDonationDate.Value > DateTime.Now)
+        {
+            return BadRequest(new { error = "LastDonationDate cannot be in the future." });
+        }
+
+        // Kiểm tra user tồn tại
         var user = await _context.Users.FindAsync(request.UserId);
         if (user == null)
         {
             return NotFound(new { error = "User does not exist" });
         }
 
+        // Cập nhật Weight và Height cho User
         user.Weight = request.Weight;
         user.Height = request.Height;
 
-        // Lưu appointment với Notes dựa trên hasDonated
+        // Tạo appointment
         var appointment = new Appointment
         {
             UserId = request.UserId,
             AppointmentDate = request.RequestedDonationDate,
             TimeSlot = request.TimeSlot,
-            Notes = request.HasDonated ? "Đã từng hiến máu" : "Chưa từng hiến máu",
+            LastDonationDate = request.LastDonationDate,
             CreatedAt = DateTime.Now
         };
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
 
-        return Ok(new
+        // Trả về response
+        var response = new
         {
             AppointmentId = appointment.AppointmentId,
-            userId = appointment.UserId,
-            requestedDonationDate = appointment.AppointmentDate,
-            timeSlot = appointment.TimeSlot,
-            createdAt = appointment.CreatedAt
-        });
+            UserId = appointment.UserId,
+            RequestedDonationDate = appointment.AppointmentDate,
+            TimeSlot = appointment.TimeSlot,
+            Weight = user.Weight,
+            Height = user.Height,
+            LastDonationDate = appointment.LastDonationDate,
+            CreatedAt = appointment.CreatedAt
+        };
+
+        return CreatedAtAction(nameof(GetSubmissionById), new { appointmentId = appointment.AppointmentId }, response);
     }
-    // DELETE /api/blood-donation-submissions/{appointmentId}
+
+    // DELETE: api/blood-donation-submissions/{appointmentId}
     [HttpDelete("blood-donation-submissions/{appointmentId}")]
     public async Task<IActionResult> DeleteSubmission(int appointmentId)
     {

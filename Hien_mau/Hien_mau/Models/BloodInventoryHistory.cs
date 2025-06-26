@@ -1,26 +1,50 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hien_mau.Models
 {
     public class BloodInventoryHistory
     {
-
         [Key]
-        public int HistoryId { get; set; }
-        public int? InventoryId { get; set; }
-        public string? BloodGroup { get; set; }
-        public string? RhType { get; set; }
-        public string? ComponentType { get; set; }
-        public string ActionType { get; set; }
+        public int HistoryID { get; set; }
+
+        [Required]
+        public int InventoryID { get; set; }
+
+        [Required]
+        public string BloodGroup { get; set; } = null!;
+
+        [Required]
+        public string RhType { get; set; } = null!;
+
+        [Required]
+        public string ComponentType { get; set; } = null!;
+
+        [Required]
+        public string ActionType { get; set; } = null!;
+
+        [Required]
         public int Quantity { get; set; }
-        public string? Reason { get; set; }
-        public string? Notes { get; set; }
-        [ForeignKey("PerformedByUser")]
+
+
+        [Required]
         public int PerformedBy { get; set; }
+
+        [Required]
         public DateTime PerformedAt { get; set; }
-        [ForeignKey("InventoryId")]
-        public BloodInventory? Inventory { get; set; }
-        public User PerformedByUser { get; set; }
+        public string Notes { get; set; }
+
+        public string? BagType { get; set; }
+
+        public DateTime? ReceivedDate { get; set; }
+
+        public DateTime? ExpirationDate { get; set; }
+
+        [ForeignKey("InventoryID")]
+        public BloodInventory BloodInventory { get; set; } = null!;
+
+        [ForeignKey("PerformedBy")]
+        public User PerformedByUser { get; set; } = null!;
     }
 }

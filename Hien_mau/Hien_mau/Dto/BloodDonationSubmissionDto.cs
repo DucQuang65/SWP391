@@ -22,4 +22,5 @@ public class BloodDonationSubmissionDto
 
     [Required]
     public bool HasDonated { get; set; }
+    public DateTime? LastDonationDate { get; set; }
 }
