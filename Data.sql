@@ -1089,12 +1089,6 @@ VALUES
     (5, 'Có 1 bài viết mới', 'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
 GO
 
-INSERT INTO UserLocations (UserID, Latitude, Longitude, UpdatedAt)
-VALUES
-    (1, 10.776, 106.701, '2025-06-23 08:00:00'),
-    (2, 10.780, 106.690, '2025-06-23 08:00:00');
-GO
-
 INSERT INTO ActivityLog (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
 VALUES
 -- Logs cho BloodArticles của UserID 2 (Doctor)
