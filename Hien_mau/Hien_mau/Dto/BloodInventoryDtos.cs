@@ -2,17 +2,19 @@
 {
     public class CheckInOutRequestDto
     {
+        public int InventoryID { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;
         public string ComponentType { get; set; } = null!;
-        public string BagType { get; set; } = null!; // 250ml, 350ml, 450ml
-        public int Quantity { get; set; } // túi
+        public string BagType { get; set; } = null!; 
+        public int Quantity { get; set; } 
         public string? Notes { get; set; }
         public int PerformedBy { get; set; }
     }
 
     public class BloodInventoryDto
     {
+        public int InventoryID { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;
         public string ComponentType { get; set; } = null!;
@@ -26,6 +28,8 @@
 
     public class BloodHistoryDto
     {
+
+        public int InventoryID { get; set; }
         public DateTime PerformedAt { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;

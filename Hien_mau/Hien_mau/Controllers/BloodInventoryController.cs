@@ -27,15 +27,16 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .Select(i => new BloodInventoryDto
                     {
+                        InventoryID = i.InventoryID,
                         BloodGroup = i.BloodGroup,
                         RhType = i.RhType,
                         ComponentType = i.ComponentType,
                         BagType = i.BagType,
-                        Quantity = i.Quantity, 
-                        Status = i.Quantity <= 10 ? (byte)0 : 
-                                 i.Quantity <= 30 ? (byte)1 : 
-                                 i.Quantity <= 60 ? (byte)2 : 
-                                 (byte)3, 
+                        Quantity = i.Quantity,
+                        Status = i.Quantity <= 10 ? (byte)0 :
+                                 i.Quantity <= 30 ? (byte)1 :
+                                 i.Quantity <= 60 ? (byte)2 :
+                                 (byte)3,
                         IsRare = i.IsRare ?? false,
                         LastUpdated = i.LastUpdated ?? DateTime.Now,
                         ExpirationDate = i.ExpirationDate
@@ -58,6 +59,7 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .Select(h => new
                     {
+                        h.InventoryID,
                         h.PerformedAt,
                         h.BloodGroup,
                         h.RhType,
@@ -74,12 +76,13 @@ namespace Hien_mau.Controllers
 
                 var userIds = histories.Select(h => h.PerformedBy).Distinct().ToList();
                 var users = await _context.Users
-                    .AsNoTracking()
+.AsNoTracking()
                     .Where(u => userIds.Contains(u.UserId))
                     .ToDictionaryAsync(u => u.UserId, u => u.Name ?? "Unknown");
 
                 var result = histories.Select(h => new BloodHistoryDto
                 {
+                    InventoryID = h.InventoryID ?? 0,
                     PerformedAt = h.PerformedAt,
                     BloodGroup = h.BloodGroup ?? "",
                     RhType = h.RhType ?? "",
@@ -135,7 +138,6 @@ namespace Hien_mau.Controllers
                     "Huyết tương" => receivedDate.AddDays(365),
                     _ => null
                 };
-
                 if (inventory == null)
                 {
                     var newInventory = new BloodInventory
@@ -144,11 +146,11 @@ namespace Hien_mau.Controllers
                         RhType = request.RhType,
                         ComponentType = request.ComponentType,
                         BagType = request.BagType,
-                        Quantity = request.Quantity, 
-                        Status = request.Quantity <= 10 ? (byte)0 : 
-                                 request.Quantity <= 30 ? (byte)1 : 
-                                 request.Quantity <= 60 ? (byte)2 : 
-                                 (byte)3, 
+                        Quantity = request.Quantity,
+                        Status = request.Quantity <= 10 ? (byte)0 :
+                                 request.Quantity <= 30 ? (byte)1 :
+                                 request.Quantity <= 60 ? (byte)2 :
+                                 (byte)3,
                         IsRare = IsRareBloodType(request.BloodGroup, request.RhType),
                         ReceivedDate = receivedDate,
                         LastUpdated = DateTime.Now,
@@ -176,11 +178,11 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         BagType = inventory.BagType,
-                        Quantity = inventory.Quantity + request.Quantity, 
-                        Status = (inventory.Quantity + request.Quantity) <= 10 ? (byte)0 : 
-                                 (inventory.Quantity + request.Quantity) <= 30 ? (byte)1 : 
-                                 (inventory.Quantity + request.Quantity) <= 60 ? (byte)2 : 
-                                 (byte)3, 
+                        Quantity = inventory.Quantity + request.Quantity,
+                        Status = (inventory.Quantity + request.Quantity) <= 10 ? (byte)0 :
+                                 (inventory.Quantity + request.Quantity) <= 30 ? (byte)1 :
+                                 (inventory.Quantity + request.Quantity) <= 60 ? (byte)2 :
+                                 (byte)3,
                         IsRare = inventory.IsRare,
                         ReceivedDate = receivedDate,
                         LastUpdated = DateTime.Now,
@@ -271,12 +273,12 @@ namespace Hien_mau.Controllers
                     RhType = inventory.RhType,
                     ComponentType = inventory.ComponentType,
                     BagType = inventory.BagType,
-                    Quantity = inventory.Quantity - request.Quantity, 
+                    Quantity = inventory.Quantity - request.Quantity,
                     IsRare = inventory.IsRare,
-                    Status = (inventory.Quantity - request.Quantity) <= 10 ? (byte)0 : 
-                             (inventory.Quantity - request.Quantity) <= 30 ? (byte)1 : 
+                    Status = (inventory.Quantity - request.Quantity) <= 10 ? (byte)0 :
+                             (inventory.Quantity - request.Quantity) <= 30 ? (byte)1 :
                              (inventory.Quantity - request.Quantity) <= 60 ? (byte)2 :
-                             (byte)3, 
+                             (byte)3,
                     ReceivedDate = inventory.ReceivedDate,
                     LastUpdated = DateTime.Now,
                     ExpirationDate = expirationDate
@@ -294,7 +296,7 @@ namespace Hien_mau.Controllers
                     RhType = inventory.RhType,
                     ComponentType = inventory.ComponentType,
                     ActionType = "CheckOut",
-                    Quantity = request.Quantity, 
+                    Quantity = request.Quantity,
                     BagType = inventory.BagType,
                     Notes = request.Notes,
                     PerformedBy = request.PerformedBy,
@@ -336,9 +338,9 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         BagType = inventory.BagType,
-                        Quantity = 0, 
+                        Quantity = 0,
                         IsRare = inventory.IsRare,
-                        Status = 0, 
+                        Status = 0,
                         ReceivedDate = inventory.ReceivedDate,
                         LastUpdated = DateTime.Now,
                         ExpirationDate = inventory.ExpirationDate
@@ -353,7 +355,7 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         ActionType = "Hủy",
-                        Quantity = inventory.Quantity, 
+                        Quantity = inventory.Quantity,
                         BagType = inventory.BagType,
                         Notes = "Máu hết hạn tự động hủy",
                         PerformedBy = 1,
@@ -381,9 +383,8 @@ namespace Hien_mau.Controllers
 
         private bool IsValidRhType(string rhType) =>
             new[] { "Rh+", "Rh-" }.Contains(rhType);
-
         private bool IsValidComponentType(string componentType) =>
-            new[] { "Toàn phần", "Hồng cầu", "Huyết tương", "Tiểu cầu" }.Contains(componentType);
+                        new[] { "Toàn phần", "Hồng cầu", "Huyết tương", "Tiểu cầu" }.Contains(componentType);
 
         private bool IsValidBagType(string bagType) =>
             new[] { "250ml", "350ml", "450ml" }.Contains(bagType);

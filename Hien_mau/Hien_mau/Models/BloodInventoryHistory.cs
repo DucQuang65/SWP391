@@ -9,8 +9,8 @@ namespace Hien_mau.Models
         [Key]
         public int HistoryID { get; set; }
 
-        [Required]
-        public int InventoryID { get; set; }
+       
+        public int? InventoryID { get; set; }
 
         [Required]
         public string BloodGroup { get; set; } = null!;
