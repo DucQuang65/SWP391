@@ -794,26 +794,6 @@ VALUES
     (6, 19), (6, 21), (6, 24), (6, 26), (6, 27), (6, 28), (6, 30);
 GO
 
--- Insert data into BloodRequests table
-INSERT INTO BloodRequests (UserID, BloodGroup, RhType, Quantity, UrgencyLevel, NeededTime, Reason, Status, CreatedTime)
-VALUES
-    (1, 'A', 'Rh+', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Surgery', 0, GETDATE()), -- High = 2
-    (2, 'O', 'Rh-', 1, 1, DATEADD(DAY, 2, GETDATE()), 'Accident', 0, GETDATE()), -- Medium = 1
-    (3, 'B', 'Rh+', 3, 0, DATEADD(DAY, 3, GETDATE()), 'Cancer treatment', 1, GETDATE()), -- Low = 0
-    (4, 'AB', 'Rh-', 2, 2, DATEADD(DAY, 1, GETDATE()), 'Emergency', 2, GETDATE()),
-    (5, 'O', 'Rh+', 1, 1, DATEADD(DAY, 2, GETDATE()), 'Anemia', 0, GETDATE());
-GO
-
--- Insert data into BloodRequestHistory table
-INSERT INTO BloodRequestHistory (UserID, RequestID, Status, TimeStamp)
-VALUES
-    (1, 1, 0, GETDATE()), -- Requested
-    (2, 2, 0, GETDATE()),
-    (3, 3, 1, GETDATE()), -- Accepted = Verified
-    (4, 4, 4, GETDATE()), -- Completed
-    (5, 5, 0, GETDATE());
-GO
-
 -- Insert data into BloodInventory
 INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
 VALUES
