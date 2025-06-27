@@ -166,16 +166,24 @@ CREATE TABLE BloodInventoryHistory (
 CREATE TABLE BloodRequests (
     RequestID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Requester (Member or Staff-Doctor)
+	PatientID INT,
+	PatientName NVARCHAR(100),
+	Age INT,
+	Gender NVARCHAR(10),
+    Relationship NVARCHAR(20),
+	FacilityName NVARCHAR(255),
+	DoctorID INT,
+	DoctorName NVARCHAR(100), -- external doctor
+	DoctorPhone NVARCHAR(11),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
-    UrgencyLevel TINYINT NOT NULL, -- 0: Normal, 1: Urgent, 2: Critical
-    NeededTime DATETIME NOT NULL,
     Reason NVARCHAR(1000),
     IsAutoApproved BIT DEFAULT 0, -- 1 for Staff-Doctor requests
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
     CreatedTime DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+	FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
 );
 
 -- RequestComponents table: Stores blood components for requests
