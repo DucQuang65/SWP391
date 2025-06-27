@@ -142,26 +142,6 @@ CREATE TABLE BloodInventory (
     ExpirationDate DATETIME -- Expiration date
 );
 
--- Create trigger in a separate batch
-CREATE TRIGGER trg_SetExpirationDate
-ON BloodInventory
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    
-    UPDATE bi
-    SET ExpirationDate = 
-        CASE 
-            WHEN i.ComponentType = 'Toàn phần' THEN DATEADD(DAY, 35, i.ReceivedDate)
-            WHEN i.ComponentType = 'Hồng cầu' THEN DATEADD(DAY, 42, i.ReceivedDate)
-            WHEN i.ComponentType = 'Tiểu cầu' THEN DATEADD(DAY, 5, i.ReceivedDate)
-            WHEN i.ComponentType = 'Huyết tương' THEN DATEADD(DAY, 365, i.ReceivedDate)
-        END
-    FROM BloodInventory bi
-    INNER JOIN inserted i ON bi.InventoryID = i.InventoryID
-    WHERE i.ReceivedDate IS NOT NULL;
-END;
 
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistory (
