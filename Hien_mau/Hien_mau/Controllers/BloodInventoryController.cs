@@ -21,21 +21,32 @@ namespace Hien_mau.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBloodInventories()
         {
-            var inventories = await _context.BloodInventory
-                .AsNoTracking()
-                .Select(i => new BloodInventoryDto
-                {
-                    BloodGroup = i.BloodGroup,
-                    RhType = i.RhType,
-                    ComponentType = i.ComponentType,
-                    Quantity = i.Quantity,
-                    Status = i.Status,
-                    IsRare = i.IsRare ?? false,
-                    LastUpdated = i.LastUpdated ?? DateTime.Now,
-                    ExpirationDate = i.ExpirationDate
-                })
-                .ToListAsync();
-            return Ok(inventories);
+            try
+            {
+                var inventories = await _context.BloodInventory
+                    .AsNoTracking()
+                    .Select(i => new BloodInventoryDto
+                    {
+                        BloodGroup = i.BloodGroup,
+                        RhType = i.RhType,
+                        ComponentType = i.ComponentType,
+                        BagType = i.BagType,
+                        Quantity = i.Quantity, 
+                        Status = i.Quantity <= 10 ? (byte)0 : 
+                                 i.Quantity <= 30 ? (byte)1 : 
+                                 i.Quantity <= 60 ? (byte)2 : 
+                                 (byte)3, 
+                        IsRare = i.IsRare ?? false,
+                        LastUpdated = i.LastUpdated ?? DateTime.Now,
+                        ExpirationDate = i.ExpirationDate
+                    })
+                    .ToListAsync();
+                return Ok(inventories);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         [HttpGet("history/all")]
@@ -113,11 +124,9 @@ namespace Hien_mau.Controllers
                                             i.ComponentType == request.ComponentType &&
                                             i.BagType == request.BagType);
 
-                int mlQuantity = request.Quantity * GetBagSize(request.BagType);
                 var receivedDate = DateTime.Now;
                 int? inventoryId;
 
-                // Tính ExpirationDate
                 DateTime? expirationDate = request.ComponentType switch
                 {
                     "Toàn phần" => receivedDate.AddDays(35),
@@ -135,8 +144,11 @@ namespace Hien_mau.Controllers
                         RhType = request.RhType,
                         ComponentType = request.ComponentType,
                         BagType = request.BagType,
-                        Quantity = mlQuantity,
-                        Status = UpdateStatus(mlQuantity),
+                        Quantity = request.Quantity, 
+                        Status = request.Quantity <= 10 ? (byte)0 : 
+                                 request.Quantity <= 30 ? (byte)1 : 
+                                 request.Quantity <= 60 ? (byte)2 : 
+                                 (byte)3, 
                         IsRare = IsRareBloodType(request.BloodGroup, request.RhType),
                         ReceivedDate = receivedDate,
                         LastUpdated = DateTime.Now,
@@ -164,8 +176,11 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         BagType = inventory.BagType,
-                        Quantity = inventory.Quantity + mlQuantity,
-                        Status = UpdateStatus(inventory.Quantity + mlQuantity),
+                        Quantity = inventory.Quantity + request.Quantity, 
+                        Status = (inventory.Quantity + request.Quantity) <= 10 ? (byte)0 : 
+                                 (inventory.Quantity + request.Quantity) <= 30 ? (byte)1 : 
+                                 (inventory.Quantity + request.Quantity) <= 60 ? (byte)2 : 
+                                 (byte)3, 
                         IsRare = inventory.IsRare,
                         ReceivedDate = receivedDate,
                         LastUpdated = DateTime.Now,
@@ -184,7 +199,7 @@ namespace Hien_mau.Controllers
                     BloodGroup = request.BloodGroup,
                     RhType = request.RhType,
                     ComponentType = request.ComponentType,
-                    ActionType = "Xuất",
+                    ActionType = "CheckIn",
                     Quantity = request.Quantity,
                     BagType = request.BagType,
                     Notes = request.Notes,
@@ -237,11 +252,9 @@ namespace Hien_mau.Controllers
                 if (inventory.ExpirationDate < DateTime.Now)
                     return BadRequest("Máu đã hết hạn sử dụng.");
 
-                int mlQuantity = request.Quantity * GetBagSize(request.BagType);
-                if (inventory.Quantity < mlQuantity)
+                if (inventory.Quantity < request.Quantity)
                     return BadRequest("Số lượng trong kho không đủ.");
 
-                // Tính lại ExpirationDate
                 DateTime? expirationDate = request.ComponentType switch
                 {
                     "Toàn phần" => inventory.ReceivedDate.AddDays(35),
@@ -258,9 +271,12 @@ namespace Hien_mau.Controllers
                     RhType = inventory.RhType,
                     ComponentType = inventory.ComponentType,
                     BagType = inventory.BagType,
-                    Quantity = inventory.Quantity - mlQuantity,
+                    Quantity = inventory.Quantity - request.Quantity, 
                     IsRare = inventory.IsRare,
-                    Status = UpdateStatus(inventory.Quantity - mlQuantity),
+                    Status = (inventory.Quantity - request.Quantity) <= 10 ? (byte)0 : 
+                             (inventory.Quantity - request.Quantity) <= 30 ? (byte)1 : 
+                             (inventory.Quantity - request.Quantity) <= 60 ? (byte)2 :
+                             (byte)3, 
                     ReceivedDate = inventory.ReceivedDate,
                     LastUpdated = DateTime.Now,
                     ExpirationDate = expirationDate
@@ -277,8 +293,8 @@ namespace Hien_mau.Controllers
                     BloodGroup = inventory.BloodGroup,
                     RhType = inventory.RhType,
                     ComponentType = inventory.ComponentType,
-                    ActionType = "Thêm",
-                    Quantity = request.Quantity,
+                    ActionType = "CheckOut",
+                    Quantity = request.Quantity, 
                     BagType = inventory.BagType,
                     Notes = request.Notes,
                     PerformedBy = request.PerformedBy,
@@ -320,9 +336,9 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         BagType = inventory.BagType,
-                        Quantity = 0,
+                        Quantity = 0, 
                         IsRare = inventory.IsRare,
-                        Status = 0,
+                        Status = 0, 
                         ReceivedDate = inventory.ReceivedDate,
                         LastUpdated = DateTime.Now,
                         ExpirationDate = inventory.ExpirationDate
@@ -337,7 +353,7 @@ namespace Hien_mau.Controllers
                         RhType = inventory.RhType,
                         ComponentType = inventory.ComponentType,
                         ActionType = "Hủy",
-                        Quantity = inventory.Quantity / GetBagSize(inventory.BagType),
+                        Quantity = inventory.Quantity, 
                         BagType = inventory.BagType,
                         Notes = "Máu hết hạn tự động hủy",
                         PerformedBy = 1,
@@ -373,17 +389,8 @@ namespace Hien_mau.Controllers
             new[] { "250ml", "350ml", "450ml" }.Contains(bagType);
 
         private bool IsRareBloodType(string bloodGroup, string rhType) =>
-            (bloodGroup == "AB" && rhType == "-") || (bloodGroup == "O" && rhType == "-") ||
-            (bloodGroup == "A" && rhType == "-") || (bloodGroup == "B" && rhType == "-");
-
-        private byte UpdateStatus(int quantity) =>
-            quantity switch
-            {
-                <= 2500 => 0, // Khẩn cấp
-                <= 7500 => 1, // Thiếu
-                <= 15000 => 2, // Trung bình
-                _ => 3        // An toàn
-            };
+            (bloodGroup == "AB" && rhType == "Rh-") || (bloodGroup == "O" && rhType == "Rh-") ||
+            (bloodGroup == "A" && rhType == "Rh-") || (bloodGroup == "B" && rhType == "Rh-");
 
         private int GetBagSize(string bagType) =>
             bagType switch
