@@ -116,6 +116,7 @@ namespace Hien_mau.Controllers
                 District = informationDto.District,
                 Ward = informationDto.Ward,
                 Address = informationDto.Address,
+                Distance = informationDto.Distance,
                 BloodGroup = informationDto.BloodGroup,
                 RhType = informationDto.RhType,
                 Status = informationDto.Status,
