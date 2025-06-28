@@ -148,6 +148,17 @@ CREATE TABLE BloodInventoryHistory (
 	FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
 );
 
+ CREATE TABLE Patients (
+	PatientID INT PRIMARY KEY IDENTITY(1,1),
+	FullName NVARCHAR(50),
+	Gender NVARCHAR(10),
+	DateOfBirth DATETIME,
+	Age INT,
+	Phone NVARCHAR(11),
+	Address NVARCHAR(255),
+	Email NVARCHAR(255),
+);
+
 -- BloodRequests table: Stores blood requests
 CREATE TABLE BloodRequests (
     RequestID INT PRIMARY KEY IDENTITY(1,1),
@@ -169,7 +180,8 @@ CREATE TABLE BloodRequests (
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
     CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-	FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
+	FOREIGN KEY (DoctorID) REFERENCES Users(UserID),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
 -- RequestComponents table: Stores blood components for requests
@@ -241,15 +253,4 @@ CREATE TABLE DonationReminders (
     SentAt DATETIME,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
- CREATE TABLE Patients (
- PatientID INT PRIMARY KEY IDENTITY(1,1),
- FullName NVARCHAR(50),
- Gender NVARCHAR(10),
- DateOfBirth DATETIME,
- Age INT,
- Phone NVARCHAR(11),
- Address NVARCHAR(255),
- Email NVARCHAR(255),
- );
- GO
+GO
