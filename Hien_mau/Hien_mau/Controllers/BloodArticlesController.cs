@@ -49,7 +49,11 @@ namespace Hien_mau.Controllers
                     .Where(u => u.UserId == a.UserId)
                     .Select(u => u.RoleId)
                     .FirstOrDefault(),
-                Tags = a.Tags.Select(t => t.TagName).ToList()
+                Tags = a.Tags.Select(t => new
+                {
+                    t.TagId,
+                    t.TagName
+                }).ToList()
             }).ToList();
 
             return Ok(response);
@@ -88,7 +92,11 @@ namespace Hien_mau.Controllers
                     .Where(u => u.UserId == article.UserId)
                     .Select(u => u.RoleId)
                     .FirstOrDefaultAsync(),
-                TagNames = article.Tags.Select(t => t.TagName).ToList()
+                Tags = article.Tags.Select(t => new
+                {
+                    t.TagId,
+                    t.TagName
+                }).ToList()
             };
 
             return Ok(response);
