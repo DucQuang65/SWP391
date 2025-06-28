@@ -243,13 +243,13 @@ CREATE TABLE DonationReminders (
 );
 
  CREATE TABLE Patients (
- PatientID INT PRIMARY KEY IDENTITY(1,1),
- FullName NVARCHAR(50),
- Gender NVARCHAR(10),
- DateOfBirth DATETIME,
- Age INT,
- Phone NVARCHAR(11),
- Address NVARCHAR(255),
- Email NVARCHAR(255),
- );
+	PatientID INT PRIMARY KEY IDENTITY(1,1),
+	FullName NVARCHAR(50),
+	Gender NVARCHAR(10),
+	DateOfBirth DATETIME,
+	Age INT,
+	Phone NVARCHAR(11),
+	Address NVARCHAR(255),
+	Email NVARCHAR(255),
+	);
  GO
