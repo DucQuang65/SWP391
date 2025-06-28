@@ -21,4 +21,5 @@ public class AppointmentDetailDto
     public DateTime? CreatedAt { get; set; }
     public string TimeSlot { get; set; }
     public DateTime? LastDonationDate { get; set; }
+    public DateTime AppointmentDate { get; set; }
 }
