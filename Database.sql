@@ -169,7 +169,8 @@ CREATE TABLE BloodRequests (
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
     CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-	FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
+	FOREIGN KEY (DoctorID) REFERENCES Users(UserID),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
 -- RequestComponents table: Stores blood components for requests
