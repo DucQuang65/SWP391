@@ -1090,3 +1090,37 @@ VALUES
 (6, 'Update', 'News', 5, N'Cập nhật tin tức: LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025', '2025-06-12'),
 (6, 'Delete', 'News', 6, N'Xoá tin tức: TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025', '2025-06-19');
 GO
+
+INSERT INTO Appointments 
+(AppointmentID, UserID, AppointmentDate, TimeSlot, LastDonationDate, CreatedAt, Status, Notes)
+VALUES 
+(1, 1, '2025-03-01', N'Sáng (7:00-12:00)', NULL, GETDATE(), 1, N'Lần đầu hiến thành công'),
+(2, 2, '2025-03-02', N'Chiều (13:00-17:00)', NULL, GETDATE(), 0, N'Đang chờ duyệt'),
+(3, 3, '2025-03-03', N'Sáng (7:00-12:00)', NULL, GETDATE(), 2, N'Bị từ chối do sức khỏe'),
+(4, 1, '2025-05-25', N'Chiều (13:00-17:00)', '2025-03-01', GETDATE(), 1, N'Hiến lại sau 85 ngày'),
+(5, 2, '2025-03-10', N'Sáng (7:00-12:00)', NULL, GETDATE(), 3, N'Tự hủy trước lịch'),
+(6, 3, '2025-03-15', N'Chiều (13:00-17:00)', NULL, GETDATE(), 1, N'Hiến thành công lần đầu'),
+(7, 3, '2025-06-08', N'Sáng (7:00-12:00)', '2025-03-15', GETDATE(), 1, N'Hiến lại sau 85 ngày'),
+(8, 1, '2025-06-29', N'Chiều (13:00-17:00)', '2025-05-25', GETDATE(), 0, N'Đang chờ duyệt sau hiến thành công'),
+(9, 2, '2025-06-20', N'Sáng (7:00-12:00)', NULL, GETDATE(), 1, N'Hiến thành công (trễ lịch)'),
+(10, 3, '2025-06-28', N'Chiều (13:00-17:00)', '2025-06-08', GETDATE(), 2, N'Từ chối do lịch trùng'),
+(11, 1, '2025-07-10', N'Sáng (7:00-12:00)', NULL, GETDATE(), 0, N'Đang chờ xác nhận'),
+(12, 2, '2025-07-12', N'Chiều (13:00-17:00)', '2025-06-20', GETDATE(), 1, N'Hiến lại đúng chu kỳ'),
+(13, 3, '2025-07-13', N'Sáng (7:00-12:00)', NULL, GETDATE(), 3, N'Tự hủy vì bận'),
+(14, 1, '2025-07-15', N'Chiều (13:00-17:00)', NULL, GETDATE(), 2, N'Bị từ chối do sức khỏe'),
+(15, 2, '2025-07-20', N'Sáng (7:00-12:00)', '2025-07-12', GETDATE(), 1, N'Tiếp tục hiến thành công'),
+(16, 3, '2025-07-21', N'Chiều (13:00-17:00)', NULL, GETDATE(), 0, N'Đang chờ xác nhận'),
+(17, 1, '2025-07-23', N'Sáng (7:00-12:00)', NULL, GETDATE(), 1, N'Hiến lại thành công'),
+(18, 2, '2025-07-24', N'Chiều (13:00-17:00)', '2025-07-20', GETDATE(), 1, N'Hiến liên tục đúng quy trình'),
+(19, 3, '2025-07-25', N'Sáng (7:00-12:00)', NULL, GETDATE(), 2, N'Không đủ điều kiện'),
+(20, 1, '2025-07-26', N'Chiều (13:00-17:00)', '2025-07-23', GETDATE(), 1, N'Hiến đúng chu kỳ phục hồi'),
+(21, 2, '2025-08-01', N'Sáng (7:00-12:00)', '2025-07-24', GETDATE(), 0, N'Chờ duyệt'),
+(22, 3, '2025-08-02', N'Chiều (13:00-17:00)', NULL, GETDATE(), 3, N'Tự hủy lịch đăng ký'),
+(23, 1, '2025-08-05', N'Sáng (7:00-12:00)', '2025-07-26', GETDATE(), 2, N'Không đủ điều kiện'),
+(24, 2, '2025-08-10', N'Chiều (13:00-17:00)', '2025-08-01', GETDATE(), 1, N'Hiến đúng lịch'),
+(25, 3, '2025-08-12', N'Sáng (7:00-12:00)', NULL, GETDATE(), 1, N'Lần đầu hiến thành công'),
+(26, 1, '2025-08-15', N'Chiều (13:00-17:00)', '2025-08-05', GETDATE(), 0, N'Chờ duyệt sau bị từ chối'),
+(27, 2, '2025-08-18', N'Sáng (7:00-12:00)', '2025-08-10', GETDATE(), 2, N'Không đủ điều kiện sức khỏe'),
+(28, 3, '2025-08-20', N'Chiều (13:00-17:00)', '2025-08-12', GETDATE(), 1, N'Hiến lại sau lần đầu'),
+(29, 1, '2025-08-22', N'Sáng (7:00-12:00)', '2025-08-15', GETDATE(), 1, N'Tiếp tục hiến thành công'),
+(30, 2, '2025-08-25', N'Chiều (13:00-17:00)', '2025-08-18', GETDATE(), 3, N'Tự hủy lịch cuối tháng');

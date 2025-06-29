@@ -223,10 +223,10 @@ CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
     AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
-    Status TINYINT DEFAULT 0, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4--Nhập kho
+    Status TINYINT DEFAULT 0, --0--đang chờ duyệt, --1 không chấp nhận, --2 chấp nhận, --3 hủy
     Notes NVARCHAR(255),
 	TimeSlot NVARCHAR(50),
-	Cancel BIT DEFAULT 0,
+	LastDonationDate DATE,
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
