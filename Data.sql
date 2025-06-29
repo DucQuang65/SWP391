@@ -7,8 +7,8 @@ VALUES
     ('Member'),
     ('Doctor'),
     ('BloodManager'),
-    ('Admin');
-GO
+    ('Admin'),
+    ('System');
 
 -- Insert data into Users table
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
@@ -56,6 +56,7 @@ VALUES
     -- Khoa Huyết học
     ('phong.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, N'Khoa Huyết học'),
     ('trang.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, N'Khoa Huyết học');
+
 GO
 
 -- Insert data into HospitalInfo table
@@ -65,6 +66,11 @@ VALUES
      N'Thứ 2 - Thứ 6: 7:00 - 17:00', 
      'https://www.google.com/maps/place/10%C2%B046''30.5%22N+106%C2%B041''10.4%22E/@10.7751389,106.6862222,17z/data=!3m1!4b1!4m4!3m3!8m2!3d10.7751389!4d106.6862222?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D', 
      '10.7751237', '106.6862143');
+GO
+
+-- Thêm user System
+INSERT INTO Users (UserID, Name, Status, RoleID)
+VALUES (-1, 'System', 1, 5);
 GO
 
 -- Insert data into Tags table
