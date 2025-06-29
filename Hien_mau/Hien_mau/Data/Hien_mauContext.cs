@@ -48,6 +48,8 @@ public partial class Hien_mauContext : DbContext
     public virtual DbSet<Tag> Tags { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    //public virtual DbSet<UserLocation> UserLocations { get; set; }
    
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -356,7 +358,7 @@ public partial class Hien_mauContext : DbContext
             entity.HasKey(e => e.TagId).HasName("PK__Tags__657CFA4C22818AFF");
 
             entity.Property(e => e.TagId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("TagID");
             entity.Property(e => e.TagName).HasMaxLength(50);
         });
@@ -392,8 +394,23 @@ public partial class Hien_mauContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Users__RoleID__60A75C0F");
-            
         });
+
+        //modelBuilder.Entity<UserLocation>(entity =>
+        //{
+        //    entity.HasKey(e => e.LocationId).HasName("PK__UserLoca__E7FEA4775613203D");
+
+        //    entity.Property(e => e.LocationId).HasColumnName("LocationID");
+        //    entity.Property(e => e.UpdatedAt)
+        //        .HasDefaultValueSql("(getdate())")
+        //        .HasColumnType("datetime");
+        //    entity.Property(e => e.UserId).HasColumnName("UserID");
+
+        //    entity.HasOne(d => d.User).WithMany(p => p.UserLocations)
+        //        .HasForeignKey(d => d.UserId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__UserLocat__UserI__14270015");
+        //});
 
         modelBuilder.Entity<BloodInventoryHistory>(entity =>
         {
@@ -406,7 +423,7 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.ActionType).HasMaxLength(10).IsRequired();
             entity.Property(e => e.Quantity).IsRequired();
             entity.Property(e => e.Notes).HasMaxLength(255);
-            entity.Property(e => e.PerformedBy).IsRequired().HasColumnName("PerformedBy");
+            entity.Property(e => e.PerformedBy).HasColumnName("PerformedBy");
             entity.Property(e => e.PerformedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.Property(e => e.BagType).HasMaxLength(10);
             entity.Property(e => e.ReceivedDate).HasColumnType("datetime");
@@ -423,7 +440,6 @@ public partial class Hien_mauContext : DbContext
                   .HasPrincipalKey(u => u.UserId)
                   .OnDelete(DeleteBehavior.Restrict);
         });
-
 
         OnModelCreatingPartial(modelBuilder);
     }
