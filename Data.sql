@@ -69,8 +69,10 @@ VALUES
 GO
 
 -- Thêm user System
+SET IDENTITY_INSERT Users ON;
 INSERT INTO Users (UserID, Name, Status, RoleID)
 VALUES (-1, 'System', 1, 5);
+SET IDENTITY_INSERT Users OFF;
 GO
 
 -- Insert data into Tags table
