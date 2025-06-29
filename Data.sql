@@ -76,6 +76,7 @@ SET IDENTITY_INSERT Users OFF;
 GO
 
 -- Insert data into Tags table
+SET IDENTITY_INSERT Tags ON;
 INSERT INTO Tags (TagID, TagName)
 VALUES
     -- Nhóm máu
@@ -111,7 +112,9 @@ VALUES
     (29, N'Sự Kiện Hiến Máu'),
     (30, N'Phòng Bệnh'),
     (31, N'Tin tức');
+SET IDENTITY_INSERT Tags OFF;
 GO
+
 
 -- Insert data into BloodArticles table
 INSERT INTO BloodArticles (Title, Content, ImgUrl, UserID)
