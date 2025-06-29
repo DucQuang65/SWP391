@@ -318,65 +318,7 @@ namespace Hien_mau.Controllers
             }
         }
 
-        [HttpPost("cancel-expired")]
-        public async Task<IActionResult> CancelExpiredBlood()
-        {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                var expiredInventories = await _context.BloodInventory
-                    .AsNoTracking()
-                    .Where(i => i.ExpirationDate < DateTime.Now && i.Quantity > 0)
-                    .ToListAsync();
-
-                foreach (var inventory in expiredInventories)
-                {
-                    var updatedInventory = new BloodInventory
-                    {
-                        InventoryID = inventory.InventoryID,
-                        BloodGroup = inventory.BloodGroup,
-                        RhType = inventory.RhType,
-                        ComponentType = inventory.ComponentType,
-                        BagType = inventory.BagType,
-                        Quantity = 0,
-                        IsRare = inventory.IsRare,
-                        Status = 0,
-                        ReceivedDate = inventory.ReceivedDate,
-                        LastUpdated = DateTime.Now,
-                        ExpirationDate = inventory.ExpirationDate
-                    };
-
-                    _context.BloodInventory.Update(updatedInventory);
-
-                    var history = new BloodInventoryHistory
-                    {
-                        InventoryID = inventory.InventoryID,
-                        BloodGroup = inventory.BloodGroup,
-                        RhType = inventory.RhType,
-                        ComponentType = inventory.ComponentType,
-                        ActionType = "Hủy",
-                        Quantity = inventory.Quantity,
-                        BagType = inventory.BagType,
-                        Notes = "Máu hết hạn tự động hủy",
-                        PerformedBy = 1,
-                        PerformedAt = DateTime.Now,
-                        ReceivedDate = inventory.ReceivedDate,
-                        ExpirationDate = inventory.ExpirationDate
-                    };
-
-                    _context.BloodInventoryHistory.Add(history);
-                    await _context.SaveChangesAsync();
-                }
-
-                await transaction.CommitAsync();
-                return Ok(new { Message = "Hủy máu hết hạn thành công" });
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
-        }
+    
 
         private bool IsValidBloodGroup(string bloodGroup) =>
             new[] { "A", "B", "AB", "O" }.Contains(bloodGroup);

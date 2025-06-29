@@ -79,6 +79,9 @@ namespace Hien_mau
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ActivityLogger>();
+            builder.Services.AddHostedService<CancelExpiredService>();
+
+
 
 
             // Thêm authentication và authorization
