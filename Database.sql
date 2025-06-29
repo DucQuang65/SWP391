@@ -169,7 +169,6 @@ CREATE TABLE BloodRequests (
 	Gender NVARCHAR(10),
     Relationship NVARCHAR(20),
 	FacilityName NVARCHAR(255),
-	DoctorID INT,
 	DoctorName NVARCHAR(100), -- external doctor
 	DoctorPhone NVARCHAR(11),
     BloodGroup NVARCHAR(2) NOT NULL,
@@ -180,7 +179,6 @@ CREATE TABLE BloodRequests (
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
     CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-	FOREIGN KEY (DoctorID) REFERENCES Users(UserID),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
