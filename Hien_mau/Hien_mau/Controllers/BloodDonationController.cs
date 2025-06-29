@@ -20,7 +20,7 @@ public class BloodDonationController : ControllerBase
         _context = context;
     }
 
-    // GET: api/users/{userId}
+   
     [HttpGet("users/{userId}")]
     public async Task<IActionResult> GetUser(int userId)
     {
@@ -50,7 +50,7 @@ public class BloodDonationController : ControllerBase
         return Ok(user);
     }
 
-    // GET: api/blood-donation-submissions
+   
     [HttpGet("blood-donation-submissions")]
     public async Task<IActionResult> GetAllSubmissions()
     {
@@ -83,7 +83,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submissions);
     }
 
-    // GET: api/blood-donation-submissions/{appointmentId}
+ 
     [HttpGet("blood-donation-submissions/{appointmentId}")]
     public async Task<IActionResult> GetSubmissionById(int appointmentId)
     {
@@ -187,18 +187,25 @@ public class BloodDonationController : ControllerBase
         return CreatedAtAction(nameof(GetSubmissionById), new { appointmentId = appointment.AppointmentId }, response);
     }
 
+    
     [HttpPut("blood-donation-submissions/{appointmentId}/status")]
     public async Task<IActionResult> UpdateAppointmentStatus(int appointmentId, [FromBody] UpdateStatusDto request)
     {
-        var appointment = await _context.Appointments.FindAsync(appointmentId);
+        
+        if (request.Status < 0 || request.Status > 2)
+        {
+            return BadRequest(new { error = "Invalid status. Must be 0 (Fail), 1 (Success), or 2 (Canceled)." });
+        }
 
+      
+        var appointment = await _context.Appointments.FindAsync(appointmentId);
         if (appointment == null)
         {
             return NotFound(new { error = "Appointment not found" });
         }
 
         
-        appointment.Status = request.Status;
+        appointment.Status = (byte)request.Status;
         appointment.Notes = request.Notes;
 
         await _context.SaveChangesAsync();
@@ -213,7 +220,7 @@ public class BloodDonationController : ControllerBase
     }
 
 
-    // DELETE: api/blood-donation-submissions/{appointmentId}
+   
     [HttpDelete("blood-donation-submissions/{appointmentId}")]
     public async Task<IActionResult> DeleteSubmission(int appointmentId)
     {
