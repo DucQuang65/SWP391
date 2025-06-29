@@ -23,4 +23,13 @@ public class BloodDonationSubmissionDto
     [Required]
     public bool HasDonated { get; set; }
     public DateTime? LastDonationDate { get; set; }
+    public string? Notes { get; set; }
+}
+public class UpdateStatusDto
+{
+    [Required]
+    [Range(1, 3)] 
+    public byte Status { get; set; } 
+
+    public string? Notes { get; set; }
 }

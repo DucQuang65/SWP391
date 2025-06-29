@@ -37,7 +37,8 @@ public class BloodDonationController : ControllerBase
                 u.BloodGroup,
                 u.RhType,
                 u.Weight,
-                u.Height
+                u.Height,
+                u.Status
             })
             .FirstOrDefaultAsync();
 
@@ -72,7 +73,10 @@ public class BloodDonationController : ControllerBase
                 UserId = a.UserId,
                 CreatedAt = a.CreatedAt,
                 TimeSlot = a.TimeSlot,
-                LastDonationDate = a.LastDonationDate
+                LastDonationDate = a.LastDonationDate,
+                Status = a.Status,
+                Notes = a.Notes
+
             })
             .ToListAsync();
 
@@ -103,7 +107,9 @@ public class BloodDonationController : ControllerBase
                 UserId = a.UserId,
                 CreatedAt = a.CreatedAt,
                 TimeSlot = a.TimeSlot,
-                LastDonationDate = a.LastDonationDate
+                LastDonationDate = a.LastDonationDate,
+                Status=a.Status,
+                Notes = a.Notes
             })
             .FirstOrDefaultAsync();
 
@@ -115,7 +121,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submission);
     }
 
-    // POST: api/blood-donation-submissions
+    
     [HttpPost("blood-donation-submissions")]
     public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request)
     {
@@ -124,44 +130,46 @@ public class BloodDonationController : ControllerBase
             return BadRequest(new { error = "Invalid data" });
         }
 
-        // Kiểm tra TimeSlot hợp lệ
+     
         var validTimeSlots = new[] { "Sáng (7:00-12:00)", "Chiều (13:00-17:00)" };
         if (!validTimeSlots.Contains(request.TimeSlot))
         {
             return BadRequest(new { error = "Invalid time slot. It must be either 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'." });
         }
 
-        // Kiểm tra LastDonationDate không được là ngày tương lai
+       
         if (request.LastDonationDate.HasValue && request.LastDonationDate.Value > DateTime.Now)
         {
             return BadRequest(new { error = "LastDonationDate cannot be in the future." });
         }
 
-        // Kiểm tra user tồn tại
         var user = await _context.Users.FindAsync(request.UserId);
         if (user == null)
         {
             return NotFound(new { error = "User does not exist" });
         }
 
-        // Cập nhật Weight và Height cho User
+      
         user.Weight = request.Weight;
         user.Height = request.Height;
 
-        // Tạo appointment
+   
         var appointment = new Appointment
         {
             UserId = request.UserId,
             AppointmentDate = request.RequestedDonationDate,
             TimeSlot = request.TimeSlot,
             LastDonationDate = request.LastDonationDate,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.Now,
+            Notes = request.Notes,
+            Status = 0
+
         };
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
 
-        // Trả về response
+     
         var response = new
         {
             AppointmentId = appointment.AppointmentId,
@@ -171,11 +179,39 @@ public class BloodDonationController : ControllerBase
             Weight = user.Weight,
             Height = user.Height,
             LastDonationDate = appointment.LastDonationDate,
-            CreatedAt = appointment.CreatedAt
+            CreatedAt = appointment.CreatedAt,
+            Status =appointment.Status,
+            Notes = appointment.Notes
         };
 
         return CreatedAtAction(nameof(GetSubmissionById), new { appointmentId = appointment.AppointmentId }, response);
     }
+
+    [HttpPut("blood-donation-submissions/{appointmentId}/status")]
+    public async Task<IActionResult> UpdateAppointmentStatus(int appointmentId, [FromBody] UpdateStatusDto request)
+    {
+        var appointment = await _context.Appointments.FindAsync(appointmentId);
+
+        if (appointment == null)
+        {
+            return NotFound(new { error = "Appointment not found" });
+        }
+
+        
+        appointment.Status = request.Status;
+        appointment.Notes = request.Notes;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Appointment status updated successfully",
+            appointmentId = appointment.AppointmentId,
+            newStatus = appointment.Status,
+            notes = appointment.Notes
+        });
+    }
+
 
     // DELETE: api/blood-donation-submissions/{appointmentId}
     [HttpDelete("blood-donation-submissions/{appointmentId}")]

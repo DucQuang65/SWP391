@@ -4,7 +4,7 @@ namespace Hien_mau.Dto;
 
 public class AppointmentDetailDto
 {
-    // Từ Users
+
     public string Name { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
@@ -15,11 +15,13 @@ public class AppointmentDetailDto
     public string RhType { get; set; }
     public float Weight { get; set; }
     public float Height { get; set; }
-    // Từ Appointments
+  
+    public byte Status { get; set; }
     public int AppointmentId { get; set; }
     public int UserId { get; set; }
     public DateTime? CreatedAt { get; set; }
     public string TimeSlot { get; set; }
     public DateTime? LastDonationDate { get; set; }
     public DateTime AppointmentDate { get; set; }
+    public string? Notes { get; set; }
 }

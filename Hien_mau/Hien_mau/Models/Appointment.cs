@@ -12,7 +12,7 @@ public partial class Appointment
     public int UserId { get; set; }
 
     public DateTime AppointmentDate { get; set; }
-
+    public byte Status { get; set; } 
     public string TimeSlot { get; set; }
 
     public string? Notes { get; set; }
