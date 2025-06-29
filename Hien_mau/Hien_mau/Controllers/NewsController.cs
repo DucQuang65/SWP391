@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace Hien_mau.Controllers
@@ -31,8 +32,8 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBlogPosts()
         {
             var blogs = await _context.News
-                .Include(p => p.Tags) 
-                .Include(p => p.User) 
+                .Include(p => p.Tags)
+                .Include(p => p.User)
                 .ToListAsync();
 
             //// Cập nhật PostedAt nếu là giá trị mặc định ban đầu
@@ -58,7 +59,11 @@ namespace Hien_mau.Controllers
                     .Select(u => u.RoleId)
                     .FirstOrDefault(),
                 p.PostedAt,
-                Tags = p.Tags.Select(t => t.TagName).ToList()
+                Tags = p.Tags.Select(t => new
+                {
+                    t.TagId,
+                    t.TagName
+                }).ToList()
             }).ToList();
 
             return Ok(response);
@@ -69,8 +74,8 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> GetBlogPost(int id)
         {
             var blog = await _context.News
-                 .Include(p => p.Tags) 
-                 .Include(p => p.User) 
+                 .Include(p => p.Tags)
+                 .Include(p => p.User)
                  .FirstOrDefaultAsync(p => p.PostId == id);
 
 
@@ -99,9 +104,12 @@ namespace Hien_mau.Controllers
                     .Select(u => u.RoleId)
                     .FirstOrDefaultAsync(),
                 blog.PostedAt,
-                TagNames = blog.Tags.Select(t => t.TagName).ToList()
+                Tags = blog.Tags.Select(t => new
+                {
+                    t.TagId,
+                    t.TagName
+                }).ToList()
             };
-
             return Ok(response);
         }
 
@@ -160,7 +168,11 @@ namespace Hien_mau.Controllers
                 news.ImgUrl,
                 news.UserId,
                 news.PostedAt,
-                TagNames = news.Tags.Select(t => t.TagName).ToList()
+                Tags = news.Tags.Select(t => new
+                {
+                    t.TagId,
+                    t.TagName
+                }).ToList()
             };
 
             return CreatedAtAction(nameof(GetBlogPost), new { id = news.PostId }, response);
