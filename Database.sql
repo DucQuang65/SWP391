@@ -223,8 +223,9 @@ CREATE TABLE Appointments (
     AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
     Status TINYINT DEFAULT 0, --0--đang chờ duyệt, --1 không chấp nhận, --2 chấp nhận, --3 hủy
     Notes NVARCHAR(255),
-	TimeSlot NVARCHAR(50),
-	LastDonationDate DATE,
+    TimeSlot NVARCHAR(50),
+    LastDonationDate DATE,
+    Cancel BIT DEFAULT 0,
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
