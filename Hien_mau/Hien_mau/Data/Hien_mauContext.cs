@@ -158,7 +158,6 @@ public partial class Hien_mauContext : DbContext
         modelBuilder.Entity<BloodInventory>(entity =>
         {
             entity.HasKey(e => e.InventoryID);
-            entity.ToTable("BloodInventory");
             entity.Property(e => e.InventoryID).HasColumnName("InventoryID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
             entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
@@ -395,22 +394,6 @@ public partial class Hien_mauContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Users__RoleID__60A75C0F");
         });
-
-        //modelBuilder.Entity<UserLocation>(entity =>
-        //{
-        //    entity.HasKey(e => e.LocationId).HasName("PK__UserLoca__E7FEA4775613203D");
-
-        //    entity.Property(e => e.LocationId).HasColumnName("LocationID");
-        //    entity.Property(e => e.UpdatedAt)
-        //        .HasDefaultValueSql("(getdate())")
-        //        .HasColumnType("datetime");
-        //    entity.Property(e => e.UserId).HasColumnName("UserID");
-
-        //    entity.HasOne(d => d.User).WithMany(p => p.UserLocations)
-        //        .HasForeignKey(d => d.UserId)
-        //        .OnDelete(DeleteBehavior.ClientSetNull)
-        //        .HasConstraintName("FK__UserLocat__UserI__14270015");
-        //});
 
         modelBuilder.Entity<BloodInventoryHistory>(entity =>
         {
