@@ -140,11 +140,12 @@ CREATE TABLE BloodInventoryHistory (
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(255) NULL,
     Notes NVARCHAR(255) NULL,
-    PerformedBy INT NOT NULL FOREIGN KEY REFERENCES Users(UserID),
+    PerformedBy INT NOT NULL,
     PerformedAt DATETIME DEFAULT GETDATE(),
     BagType NVARCHAR(5),
     ReceivedDate DATETIME, -- Date received
     ExpirationDate DATETIME, -- Expiration date
+	FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
 	FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
 );
 

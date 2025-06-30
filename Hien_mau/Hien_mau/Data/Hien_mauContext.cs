@@ -162,13 +162,47 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
             entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
             entity.Property(e => e.ComponentType).HasMaxLength(20).IsRequired();
-            entity.Property(e => e.BagType).HasMaxLength(10).IsRequired();
+            entity.Property(e => e.BagType).HasMaxLength(5);
             entity.Property(e => e.Quantity).IsRequired();
-            entity.Property(e => e.IsRare).HasDefaultValue(false);
+            entity.Property(e => e.IsRare).HasDefaultValue(false).IsRequired();
             entity.Property(e => e.Status).IsRequired();
             entity.Property(e => e.LastUpdated).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.Property(e => e.ReceivedDate).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+
+            entity.HasMany(e => e.Histories)
+                  .WithOne(h => h.BloodInventory)
+                  .HasForeignKey(h => h.InventoryID)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<BloodInventoryHistory>(entity =>
+        {
+            entity.HasKey(e => e.HistoryID);
+            entity.ToTable("BloodInventoryHistory");
+            entity.Property(e => e.InventoryID);
+            entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
+            entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
+            entity.Property(e => e.ComponentType).HasMaxLength(20).IsRequired();
+            entity.Property(e => e.ActionType).HasMaxLength(10).IsRequired();
+            entity.Property(e => e.Quantity).IsRequired();
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.PerformedBy).HasColumnName("PerformedBy");
+            entity.Property(e => e.PerformedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
+            entity.Property(e => e.BagType).HasMaxLength(10);
+            entity.Property(e => e.ReceivedDate).HasColumnType("datetime");
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+
+            entity.HasOne(e => e.BloodInventory)
+                  .WithMany(b => b.Histories)
+                  .HasForeignKey(e => e.InventoryID)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(e => e.PerformedByUser)
+                  .WithMany(u => u.BloodInventoryHistories)
+                  .HasForeignKey(e => e.PerformedBy)
+                  .HasPrincipalKey(u => u.UserId)
+                  .OnDelete(DeleteBehavior.Restrict);
         });
 
         modelBuilder.Entity<BloodRequest>(entity =>
@@ -393,35 +427,6 @@ public partial class Hien_mauContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Users__RoleID__60A75C0F");
-        });
-
-        modelBuilder.Entity<BloodInventoryHistory>(entity =>
-        {
-            entity.HasKey(e => e.HistoryID);
-            entity.ToTable("BloodInventoryHistory");
-            entity.Property(e => e.InventoryID);
-            entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
-            entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
-            entity.Property(e => e.ComponentType).HasMaxLength(20).IsRequired();
-            entity.Property(e => e.ActionType).HasMaxLength(10).IsRequired();
-            entity.Property(e => e.Quantity).IsRequired();
-            entity.Property(e => e.Notes).HasMaxLength(255);
-            entity.Property(e => e.PerformedBy).HasColumnName("PerformedBy");
-            entity.Property(e => e.PerformedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-            entity.Property(e => e.BagType).HasMaxLength(10);
-            entity.Property(e => e.ReceivedDate).HasColumnType("datetime");
-            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
-
-            entity.HasOne(e => e.BloodInventory)
-                  .WithMany(b => b.Histories)
-                  .HasForeignKey(e => e.InventoryID)
-                  .OnDelete(DeleteBehavior.Restrict);
-
-            entity.HasOne(e => e.PerformedByUser)
-                  .WithMany(u => u.BloodInventoryHistories) 
-                  .HasForeignKey(e => e.PerformedBy)
-                  .HasPrincipalKey(u => u.UserId)
-                  .OnDelete(DeleteBehavior.Restrict);
         });
 
         OnModelCreatingPartial(modelBuilder);
