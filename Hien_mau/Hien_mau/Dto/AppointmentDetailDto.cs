@@ -24,4 +24,5 @@ public class AppointmentDetailDto
     public DateTime? LastDonationDate { get; set; }
     public DateTime AppointmentDate { get; set; }
     public string? Notes { get; set; }
+    public bool Cancel { get; set; }
 }

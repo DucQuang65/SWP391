@@ -428,6 +428,24 @@ public partial class Hien_mauContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Users__RoleID__60A75C0F");
         });
+        //modelBuilder.Entity<Reminder>(entity =>
+        //{
+        //    entity.HasKey(e => e.ReminderId);
+        //    entity.Property(e => e.Type).HasMaxLength(100);
+        //    entity.Property(e => e.Message).IsRequired();
+        //    entity.Property(e => e.RemindAt).HasColumnType("datetime");
+        //    entity.Property(e => e.IsDisabled).HasDefaultValue(false);
+        //    entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
+
+        //    entity.Property(e => e.UserId).HasColumnName("UserID");
+
+        //    entity.HasOne(e => e.User)
+        //          .WithMany(u => u.Reminders)
+        //          .HasForeignKey(e => e.UserId)
+        //          .OnDelete(DeleteBehavior.ClientSetNull)
+        //          .HasConstraintName("FK_Reminders_Users");
+        //});
+
 
         OnModelCreatingPartial(modelBuilder);
     }

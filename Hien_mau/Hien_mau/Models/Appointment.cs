@@ -19,6 +19,8 @@ public partial class Appointment
     public DateTime? LastDonationDate { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+    public bool Cancel { get; set; }    
 
     public virtual User User { get; set; } = null!;
+    
 }

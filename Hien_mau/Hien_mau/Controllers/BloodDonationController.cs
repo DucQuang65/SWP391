@@ -39,6 +39,7 @@ public class BloodDonationController : ControllerBase
                 u.Weight,
                 u.Height,
                 u.Status
+
             })
             .FirstOrDefaultAsync();
 
@@ -75,7 +76,8 @@ public class BloodDonationController : ControllerBase
                 TimeSlot = a.TimeSlot,
                 LastDonationDate = a.LastDonationDate,
                 Status = a.Status,
-                Notes = a.Notes
+                Notes = a.Notes,
+                Cancel =a.Cancel
 
             })
             .ToListAsync();
@@ -100,8 +102,8 @@ public class BloodDonationController : ControllerBase
                 DateOfBirth = a.User.DateOfBirth,
                 Gender = a.User.Gender,
                 RhType = a.User.RhType,
-                Weight = (float)a.User.Weight,
-                Height = (float)a.User.Height,
+                Weight = (float)(a.User.Weight ?? 0),   
+                Height = (float)(a.User.Height ?? 0),    
                 AppointmentId = a.AppointmentId,
                 AppointmentDate =a.AppointmentDate,
                 UserId = a.UserId,
@@ -109,7 +111,8 @@ public class BloodDonationController : ControllerBase
                 TimeSlot = a.TimeSlot,
                 LastDonationDate = a.LastDonationDate,
                 Status=a.Status,
-                Notes = a.Notes
+                Notes = a.Notes,
+                Cancel = a.Cancel
             })
             .FirstOrDefaultAsync();
 
@@ -229,8 +232,9 @@ public class BloodDonationController : ControllerBase
         {
             return NotFound(new { error = "Blood donation submission not found!" });
         }
+        appointment.Cancel = true; 
 
-        _context.Appointments.Remove(appointment);
+       
         await _context.SaveChangesAsync();
 
         return Ok(new { message = "Deleted successfully" });
