@@ -90,7 +90,7 @@ namespace Hien_mau.Controllers
 
             if (user.Status == 0)
             {
-                return BadRequest("Tài khoản của bạn đã bị vô hiệu hóa");
+                return BadRequest("Account is banned");
             }
 
             var token = _authService.CreateToken(user);

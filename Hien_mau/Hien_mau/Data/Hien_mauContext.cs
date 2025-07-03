@@ -49,8 +49,10 @@ public partial class Hien_mauContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public DbSet<Patient> Patients { get; set; }
+
     //public virtual DbSet<UserLocation> UserLocations { get; set; }
-   
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -215,7 +217,6 @@ public partial class Hien_mauContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.IsAutoApproved).HasDefaultValue(false);
-            entity.Property(e => e.NeededTime).HasColumnType("datetime");
             entity.Property(e => e.Reason).HasMaxLength(1000);
             entity.Property(e => e.RhType).HasMaxLength(3);
             entity.Property(e => e.UserId).HasColumnName("UserID");

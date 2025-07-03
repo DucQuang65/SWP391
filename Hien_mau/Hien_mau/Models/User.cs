@@ -72,7 +72,5 @@ public partial class User
 
     public virtual Role Role { get; set; } = null!;
 
-    public ICollection<BloodInventoryHistory> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistory>();
-
-
+    public ICollection<BloodInventoryHistory> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistory>();    
 }

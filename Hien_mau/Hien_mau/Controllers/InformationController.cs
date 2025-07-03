@@ -132,7 +132,7 @@ namespace Hien_mau.Controllers
             informationDto.UserID = newUser.UserId;
             informationDto.CreatedAt = newUser.CreatedAt;
 
-            return CreatedAtAction(nameof(GetUserByID), new { id = informationDto.UserID }, informationDto);
+            return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, informationDto);
         }
 
         [HttpPut("{id}")]
@@ -185,11 +185,10 @@ namespace Hien_mau.Controllers
             var User = await _context.Users.FindAsync(id);
             if (User == null)
                 return NotFound();
-            var updateUser = new User
-            {
-                Status = 0 // Set status to 0 for soft delete
-            };
-            _context.Users.Add(updateUser);
+
+            User.Status = 0; 
+
+            _context.Users.Update(User);
             await _context.SaveChangesAsync();
 
             return Ok();
