@@ -149,7 +149,7 @@ namespace Hien_mau.Controllers
 
             _context.News.Add(news);
             await _context.SaveChangesAsync();
-            // Ghi log SAU khi đã lưu
+            // Ghi log sau khi đã lưu
             await logger.LogAsync(dto.UserId, "Create", "News", news.PostId, $"Tạo bài viết: {news.Title}");
 
             // Trả về đối tượng không chứa vòng lặp

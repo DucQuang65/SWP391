@@ -2,8 +2,10 @@
 using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Models;
+using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Hien_mau.Controllers
 {
@@ -134,7 +136,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, InformationDto informationDto)
+        public async Task<IActionResult> UpdateUser(int id, InformationDto informationDto, [FromServices] NotificationLog logger)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -172,7 +174,8 @@ namespace Hien_mau.Controllers
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-
+            // Ghi log sau khi đã lưu với UserId tương ứng
+            await logger.NotiLog(id, "Profile", $"Sửa hồ sơ:", "Update");
             return Ok();
         }
 

@@ -1,7 +1,6 @@
 ﻿using Hien_mau.Data;
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace Hien_mau.Services
 {
