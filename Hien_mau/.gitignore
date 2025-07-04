@@ -68,3 +68,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Publish output
+publish/
+runtimes/
+*.exe
+*.dll
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+*.staticwebassets.endpoints.json
