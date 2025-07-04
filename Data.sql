@@ -1073,11 +1073,11 @@ GO
 -- Insert data into Notifications table
 INSERT INTO Notifications (UserID, Title, Message, Type, IsRead, SentAt)
 VALUES
-    (1, 'Nhắc Hiến Máu', 'Bạn có thể hiến lại sau 2 tuần', 'Reminder', 0, GETDATE()),
-    (2, 'Yêu cầu khẩn cấp', 'Chúng tôi cần máu của bạn cho trường hợp khẩn cấp', 'Alert', 0, GETDATE()),
-    (3, 'Cảm ơn', 'Cảm ơn bạn đã hiến máu!', 'Report', 1, GETDATE()),
-    (4, 'Yêu cầu máu đã chấp nhận', 'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
-    (5, 'Có 1 bài viết mới', 'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
+    (1, N'Nhắc Hiến Máu', N'Bạn có thể hiến lại sau 2 tuần', 'Reminder', 0, GETDATE()),
+    (2, N'Yêu cầu khẩn cấp', N'Chúng tôi cần máu của bạn cho trường hợp khẩn cấp', 'Alert', 0, GETDATE()),
+    (3, N'Cảm ơn', N'Cảm ơn bạn đã hiến máu!', 'Report', 1, GETDATE()),
+    (4, N'Yêu cầu máu đã chấp nhận', N'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
+    (5, N'Có 1 bài viết mới', N'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
 GO
 
 INSERT INTO ActivityLog (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
