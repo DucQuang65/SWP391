@@ -50,7 +50,7 @@ CREATE TABLE HospitalInfo (
     Phone NVARCHAR(20),
     Email NVARCHAR(100),
     WorkingHours NVARCHAR(255),
-    MapImageUrl NVARCHAR(255), -- link gán = ảnh bản đồ tĩnh Google Maps,
+    MapImageUrl NVARCHAR(MAX), -- link gán = ảnh bản đồ tĩnh Google Maps,
     Latitude FLOAT NOT NULL,
     Longitude FLOAT NOT NULL
 );
@@ -60,7 +60,7 @@ CREATE TABLE BloodArticles (
     ArticleID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX) NOT NULL,
-    ImgUrl NVARCHAR(255),
+    ImgUrl NVARCHAR(MAX),
     CreatedAt DATETIME DEFAULT GETDATE(),
     UserID INT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
@@ -86,7 +86,7 @@ CREATE TABLE News (
     PostID INT PRIMARY KEY IDENTITY(1,1),
     Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX)NOT NULL,
-    ImgUrl NVARCHAR(255),
+    ImgUrl NVARCHAR(MAX),
     UserID INT NOT NULL,
     PostedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
