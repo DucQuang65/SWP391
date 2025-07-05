@@ -3,10 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Hien_mau.Data;
 using Hien_mau.Models;
 using Hien_mau.Dto;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Hien_mau.Services;
 
 namespace Hien_mau.Controllers;
@@ -16,13 +12,15 @@ namespace Hien_mau.Controllers;
 public class BloodDonationController : ControllerBase
 {
     private readonly Hien_mauContext _context;
+    private readonly NotificationLog _logger;
 
-    public BloodDonationController(Hien_mauContext context)
+    public BloodDonationController(Hien_mauContext context, NotificationLog logger)
     {
         _context = context;
+        _logger = logger;
     }
 
-   
+
     [HttpGet("users/{userId}")]
     public async Task<IActionResult> GetUser(int userId)
     {
@@ -128,7 +126,7 @@ public class BloodDonationController : ControllerBase
 
     
     [HttpPost("blood-donation-submissions")]
-    public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request, [FromServices] NotificationLog logger)
+    public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request)
     {
         if (!ModelState.IsValid)
         {
@@ -174,7 +172,7 @@ public class BloodDonationController : ControllerBase
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
         // Ghi log sau khi đã lưu với UserId tương ứng
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Tạo hẹn:", "Create");
+        await _logger.NotiLog(appointment.UserId, "Appointment", $"Tạo hẹn:", "Create");
 
         var response = new
         {
@@ -195,7 +193,7 @@ public class BloodDonationController : ControllerBase
 
     
     [HttpPut("blood-donation-submissions/{appointmentId}/status")]
-    public async Task<IActionResult> UpdateAppointmentStatus(int appointmentId, [FromBody] UpdateStatusDto request, [FromServices] NotificationLog logger)
+    public async Task<IActionResult> UpdateAppointmentStatus(int appointmentId, [FromBody] UpdateStatusDto request)
     {
         
         if (request.Status < 0 || request.Status > 2)
@@ -216,7 +214,7 @@ public class BloodDonationController : ControllerBase
 
         await _context.SaveChangesAsync();
         // Ghi log sau khi đã lưu với UserId tương ứng
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Sửa hẹn:", "Update");
+        await _logger.NotiLog(appointment.UserId, "Appointment", $"Sửa hẹn:", "Update");
 
         return Ok(new
         {
@@ -230,7 +228,7 @@ public class BloodDonationController : ControllerBase
 
    
     [HttpDelete("blood-donation-submissions/{appointmentId}")]
-    public async Task<IActionResult> DeleteSubmission(int appointmentId, [FromServices] NotificationLog logger)
+    public async Task<IActionResult> DeleteSubmission(int appointmentId)
     {
         var appointment = await _context.Appointments.FindAsync(appointmentId);
         if (appointment == null)
@@ -242,7 +240,7 @@ public class BloodDonationController : ControllerBase
        
         await _context.SaveChangesAsync();
         // Ghi log sau khi đã lưu với UserId tương ứng
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Xóa hẹn:", "Delete");
+        await _logger.NotiLog(appointment.UserId, "Appointment", $"Xóa hẹn:", "Delete");
 
         return Ok(new { message = "Deleted successfully" });
     }

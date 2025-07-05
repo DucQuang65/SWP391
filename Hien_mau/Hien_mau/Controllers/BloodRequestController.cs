@@ -1,7 +1,7 @@
 ﻿using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Models;
-using Microsoft.AspNetCore.Http;
+using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,9 +12,11 @@ namespace Hien_mau.Controllers
     public class BloodRequestController : ControllerBase
     {
         private readonly Hien_mauContext _context;
-        public BloodRequestController(Hien_mauContext context)
+        private readonly NotificationLog _logger;
+        public BloodRequestController(Hien_mauContext context, NotificationLog logger)
         {
             _context = context;
+            _logger = logger;
         }
         [HttpGet]
         public async Task<ActionResult<List<BloodRequestDto>>> GetBloodRequest()
@@ -125,6 +127,8 @@ namespace Hien_mau.Controllers
 
             _context.BloodRequests.Add(bloodRequest);
             await _context.SaveChangesAsync();
+            // Ghi log sau khi đã lưu với UserId tương ứng
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Tạo yêu cầu:", "Create");
 
             bloodRequestDto.RequestId = bloodRequest.RequestId;
             bloodRequestDto.Status = bloodRequest.Status;
@@ -158,7 +162,8 @@ namespace Hien_mau.Controllers
 
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
-
+            // Ghi log sau khi đã lưu với UserId tương ứng
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Sửa yêu cầu:", "Update");
             return Ok();
         }
 
@@ -173,6 +178,8 @@ namespace Hien_mau.Controllers
 
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
+            // Ghi log sau khi đã lưu với UserId tương ứng
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Xóa yêu cầu:", "Delete");
 
             return Ok();
         }
