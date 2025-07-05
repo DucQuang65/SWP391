@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hien_mau.Data;
-using FirebaseAdmin.Messaging;
-using Hien_mau.Models;
-using Microsoft.Extensions.Logging;
 
 namespace Hien_mau.Controllers
 {

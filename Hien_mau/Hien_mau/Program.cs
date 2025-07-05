@@ -51,33 +51,11 @@ namespace Hien_mau
                               .AllowCredentials(); // If use cookie                          
                     });
             });
-            //// Register FirebaseAdmin with google-services.json
-            //builder.Services.AddSingleton(provider =>
-            //{
-            //    var configuration = provider.GetRequiredService<IConfiguration>();
-            //    var projectRoot = Directory.GetCurrentDirectory();
-            //    var googleServicesPath = Path.Combine(projectRoot, "google-services.json");
-
-            //    if (!File.Exists(googleServicesPath))
-            //    {
-            //        throw new FileNotFoundException("google-services.json not found in project root");
-            //    }
-
-            //    var serviceAccountJson = File.ReadAllText(googleServicesPath);
-            //    var projectId = configuration["Firebase:ProjectId"]
-            //        ?? throw new InvalidOperationException("Firebase ProjectId is missing");
-
-            //    var firebaseApp = FirebaseApp.Create(new AppOptions
-            //    {
-            //        Credential = GoogleCredential.FromJson(serviceAccountJson),
-            //        ProjectId = projectId
-            //    });
-            //    return firebaseApp;
-            //});
 
             builder.Services.AddDbContext<Hien_mauContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<NotificationLog>();
             builder.Services.AddScoped<ActivityLogger>();
             builder.Services.AddHostedService<CancelExpiredService>();
 
