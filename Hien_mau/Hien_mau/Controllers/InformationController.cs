@@ -45,6 +45,7 @@ namespace Hien_mau.Controllers
                 RhType = u.RhType,
                 Weight = u.Weight,
                 Height = u.Height,
+                Status = u.Status,
                 RoleID = u.RoleId,
                 Department = u.Department,
                 CreatedAt = u.CreatedAt
