@@ -36,11 +36,17 @@ CREATE TABLE Users (
 
     Status TINYINT DEFAULT 1, -- 0: inactive, 1: active
     RoleID INT NOT NULL,
-    Department NVARCHAR(50), -- For Staff-Doctor (e.g., Khoa A)
+    DepartmentID INT, -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
+    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID),
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
+-- Department: Stores information about hospital department
+CREATE TABLE Departments(
+	DepartmentID INT PRIMARY KEY IDENTITY(1,1),
+	DepartmentName NVARCHAR(255),
+);
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
     ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
@@ -138,7 +144,6 @@ CREATE TABLE BloodInventoryHistories (
     ComponentID INT NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
     ActionType NVARCHAR(10) NOT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
-    Reason NVARCHAR(255) NULL,
     Notes NVARCHAR(255) NULL,
     PerformedBy INT NOT NULL,
     PerformedAt DATETIME DEFAULT GETDATE(),
