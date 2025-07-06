@@ -13,7 +13,6 @@ CREATE TABLE Roles (
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
-    --FirebaseUID NVARCHAR(128) NOT NULL UNIQUE, -- Firebase user ID
 	
     Email NVARCHAR(255), -- AES encrypted
     Password NVARCHAR(255), -- Hash encrypted
@@ -29,10 +28,10 @@ CREATE TABLE Users (
     District NVARCHAR(50), -- AES encrypted
     Ward NVARCHAR(255),   -- AES encrypted
     Address NVARCHAR(255), -- AES encrypted
-	Distance FLOAT, -- Distance: user address-hospital
+    Distance FLOAT, -- Distance: user address-hospital
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
-	Weight FLOAT, -- Weight in kg
+    Weight FLOAT, -- Weight in kg
     Height FLOAT, -- Height in cm
 
     Status TINYINT DEFAULT 1, -- 0: inactive, 1: active
@@ -118,7 +117,7 @@ CREATE TABLE BloodInventories (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
-    ComponentType NVARCHAR(20) NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
+    ComponentID INT NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
     Quantity INT NOT NULL CHECK (Quantity >= 0),
     IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
     Status TINYINT NOT NULL, -- 0: Khẩn cấp, 1: Thiếu máu, 2: Trung bình, 3: An toàn
@@ -126,6 +125,7 @@ CREATE TABLE BloodInventories (
     BagType NVARCHAR(5), -- 250ml, 350ml, 450ml
     ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
     ExpirationDate DATETIME -- Expiration date
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
 );
 
 
@@ -135,7 +135,7 @@ CREATE TABLE BloodInventoryHistories (
     InventoryID INT NULL,
     BloodGroup NVARCHAR(2) NULL,
     RhType NVARCHAR(3) NULL,
-    ComponentType NVARCHAR(20) NULL,
+    ComponentID INT NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
     ActionType NVARCHAR(10) NOT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(255) NULL,
@@ -145,8 +145,9 @@ CREATE TABLE BloodInventoryHistories (
     BagType NVARCHAR(5),
     ReceivedDate DATETIME, -- Date received
     ExpirationDate DATETIME, -- Expiration date
-	FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
-	FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
+    FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
+    FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
 );
 
  CREATE TABLE Patients (
@@ -174,21 +175,20 @@ CREATE TABLE BloodRequests (
     DoctorPhone NVARCHAR(11),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
+    ComponentID INT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(1000),
-    IsAutoApproved BIT DEFAULT 0, -- 1 for Staff-Doctor requests
     Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4-- Nhập kho
     CreatedTime DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
--- RequestComponents table: Stores blood components for requests
-CREATE TABLE RequestComponents (
+-- Components table: Stores blood components
+CREATE TABLE Components (
     ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    RequestID INT NOT NULL,
-    ComponentType NVARCHAR(20) NOT NULL, -- RedCells, Plasma, Platelets, Whole
-    FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
+    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
 );
 
 -- BloodDonationHistory table: Stores donation records
@@ -198,11 +198,12 @@ CREATE TABLE BloodDonationHistories (
     DonationDate DATETIME NOT NULL,
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
-    ComponentType NVARCHAR(20) NOT NULL,
+    ComponentID INT, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
     Quantity INT NOT NULL CHECK (Quantity > 0),
-	IsSuccess BIT DEFAULT 1,
+    IsSuccess BIT DEFAULT 1,
     Notes NVARCHAR(255),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID)
 );
 
 -- Appointments table: Stores appointment created
