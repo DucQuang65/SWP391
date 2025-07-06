@@ -102,7 +102,7 @@ CREATE TABLE NewsTags (
 );
 
 -- ActivityLog table: Tracks News and Article activities for Admin
-CREATE TABLE ActivityLog (
+CREATE TABLE ActivityLogs (
     LogID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
     ActivityType NVARCHAR(50) NOT NULL, -- e.g., CreateArticle, UpdateArticle, DeleteArticle, CreateNews, UpdateNews, DeleteNews
@@ -114,7 +114,7 @@ CREATE TABLE ActivityLog (
 );
 
 -- Create BloodInventory table first
-CREATE TABLE BloodInventory (
+CREATE TABLE BloodInventories (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE BloodInventory (
 
 
 -- Create BloodInventoryHistory table after BloodInventory
-CREATE TABLE BloodInventoryHistory (
+CREATE TABLE BloodInventoryHistories (
     HistoryID INT PRIMARY KEY IDENTITY(1,1),
     InventoryID INT NULL,
     BloodGroup NVARCHAR(2) NULL,
@@ -164,23 +164,23 @@ CREATE TABLE BloodInventoryHistory (
 CREATE TABLE BloodRequests (
     RequestID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Requester (Member or Staff-Doctor)
-	PatientID INT,
-	PatientName NVARCHAR(100),
-	Age INT,
-	Gender NVARCHAR(10),
+    PatientID INT,
+    PatientName NVARCHAR(100),
+    Age INT,
+    Gender NVARCHAR(10),
     Relationship NVARCHAR(20),
-	FacilityName NVARCHAR(255),
-	DoctorName NVARCHAR(100), -- external doctor
-	DoctorPhone NVARCHAR(11),
+    FacilityName NVARCHAR(255),
+    DoctorName NVARCHAR(100), -- external doctor
+    DoctorPhone NVARCHAR(11),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(1000),
     IsAutoApproved BIT DEFAULT 0, -- 1 for Staff-Doctor requests
-    Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected
+    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4-- Nhập kho
     CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
 -- RequestComponents table: Stores blood components for requests
@@ -191,20 +191,8 @@ CREATE TABLE RequestComponents (
     FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID)
 );
 
--- BloodRequestHistory table: Tracks request status changes
-CREATE TABLE BloodRequestHistory (
-    HistoryID INT PRIMARY KEY IDENTITY(1,1),
-    RequestID INT NOT NULL,
-    UserID INT NOT NULL, -- Staff-Doctor or Staff-BloodManager
-    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4-- Nhập kho
-    Notes NVARCHAR(255),
-    TimeStamp DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (RequestID) REFERENCES BloodRequests(RequestID),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
-
 -- BloodDonationHistory table: Stores donation records
-CREATE TABLE BloodDonationHistory (
+CREATE TABLE BloodDonationHistories (
     DonationID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
     DonationDate DATETIME NOT NULL,
