@@ -183,7 +183,7 @@ CREATE TABLE BloodRequests (
     ComponentID INT NULL,
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(1000),
-    Status TINYINT NOT NULL, --0-- Không thành công, 1-- Khám sức khỏe(đạt/ 0 đạt), 2-- Hiến máu, 3-- Xét nghiệm máu(đạt/0 đạt), 4-- Nhập kho
+    Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected, 4: Delete
     CreatedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
