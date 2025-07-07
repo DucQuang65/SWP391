@@ -216,7 +216,7 @@ CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
     AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
-    Status TINYINT DEFAULT 0, --0--đang chờ duyệt, --1 không chấp nhận, --2 chấp nhận, --3 hủy
+    Status TINYINT DEFAULT 0, --0--đang chờ duyệt, --1 không chấp nhận, --2 chấp nhận
     Notes NVARCHAR(255),
     TimeSlot NVARCHAR(50),
     LastDonationDate DATE,
@@ -232,7 +232,7 @@ CREATE TABLE Notifications (
     Title NVARCHAR(255) NOT NULL,
     Message NVARCHAR(255)NOT NULL,
     Type NVARCHAR(50) NOT NULL, -- Reminder, Alert, Report
-    Priority TINYINT DEFAULT 0, -- 0: Normal, 1: High (for rare blood)
+    Priority BIT DEFAULT 0, -- 0: Normal, 1: High (for rare blood)
     IsRead BIT DEFAULT 0,
     SentAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
