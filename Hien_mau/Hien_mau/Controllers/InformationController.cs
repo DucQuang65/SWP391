@@ -47,7 +47,7 @@ namespace Hien_mau.Controllers
                 Height = u.Height,
                 Status = u.Status,
                 RoleID = u.RoleId,
-                Department = u.Department,
+                DepartmentId = u.DepartmentId,
                 CreatedAt = u.CreatedAt
             }).ToListAsync();
 
@@ -55,7 +55,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserByID(int id)
+        public async Task<ActionResult<Users>> GetUserByID(int id)
         {
             var user = await _context.Users
            .Where(u => u.UserId == id && u.Status == 1)
@@ -80,7 +80,7 @@ namespace Hien_mau.Controllers
                 Height = u.Height,
                 Status = u.Status,
                 RoleID = u.RoleId,
-                Department = u.Department,
+                DepartmentId = u.DepartmentId,
                 CreatedAt = u.CreatedAt
             }).FirstOrDefaultAsync();
 
@@ -91,7 +91,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser(InformationDto informationDto)
+        public async Task<ActionResult<Users>> AddUser(InformationDto informationDto)
         {            
             if (informationDto == null || string.IsNullOrEmpty(informationDto.Email))
                 return BadRequest();
@@ -103,7 +103,7 @@ namespace Hien_mau.Controllers
             var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
             var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
-            var newUser = new User
+            var newUser = new Users
             {
                 Email = informationDto.Email,
                 Password = informationDto.Password,
@@ -123,7 +123,7 @@ namespace Hien_mau.Controllers
                 RhType = informationDto.RhType,
                 Status = informationDto.Status,
                 RoleId = informationDto.RoleID,
-                Department = informationDto.Department,
+                DepartmentId = informationDto.DepartmentId,
                 CreatedAt = vietNamTime
             };
 
@@ -171,12 +171,12 @@ namespace Hien_mau.Controllers
             user.Height = informationDto.Height;
             user.Status = informationDto.Status;
             user.RoleId = informationDto.RoleID;
-            user.Department = informationDto.Department;
+            user.DepartmentId = informationDto.DepartmentId;
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             // Ghi log sau khi đã lưu với UserId tương ứng
-            await logger.NotiLog(id, "Profile", $"Sửa hồ sơ:", "Update");
+            //await logger.NotiLog(id, "Profile", $"Sửa hồ sơ:", "Update");
             return Ok();
         }
 

@@ -17,9 +17,9 @@ namespace Hien_mau.Services
             {
                 throw new ArgumentException($"UserId {userId} does not exist.");
             }
-            var notification = new Notification
+            var notification = new Notifications
             {
-                UserID = userId,
+                UserId = userId,
                 Title = title,
                 Message = message,
                 Type = type,

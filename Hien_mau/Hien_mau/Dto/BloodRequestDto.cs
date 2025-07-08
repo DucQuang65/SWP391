@@ -4,7 +4,7 @@
     {
         public int RequestId { get; set; }
         public int UserID { get; set; }
-        public int? PatientID { get; set; }
+        public int? PatientId { get; set; }
         public string PatientName { get; set; }
         public int? Age { get; set; }
         public string Gender { get; set; }
@@ -17,6 +17,6 @@
         public int Quantity { get; set; }
         public string Reason { get; set; }
         public byte Status { get; set; } = 0;
-        public DateTime CreatedTime { get; set; }
+        public DateTime? CreatedTime { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class BloodArticle
+public partial class BloodArticles
 {
     [Key]
     public int ArticleId { get; set; }
@@ -15,10 +15,11 @@ public partial class BloodArticle
 
     public string? ImgUrl { get; set; }
 
-    public int UserId { get; set; }
     public DateTime? CreatedAt { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public int UserId { get; set; }
 
-    public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
+    public virtual Users User { get; set; } = null!;
+
+    public virtual ICollection<Tags> Tags { get; set; } = new List<Tags>();
 }

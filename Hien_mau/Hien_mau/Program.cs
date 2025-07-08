@@ -53,11 +53,11 @@ namespace Hien_mau
             });
 
             builder.Services.AddDbContext<Hien_mauContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<NotificationLog>();
-            builder.Services.AddScoped<ActivityLogger>();
-            builder.Services.AddHostedService<CancelExpiredService>();
+            //builder.Services.AddScoped<ActivityLogger>();
+            //builder.Services.AddHostedService<CancelExpiredService>();
 
 
 

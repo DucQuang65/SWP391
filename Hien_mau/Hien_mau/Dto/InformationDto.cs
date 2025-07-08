@@ -21,9 +21,9 @@
         public string RhType { get; set; }
         public float? Weight { get; set; }
         public float? Height { get; set; }
-        public byte Status { get; set; }
+        public byte? Status { get; set; }
         public int RoleID { get; set; }
-        public string Department { get; set; }
+        public int? DepartmentId { get; set; }
         public DateTime? CreatedAt { get; set; }
     }
 }

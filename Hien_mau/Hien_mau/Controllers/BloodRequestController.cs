@@ -26,7 +26,7 @@ namespace Hien_mau.Controllers
                 {
                     UserID = x.UserId,
                     RequestId = x.RequestId,
-                    PatientID = x.PatientID,
+                    PatientId = x.PatientId,
                     PatientName = x.PatientName,
                     Age = x.Age,
                     Gender = x.Gender,
@@ -43,14 +43,14 @@ namespace Hien_mau.Controllers
             return Ok(bloodRequests);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<BloodRequest>> GetRequestById(int id)
+        public async Task<ActionResult<BloodRequests>> GetRequestById(int id)
         {
             var bloodRequests = await _context.BloodRequests
                 .Select(x => new BloodRequestDto
                 {
                     UserID = x.UserId,
                     RequestId = x.RequestId,
-                    PatientID = x.PatientID,
+                    PatientId = x.PatientId,
                     PatientName = x.PatientName,
                     Age = x.Age,
                     Gender = x.Gender,
@@ -90,10 +90,10 @@ namespace Hien_mau.Controllers
             var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
             var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
-            var bloodRequest = new BloodRequest
+            var bloodRequest = new BloodRequests
             {
                 UserId = bloodRequestDto.UserID,
-                PatientID = bloodRequestDto.PatientID,
+                PatientId = bloodRequestDto.PatientId,
                 PatientName = bloodRequestDto.PatientName,
                 Age = bloodRequestDto.Age,
                 Gender = bloodRequestDto.Gender,
@@ -113,7 +113,6 @@ namespace Hien_mau.Controllers
                 {
                     bloodRequest.DoctorName = doctorUser.Name;
                     bloodRequest.DoctorPhone = doctorUser.Phone;
-                    bloodRequest.IsAutoApproved = true;
                     bloodRequest.Status = 1;
                     bloodRequest.FacilityName = "Ánh Dương";
                 }
@@ -128,7 +127,7 @@ namespace Hien_mau.Controllers
             _context.BloodRequests.Add(bloodRequest);
             await _context.SaveChangesAsync();
             // Ghi log sau khi đã lưu với UserId tương ứng
-            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Tạo yêu cầu:", "Create");
+            //await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Tạo yêu cầu:", "Create");
 
             bloodRequestDto.RequestId = bloodRequest.RequestId;
             bloodRequestDto.Status = bloodRequest.Status;
@@ -146,7 +145,7 @@ namespace Hien_mau.Controllers
             if (bloodRequest.Status == 2 || bloodRequest.Status == 3 || bloodRequest.Status == 4)
                 return BadRequest();
 
-            bloodRequest.PatientID = bloodRequestDto.PatientID;
+            bloodRequest.PatientId = bloodRequestDto.PatientId;
             bloodRequest.PatientName = bloodRequestDto.PatientName;
             bloodRequest.Age = bloodRequestDto.Age;
             bloodRequest.Gender = bloodRequestDto.Gender;
@@ -163,7 +162,7 @@ namespace Hien_mau.Controllers
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
             // Ghi log sau khi đã lưu với UserId tương ứng
-            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Sửa yêu cầu:", "Update");
+            //await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Sửa yêu cầu:", "Update");
             return Ok();
         }
 
@@ -179,7 +178,7 @@ namespace Hien_mau.Controllers
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
             // Ghi log sau khi đã lưu với UserId tương ứng
-            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Xóa yêu cầu:", "Delete");
+            //await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", $"Xóa yêu cầu:", "Delete");
 
             return Ok();
         }

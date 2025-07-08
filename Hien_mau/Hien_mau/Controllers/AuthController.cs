@@ -22,7 +22,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<Users>> Register(UserDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

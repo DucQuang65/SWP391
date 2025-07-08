@@ -23,5 +23,5 @@ public partial class PublicBloodRequest
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual BloodRequest Request { get; set; } = null!;
+    public virtual BloodRequests Request { get; set; } = null!;
 }

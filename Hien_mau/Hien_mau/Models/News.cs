@@ -19,7 +19,7 @@ public partial class News
 
     public DateTime? PostedAt { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual Users User { get; set; } = null!;
 
-    public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
+    public virtual ICollection<Tags> Tags { get; set; } = new List<Tags>();
 }

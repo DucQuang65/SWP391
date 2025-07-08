@@ -5,10 +5,10 @@ namespace Hien_mau.Services
 {
     public interface IAuthService
     {
-        Task<User?> RegisterAsync(UserDto request);
+        Task<Users?> RegisterAsync(UserDto request);
         Task<string?> LoginAsync(UserDto request);
-        Task<User?> GetUserByEmailAsync(string email);
-        Task<User> CreateUserFromGoogleAsync(string email, string name);
-        string CreateToken(User user);
+        Task<Users?> GetUserByEmailAsync(string email);
+        Task<Users> CreateUserFromGoogleAsync(string email, string name);
+        string CreateToken(Users user);
     }
 }

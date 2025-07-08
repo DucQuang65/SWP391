@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class Notification
+public partial class Notifications
 {
     [Key]
     public int NotificationId { get; set; }
 
-    public int UserID { get; set; }
+    public int UserId { get; set; }
 
     public string Title { get; set; } = null!;
 
@@ -17,11 +17,11 @@ public partial class Notification
 
     public string Type { get; set; } = null!;
 
-    public byte? Priority { get; set; }
+    public bool? Priority { get; set; }
 
     public bool? IsRead { get; set; }
 
     public DateTime? SentAt { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual Users User { get; set; } = null!;
 }
