@@ -825,7 +825,7 @@ VALUES
 GO
 
 -- Insert data into BloodInventory
-INSERT INTO BloodInventories (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
+INSERT INTO BloodInventories (BloodGroup, RhType, ComponentID, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
 VALUES
 -- A+ (12 records: 3 per ComponentType)
 ('A', 'Rh+', 1, 10, 0, 2, '450ml', '2025-06-07', NULL),
