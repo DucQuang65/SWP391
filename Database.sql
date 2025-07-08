@@ -10,6 +10,12 @@ CREATE TABLE Roles (
     RoleName NVARCHAR(20) NOT NULL UNIQUE -- Guest, Member, Staff-Doctor, Staff-BloodManager, Admin
 );
 
+-- Department: Stores information about hospital department
+CREATE TABLE Departments(
+	DepartmentID INT PRIMARY KEY IDENTITY(1,1),
+	DepartmentName NVARCHAR(255),
+);
+
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
@@ -42,11 +48,7 @@ CREATE TABLE Users (
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
--- Department: Stores information about hospital department
-CREATE TABLE Departments(
-	DepartmentID INT PRIMARY KEY IDENTITY(1,1),
-	DepartmentName NVARCHAR(255),
-);
+
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
     ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
@@ -118,6 +120,12 @@ CREATE TABLE ActivityLogs (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
+-- Components table: Stores blood components
+CREATE TABLE Components (
+    ComponentID INT PRIMARY KEY IDENTITY(1,1),
+    ComponentType NVARCHAR(20) NOT NULL -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
+);
+
 -- Create BloodInventory table first
 CREATE TABLE BloodInventories (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
@@ -130,8 +138,8 @@ CREATE TABLE BloodInventories (
     LastUpdated DATETIME DEFAULT GETDATE(),
     BagType NVARCHAR(5), -- 250ml, 350ml, 450ml
     ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
-    ExpirationDate DATETIME -- Expiration date
-    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
+    ExpirationDate DATETIME, -- Expiration date
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID)
 );
 
 
@@ -190,11 +198,7 @@ CREATE TABLE BloodRequests (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
--- Components table: Stores blood components
-CREATE TABLE Components (
-    ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
-);
+
 
 -- BloodDonationHistory table: Stores donation records
 CREATE TABLE BloodDonationHistories (
