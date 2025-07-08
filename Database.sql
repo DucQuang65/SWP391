@@ -152,7 +152,7 @@ CREATE TABLE BloodInventoryHistories (
     ExpirationDate DATETIME, -- Expiration date
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
-    FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
+    FOREIGN KEY (InventoryID) REFERENCES BloodInventories(InventoryID)
 );
 
  CREATE TABLE Patients (
