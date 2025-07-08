@@ -1111,7 +1111,7 @@ VALUES
     (5, N'Có 1 bài viết mới', N'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
 GO
 
-INSERT INTO ActivityLog (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
+INSERT INTO ActivityLogs (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
 VALUES
 -- Logs cho BloodArticles của UserID 2 (Doctor)
 (2, 'Create', 'Article', 1, N'Tạo bài viết: Giới thiệu nhóm máu A Rh+', '2025-06-08'),
