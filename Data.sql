@@ -22,7 +22,7 @@ VALUES
 GO
 	
 -- Insert data into Users table
-INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, Department)
+INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, DepartmentID)
 VALUES
 	-- Role: Member (RoleID = 1)
     ('vinhntqse180354@fpt.edu.vn','Ab1234@', '0901234567', 'Vinh', 30, 'Male', N'123 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
@@ -825,7 +825,7 @@ VALUES
 GO
 
 -- Insert data into BloodInventory
-INSERT INTO BloodInventory (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
+INSERT INTO BloodInventories (BloodGroup, RhType, ComponentType, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
 VALUES
 -- A+ (12 records: 3 per ComponentType)
 ('A', 'Rh+', 1, 10, 0, 2, '450ml', '2025-06-07', NULL),
@@ -934,7 +934,7 @@ VALUES
 GO
 
 -- Insert data into BloodInventoryHistory
-INSERT INTO BloodInventoryHistory
+INSERT INTO BloodInventoryHistories
 (BloodGroup, RhType, ComponentID, ActionType, Quantity, Notes, PerformedBy, BagType, ReceivedDate, ExpirationDate)
 VALUES
 ('A', 'Rh+', 1, N'Xuất', 2, N'Dùng cho phẫu thuật', 8, '250ml', '2025-06-17', '2025-07-22'),
