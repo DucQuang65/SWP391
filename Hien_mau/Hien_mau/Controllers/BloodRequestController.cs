@@ -38,6 +38,7 @@ namespace Hien_mau.Controllers
                     RhType = x.RhType,
                     Quantity = x.Quantity,
                     Reason = x.Reason,
+                    Status = x.Status,
                     CreatedTime = x.CreatedTime
                 }).ToListAsync();
             return Ok(bloodRequests);
@@ -62,6 +63,7 @@ namespace Hien_mau.Controllers
                     RhType = x.RhType,
                     Quantity = x.Quantity,
                     Reason = x.Reason,
+                    Status = x.Status,
                     CreatedTime = x.CreatedTime
                 }).FirstOrDefaultAsync();
 
@@ -106,7 +108,7 @@ namespace Hien_mau.Controllers
                 CreatedTime = vietNamTime
             };
 
-            if (bloodRequestDto.Relationship == "Doctor")
+            if (bloodRequestDto.Relationship == "Bác sĩ phụ trách")
             {
                 var doctorUser = await _context.Users.FindAsync(bloodRequestDto.UserID);
                 if (doctorUser != null)
