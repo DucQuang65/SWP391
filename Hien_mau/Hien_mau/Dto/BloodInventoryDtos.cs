@@ -5,7 +5,7 @@
         public int InventoryID { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;
-        public string ComponentType { get; set; } = null!;
+        public int ComponentId { get; set; }
         public string BagType { get; set; } = null!; 
         public int Quantity { get; set; } 
         public string? Notes { get; set; }
@@ -17,7 +17,7 @@
         public int InventoryID { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;
-        public string ComponentType { get; set; } = null!;
+        public int ComponentId { get; set; } 
         public string BagType { get; set; } = null!;
         public int Quantity { get; set; }
         public byte Status { get; set; }
@@ -30,10 +30,10 @@
     {
 
         public int InventoryID { get; set; }
-        public DateTime PerformedAt { get; set; }
+        public DateTime? PerformedAt { get; set; }
         public string BloodGroup { get; set; } = null!;
         public string RhType { get; set; } = null!;
-        public string ComponentType { get; set; } = null!;
+        public int ComponentId { get; set; } 
         public int Quantity { get; set; }
         public string PerformedByName { get; set; } = null!;
         public string ActionType { get; set; } = null!;

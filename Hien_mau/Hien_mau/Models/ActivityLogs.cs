@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hien_mau.Models
 {
-    [Table("ActivityLog")]
+    [Table("ActivityLogs")]
     public partial class ActivityLogs
     {
         [Key]
@@ -15,7 +15,7 @@ namespace Hien_mau.Models
         [Required]
         public string ActivityType { get; set; } = null!;
 
-        public int EntityId { get; set; }
+        public int? EntityId { get; set; }
         [Required]
         public string EntityType { get; set; } = null!;
 

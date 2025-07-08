@@ -16,7 +16,7 @@ public class AppointmentDetailDto
     public float Weight { get; set; }
     public float Height { get; set; }
   
-    public byte Status { get; set; }
+    public byte? Status { get; set; }
     public int AppointmentId { get; set; }
     public int UserId { get; set; }
     public DateTime? CreatedAt { get; set; }
@@ -24,5 +24,5 @@ public class AppointmentDetailDto
     public DateTime? LastDonationDate { get; set; }
     public DateTime AppointmentDate { get; set; }
     public string? Notes { get; set; }
-    public bool Cancel { get; set; }
+    public bool? Cancel { get; set; }
 }

@@ -8,7 +8,7 @@ namespace Hien_mau.Dto
         public string? Message { get; set; }
         public string? Type { get; set; }
         public int UserId { get; set; }
-        public byte Priority { get; set; }
+        public bool Priority { get; set; }
         public bool IsRead { get; set; } = false;
         public DateTime SentAt { get; set; } = DateTime.Now;
         
@@ -20,7 +20,7 @@ namespace Hien_mau.Dto
         public string? Message { get; set; }
         public string? Type { get; set; }
         public int UserId { get; set; }
-        public byte Priority { get; set; }
+        public bool Priority { get; set; }
         public bool IsRead { get; set; } = false;
         public DateTime SentAt { get; set; } = DateTime.Now;
     }
