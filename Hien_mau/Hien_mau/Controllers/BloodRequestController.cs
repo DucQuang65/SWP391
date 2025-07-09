@@ -81,7 +81,7 @@ namespace Hien_mau.Controllers
             }           
 
             var existingRequest = await _context.BloodRequests
-            .Where(x => x.UserId == bloodRequestDto.UserID && (x.Status == 0 || x.Status == 1)) 
+            .Where(x => x.UserId == bloodRequestDto.UserID && x.Status == 0 ) 
             .FirstOrDefaultAsync();
 
             if (existingRequest != null)
@@ -104,7 +104,6 @@ namespace Hien_mau.Controllers
                 RhType = bloodRequestDto.RhType,
                 Quantity = bloodRequestDto.Quantity,
                 Reason = bloodRequestDto.Reason,
-                Status = 0,
                 CreatedTime = vietNamTime
             };
 
@@ -121,6 +120,7 @@ namespace Hien_mau.Controllers
             }
             else
             {
+                bloodRequest.Status = 0; 
                 bloodRequest.DoctorName = bloodRequestDto.DoctorName;
                 bloodRequest.DoctorPhone = bloodRequestDto.DoctorPhone;
                 bloodRequest.FacilityName = bloodRequestDto.FacilityName;
