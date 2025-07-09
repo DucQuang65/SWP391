@@ -35,7 +35,7 @@ public partial class Users
 
     public string? Address { get; set; }
 
-    public float? Distance { get; set; }
+    public double? Distance { get; set; }
 
     public string? BloodGroup { get; set; }
 

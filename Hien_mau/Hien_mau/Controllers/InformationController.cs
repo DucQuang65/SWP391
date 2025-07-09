@@ -164,7 +164,7 @@ namespace Hien_mau.Controllers
             user.District = informationDto.District;
             user.Ward = informationDto.Ward;
             user.Address = informationDto.Address;
-            user.Distance = informationDto.Distance;
+            //user.Distance = informationDto.Distance;
             user.BloodGroup = informationDto.BloodGroup;
             user.RhType = informationDto.RhType;
             user.Weight = informationDto.Weight;
@@ -176,9 +176,26 @@ namespace Hien_mau.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             // Ghi log sau khi đã lưu với UserId tương ứng
-            //await logger.NotiLog(id, "Profile", $"Sửa hồ sơ:", "Update");
+            await logger.NotiLog(id, "Profile", $"Sửa hồ sơ:", "Update");
             return Ok();
         }
+
+        [HttpPatch("{id}/distance")]
+        public async Task<IActionResult> PatchDistance(int id, UpdateDistanceDto updateDistanceDto)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Distance = updateDistanceDto.Distance;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)

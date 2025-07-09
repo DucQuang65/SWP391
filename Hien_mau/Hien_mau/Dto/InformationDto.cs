@@ -16,7 +16,7 @@
         public string District { get; set; }       
         public string Ward { get; set; }           
         public string Address { get; set; }
-        public float? Distance { get; set; }
+        public double? Distance { get; set; }
         public string BloodGroup { get; set; }
         public string RhType { get; set; }
         public float? Weight { get; set; }
