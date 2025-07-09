@@ -1041,12 +1041,12 @@ INSERT INTO BloodRequests (UserID, PatientID, PatientName, Age, Gender, Relation
 VALUES
     (1, 1, N'Nguyễn Văn An', 35, N'Nam', N'Bản thân', N'Bệnh viện Chợ Rẫy', N'Trần Văn Minh', '0912345678', 'A', 'Rh+', 1, 2, N'Phẫu thuật tim', 2, '2025-06-23 09:00:00'),
     (2, 2, N'Trần Thị Bình', 39, N'Nữ', N'Bạn bè', N'Bệnh viện Bạch Mai', N'Lê Quốc Hùng', '0987654321', 'O', 'Rh+', 3, 1, N'Cấp cứu tai nạn', 1, '2025-06-24 10:30:00'),
-    (3, 8, N'Ngô Minh Tuấn', 32, N'Nam', N'Bạn bè', N'Bệnh viện Nhân Dân Gia Định', N'Phạm Văn Hòa', '0922345678', 'O', 'Rh-', 4, 2, N'Hỗ trợ cấp cứu', 2, '2025-06-30 16:00:00');	
+    (3, 8, N'Ngô Minh Tuấn', 32, N'Nam', N'Bạn bè', N'Bệnh viện Nhân Dân Gia Định', N'Phạm Văn Hòa', '0922345678', 'O', 'Rh-', 4, 2, N'Hỗ trợ cấp cứu', 2, '2025-06-30 16:00:00'),	
     (7, 3, N'Phạm Minh Châu', 25, N'Nữ', N'Gia đình', N'Bệnh viện Từ Dũ', N'Nguyễn Thị Lan', '0908765432', 'A', 'Rh-', 2, 2, N'Sinh mổ', 0, '2025-06-25 11:15:00'),
     (8, 4, N'Lê Quốc Dũng', 49, N'Nam', N'Bản thân', N'Bệnh viện 115', N'Hoàng Văn Tuấn', '0933456789', 'B', 'Rh+', 4, 3, N'Hóa trị ung thư', 3, '2025-06-26 12:00:00'),
     (9, 5, N'Hoàng Thị Mai', 29, N'Nữ', N'Bạn bè', N'Bệnh viện Nhi Đồng', N'Võ Thị Thanh', '0971234567', 'AB', 'Rh+', NULL, 1, N'Chảy máu cấp', 2, '2025-06-27 13:45:00'),
     (11, 6, N'Võ Văn Hùng', 37, N'Nam', N'Gia đình', N'Bệnh viện Đại học Y Dược', N'Đỗ Minh Khang', '0945678901', 'AB', 'Rh-', 3, 2, N'Ghép tạng', 1, '2025-06-28 14:20:00'),
-    (12, 7, N'Đỗ Thị Lan', 19, N'Nữ', N'Bản thân', N'Bệnh viện Chấn thương Chỉnh hình', N'Ngô Văn Phát', '0967890123', 'B', 'Rh-', 2, 1, N'Phẫu thuật xương', 0, '2025-06-29 15:10:00'),
+    (12, 7, N'Đỗ Thị Lan', 19, N'Nữ', N'Bản thân', N'Bệnh viện Chấn thương Chỉnh hình', N'Ngô Văn Phát', '0967890123', 'B', 'Rh-', 2, 1, N'Phẫu thuật xương', 0, '2025-06-29 15:10:00');
 GO	
 	
 -- Insert data into BloodDonationHistory table
