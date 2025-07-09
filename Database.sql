@@ -34,7 +34,7 @@ CREATE TABLE Users (
     District NVARCHAR(50), -- AES encrypted
     Ward NVARCHAR(255),   -- AES encrypted
     Address NVARCHAR(255), -- AES encrypted
-    Distance FLOAT, -- Distance: user address-hospital
+    Distance DOUBLE, -- Distance: user address-hospital
     BloodGroup NVARCHAR(2), -- A, B, AB, O
     RhType NVARCHAR(3), -- Rh+, Rh-
     Weight FLOAT, -- Weight in kg
