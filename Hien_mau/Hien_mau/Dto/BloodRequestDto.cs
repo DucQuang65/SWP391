@@ -3,7 +3,7 @@
     public class BloodRequestDto
     {
         public int RequestId { get; set; }
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public int? PatientId { get; set; }
         public string PatientName { get; set; }
         public int? Age { get; set; }

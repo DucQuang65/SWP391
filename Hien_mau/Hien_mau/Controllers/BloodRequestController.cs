@@ -24,7 +24,7 @@ namespace Hien_mau.Controllers
             var bloodRequests = await _context.BloodRequests
                 .Select(x => new BloodRequestDto
                 {
-                    UserID = x.UserId,
+                    UserId = x.UserId,
                     RequestId = x.RequestId,
                     PatientId = x.PatientId,
                     PatientName = x.PatientName,
@@ -49,7 +49,7 @@ namespace Hien_mau.Controllers
             var bloodRequests = await _context.BloodRequests
                 .Select(x => new BloodRequestDto
                 {
-                    UserID = x.UserId,
+                    UserId = x.UserId,
                     RequestId = x.RequestId,
                     PatientId = x.PatientId,
                     PatientName = x.PatientName,
@@ -81,7 +81,7 @@ namespace Hien_mau.Controllers
             }           
 
             var existingRequest = await _context.BloodRequests
-            .Where(x => x.UserId == bloodRequestDto.UserID && x.Status == 0 ) 
+            .Where(x => x.UserId == bloodRequestDto.UserId && x.Status == 0) 
             .FirstOrDefaultAsync();
 
             if (existingRequest != null)
@@ -94,7 +94,7 @@ namespace Hien_mau.Controllers
 
             var bloodRequest = new BloodRequests
             {
-                UserId = bloodRequestDto.UserID,
+                UserId = bloodRequestDto.UserId,
                 PatientId = bloodRequestDto.PatientId,
                 PatientName = bloodRequestDto.PatientName,
                 Age = bloodRequestDto.Age,
@@ -109,7 +109,7 @@ namespace Hien_mau.Controllers
 
             if (bloodRequestDto.Relationship == "Bác sĩ phụ trách")
             {
-                var doctorUser = await _context.Users.FindAsync(bloodRequestDto.UserID);
+                var doctorUser = await _context.Users.FindAsync(bloodRequestDto.UserId);
                 if (doctorUser != null)
                 {
                     bloodRequest.DoctorName = doctorUser.Name;
