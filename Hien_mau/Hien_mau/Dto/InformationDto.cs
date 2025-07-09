@@ -19,8 +19,8 @@
         public double? Distance { get; set; }
         public string BloodGroup { get; set; }
         public string RhType { get; set; }
-        public float? Weight { get; set; }
-        public float? Height { get; set; }
+        public double? Weight { get; set; }
+        public double? Height { get; set; }
         public byte? Status { get; set; }
         public int RoleID { get; set; }
         public int? DepartmentId { get; set; }
