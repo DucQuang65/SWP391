@@ -16,15 +16,12 @@ CREATE TABLE Departments(
 	DepartmentName NVARCHAR(255),
 );
 
-<<<<<<< HEAD
-=======
 -- Components table: Stores blood components
 CREATE TABLE Components (
     ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
+    ComponentType NVARCHAR(20) NOT NULL -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
 );
 
->>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
@@ -57,10 +54,6 @@ CREATE TABLE Users (
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
     ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
@@ -110,12 +103,6 @@ CREATE TABLE ActivityLogs (
     Description NVARCHAR(MAX),
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
-
--- Components table: Stores blood components
-CREATE TABLE Components (
-    ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    ComponentType NVARCHAR(20) NOT NULL -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
 );
 
 -- Create BloodInventory table first
@@ -190,11 +177,6 @@ CREATE TABLE BloodRequests (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 -- BloodDonationHistory table: Stores donation records
 CREATE TABLE BloodDonationHistories (
     DonationID INT PRIMARY KEY IDENTITY(1,1),
