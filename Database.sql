@@ -19,7 +19,7 @@ CREATE TABLE Departments(
 -- Components table: Stores blood components
 CREATE TABLE Components (
     ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
+    ComponentType NVARCHAR(20) NOT NULL -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
 );
 
 -- Users table: Stores user accounts with encrypted data
@@ -117,8 +117,8 @@ CREATE TABLE BloodInventories (
     LastUpdated DATETIME DEFAULT GETDATE(),
     BagType NVARCHAR(5), -- 250ml, 350ml, 450ml
     ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
-    ExpirationDate DATETIME -- Expiration date
-    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
+    ExpirationDate DATETIME, -- Expiration date
+    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID)
 );
 
 
