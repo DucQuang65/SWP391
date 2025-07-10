@@ -8,24 +8,16 @@ public partial class BloodDonationHistories
 {
     [Key]
     public int DonationId { get; set; }
-
-    public int UserId { get; set; }
-
+   
+    public int AppointmentId { get; set; }
     public DateTime DonationDate { get; set; }
-
     public string BloodGroup { get; set; } = null!;
-
     public string RhType { get; set; } = null!;
-
-    public int? ComponentId { get; set; }
-
-    public int Quantity { get; set; }
-
-    public bool? IsSuccess { get; set; }
-
+    public int? DoctorId { get; set; }
     public string? Notes { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public bool IsSuccess { get; set; } = false;
+    public Appointments? Appointment { get; set; }
+    public Users? Doctor { get; set; }
 
-    public virtual Components? Component { get; set; }
-
-    public virtual Users User { get; set; } = null!;
 }

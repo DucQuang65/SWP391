@@ -23,7 +23,7 @@ namespace Hien_mau.Controllers
         {
             try
             {
-                var inventories = await _context.BloodInventory
+                var inventories = await _context.BloodInventories
                     .AsNoTracking()
                     .Select(i => new BloodInventoryDto
                     {
@@ -55,7 +55,7 @@ namespace Hien_mau.Controllers
         {
             try
             {
-                var histories = await _context.BloodInventoryHistory
+                var histories = await _context.BloodInventoryHistories
                     .AsNoTracking()
                     .Select(h => new
                     {
@@ -120,7 +120,7 @@ namespace Hien_mau.Controllers
                 if (!userExists)
                     return BadRequest("Người thực hiện không tồn tại.");
 
-                var inventory = await _context.BloodInventory
+                var inventory = await _context.BloodInventories
                     .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
                                             i.RhType == request.RhType &&
@@ -156,10 +156,10 @@ namespace Hien_mau.Controllers
                         LastUpdated = DateTime.Now,
                         ExpirationDate = expirationDate
                     };
-                    _context.BloodInventory.Add(newInventory);
+                    _context.BloodInventories.Add(newInventory);
                     await _context.SaveChangesAsync();
 
-                    inventoryId = await _context.BloodInventory
+                    inventoryId = await _context.BloodInventories
                         .AsNoTracking()
                         .Where(i => i.BloodGroup == request.BloodGroup &&
                                     i.RhType == request.RhType &&
@@ -188,7 +188,7 @@ namespace Hien_mau.Controllers
                         LastUpdated = DateTime.Now,
                         ExpirationDate = expirationDate
                     };
-                    _context.BloodInventory.Update(updatedInventory);
+                    _context.BloodInventories.Update(updatedInventory);
                     await _context.SaveChangesAsync();
                 }
 
@@ -211,7 +211,7 @@ namespace Hien_mau.Controllers
                     ExpirationDate = expirationDate
                 };
 
-                _context.BloodInventoryHistory.Add(history);
+                _context.BloodInventoryHistories.Add(history);
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();
@@ -241,7 +241,7 @@ namespace Hien_mau.Controllers
                 if (!userExists)
                     return BadRequest("Người thực hiện không tồn tại.");
 
-                var inventory = await _context.BloodInventory
+                var inventory = await _context.BloodInventories
                     .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
                                             i.RhType == request.RhType &&
@@ -284,7 +284,7 @@ namespace Hien_mau.Controllers
                     ExpirationDate = expirationDate
                 };
 
-                _context.BloodInventory.Update(updatedInventory);
+                _context.BloodInventories.Update(updatedInventory);
                 await _context.SaveChangesAsync();
 
                 var inventoryId = inventory.InventoryId;
@@ -305,7 +305,7 @@ namespace Hien_mau.Controllers
                     ExpirationDate = expirationDate
                 };
 
-                _context.BloodInventoryHistory.Add(history);
+                _context.BloodInventoryHistories.Add(history);
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();

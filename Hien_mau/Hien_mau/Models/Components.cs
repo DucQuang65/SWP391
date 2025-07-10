@@ -11,7 +11,7 @@ public partial class Components
 
     public string ComponentType { get; set; } = null!;
 
-    public virtual ICollection<BloodDonationHistories> BloodDonationHistories { get; set; } = new List<BloodDonationHistories>();
+   
 
     public virtual ICollection<BloodInventories> BloodInventories { get; set; } = new List<BloodInventories>();
 

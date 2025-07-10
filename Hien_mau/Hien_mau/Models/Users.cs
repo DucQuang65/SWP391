@@ -52,6 +52,7 @@ public partial class Users
     public int? DepartmentId { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+    public DateTime? SelfReportedLastDonationDate { get; set; }
 
     public virtual ICollection<ActivityLogs> ActivityLogs { get; set; } = new List<ActivityLogs>();
 

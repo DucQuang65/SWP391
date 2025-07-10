@@ -25,7 +25,7 @@ namespace Hien_mau.Services
                 {
                     var context = scope.ServiceProvider.GetRequiredService<Hien_mauContext>();
 
-                    var expiredInventories = await context.BloodInventory
+                    var expiredInventories = await context.BloodInventories
                         .AsNoTracking()
                         .Where(i => i.ExpirationDate < DateTime.Now && i.Quantity > 0)
                         .ToListAsync();
@@ -47,7 +47,7 @@ namespace Hien_mau.Services
                             ExpirationDate = inventory.ExpirationDate
                         };
 
-                        context.BloodInventory.Update(updatedInventory);
+                        context.BloodInventories.Update(updatedInventory);
 
                         var history = new BloodInventoryHistories
                         {
@@ -65,7 +65,7 @@ namespace Hien_mau.Services
                             ExpirationDate = inventory.ExpirationDate
                         };
 
-                        context.BloodInventoryHistory.Add(history);
+                        context.BloodInventoryHistories.Add(history);
                         await context.SaveChangesAsync();
                     }
 
