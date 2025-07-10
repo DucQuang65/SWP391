@@ -28,6 +28,7 @@ VALUES
 (N'Tiểu cầu'),        -- ID = 3
 (N'Toàn phần');       -- ID = 4
 
+
 -- Insert data into Users table
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, DepartmentID)
 VALUES
@@ -70,10 +71,10 @@ VALUES
     -- Khoa Ngoại
     ('dung.ngoai@gmail.com', 'Ab1234@', '0955555001', 'Dung', 33, 'Female', N'123 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 'B', 'Rh+', 1, 2, 8),
     ('khoa.ngoai@gmail.com', 'Ab1234@', '0955555002', 'Khoa', 47, 'Male', N'9 Phạm Văn Đồng, TP Thủ Đức, TP.HCM', 'A', 'Rh-', 1, 2, 8),
-
     -- Khoa Huyết học
     ('phong.huyethoc@gmail.com', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, 1),
     ('trang.huyethoc@gmail.com', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, 1);
+
 
 GO
 
@@ -1031,10 +1032,32 @@ VALUES
 ('A', 'Rh-', 1, N'Hủy', 1, N'Túi máu hỏng', 7, '350ml', '2025-06-14', '2025-07-26'),
 ('AB', 'Rh+', 2, N'Thêm', 5, N'Hiến máu', 8, '250ml', '2025-06-13', '2026-06-13'),
 ('O', 'Rh-', 3, N'Xuất', 2, N'Cấp cứu tai nạn', 9, '450ml', '2025-06-12', '2025-06-17');
-
 GO
 
+INSERT INTO Patients (FullName, Gender, DateOfBirth, Age, Phone, Address, Email)
+VALUES
+    (N'Nguyễn Văn An', N'Nam', '1990-05-15', 35, '0912345678', N'123 Đường Lê Lợi, Quận 1, TP.HCM', 'nguyenvanan@gmail.com'),
+    (N'Trần Thị Bình', N'Nữ', '1985-08-22', 39, '0987654321', N'45 Đường Nguyễn Huệ, Quận 3, TP.HCM', 'tranbinh85@yahoo.com'),
+    (N'Phạm Minh Châu', N'Nữ', '2000-03-10', 25, '0908765432', N'78 Đường Trần Hưng Đạo, Quận 5, TP.HCM', 'phamchau2000@gmail.com'),
+    (N'Lê Quốc Dũng', N'Nam', '1975-11-30', 49, '0933456789', N'12 Đường Phạm Văn Đồng, Thủ Đức, TP.HCM', 'lequocdung75@gmail.com'),
+    (N'Hoàng Thị Mai', N'Nữ', '1995-07-20', 29, '0971234567', N'56 Đường Lý Thường Kiệt, Quận 10, TP.HCM', 'hoangmai95@gmail.com'),
+    (N'Võ Văn Hùng', N'Nam', '1988-02-14', 37, '0945678901', N'89 Đường Nguyễn Trãi, Quận 7, TP.HCM', 'vohung88@gmail.com'),
+    (N'Đỗ Thị Lan', N'Nữ', '2005-09-05', 19, '0967890123', N'34 Đường Cách Mạng Tháng Tám, Quận 3, TP.HCM', 'dolan2005@gmail.com'),
+    (N'Ngô Minh Tuấn', N'Nam', '1992-12-25', 32, '0922345678', N'67 Đường Võ Thị Sáu, Quận 1, TP.HCM', 'ngominhtuan@gmail.com');
+GO
 
+INSERT INTO BloodRequests (UserID, PatientID, PatientName, Age, Gender, Relationship, FacilityName, DoctorName, DoctorPhone, BloodGroup, RhType, ComponentID, Quantity, Reason, Status, CreatedTime)
+VALUES
+    (1, 1, N'Nguyễn Văn An', 35, N'Nam', N'Bản thân', N'Bệnh viện Chợ Rẫy', N'Trần Văn Minh', '0912345678', 'A', 'Rh+', 1, 2, N'Phẫu thuật tim', 2, '2025-06-23 09:00:00'),
+    (2, 2, N'Trần Thị Bình', 39, N'Nữ', N'Bạn bè', N'Bệnh viện Bạch Mai', N'Lê Quốc Hùng', '0987654321', 'O', 'Rh+', 3, 1, N'Cấp cứu tai nạn', 1, '2025-06-24 10:30:00'),
+    (3, 8, N'Ngô Minh Tuấn', 32, N'Nam', N'Bạn bè', N'Bệnh viện Nhân Dân Gia Định', N'Phạm Văn Hòa', '0922345678', 'O', 'Rh-', 4, 2, N'Hỗ trợ cấp cứu', 2, '2025-06-30 16:00:00'),	
+    (7, 3, N'Phạm Minh Châu', 25, N'Nữ', N'Gia đình', N'Bệnh viện Từ Dũ', N'Nguyễn Thị Lan', '0908765432', 'A', 'Rh-', 2, 2, N'Sinh mổ', 0, '2025-06-25 11:15:00'),
+    (8, 4, N'Lê Quốc Dũng', 49, N'Nam', N'Bản thân', N'Bệnh viện 115', N'Hoàng Văn Tuấn', '0933456789', 'B', 'Rh+', 4, 3, N'Hóa trị ung thư', 3, '2025-06-26 12:00:00'),
+    (9, 5, N'Hoàng Thị Mai', 29, N'Nữ', N'Bạn bè', N'Bệnh viện Nhi Đồng', N'Võ Thị Thanh', '0971234567', 'AB', 'Rh+', NULL, 1, N'Chảy máu cấp', 2, '2025-06-27 13:45:00'),
+    (11, 6, N'Võ Văn Hùng', 37, N'Nam', N'Gia đình', N'Bệnh viện Đại học Y Dược', N'Đỗ Minh Khang', '0945678901', 'AB', 'Rh-', 3, 2, N'Ghép tạng', 1, '2025-06-28 14:20:00'),
+    (12, 7, N'Đỗ Thị Lan', 19, N'Nữ', N'Bản thân', N'Bệnh viện Chấn thương Chỉnh hình', N'Ngô Văn Phát', '0967890123', 'B', 'Rh-', 2, 1, N'Phẫu thuật xương', 0, '2025-06-29 15:10:00');
+GO		
+	
 -- Insert data into BloodDonationHistory table
 INSERT INTO BloodDonationHistories (UserID, DonationDate, BloodGroup, RhType, ComponentID, Quantity, IsSuccess, Notes)
 VALUES
