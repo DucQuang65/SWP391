@@ -1059,56 +1059,17 @@ VALUES
 GO		
 	
 -- Insert data into BloodDonationHistory table
-INSERT INTO BloodDonationHistories (UserID, DonationDate, BloodGroup, RhType, ComponentID, Quantity, IsSuccess, Notes)
+INSERT INTO BloodDonationHistories (AppointmentID, DonationDate, BloodGroup, RhType, DoctorID, Notes, CreatedAt, IsSuccess)
 VALUES
-    -- A+ (UserID: 1, Vinh)
-    (1, '2025-06-23 08:00:00', 'A', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
-    (1, '2025-06-24 09:00:00', 'A', 'Rh+', 2, 1, 1, N'Hiến máu tình nguyện'),
-    (1, '2025-06-25 10:00:00', 'A', 'Rh+', 3, 1, 1, N'Cho bệnh nhân ung thư'),
-    (1, '2025-06-26 11:00:00', 'A', 'Rh+', 1, 1, 1, N'Cho cấp cứu'),
+-- Thành công
+(1, '2025-06-20 08:00:00', 'A', 'Rh+', 4, N'Máu đã được chấp nhận', GETDATE(), 1),
 
-    -- A- (UserID: 5, Hieu)
-    (5, '2025-06-23 08:30:00', 'A', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
-    (5, '2025-06-24 09:30:00', 'A', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
-    (5, '2025-06-25 10:30:00', 'A', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
-    (5, '2025-06-26 11:30:00', 'A', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
+-- Thất bại do lý do liên quan đến máu
+(2, '2025-06-21 14:00:00', 'B', 'Rh-', 6, N'Phát hiện kháng thể bất thường trong máu', GETDATE(), 0),
 
-    -- B+ (UserID: 7, Nhi)
-    (7, '2025-06-23 09:00:00', 'B', 'Rh+', 4, 1, 1, N'Cho sự kiện cộng đồng'),
-    (7, '2025-06-24 10:00:00', 'B', 'Rh+', 2, 1, 1, N'Hiến máu định kỳ'),
-    (7, '2025-06-25 11:00:00', 'B', 'Rh+', 3, 1, 1, N'Cho phẫu thuật'),
-    (7, '2025-06-26 12:00:00', 'B', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
+-- Thành công
+(3, '2025-06-22 08:00:00', 'O', 'Rh+', 23, N'Máu đã được chấp nhận', GETDATE(), 1);
 
-    -- B- (UserID: 18, Vương)
-    (18, '2025-06-23 09:30:00', 'B', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
-    (18, '2025-06-24 10:30:00', 'B', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
-    (18, '2025-06-25 11:30:00', 'B', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
-    (18, '2025-06-26 12:30:00', 'B', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
-
-    -- AB+ (UserID: 8, Hoa)
-    (8, '2025-06-23 10:00:00', 'AB', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
-    (8, '2025-06-24 11:00:00', 'AB', 'Rh+', 2, 1, 1, N'Cho kho máu thế giới'),
-    (8, '2025-06-25 12:00:00', 'AB', 'Rh+', 3, 1, 1, N'Cho bệnh nhân ung thư'),
-    (8, '2025-06-26 13:00:00', 'AB', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
-
-    -- AB- (UserID: 12, Nhu)
-    (12, '2025-06-23 10:30:00', 'AB', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
-    (12, '2025-06-24 11:30:00', 'AB', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
-    (12, '2025-06-25 12:30:00', 'AB', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
-    (12, '2025-06-26 13:30:00', 'AB', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
-
-    -- O+ (UserID: 2, Duc)
-    (2, '2025-06-23 11:00:00', 'O', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
-    (2, '2025-06-24 12:00:00', 'O', 'Rh+', 2, 1, 1, N'Cho sự kiện cộng đồng'),
-    (2, '2025-06-25 13:00:00', 'O', 'Rh+', 3, 1, 1,  N'Cho phẫu thuật'),
-    (2, '2025-06-26 14:00:00', 'O', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
-
-    -- O- (UserID: 4, Kien)
-    (4, '2025-06-23 11:30:00', 'O', 'Rh-', 4, 1, 1, N'Cho quốc tế'),
-    (4, '2025-06-24 12:30:00', 'O', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
-    (4, '2025-06-25 13:30:00', 'O', 'Rh-', 3, 1, 1, N'Hiến máu hiếm'),
-    (4, '2025-06-26 14:30:00', 'O', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện');
-GO
 
 -- Insert data into Notifications table
 INSERT INTO Notifications (UserID, Title, Message, Type, IsRead, SentAt)
@@ -1142,26 +1103,25 @@ VALUES
 (6, 'Delete', 'News', 6, N'Xoá tin tức: TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025', '2025-06-19');
 GO
 
-INSERT INTO Appointments (UserID, AppointmentDate, Status, Notes, TimeSlot, LastDonationDate, CreatedAt)
+INSERT INTO Appointments (UserID, AppointmentDate, TimeSlot, Status, Cancel, Notes, CreatedAt)
 VALUES
-(2, '2025-08-25', 1, N'Tiếp nhận thành công', N'Sáng (7:00-12:00)', '2025-05-20', GETDATE()),
-(3, '2025-03-10', 1, N'Tự đăng ký và xác nhận', N'Chiều (13:00-17:00)', '2024-12-01', GETDATE()),
-(1, '2025-08-01', 0, N'Tụt huyết áp trong lúc kiểm tra', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(1, '2025-01-10', 1, N'Đăng ký qua hệ thống online', N'Chiều (13:00-17:00)', '2024-10-01', GETDATE()),
-(3, '2025-09-10', 2, N'Hủy vì lý do cá nhân', N'Chiều (13:00-17:00)', NULL, GETDATE()),
-(2, '2025-09-18', 0, N'Thể trạng yếu', N'Chiều (13:00-17:00)', NULL, GETDATE()),
-(1, '2024-10-01', 1, N'Xác nhận thành công', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(3, '2025-06-10', 1, N'Không gặp trở ngại khi hiến', N'Sáng (7:00-12:00)', '2025-03-10', GETDATE()),
-(1, '2025-09-01', 2, N'Hủy lịch do có việc đột xuất', N'Chiều (13:00-17:00)', NULL, GETDATE()),
-(2, '2024-11-15', 1, N'Đã hoàn tất hiến máu', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(2, '2025-08-05', 0, N'Không đạt yêu cầu thể lực', N'Chiều (13:00-17:00)', NULL, GETDATE()),
-(1, '2025-07-15', 1, N'Tiến trình suôn sẻ', N'Chiều (13:00-17:00)', '2025-04-10', GETDATE()),
-(3, '2025-08-08', 0, N'Chỉ số hemoglobin thấp', N'Sáng (7:00-12:00)', '2025-06-10', GETDATE()),
-(1, '2025-09-15', 0, N'Chỉ số huyết áp không ổn định', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(2, '2025-02-20', 1, N'Không gặp vấn đề sức khỏe', N'Chiều (13:00-17:00)', '2024-11-15', GETDATE()),
-(1, '2025-04-10', 1, N'Trao đổi trực tiếp tại quầy', N'Sáng (7:00-12:00)', '2025-01-10', GETDATE()),
-(2, '2025-09-05', 2, N'Hủy do thời tiết xấu', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(3, '2024-12-01', 1, N'Không có phản ứng phụ', N'Sáng (7:00-12:00)', NULL, GETDATE()),
-(2, '2025-05-20', 1, N'Người hiến tự đến bệnh viện', N'Sáng (7:00-12:00)', '2025-02-20', GETDATE()),
-(1, '2025-03-20', 2, N'Tự hủy vì lý do cá nhân', N'Chiều (13:00-17:00)', NULL, GETDATE());
-GO
+(1, '2025-06-20', N'Sáng (7:00-12:00)', 2, 0, N'Đặt lịch hiến máu', GETDATE()),
+(2, '2025-06-21', N'Chiều (13:00-17:00)', 2, 0, N'Đặt lịch hiến máu', GETDATE()),
+(3, '2025-06-22', N'Sáng (7:00-12:00)', 2, 0, N'Đặt lịch hiến máu', GETDATE()),
+
+(1, '2025-06-23', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(2, '2025-06-24', N'Sáng (7:00-12:00)', 2, 1, N'Người dùng hủy đặt lịch', GETDATE()), 
+(3, '2025-06-25', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+
+(1, '2025-06-26', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(2, '2025-06-27', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(3, '2025-06-28', N'Sáng (7:00-12:00)', 1, 1, N'Đặt lịch bị từ chối', GETDATE()),
+
+(1, '2025-06-29', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(2, '2025-06-30', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(3, '2025-07-01', N'Chiều (13:00-17:00)', 2, 1, N'Người dùng hủy đặt lịch', GETDATE()), 
+
+(1, '2025-07-02', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(2, '2025-07-03', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(3, '2025-07-04', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE());
+
