@@ -178,21 +178,6 @@ CREATE TABLE BloodRequests (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
--- BloodDonationHistory table: Stores donation records
-CREATE TABLE BloodDonationHistories (
-    DonationID INT PRIMARY KEY IDENTITY(1,1),
-    AppointmentID INT NOT NULL,
-    DonationDate DATETIME NOT NULL,
-    BloodGroup NVARCHAR(2) NOT NULL,
-    RhType NVARCHAR(3) NOT NULL,
-    DoctorID INT NULL,
-    Notes NVARCHAR(255) NULL,
-    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-    IsSuccess BIT NOT NULL DEFAULT 0,
-    FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID) ON DELETE SET NULL,
-    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) ON DELETE SET NULL
-);
-
 -- Appointments table: Stores appointment created
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
@@ -208,9 +193,26 @@ CREATE TABLE Appointments (
     Hemoglobin FLOAT NULL,
     Temperature FLOAT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE SET NULL,
-    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) ON DELETE SET NULL
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
 );
+
+-- BloodDonationHistory table: Stores donation records
+CREATE TABLE BloodDonationHistories (
+    DonationID INT PRIMARY KEY IDENTITY(1,1),
+    AppointmentID INT NOT NULL,
+    DonationDate DATETIME NOT NULL,
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    DoctorID INT NULL,
+    Notes NVARCHAR(255) NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    IsSuccess BIT NOT NULL DEFAULT 0,
+    FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID),
+    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) 
+);
+
+
 
 -- Notifications table: Stores user notifications
 CREATE TABLE Notifications (
