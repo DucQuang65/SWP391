@@ -4,6 +4,7 @@ GO
 -- Insert data into Roles table
 INSERT INTO Roles (RoleName)
 VALUES 
+<<<<<<< HEAD
     ('Member'),
     ('Doctor'),
     ('BloodManager'),
@@ -21,6 +22,32 @@ VALUES
     ('Khoa Ngoại');
 GO
 	
+=======
+    ('Member'),			-- ID = 1
+    ('Doctor'),			-- ID = 2 
+    ('BloodManager'),	-- ID = 3
+    ('Admin'),			-- ID = 4 
+    ('System');			-- ID = -1
+
+INSERT INTO Departments (DepartmentName)
+VALUES 
+(N'Khoa Huyết học'),        -- ID = 1
+(N'Khoa Tim mạch'),         -- ID = 2 
+(N'Khoa Cấp cứu'),          -- ID = 3
+(N'Khoa Nội tổng hợp'),     -- ID = 4 
+(N'Khoa Nhi'),				-- ID = 5
+(N'Khoa Truyền máu'),		-- ID = 6
+(N'Khoa Giải phẫu'),		-- ID = 7
+(N'Khoa Ngoại');			-- ID = 8
+
+INSERT INTO Components (ComponentType)
+VALUES 
+(N'Hồng cầu'),        -- ID = 1
+(N'Huyết tương'),     -- ID = 2
+(N'Tiểu cầu'),        -- ID = 3
+(N'Toàn phần');       -- ID = 4
+
+>>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 -- Insert data into Users table
 INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, BloodGroup, RhType, Status, RoleID, DepartmentID)
 VALUES
@@ -45,6 +72,7 @@ VALUES
     ('vukhanhnhu@gmail.com','Ab1234@', '0791234567', 'Nhu', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 'AB', 'Rh-', 1, 4, NULL),
 
 	-- Khoa Nhi
+<<<<<<< HEAD
 	('lan.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111001', 'Lan', 40, 'Female', N'12 Pasteur, Quận 1, TP.HCM', 'B', 'Rh+', 1, 2, 3),
     ('hoang.khoa.nhi@fpt.edu.vn', 'Ab1234@', '0911111002', 'Hoàng', 35, 'Male', N'23 Nguyễn Đình Chiểu, Quận 3, TP.HCM', 'O', 'Rh+', 1, 2, 3),
 
@@ -67,13 +95,37 @@ VALUES
     -- Khoa Huyết học
     ('phong.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, 1),
     ('trang.huyethoc@fpt.edu.vn', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, 1);
+=======
+	('lan.khoa.nhi@gmail.com', 'Ab1234@', '0911111001', 'Lan', 40, 'Female', N'12 Pasteur, Quận 1, TP.HCM', 'B', 'Rh+', 1, 2, 5),
+    ('hoang.khoa.nhi@gmail.com', 'Ab1234@', '0911111002', 'Hoàng', 35, 'Male', N'23 Nguyễn Đình Chiểu, Quận 3, TP.HCM', 'O', 'Rh+', 1, 2, 5),
+
+    -- Khoa Cấp Cứu
+    ('minh.capcuu@gmail.com', 'Ab1234@', '0922222001', 'Minh', 46, 'Male', N'90 Hai Bà Trưng, Quận 3, TP.HCM', 'AB', 'Rh-', 1, 2, 3),
+    ('thu.capcuu@gmail.com', 'Ab1234@', '0922222002', 'Thu', 38, 'Female', N'77 Nguyễn Thái Học, Quận 1, TP.HCM', 'A', 'Rh+', 1, 2, 3),
+
+    -- Khoa Giải phẫu
+    ('hoa.giaiphau@gmail.com', 'Ab1234@', '0933333001', 'Hoa', 39, 'Female', N'76 Lý Tự Trọng, Quận 1, TP.HCM', 'A', 'Rh+', 1, 2, 7),
+    ('vuong.giaiphau@gmail.com', 'Ab1234@', '0933333002', 'Vương', 44, 'Male', N'21 Trần Hưng Đạo, Quận 5, TP.HCM', 'B', 'Rh-', 1, 2, 7),
+
+    -- Khoa Tim mạch
+    ('tung.timmach@gmail.com', 'Ab1234@', '0944444001', 'Tùng', 50, 'Male', N'55 Võ Thị Sáu, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, 2),
+    ('hien.timmach@gmail.com', 'Ab1234@', '0944444002', 'Hiền', 36, 'Female', N'34 Nguyễn Văn Trỗi, Phú Nhuận, TP.HCM', 'AB', 'Rh+', 1, 2, 2),
+
+    -- Khoa Ngoại
+    ('dung.ngoai@gmail.com', 'Ab1234@', '0955555001', 'Dung', 33, 'Female', N'123 Nguyễn Thị Minh Khai, Quận 3, TP.HCM', 'B', 'Rh+', 1, 2, 8),
+    ('khoa.ngoai@gmail.com', 'Ab1234@', '0955555002', 'Khoa', 47, 'Male', N'9 Phạm Văn Đồng, TP Thủ Đức, TP.HCM', 'A', 'Rh-', 1, 2, 8),
+
+    -- Khoa Huyết học
+    ('phong.huyethoc@gmail.com', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, 1),
+    ('trang.huyethoc@gmail.com', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, 1);
+>>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 
 GO
 
 -- Insert data into HospitalInfo table
 INSERT INTO HospitalInfo (ID, Name, Address, Phone, Email, WorkingHours, MapImageUrl, Latitude, Longitude)
 VALUES
-    (1, N'Trung Tâm Hiến Máu', N'đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau@gmail.vn', 
+    (1, N'Trung Tâm Hiến Máu', N'đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau@gmail.com', 
      N'Thứ 2 - Thứ 6: 7:00 - 17:00', 
      'https://www.google.com/maps/place/10%C2%B046''30.5%22N+106%C2%B041''10.4%22E/@10.7751389,106.6862222,17z/data=!3m1!4b1!4m4!3m3!8m2!3d10.7751389!4d106.6862222?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D', 
      '10.7751237', '106.6862143');
@@ -87,48 +139,46 @@ SET IDENTITY_INSERT Users OFF;
 GO
 
 -- Insert data into Tags table
-SET IDENTITY_INSERT Tags ON;
-INSERT INTO Tags (TagID, TagName)
+INSERT INTO Tags (TagName)
 VALUES
     -- Nhóm máu
-    (1, 'A+'),
-    (2, 'A-'),
-    (3, 'B+'),
-    (4, 'B-'),
-    (5, 'AB+'),
-    (6, 'AB-'),
-    (7, 'O+'),
-    (8, 'O-'),
+    (N'A+'),	 -- ID = 1
+    (N'A-'),	 -- ID = 2
+    (N'B+'),	 -- ID = 3
+    (N'B-'),	 -- ID = 4
+    (N'AB+'),	 -- ID = 5
+    (N'AB-'),	 -- ID = 6
+    (N'O+'),	 -- ID = 7
+    (N'O-'),	 -- ID = 8
     -- Tag bài viết
-    (9, N'Tổng quan nhóm máu'),
-    (10, N'Truyền máu'),
-    (11, N'Hiến Máu Lần Đầu'),
-    (12, N'Chuẩn Bị Trước Hiến Máu'),
-    (13, N'Quy Trình Hiến Máu'),
-    (14, N'Lợi Ích Hiến Máu'),
-    (15, N'Hiến Máu Định Kỳ'),
-    (16, N'Sức Khoẻ'),
-    (17, N'Nhóm Máu'),
-    (18, N'Kiến Thức Y Khoa'),
-    (19, N'Quy Trình Xử Lý Máu'),
-    (20, N'Cứu Người'),
-    (21, N'Hiến Máu Toàn Phần'),
-    (22, N'Hiến Tiểu Cầu'),
-    (23, N'Kỹ Thuật Hiến Máu'),
-    (24, N'Câu Chuyện Hiến Máu'),
-    (25, N'Truyền Cảm Hứng'),
-    (26, N'Phân Loại Máu'),
-    (27, N'Hiến Máu'),
-    (28, N'Kêu Gọi Hiến Máu'),
-    (29, N'Sự Kiện Hiến Máu'),
-    (30, N'Phòng Bệnh'),
-    (31, N'Tin tức');
-SET IDENTITY_INSERT Tags OFF;
+    (N'Tổng quan nhóm máu'),	 -- ID = 9
+    (N'Truyền máu'),			 -- ID = 10
+    (N'Hiến Máu Lần Đầu'),		 -- ID = 11
+    (N'Chuẩn Bị Trước Hiến Máu'),-- ID = 12
+    (N'Quy Trình Hiến Máu'),	 -- ID = 13
+    (N'Lợi Ích Hiến Máu'),		 -- ID = 14
+    (N'Hiến Máu Định Kỳ'),		 -- ID = 15
+    (N'Sức Khoẻ'),				 -- ID = 16
+    (N'Nhóm Máu'),				 -- ID = 17
+    (N'Kiến Thức Y Khoa'),		 -- ID = 18
+    (N'Quy Trình Xử Lý Máu'),	 -- ID = 19
+    (N'Cứu Người'),				 -- ID = 20
+    (N'Hiến Máu Toàn Phần'),	 -- ID = 21
+    (N'Hiến Tiểu Cầu'),			 -- ID = 22
+    (N'Kỹ Thuật Hiến Máu'),		 -- ID = 23
+    (N'Câu Chuyện Hiến Máu'),	 -- ID = 24
+    (N'Truyền Cảm Hứng'),		 -- ID = 25
+    (N'Phân Loại Máu'),			 -- ID = 26
+    (N'Hiến Máu'),				 -- ID = 27
+    (N'Kêu Gọi Hiến Máu'),		 -- ID = 28
+    (N'Sự Kiện Hiến Máu'),		 -- ID = 29
+    (N'Phòng Bệnh'),			 -- ID = 30
+    (N'Tin tức');				 -- ID = 31
 GO
 
 
 -- Insert data into BloodArticles table
-INSERT INTO BloodArticles (Title, Content, ImgUrl, UserID)
+INSERT INTO Contents (Title, Content, ImgUrl, UserID, ContentType, CreatedAt)
 VALUES
     -- Nhóm A Rh+
     (N'Giới thiệu nhóm máu A Rh+', 
@@ -145,7 +195,7 @@ Người có nhóm máu A Rh+:
 
 Lưu ý:
 - Trong truyền máu, yếu tố Rh đóng vai trò quan trọng. Người Rh+ có thể nhận máu Rh- nhưng ngược lại thì không an toàn.', 
-     'article1.jpg', 2),
+     'article1.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm A Rh-
     (N'Giới thiệu nhóm máu A Rh-', 
@@ -162,7 +212,7 @@ Người có nhóm máu A Rh-:
 
 Lưu ý:
 - Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.', 
-     'article2.jpg', 2),
+     'article2.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm B Rh+
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -178,7 +228,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'article3.jpg', 2),
+     'article3.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm B Rh-
     (N'Giới thiệu nhóm máu B Rh-', 
@@ -195,7 +245,7 @@ Người có nhóm máu B Rh-:
 
 Lưu ý:
 - Trong truyền máu, người Rh- cần thận trọng và **chỉ nên nhận từ Rh-** để tránh phản ứng miễn dịch.', 
-     'article4.jpg', 2),
+     'article4.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm AB Rh+
     (N'Giới thiệu nhóm máu AB Rh+', 
@@ -212,7 +262,7 @@ Người có nhóm máu AB Rh+:
 
 Lưu ý:
 - AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.', 
-     'article5.jpg', 2),
+     'article5.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm AB Rh-
     (N'Giới thiệu nhóm máu AB Rh-', 
@@ -229,7 +279,7 @@ Người có nhóm máu AB Rh-:
 
 Lưu ý:
 - Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.', 
-     'article6.jpg', 2),
+     'article6.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm O Rh+
     (N'Giới thiệu nhóm máu O Rh+', 
@@ -246,7 +296,7 @@ Người có nhóm máu O Rh+:
 
 Lưu ý:
 - Không thể nhận từ các nhóm A, B, AB vì có kháng thể.', 
-     'article7.jpg', 2),
+     'article7.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm O Rh-
     (N'Giới thiệu nhóm máu O Rh-', 
@@ -263,7 +313,7 @@ Người có nhóm máu O Rh-:
 
 Lưu ý:
 - O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.', 
-     'article8.jpg', 2),
+     'article8.jpg', 2, 'Article',01/05/2025),
     
     -- Hiến máu lần đầu
  (N' Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu', 
@@ -313,7 +363,7 @@ Theo dõi sức khỏe: Nếu có dấu hiệu bất thường, hãy liên hệ 
 
 5. Kết Luận
 Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.', 
-'article9.jpg', 6),
+'article9.jpg', 6, 'Article',01/05/2025),
 
     -- Lưu ý hiến máu định kỳ
     (N' Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -366,7 +416,8 @@ Uống nhiều nước: giúp cơ thể bù đắp lượng dịch đã mất.
 
 Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.
 
-Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 'article10.jpg', 6),
+Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.', 
+'article10.jpg', 6, 'Article',01/05/2025),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N' Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', 
@@ -419,7 +470,7 @@ Giữ tâm trạng thoải mái và ngủ đủ giấc trước ngày hiến má
 Kết Luận
 
 Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.', 
-'article11.jpg', 6),
+'article11.jpg', 6, 'Article',01/05/2025),
 
     -- Hiểu về nhóm máu và vai trò
     (N' Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu', 
@@ -509,7 +560,8 @@ Rất nhiều người chưa biết nhóm máu của mình – điều này ti�
 7. Kết Luận
 Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.
 
-Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 'article12.jpg', 2),
+Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.', 
+'article12.jpg', 2, 'Article',01/05/2025),
 
     -- Lưu và sử dụng máu hiến
     (N' Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?', 
@@ -577,7 +629,7 @@ Việc hiến máu đều đặn và liên tục chính là nguồn lực quý g
 
 Kết Luận
 Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.', 
-'article13.jpg', 6),
+'article13.jpg', 6, 'Article',01/05/2025),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu', 
@@ -631,7 +683,8 @@ Tùy thuộc vào nhu cầu thực tế tại bệnh viện, bạn có thể đ�
 Kết Luận
 Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.
 
- Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!', 'article14.jpg', 2),
+ Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!',
+ 'article14.jpg', 2, 'Article',01/05/2025),
 
     -- Câu chuyện thật
     (N'Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu', 
@@ -678,11 +731,97 @@ Kết Luận
 Câu chuyện của bé Linh chỉ là một trong hàng ngàn ca được cứu sống nhờ sự sẻ chia của cộng đồng hiến máu. Hôm nay, bạn có thể là người hiến; ngày mai, người thân bạn có thể là người nhận.
 
 Hiến máu không mất đi – chỉ là đang trao đi sự sống.
-Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 'article15.jpg', 6);
+Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.', 
+'article15.jpg', 6, 'Article',01/05/2025),
+
+   -- Sự kiến hiến máu
+(N' CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Chiến Dịch Hiến Máu Cộng Đồng 2025, hợp tác với các doanh nghiệp tại TP.HCM, là sự kiện ý nghĩa nhằm khắc phục tình trạng thiếu máu tại Trung Tâm Hiến Máu. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và giảm nguy cơ bệnh tim. Sự kiện này lan tỏa tinh thần tương thân tương ái, xây dựng cộng đồng đoàn kết, nhân văn.
+ Đây là bản hòa ca của lòng nhân ái, nơi những giọt máu hồng kết nối những trái tim, thắp sáng hy vọng cho những người cần máu khẩn cấp. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+ Hãy cùng Trung Tâm Hiến Máu và các doanh nghiệp lan tỏa yêu thương! Nhanh tay đăng ký để chung tay cứu sống nhé.
+ Kết Nối Doanh Nghiệp, Sẻ Chia Sự Sống
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+ Thời gian: 15/07/2025, 8:00 - 16:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 
+ 'event1.jpg', 2, 'News', 01/07/2025),
+
+    -- Ngày hiến máu thế giới
+(N' NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Ngày Hiến Máu Thế Giới 14/06/2025 là dịp để toàn cầu tôn vinh những người hiến máu và nâng cao nhận thức về tầm quan trọng của hiến máu nhân đạo. Với chủ đề **“Cảm ơn bạn, người hiến máu!”**, sự kiện nhấn mạnh vai trò của mỗi giọt máu trong việc cứu sống hàng triệu người. Tại Trung Tâm Hiến Máu, chúng tôi kêu gọi cộng đồng tham gia, đặc biệt những người có nhóm máu hiếm như O- và AB-, để cùng giải quyết tình trạng thiếu máu và mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
+ Đây không chỉ là một sự kiện, mà là bản hòa ca của lòng nhân ái, nơi những trái tim toàn cầu chung nhịp đập vì sự sống. Mỗi giọt máu bạn trao đi là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người.
+ Sự chung tay của bạn là món quà ý nghĩa cho những bệnh nhân đang cần máu. Hãy nhanh tay đăng ký để cùng Trung Tâm Hiến Máu lan tỏa tình nhân ái nhé!
+ Cảm Ơn Bạn – Người Hiến Máu Toàn Cầu
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+ Thời gian: 14/06/2025, 7:00 - 17:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
+ Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 
+ 'event2.jpg', 6, 'News', 01/06/2025),
+
+    -- Sinh viên hiến máu
+(N'HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ',
+N'Một giọt máu cho đi – Một cuộc đời ở lại
+ Hiến Máu Nhân Đạo 2025 - Tiếp Nguồn Sinh Khí là dự án hiến máu được thực hiện hằng năm nhằm góp phần khắc phục tình trạng thiếu máu tại các ngân hàng máu trên địa bàn TP.HCM, đồng thời nâng cao nhận thức về hoạt động Hiến Máu Nhân Đạo – một nghĩa cử cao đẹp không chỉ giúp các bệnh nhân và các hoạt động y tế mà còn mang lại lợi ích sức khỏe cho chính người hiến. Qua đó, dự án mong muốn lan tỏa tinh thần tương thân tương ái, xây dựng lối sống tích cực, nhân văn trong cộng đồng sinh viên FPT nói riêng và xã hội nói chung.
+ Đây không chỉ là một sự kiện, mà còn là bản hòa ca của lòng nhân ái, nơi những trái tim cùng chung nhịp đập vì sự sẻ chia và tình yêu thương cuộc sống. Mỗi giọt máu được trao đi không chỉ mang lại cơ hội sống, mà còn là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người xung quanh.
+ Sự chung tay của bạn sẽ là một niềm hy vọng, là món quà ý nghĩa dành tặng những người đang cần được tiếp sức. Và để thực hiện hóa được niềm hy vọng đó, hãy nhanh tay đăng ký tham gia để cùng SiTiGroup lan tỏa yêu thương nhé.
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+ Thời gian : 28/04/2025.
+ Địa điểm: Đại học FPT HCM.
+ Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 
+ 'event3.jpg', 6, 'News', 16/04/2025),
+
+    -- Chương trình máu hiếm
+(N' CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Chương Trình Đăng Ký Người Hiến Máu Hiếm 2025, khởi động từ 01/07/2025, là sáng kiến của Trung Tâm Hiến Máu nhằm xây dựng ngân hàng máu hiếm (O-, AB-). Máu hiếm là nguồn lực quý giá, cứu sống những bệnh nhân khó tìm máu tương thích. Tham gia chương trình mang lại lợi ích sức khỏe như kiểm tra định kỳ và nâng cao nhận thức về nhóm máu.
+ Đây là hành trình của những trái tim dũng cảm, nơi mỗi giọt máu hiếm là ngọn đèn soi sáng cho những ca bệnh hiểm nghèo. Sự tham gia của bạn là món quà vô giá, kết nối yêu thương.
+ Nếu bạn có nhóm máu O- hoặc AB-, hãy đăng ký ngay để cùng Trung Tâm Hiến Máu cứu người! Liên hệ qua hệ thống hoặc số 02838554137.
+ Máu Hiếm – Món Quà Vô Giá
+_______________________________
+THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
+ Thời gian khởi động: 01/07/2025
+ Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu',
+ 'event4.jpg', 2, 'News', 15/06/2025),
+
+    -- Vinh danh người hiến máu
+(N' LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Lễ Vinh Danh Người Hiến Máu Xuất Sắc 2025, diễn ra vào 30/08/2025, là dịp để Trung Tâm Hiến Máu tri ân những người đã hiến máu nhiều lần, góp phần cứu sống hàng trăm bệnh nhân. Sự kiện lan tỏa tinh thần hiến máu, khuyến khích cộng đồng tham gia hành động nhân đạo, mang lại lợi ích sức khỏe và niềm vui sẻ chia.
+ Đây là bản giao hưởng của lòng biết ơn, nơi những trái tim nhân ái được tôn vinh, truyền cảm hứng cho mọi người. Sự hiện diện của bạn sẽ làm rực rỡ ý nghĩa của sự kiện.
+ Hãy đến để cùng Trung Tâm Hiến Máu vinh danh những người hùng thầm lặng! Đăng ký tham dự qua hệ thống hoặc email trungtamhienmau@gmail.vn.
+ Tri Ân Những Người Hùng Thầm Lặng
+_______________________________
+THÔNG TIN CHI TIẾT SỰ KIỆN:
+ Thời gian: 30/08/2025, 18:00 - 20:00
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo',
+ 'event5.jpg', 6, 'News', 01/08/2025),
+
+    -- Hiến máu tiểu cầu
+(N' TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ ',
+N' Một giọt máu cho đi – Một cuộc đời ở lại 
+ Trung Tâm Hiến Máu kêu gọi cộng đồng tham gia **Chiến Dịch Hiến Tiểu Cầu 2025**, khởi động từ 01/11/2025, để hỗ trợ bệnh nhân ung thư, những người cần truyền tiểu cầu để ngăn ngừa xuất huyết trong quá trình hóa trị. Tiểu cầu, một thành phần quan trọng của máu, giúp đông máu và duy trì sự sống. Hiến tiểu cầu không chỉ cứu sống mà còn mang lại lợi ích sức khỏe như kích thích sản sinh tế bào mới và nâng cao tinh thần sẻ chia. Chiến dịch này nhằm nâng cao nhận thức về nhu cầu tiểu cầu và lan tỏa tinh thần nhân ái.
+ Đây không chỉ là một hành động hiến máu, mà là bản hòa ca của lòng nhân ái, nơi mỗi túi tiểu cầu là ngọn lửa hy vọng, thắp sáng cuộc sống cho những bệnh nhân ung thư đang chiến đấu từng ngày. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
+ Hãy đến Trung Tâm Hiến Máu để hiến tiểu cầu và hỗ trợ bệnh nhân ung thư! Nhanh tay đăng ký qua hệ thống hoặc liên hệ số 02838554137 để biết thêm chi tiết.
+ Tiểu Cầu – Ngọn Lửa Hy Vọng Cho Ung Thư
+_______________________________
+THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
+ Thời gian khởi động: 01/11/2025
+ Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
+ Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+
+ Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu',
+ 'event6.jpg', 2, 'News', 15/10/2025);
 GO
 
 -- Insert data into ArticleTags table
-INSERT INTO ArticleTags (ArticleID, TagID)
+INSERT INTO ContentTags (ContentID, TagID)
 VALUES
     -- Bài 1: A Rh+
     (1, 1), (1, 5), (1, 7), (1, 8), (1, 15), (1, 26),
@@ -713,107 +852,19 @@ VALUES
     -- Bài 14: Hiến toàn phần và hiến tiểu cầu
     (14, 16), (14, 20), (14, 21), (14, 22), (14, 26),
     -- Bài 15: Câu chuyện thật
-    (15, 12), (15, 19), (15, 23), (15, 24), (15, 26), (15, 27);
-GO
-
--- Insert data into BlogPosts table
-INSERT INTO News (Title, Content, ImgUrl, UserID, PostedAt)
-VALUES
-   -- Sự kiến hiến máu
-(N' CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG ',
-N' Một giọt máu cho đi – Một cuộc đời ở lại 
- Chiến Dịch Hiến Máu Cộng Đồng 2025, hợp tác với các doanh nghiệp tại TP.HCM, là sự kiện ý nghĩa nhằm khắc phục tình trạng thiếu máu tại Trung Tâm Hiến Máu. Hiến máu không chỉ cứu sống bệnh nhân mà còn mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và giảm nguy cơ bệnh tim. Sự kiện này lan tỏa tinh thần tương thân tương ái, xây dựng cộng đồng đoàn kết, nhân văn.
- Đây là bản hòa ca của lòng nhân ái, nơi những giọt máu hồng kết nối những trái tim, thắp sáng hy vọng cho những người cần máu khẩn cấp. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
- Hãy cùng Trung Tâm Hiến Máu và các doanh nghiệp lan tỏa yêu thương! Nhanh tay đăng ký để chung tay cứu sống nhé.
- Kết Nối Doanh Nghiệp, Sẻ Chia Sự Sống
-_______________________________
-THÔNG TIN CHI TIẾT SỰ KIỆN:
- Thời gian: 15/07/2025, 8:00 - 16:00
- Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
- Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia', 'event1.jpg', 2, 01/07/2025),
-
-    -- Ngày hiến máu thế giới
-(N' NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI ',
-N' Một giọt máu cho đi – Một cuộc đời ở lại 
- Ngày Hiến Máu Thế Giới 14/06/2025 là dịp để toàn cầu tôn vinh những người hiến máu và nâng cao nhận thức về tầm quan trọng của hiến máu nhân đạo. Với chủ đề **“Cảm ơn bạn, người hiến máu!”**, sự kiện nhấn mạnh vai trò của mỗi giọt máu trong việc cứu sống hàng triệu người. Tại Trung Tâm Hiến Máu, chúng tôi kêu gọi cộng đồng tham gia, đặc biệt những người có nhóm máu hiếm như O- và AB-, để cùng giải quyết tình trạng thiếu máu và mang lại lợi ích sức khỏe như cải thiện tuần hoàn máu và tinh thần tích cực.
- Đây không chỉ là một sự kiện, mà là bản hòa ca của lòng nhân ái, nơi những trái tim toàn cầu chung nhịp đập vì sự sống. Mỗi giọt máu bạn trao đi là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người.
- Sự chung tay của bạn là món quà ý nghĩa cho những bệnh nhân đang cần máu. Hãy nhanh tay đăng ký để cùng Trung Tâm Hiến Máu lan tỏa tình nhân ái nhé!
- Cảm Ơn Bạn – Người Hiến Máu Toàn Cầu
-_______________________________
-THÔNG TIN CHI TIẾT SỰ KIỆN:
- Thời gian: 14/06/2025, 7:00 - 17:00
- Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
- Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm
- Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu', 'event2.jpg', 6, 01/06/2025),
-
-    -- Sinh viên hiến máu
-(N'HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ',
-N'Một giọt máu cho đi – Một cuộc đời ở lại
- Hiến Máu Nhân Đạo 2025 - Tiếp Nguồn Sinh Khí là dự án hiến máu được thực hiện hằng năm nhằm góp phần khắc phục tình trạng thiếu máu tại các ngân hàng máu trên địa bàn TP.HCM, đồng thời nâng cao nhận thức về hoạt động Hiến Máu Nhân Đạo – một nghĩa cử cao đẹp không chỉ giúp các bệnh nhân và các hoạt động y tế mà còn mang lại lợi ích sức khỏe cho chính người hiến. Qua đó, dự án mong muốn lan tỏa tinh thần tương thân tương ái, xây dựng lối sống tích cực, nhân văn trong cộng đồng sinh viên FPT nói riêng và xã hội nói chung.
- Đây không chỉ là một sự kiện, mà còn là bản hòa ca của lòng nhân ái, nơi những trái tim cùng chung nhịp đập vì sự sẻ chia và tình yêu thương cuộc sống. Mỗi giọt máu được trao đi không chỉ mang lại cơ hội sống, mà còn là sợi dây gắn kết yêu thương, lan tỏa niềm tin và hy vọng đến mọi người xung quanh.
- Sự chung tay của bạn sẽ là một niềm hy vọng, là món quà ý nghĩa dành tặng những người đang cần được tiếp sức. Và để thực hiện hóa được niềm hy vọng đó, hãy nhanh tay đăng ký tham gia để cùng SiTiGroup lan tỏa yêu thương nhé.
-_______________________________
-THÔNG TIN CHI TIẾT SỰ KIỆN:
- Thời gian : 28/04/2025.
- Địa điểm: Đại học FPT HCM.
- Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.', 'event3.jpg', 6, 16/04/2025),
-
-    -- Chương trình máu hiếm
-(N' CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG ',
-N' Một giọt máu cho đi – Một cuộc đời ở lại 
- Chương Trình Đăng Ký Người Hiến Máu Hiếm 2025, khởi động từ 01/07/2025, là sáng kiến của Trung Tâm Hiến Máu nhằm xây dựng ngân hàng máu hiếm (O-, AB-). Máu hiếm là nguồn lực quý giá, cứu sống những bệnh nhân khó tìm máu tương thích. Tham gia chương trình mang lại lợi ích sức khỏe như kiểm tra định kỳ và nâng cao nhận thức về nhóm máu.
- Đây là hành trình của những trái tim dũng cảm, nơi mỗi giọt máu hiếm là ngọn đèn soi sáng cho những ca bệnh hiểm nghèo. Sự tham gia của bạn là món quà vô giá, kết nối yêu thương.
- Nếu bạn có nhóm máu O- hoặc AB-, hãy đăng ký ngay để cùng Trung Tâm Hiến Máu cứu người! Liên hệ qua hệ thống hoặc số 02838554137.
- Máu Hiếm – Món Quà Vô Giá
-_______________________________
-THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
- Thời gian khởi động: 01/07/2025
- Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
- Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu', 'event4.jpg', 2, 15/06/2025),
-
-    -- Vinh danh người hiến máu
-(N' LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI ',
-N' Một giọt máu cho đi – Một cuộc đời ở lại 
- Lễ Vinh Danh Người Hiến Máu Xuất Sắc 2025, diễn ra vào 30/08/2025, là dịp để Trung Tâm Hiến Máu tri ân những người đã hiến máu nhiều lần, góp phần cứu sống hàng trăm bệnh nhân. Sự kiện lan tỏa tinh thần hiến máu, khuyến khích cộng đồng tham gia hành động nhân đạo, mang lại lợi ích sức khỏe và niềm vui sẻ chia.
- Đây là bản giao hưởng của lòng biết ơn, nơi những trái tim nhân ái được tôn vinh, truyền cảm hứng cho mọi người. Sự hiện diện của bạn sẽ làm rực rỡ ý nghĩa của sự kiện.
- Hãy đến để cùng Trung Tâm Hiến Máu vinh danh những người hùng thầm lặng! Đăng ký tham dự qua hệ thống hoặc email trungtamhienmau@gmail.vn.
- Tri Ân Những Người Hùng Thầm Lặng
-_______________________________
-THÔNG TIN CHI TIẾT SỰ KIỆN:
- Thời gian: 30/08/2025, 18:00 - 20:00
- Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
- Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo', 'event5.jpg', 6, 01/08/2025),
-
-    -- Hiến máu tiểu cầu
-(N' TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ ',
-N' Một giọt máu cho đi – Một cuộc đời ở lại 
- Trung Tâm Hiến Máu kêu gọi cộng đồng tham gia **Chiến Dịch Hiến Tiểu Cầu 2025**, khởi động từ 01/11/2025, để hỗ trợ bệnh nhân ung thư, những người cần truyền tiểu cầu để ngăn ngừa xuất huyết trong quá trình hóa trị. Tiểu cầu, một thành phần quan trọng của máu, giúp đông máu và duy trì sự sống. Hiến tiểu cầu không chỉ cứu sống mà còn mang lại lợi ích sức khỏe như kích thích sản sinh tế bào mới và nâng cao tinh thần sẻ chia. Chiến dịch này nhằm nâng cao nhận thức về nhu cầu tiểu cầu và lan tỏa tinh thần nhân ái.
- Đây không chỉ là một hành động hiến máu, mà là bản hòa ca của lòng nhân ái, nơi mỗi túi tiểu cầu là ngọn lửa hy vọng, thắp sáng cuộc sống cho những bệnh nhân ung thư đang chiến đấu từng ngày. Sự tham gia của bạn là món quà vô giá, mang lại cơ hội sống và niềm tin.
- Hãy đến Trung Tâm Hiến Máu để hiến tiểu cầu và hỗ trợ bệnh nhân ung thư! Nhanh tay đăng ký qua hệ thống hoặc liên hệ số 02838554137 để biết thêm chi tiết.
- Tiểu Cầu – Ngọn Lửa Hy Vọng Cho Ung Thư
-_______________________________
-THÔNG TIN CHI TIẾT CHƯƠNG TRÌNH:
- Thời gian khởi động: 01/11/2025
- Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM
- Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+
- Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu', 'event6.jpg', 2, 15/10/2025);
-GO
-
--- Insert data into BlogPostTags table
-INSERT INTO NewsTags (PostID, TagID)
-VALUES
-    -- Post 1: Sự kiến hiến máu
-    (1, 19), (1, 26), (1, 27), (1, 28), (1, 30),
-    -- Post 2: Ngày hiến máu thế giới
-    (2, 19), (2, 24), (2, 26), (2, 27), (2, 28), (2, 30),
-    -- Post 3: Sinh viên hiến máu
-    (3, 19), (3, 24), (3, 26), (3, 27), (3, 28), (3, 30),
-    -- Post 4: Chương trình máu hiếm 
-    (4, 16), (4, 19), (4, 24), (4, 26), (4, 27), (4, 28), (4, 30),
-    -- Post 5: Vinh danh người hiến máu
-    (5, 19), (5, 24), (5, 26), (5, 27), (5, 28), (5, 30),
-    -- Post 6: Hiến máu tiểu cầu
-    (6, 19), (6, 21), (6, 24), (6, 26), (6, 27), (6, 28), (6, 30);
+    (15, 12), (15, 19), (15, 23), (15, 24), (15, 26), (15, 27),
+    -- Tin tức 1: Sự kiến hiến máu
+    (16, 19), (16, 26), (16, 27), (16, 28), (16, 30),
+    -- Tin tức 2: Ngày hiến máu thế giới
+    (17, 19), (17, 24), (17, 26), (17, 27), (17, 28), (17, 30),
+    -- Tin tức 3: Sinh viên hiến máu
+    (18, 19), (18, 24), (18, 26), (18, 27), (18, 28), (18, 30),
+    -- Tin tức 4: Chương trình máu hiếm 
+    (19, 16), (19, 19), (19, 24), (19, 26), (19, 27), (19, 28), (19, 30),
+    -- Tin tức 5: Vinh danh người hiến máu
+    (20, 19), (20, 24), (20, 26), (20, 27), (20, 28), (20, 30),
+    -- Tin tức 6: Hiến máu tiểu cầu
+    (21, 19), (21, 21), (21, 24), (21, 26), (21, 27), (21, 28), (21, 30);
 GO
 -- Insert data into Components	
 INSERT INTO Components (ComponentType)
@@ -828,6 +879,7 @@ GO
 INSERT INTO BloodInventories (BloodGroup, RhType, ComponentID, Quantity, IsRare, Status, BagType, ReceivedDate, ExpirationDate)
 VALUES
 -- A+ (12 records: 3 per ComponentType)
+<<<<<<< HEAD
 ('A', 'Rh+', 1, 10, 0, 2, '450ml', '2025-06-07', NULL),
 ('A', 'Rh+', 1, 12, 0, 3, '350ml', '2025-06-08', NULL),
 ('A', 'Rh+', 1, 14, 0, 1, '250ml', '2025-06-09', NULL),
@@ -931,12 +983,118 @@ VALUES
 ('O', 'Rh-', 4, 10, 1, 2, '450ml', '2025-09-08', NULL),
 ('O', 'Rh-', 4, 11, 1, 3, '350ml', '2025-09-09', NULL),
 ('O', 'Rh-', 4, 12, 1, 1, '250ml', '2025-09-10', NULL);
+=======
+('A', 'Rh+', 4, 10, 0, 2, '450ml', '2025-06-07', NULL),
+('A', 'Rh+', 4, 15, 0, 3, '350ml', '2025-06-08', NULL),
+('A', 'Rh+', 4, 8, 0, 1, '250ml', '2025-06-09', NULL),
+('A', 'Rh+', 1, 12, 0, 2, '450ml', '2025-06-10', NULL),
+('A', 'Rh+', 1, 9, 0, 3, '350ml', '2025-06-11', NULL),
+('A', 'Rh+', 1, 11, 0, 0, '250ml', '2025-06-12', NULL),
+('A', 'Rh+', 2, 14, 0, 2, '450ml', '2025-06-13', NULL),
+('A', 'Rh+', 2, 16, 0, 3, '350ml','2025-06-14', NULL),
+('A', 'Rh+', 2, 7, 0, 1, '250ml', '2025-06-15', NULL),
+('A', 'Rh+', 3, 5, 0, 2, '450ml', '2025-06-16', NULL),
+('A', 'Rh+', 3, 6, 0, 3, '350ml', '2025-06-17', NULL),
+('A', 'Rh+', 3, 4, 0, 1, '250ml', '2025-06-18', NULL),
+-- A- (12 records: 3 per ComponentType, rare)
+('A', 'Rh-', 4, 8, 1, 1, '450ml', '2025-06-19', NULL),
+('A', 'Rh-', 4, 10, 1, 2, '350ml', '2025-06-20', NULL),
+('A', 'Rh-', 4, 7, 1, 0, '250ml', '2025-06-21', NULL),
+('A', 'Rh-', 1, 9, 1, 1, '450ml', '2025-06-22', NULL),
+('A', 'Rh-', 1, 11, 1, 2, '350ml', '2025-06-23', NULL),
+('A', 'Rh-', 1, 8, 1, 0, '250ml', '2025-06-24', NULL),
+('A', 'Rh-', 2, 12, 1, 1, '450ml', '2025-06-07', NULL),
+('A', 'Rh-', 2, 14, 1, 2, '350ml', '2025-06-08', NULL),
+('A', 'Rh-', 2, 10, 1, 0, '250ml', '2025-06-09', NULL),
+('A', 'Rh-', 3, 3, 1, 1, '450ml', '2025-06-10', NULL),
+('A', 'Rh-', 3, 4, 1, 2, '350ml', '2025-06-11', NULL),
+('A', 'Rh-', 3, 2, 1, 0, '250ml', '2025-06-12', NULL),
+-- B+ (12 records: 3 per ComponentType)
+('B', 'Rh+', 4, 11, 0, 2, '450ml', '2025-06-13', NULL),
+('B', 'Rh+', 4, 13, 0, 3, '350ml', '2025-06-14', NULL),
+('B', 'Rh+', 4, 9, 0, 1, '250ml', '2025-06-15', NULL),
+('B', 'Rh+', 1, 10, 0, 2, '450ml', '2025-06-16', NULL),
+('B', 'Rh+', 1, 12, 0, 3, '350ml', '2025-06-17', NULL),
+('B', 'Rh+', 1, 8, 0, 1, '250ml', '2025-06-18', NULL),
+('B', 'Rh+', 2, 14, 0, 2, '450ml', '2025-06-19', NULL),
+('B', 'Rh+', 2, 16, 0, 3, '350ml', '2025-06-20', NULL),
+('B', 'Rh+', 2, 12, 0, 1, '250ml', '2025-06-21', NULL),
+('B', 'Rh+', 3, 4, 0, 2, '450ml', '2025-06-22', NULL),
+('B', 'Rh+', 3, 5, 0, 3, '350ml', '2025-06-23', NULL),
+('B', 'Rh+', 3, 3, 0, 1, '250ml', '2025-06-24', NULL),
+-- B- (12 records: 3 per ComponentType, rare)
+('B', 'Rh-', 4, 7, 1, 0, '450ml','2025-06-07', NULL),
+('B', 'Rh-', 4, 9, 1, 1, '350ml', '2025-06-08', NULL),
+('B', 'Rh-', 4, 6, 1, 2, '250ml', '2025-06-09', NULL),
+('B', 'Rh-', 1, 8, 1, 0, '450ml', '2025-06-10', NULL),
+('B', 'Rh-', 1, 10, 1, 1, '350ml','2025-06-11', NULL),
+('B', 'Rh-', 1, 7, 1, 2, '250ml', '2025-06-12', NULL),
+('B', 'Rh-', 2, 11, 1, 0, '450ml', '2025-06-13', NULL),
+('B', 'Rh-', 2, 13, 1, 1, '350ml','2025-06-14', NULL),
+('B', 'Rh-', 2, 9, 1, 2, '250ml','2025-06-15', NULL),
+('B', 'Rh-', 3, 2, 1, 0, '450ml', '2025-06-16', NULL),
+('B', 'Rh-', 3, 3, 1, 1, '350ml', '2025-06-17', NULL),
+('B', 'Rh-', 3, 2, 1, 2, '250ml', '2025-06-18', NULL),
+-- AB+ (12 records: 3 per ComponentType)
+('AB', 'Rh+', 4, 12, 0, 3, '450ml', '2025-06-19', NULL),
+('AB', 'Rh+', 4, 14, 0, 2, '350ml', '2025-06-20', NULL),
+('AB', 'Rh+', 4, 10, 0, 1, '250ml', '2025-06-21', NULL),
+('AB', 'Rh+', 1, 11, 0, 3, '450ml', '2025-06-22', NULL),
+('AB', 'Rh+', 1, 13, 0, 2, '350ml', '2025-06-23', NULL),
+('AB', 'Rh+', 1, 9, 0, 1, '250ml', '2025-06-24', NULL),
+('AB', 'Rh+', 2, 15, 0, 3, '450ml', '2025-06-07', NULL),
+('AB', 'Rh+', 2, 17, 0, 2, '350ml', '2025-06-08', NULL),
+('AB', 'Rh+', 2, 13, 0, 1, '250ml','2025-06-09', NULL),
+('AB', 'Rh+', 3, 5, 0, 3, '450ml', '2025-06-10', NULL),
+('AB', 'Rh+', 3, 6, 0, 2, '350ml', '2025-06-11', NULL),
+('AB', 'Rh+', 3, 4, 0, 1, '250ml', '2025-06-12', NULL),
+-- AB- (12 records: 3 per ComponentType, rare)
+('AB', 'Rh-', 4, 6, 1, 0, '450ml', '2025-06-13', NULL),
+('AB', 'Rh-', 4, 8, 1, 1, '350ml', '2025-06-14', NULL),
+('AB', 'Rh-', 4, 5, 1, 2, '250ml', '2025-06-15', NULL),
+('AB', 'Rh-', 1, 7, 1, 0, '450ml', '2025-06-16', NULL),
+('AB', 'Rh-', 1, 9, 1, 1, '350ml', '2025-06-17', NULL),
+('AB', 'Rh-', 1, 6, 1, 2, '250ml', '2025-06-18', NULL),
+('AB', 'Rh-', 2, 10, 1, 0, '450ml', '2025-06-19', NULL),
+('AB', 'Rh-', 2, 12, 1, 1, '350ml', '2025-06-20', NULL),
+('AB', 'Rh-', 2, 8, 1, 2, '250ml', '2025-06-21', NULL),
+('AB', 'Rh-', 3, 2, 1, 0, '450ml', '2025-06-22', NULL),
+('AB', 'Rh-', 3, 3, 1, 1, '350ml', '2025-06-23', NULL),
+('AB', 'Rh-', 3, 2, 1, 2, '250ml', '2025-06-24', NULL),
+-- O+ (12 records: 3 per ComponentType)
+('O', 'Rh+', 4, 13, 0, 3, '450ml', '2025-06-07', NULL),
+('O', 'Rh+', 4, 15, 0, 2, '350ml', '2025-06-08', NULL),
+('O', 'Rh+', 4, 11, 0, 1, '250ml', '2025-06-09', NULL),
+('O', 'Rh+', 1, 12, 0, 3, '450ml', '2025-06-10', NULL),
+('O', 'Rh+', 1, 14, 0, 2, '350ml', '2025-06-11', NULL),
+('O', 'Rh+', 1, 10, 0, 1, '250ml', '2025-06-12', NULL),
+('O', 'Rh+', 2, 16, 0, 3, '450ml', '2025-06-13', NULL),
+('O', 'Rh+', 2, 18, 0, 2, '350ml', '2025-06-14', NULL),
+('O', 'Rh+', 2, 14, 0, 1, '250ml', '2025-06-15', NULL),
+('O', 'Rh+', 3, 6, 0, 3, '450ml', '2025-06-16', NULL),
+('O', 'Rh+', 3, 7, 0, 2, '350ml', '2025-06-17', NULL),
+('O', 'Rh+', 3, 5, 0, 1, '250ml', '2025-06-18', NULL),
+-- O- (12 records: 3 per ComponentType, rare)
+('O', 'Rh-', 4, 7, 1, 0, '450ml', '2025-06-19', NULL),
+('O', 'Rh-', 4, 9, 1, 1, '350ml', '2025-06-20', NULL),
+('O', 'Rh-', 4, 6, 1, 2, '250ml', '2025-06-21', NULL),
+('O', 'Rh-', 1, 8, 1, 0, '450ml', '2025-06-22', NULL),
+('O', 'Rh-', 1, 10, 1, 1, '350ml', '2025-06-23', NULL),
+('O', 'Rh-', 1, 7, 1, 2, '250ml', '2025-06-24', NULL),
+('O', 'Rh-', 2, 11, 1, 0, '450ml', '2025-06-07', NULL),
+('O', 'Rh-', 2, 13, 1, 1, '350ml', '2025-06-08', NULL),
+('O', 'Rh-', 2, 9, 1, 2, '250ml', '2025-06-09', NULL),
+('O', 'Rh-', 3, 2, 1, 0, '450ml', '2025-06-10', NULL),
+('O', 'Rh-', 3, 3, 1, 1, '350ml', '2025-06-11', NULL),
+('O', 'Rh-', 3, 2, 1, 2, '250ml', '2025-06-12', NULL);
+>>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 GO
 
 -- Insert data into BloodInventoryHistory
 INSERT INTO BloodInventoryHistories
 (BloodGroup, RhType, ComponentID, ActionType, Quantity, Notes, PerformedBy, BagType, ReceivedDate, ExpirationDate)
 VALUES
+<<<<<<< HEAD
 ('A', 'Rh+', 1, N'Xuất', 2, N'Dùng cho phẫu thuật', 8, '250ml', '2025-06-17', '2025-07-22'),
 ('B', 'Rh+', 1, N'Thêm', 3, N'Nhập kho', 9, '450ml', '2025-06-18', '2025-07-23'),
 ('AB', 'Rh+', 2, N'Hủy', 1, N'Máu bị hỏng', 7, '350ml', '2025-06-19', '2025-07-31'),
@@ -1023,6 +1181,105 @@ VALUES
 ('A', 'Rh-', 2, N'Hủy', 1, N'Túi máu hỏng', 7, '350ml', '2025-06-14', '2025-07-26'),
 ('AB', 'Rh+', 3, N'Thêm', 5, N'Hiến máu', 8, '250ml', '2025-06-13', '2026-06-13'),
 ('O', 'Rh-', 4, N'Xuất', 2, N'Cấp cứu tai nạn', 9, '450ml', '2025-06-12', '2025-06-17');
+=======
+('A', 'Rh+', 1, N'Thêm', 3, N'Nhập kho', 7, '250ml', '2025-06-07', '2025-07-19'),
+('O', 'Rh-', 2, N'Xuất', 2, N'Cấp phát cho bệnh nhân', 8, '450ml', '2025-06-08', '2026-06-08'),
+('B', 'Rh+', 4, N'Hủy', 1, N'Quá hạn sử dụng', 9, '350ml', '2025-06-09', '2025-07-14'),
+('AB', 'Rh+', 3, N'Thêm', 4, N'Nhập kho', 7, '250ml', '2025-06-10', '2025-06-15'),
+('A', 'Rh-', 2, N'Hủy', 2, N'Quá hạn sử dụng', 8, '350ml', '2025-06-11', '2026-06-11'),
+('O', 'Rh+', 1, N'Xuất', 3, N'Cấp phát cho bệnh nhân', 9, '450ml', '2025-06-12', '2025-07-24'),
+('B', 'Rh-', 4, N'Thêm', 1, N'Nhập kho', 7, '250ml', '2025-06-13', '2025-07-18'),
+('A', 'Rh+', 3, N'Hủy', 2, N'Nhiễm khuẩn', 8, '350ml', '2025-06-14', '2025-06-19'),
+('AB', 'Rh-', 2, N'Thêm', 3, N'Nhập kho', 9, '450ml', '2025-06-15', '2026-06-15'),
+('O', 'Rh+', 1, N'Hủy', 4, N'Quá hạn sử dụng', 7, '350ml', '2025-06-16', '2025-07-28'),
+('A', 'Rh+', 4, N'Xuất', 2, N'Dùng cho phẫu thuật', 8, '250ml', '2025-06-17', '2025-07-22'),
+('B', 'Rh+', 4, N'Thêm', 3, N'Nhập kho', 9, '450ml', '2025-06-18', '2025-07-23'),
+('AB', 'Rh+', 1, N'Hủy', 1, N'Máu bị hỏng', 7, '350ml', '2025-06-19', '2025-07-31'),
+('A', 'Rh-', 2, N'Thêm', 2, N'Nhập kho', 8, '250ml', '2025-06-20', '2026-06-20'),
+('O', 'Rh-', 3, N'Hủy', 1, N'Nhiễm khuẩn', 9, '450ml', '2025-06-21', '2025-06-26'),
+('B', 'Rh+', 1, N'Thêm', 3, N'Nhập kho', 7, '350ml', '2025-06-22', '2025-08-03'),
+('A', 'Rh+', 4, N'Xuất', 2, N'Cấp cứu', 8, '250ml', '2025-06-23', '2025-07-28'),
+('AB', 'Rh-', 4, N'Hủy', 1, N'Quá hạn sử dụng', 9, '450ml', '2025-06-24', '2025-07-29'),
+('O', 'Rh+', 2, N'Thêm', 2, N'Nhập kho', 7, '350ml', '2025-06-25', '2026-06-25'),
+('A', 'Rh-', 4, N'Hủy', 1, N'Không đạt tiêu chuẩn', 8, '450ml', '2025-06-26', '2025-07-31'),
+('B', 'Rh+', 3, N'Thêm', 4, N'Nhập kho', 9, '250ml', '2025-06-27', '2025-07-02'),
+('A', 'Rh+', 1, N'Hủy', 3, N'Máu đông', 7, '450ml', '2025-06-28', '2025-08-09'),
+('AB', 'Rh-', 3, N'Thêm', 2, N'Nhập kho', 8, '350ml', '2025-06-29', '2025-07-04'),
+('O', 'Rh+', 4, N'Hủy', 1, N'Túi máu rách', 9, '250ml', '2025-06-30', '2025-08-04'),
+('A', 'Rh+', 2, N'Xuất', 3, N'Chuyển viện', 7, '450ml', '2025-07-01', '2026-07-01'),
+('B', 'Rh+', 3, N'Hủy', 2, N'Nhiễm khuẩn', 8, '350ml', '2025-07-02', '2025-07-07'),
+('AB', 'Rh+', 1, N'Thêm', 5, N'Nhập kho', 9, '250ml', '2025-07-03', '2025-08-14'),
+('O', 'Rh-', 3, N'Xuất', 3, N'Cấp phát nội bộ', 7, '450ml', '2025-07-04', '2025-07-09'),
+('A', 'Rh+', 4, N'Thêm', 4, N'Nhập kho', 8, '350ml', '2025-07-05', '2025-08-09'),
+('B', 'Rh-', 2, N'Hủy', 1, N'Máu bị hỏng', 9, '250ml', '2025-07-06', '2026-07-06'),
+('AB', 'Rh-', 2, N'Xuất', 2, N'Dùng cho ca ghép tạng', 7, '450ml', '2025-07-07', '2026-07-07'),
+('O', 'Rh+', 1, N'Thêm', 3, N'Nhập kho', 8, '350ml', '2025-07-08', '2025-08-19'),
+('B', 'Rh+', 4, N'Hủy', 1, N'Túi bị rò rỉ', 9, '250ml', '2025-06-13', '2025-07-18'),
+('A', 'Rh-', 1, N'Xuất', 2, N'Cấp phát cho khoa nội', 7, '450ml', '2025-06-14', '2025-07-26'),
+('AB', 'Rh+', 3, N'Hủy', 3, N'Nhiễm khuẩn', 8, '350ml', '2025-06-15', '2025-06-20'),
+('O', 'Rh-', 2, N'Thêm', 4, N'Nhập kho', 9, '450ml', '2025-06-16', '2026-06-16'),
+('B', 'Rh+', 4, N'Thêm', 3, N'Tài trợ', 7, '350ml', '2025-06-17', '2025-07-22'),
+('A', 'Rh+', 1, N'Xuất', 2, N'Trường hợp khẩn cấp', 8, '250ml', '2025-06-18', '2025-07-30'),
+('AB', 'Rh-', 3, N'Thêm', 5, N'Hiến máu', 9, '450ml', '2025-06-19', '2025-06-24'),
+('O', 'Rh+', 2, N'Hủy', 1, N'Quá hạn', 7, '350ml', '2025-06-20', '2026-06-20'),
+('B', 'Rh-', 1, N'Thêm', 4, N'Hiến máu', 8, '250ml', '2025-06-21', '2025-08-02'),
+('A', 'Rh+', 4, N'Xuất', 3, N'Dùng cho trẻ em', 9, '450ml', '2025-06-22', '2025-07-27'),
+('AB', 'Rh+', 1, N'Hủy', 2, N'Máu không đạt chất lượng', 7, '350ml', '2025-06-23', '2025-08-03'),
+('O', 'Rh-', 4, N'Thêm', 3, N'Nhập kho', 8, '250ml', '2025-06-24', '2025-07-29'),
+('B', 'Rh+', 3, N'Hủy', 1, N'Máu đông', 9, '450ml', '2025-06-25', '2025-06-30'),
+('A', 'Rh-', 2, N'Xuất', 2, N'Chuyển viện', 7, '350ml', '2025-06-26', '2026-06-26'),
+('AB', 'Rh-', 4, N'Hủy', 2, N'Túi máu bị rách', 8, '250ml', '2025-06-27', '2025-08-01'),
+('O', 'Rh+', 1, N'Thêm', 3, N'Hiến máu', 9, '450ml', '2025-06-28', '2025-08-09'),
+('B', 'Rh+', 2, N'Hủy', 2, N'Quá hạn', 7, '350ml', '2025-06-29', '2026-06-29'),
+('A', 'Rh+', 4, N'Thêm', 4, N'Nhập kho', 8, '250ml', '2025-06-30', '2025-08-04'),
+('AB', 'Rh+', 1, N'Xuất', 3, N'Cấp cứu', 9, '450ml', '2025-07-01', '2025-08-12'),
+('O', 'Rh-', 4, N'Hủy', 1, N'Không đạt tiêu chuẩn', 7, '350ml', '2025-07-02', '2025-08-06'),
+('B', 'Rh-', 3, N'Thêm', 5, N'Hiến máu', 8, '250ml', '2025-07-03', '2025-07-08'),
+('A', 'Rh+', 2, N'Hủy', 3, N'Máu bị hỏng', 9, '450ml', '2025-07-04', '2026-07-04'),
+('AB', 'Rh-', 3, N'Xuất', 2, N'Phẫu thuật', 7, '350ml', '2025-07-05', '2025-07-10'),
+('O', 'Rh+', 1, N'Thêm', 4, N'Nhập kho', 8, '250ml', '2025-07-06', '2025-08-17'),
+('B', 'Rh+', 4, N'Hủy', 2, N'Thử nghiệm lỗi', 9, '450ml', '2025-07-07', '2025-08-11'),
+('A', 'Rh-', 2, N'Thêm', 3, N'Hiến máu', 7, '350ml', '2025-07-08', '2026-07-08'),
+('AB', 'Rh+', 4, N'Xuất', 1, N'Cấp phát BV', 8, '250ml', '2025-07-09', '2025-08-13'),
+('O', 'Rh-', 2, N'Hủy', 1, N'Quá hạn sử dụng', 9, '450ml', '2025-07-10', '2026-07-10'),
+('B', 'Rh+', 3, N'Thêm', 3, N'Hiến máu', 7, '350ml', '2025-07-11', '2025-07-16'),
+('A', 'Rh+', 1, N'Hủy', 2, N'Máu bị đông', 8, '250ml', '2025-07-12', '2025-08-23'),
+('AB', 'Rh-', 2, N'Thêm', 4, N'Hiến máu', 9, '450ml', '2025-07-13', '2026-07-13'),
+('O', 'Rh+', 4, N'Xuất', 3, N'Cấp cứu BV', 7, '350ml', '2025-07-13', '2025-08-17'),
+('B', 'Rh-', 1, N'Hủy', 1, N'Máu vỡ túi', 8, '250ml', '2025-07-13', '2025-08-24'),
+('A', 'Rh+', 4, N'Thêm', 3, N'Hiến máu', 9, '450ml', '2025-07-12', '2025-08-16'),
+('AB', 'Rh-', 3, N'Xuất', 2, N'Cấp phát khẩn', 7, '350ml', '2025-07-11', '2025-07-16'),
+('O', 'Rh+', 2, N'Hủy', 1, N'Máu đổi màu', 8, '250ml', '2025-07-10', '2026-07-10'),
+('B', 'Rh-', 4, N'Thêm', 4, N'Nhập kho', 9, '450ml', '2025-07-09', '2025-08-13'),
+('A', 'Rh-', 1, N'Hủy', 2, N'Máu đông đặc', 7, '350ml', '2025-07-08', '2025-08-19'),
+('AB', 'Rh+', 2, N'Thêm', 3, N'Hiến máu', 8, '250ml', '2025-07-07', '2026-07-07'),
+('O', 'Rh-', 3, N'Xuất', 1, N'Truyền máu ngoại viện', 9, '450ml', '2025-07-06', '2025-07-11'),
+('B', 'Rh+', 1, N'Hủy', 1, N'Máu không đạt', 7, '350ml', '2025-07-05', '2025-08-16'),
+('A', 'Rh+', 4, N'Xuất', 2, N'Cấp cứu phẫu thuật', 8, '250ml', '2025-07-04', '2025-08-08'),
+('AB', 'Rh-', 2, N'Hủy', 3, N'Bị hư khi vận chuyển', 9, '450ml', '2025-07-03', '2026-07-03'),
+('O', 'Rh+', 1, N'Thêm', 4, N'Hiến máu', 7, '350ml', '2025-07-02', '2025-08-13'),
+('B', 'Rh-', 3, N'Xuất', 1, N'Cấp cứu tuyến huyện', 8, '250ml', '2025-07-01', '2025-07-06'),
+('A', 'Rh-', 1, N'Hủy', 2, N'Phát hiện vi khuẩn', 9, '450ml', '2025-06-30', '2025-08-11'),
+('AB', 'Rh+', 4, N'Thêm', 5, N'Hiến máu', 7, '350ml', '2025-06-29', '2025-08-03'),
+('O', 'Rh-', 2, N'Hủy', 1, N'Quá thời gian bảo quản', 8, '250ml', '2025-06-28', '2026-06-28'),
+('B', 'Rh+', 1, N'Thêm', 4, N'Hiến máu tình nguyện', 9, '450ml', '2025-06-27', '2025-08-08'),
+('A', 'Rh+', 4, N'Xuất', 3, N'Cấp phát BV tỉnh', 7, '350ml', '2025-06-26', '2025-07-31'),
+('AB', 'Rh-', 3, N'Hủy', 2, N'Bảo quản sai nhiệt độ', 8, '250ml', '2025-06-25', '2025-06-30'),
+('O', 'Rh+', 1, N'Thêm', 3, N'Hiến máu cộng đồng', 9, '450ml', '2025-06-24', '2025-08-05'),
+('B', 'Rh-', 2, N'Hủy', 1, N'Máu không đạt chất lượng', 7, '350ml', '2025-06-23', '2026-06-23'),
+('A', 'Rh-', 4, N'Hủy', 1, N'Rách túi', 8, '250ml', '2025-06-22', '2025-07-27'),
+('AB', 'Rh+', 1, N'Thêm', 3, N'Hiến máu nhân đạo', 9, '450ml', '2025-06-21', '2025-08-02'),
+('O', 'Rh-', 3, N'Xuất', 2, N'Cấp phát cấp cứu', 7, '350ml', '2025-06-20', '2025-06-25'),
+('B', 'Rh+', 2, N'Hủy', 2, N'Thử nghiệm sai sót', 8, '250ml', '2025-06-19', '2026-06-19'),
+('A', 'Rh+', 4, N'Thêm', 4, N'Hiến máu nội viện', 9, '450ml', '2025-06-18', '2025-07-23'),
+('AB', 'Rh-', 3, N'Hủy', 1, N'Máu đông', 7, '350ml', '2025-06-17', '2025-06-22'),
+('O', 'Rh+', 1, N'Xuất', 3, N'Cấp cứu khoa sản', 8, '250ml', '2025-06-16', '2025-07-28'),
+('B', 'Rh-', 4, N'Thêm', 2, N'Hiến máu', 9, '450ml', '2025-06-15', '2025-07-20'),
+('A', 'Rh-', 1, N'Hủy', 1, N'Túi máu hỏng', 7, '350ml', '2025-06-14', '2025-07-26'),
+('AB', 'Rh+', 2, N'Thêm', 5, N'Hiến máu', 8, '250ml', '2025-06-13', '2026-06-13'),
+('O', 'Rh-', 3, N'Xuất', 2, N'Cấp cứu tai nạn', 9, '450ml', '2025-06-12', '2025-06-17');
+
+>>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 GO
 
 INSERT INTO Patients (FullName, Gender, DateOfBirth, Age, Phone, Address, Email)
@@ -1053,6 +1310,7 @@ GO
 INSERT INTO BloodDonationHistories (UserID, DonationDate, BloodGroup, RhType, ComponentID, Quantity, IsSuccess, Notes)
 VALUES
     -- A+ (UserID: 1, Vinh)
+<<<<<<< HEAD
     (1, '2025-06-23 08:00:00', 'A', 'Rh+', 1, 1, 1, N'Hiến máu định kỳ'),
     (1, '2025-06-24 09:00:00', 'A', 'Rh+', 3, 1, 1, N'Hiến máu tình nguyện'),
     (1, '2025-06-25 10:00:00', 'A', 'Rh+', 4, 1, 1, N'Cho bệnh nhân ung thư'),
@@ -1099,6 +1357,54 @@ VALUES
     (4, '2025-06-24 12:30:00', 'O', 'Rh-', 3, 1, 1, N'Cho cấp cứu'),
     (4, '2025-06-25 13:30:00', 'O', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
     (4, '2025-06-26 14:30:00', 'O', 'Rh-', 2, 1, 1, N'Hiến máu tình nguyện');
+=======
+    (1, '2025-06-23 08:00:00', 'A', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
+    (1, '2025-06-24 09:00:00', 'A', 'Rh+', 2, 1, 1, N'Hiến máu tình nguyện'),
+    (1, '2025-06-25 10:00:00', 'A', 'Rh+', 3, 1, 1, N'Cho bệnh nhân ung thư'),
+    (1, '2025-06-26 11:00:00', 'A', 'Rh+', 1, 1, 1, N'Cho cấp cứu'),
+
+    -- A- (UserID: 5, Hieu)
+    (5, '2025-06-23 08:30:00', 'A', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
+    (5, '2025-06-24 09:30:00', 'A', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
+    (5, '2025-06-25 10:30:00', 'A', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
+    (5, '2025-06-26 11:30:00', 'A', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- B+ (UserID: 7, Nhi)
+    (7, '2025-06-23 09:00:00', 'B', 'Rh+', 4, 1, 1, N'Cho sự kiện cộng đồng'),
+    (7, '2025-06-24 10:00:00', 'B', 'Rh+', 2, 1, 1, N'Hiến máu định kỳ'),
+    (7, '2025-06-25 11:00:00', 'B', 'Rh+', 3, 1, 1, N'Cho phẫu thuật'),
+    (7, '2025-06-26 12:00:00', 'B', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- B- (UserID: 18, Vương)
+    (18, '2025-06-23 09:30:00', 'B', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
+    (18, '2025-06-24 10:30:00', 'B', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
+    (18, '2025-06-25 11:30:00', 'B', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
+    (18, '2025-06-26 12:30:00', 'B', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- AB+ (UserID: 8, Hoa)
+    (8, '2025-06-23 10:00:00', 'AB', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
+    (8, '2025-06-24 11:00:00', 'AB', 'Rh+', 2, 1, 1, N'Cho kho máu thế giới'),
+    (8, '2025-06-25 12:00:00', 'AB', 'Rh+', 3, 1, 1, N'Cho bệnh nhân ung thư'),
+    (8, '2025-06-26 13:00:00', 'AB', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- AB- (UserID: 12, Nhu)
+    (12, '2025-06-23 10:30:00', 'AB', 'Rh-', 4, 1, 1, N'Hiến máu hiếm'),
+    (12, '2025-06-24 11:30:00', 'AB', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
+    (12, '2025-06-25 12:30:00', 'AB', 'Rh-', 3, 1, 1, N'Hiến máu định kỳ'),
+    (12, '2025-06-26 13:30:00', 'AB', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- O+ (UserID: 2, Duc)
+    (2, '2025-06-23 11:00:00', 'O', 'Rh+', 4, 1, 1, N'Hiến máu định kỳ'),
+    (2, '2025-06-24 12:00:00', 'O', 'Rh+', 2, 1, 1, N'Cho sự kiện cộng đồng'),
+    (2, '2025-06-25 13:00:00', 'O', 'Rh+', 3, 1, 1,  N'Cho phẫu thuật'),
+    (2, '2025-06-26 14:00:00', 'O', 'Rh+', 1, 1, 1, N'Hiến máu tình nguyện'),
+
+    -- O- (UserID: 4, Kien)
+    (4, '2025-06-23 11:30:00', 'O', 'Rh-', 4, 1, 1, N'Cho quốc tế'),
+    (4, '2025-06-24 12:30:00', 'O', 'Rh-', 2, 1, 1, N'Cho cấp cứu'),
+    (4, '2025-06-25 13:30:00', 'O', 'Rh-', 3, 1, 1, N'Hiến máu hiếm'),
+    (4, '2025-06-26 14:30:00', 'O', 'Rh-', 1, 1, 1, N'Hiến máu tình nguyện');
+>>>>>>> 26aed1ac635027ce8be69faa679a6661df26069c
 GO
 
 -- Insert data into Notifications table
@@ -1155,5 +1461,4 @@ VALUES
 (3, '2024-12-01', 1, N'Không có phản ứng phụ', N'Sáng (7:00-12:00)', NULL, GETDATE()),
 (2, '2025-05-20', 1, N'Người hiến tự đến bệnh viện', N'Sáng (7:00-12:00)', '2025-02-20', GETDATE()),
 (1, '2025-03-20', 2, N'Tự hủy vì lý do cá nhân', N'Chiều (13:00-17:00)', NULL, GETDATE());
-
-
+GO
