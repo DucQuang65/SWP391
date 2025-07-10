@@ -11,7 +11,5 @@ public partial class Tags
 
     public string TagName { get; set; } = null!;
 
-    public virtual ICollection<BloodArticles> Articles { get; set; } = new List<BloodArticles>();
-
-    public virtual ICollection<News> Posts { get; set; } = new List<News>();
+    public virtual ICollection<Contents> Contents { get; set; } = new List<Contents>();
 }

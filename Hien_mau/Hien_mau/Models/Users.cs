@@ -57,8 +57,6 @@ public partial class Users
 
     public virtual ICollection<Appointments> Appointments { get; set; } = new List<Appointments>();
 
-    public virtual ICollection<BloodArticles> BloodArticles { get; set; } = new List<BloodArticles>();
-
     public virtual ICollection<BloodDonationHistories> BloodDonationHistories { get; set; } = new List<BloodDonationHistories>();
 
     public virtual ICollection<BloodInventoryHistories> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistories>();
@@ -69,7 +67,7 @@ public partial class Users
 
     public virtual ICollection<DonationReminders> DonationReminders { get; set; } = new List<DonationReminders>();
 
-    public virtual ICollection<News> News { get; set; } = new List<News>();
+    public virtual ICollection<Contents> Contents { get; set; } = new List<Contents>();
 
     public virtual ICollection<Notifications> Notifications { get; set; } = new List<Notifications>();
 

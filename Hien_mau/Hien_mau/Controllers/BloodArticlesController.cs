@@ -4,6 +4,7 @@ using Hien_mau.Models;
 using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Hien_mau.Controllers
 {
@@ -22,9 +23,10 @@ namespace Hien_mau.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetBloodArticles()
         {
-            var articles = await _context.BloodArticles
-        .Include(a => a.Tags)
-        .ToListAsync();
+            var articles = await _context.Contents
+                .Where(c => c.ContentType == "Article")
+                .Include(a => a.Tags)
+                .ToListAsync();
 
 
             foreach (var article in articles)
@@ -32,14 +34,14 @@ namespace Hien_mau.Controllers
                 if (article.CreatedAt < new DateTime(2025, 1, 1))
                 {
                     article.CreatedAt = DateTime.Now;
-                    _context.BloodArticles.Update(article);
+                    _context.Contents.Update(article);
                 }
             }
             await _context.SaveChangesAsync();
 
             var response = articles.Select(a => new
             {
-                a.ArticleId,
+                a.ContentID,
                 a.Title,
                 a.Content,
                 a.ImgUrl,
@@ -63,9 +65,10 @@ namespace Hien_mau.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<object>> GetBloodArticle(int id)
         {
-            var article = await _context.BloodArticles
-         .Include(a => a.Tags)
-         .FirstOrDefaultAsync(a => a.ArticleId == id);
+            var article = await _context.Contents
+                .Where(c => c.ContentType == "Article")
+                .Include(a => a.Tags)
+                .FirstOrDefaultAsync(a => a.ContentID == id);
 
             if (article == null)
             {
@@ -76,13 +79,13 @@ namespace Hien_mau.Controllers
             if (article.CreatedAt < new DateTime(2025, 1, 1))
             {
                 article.CreatedAt = DateTime.Now;
-                _context.BloodArticles.Update(article);
+                _context.Contents.Update(article);
                 await _context.SaveChangesAsync();
             }
 
             var response = new
             {
-                article.ArticleId,
+                article.ContentID,
                 article.Title,
                 article.Content,
                 article.ImgUrl,
@@ -104,7 +107,7 @@ namespace Hien_mau.Controllers
 
         // POST: api/BloodArticles
         [HttpPost]
-        public async Task<ActionResult<object>> CreateBloodArticle([FromBody] BloodArticleCreateDto dto, [FromServices] ActivityLogger logger)
+        public async Task<ActionResult<object>> CreateBloodArticle([FromBody] ContentsCreateDto dto, [FromServices] ActivityLogger logger)
         {
             // Kiểm tra dữ liệu đầu vào
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
@@ -120,12 +123,13 @@ namespace Hien_mau.Controllers
 
             var createdAt = DateTime.Now; // Lấy múi giờ địa phương
 
-            var article = new BloodArticles
+            var article = new Contents
             {
                 Title = dto.Title,
                 Content = dto.Content,
                 ImgUrl = dto.ImgUrl,
                 UserId = dto.UserId,
+                ContentType = "Article",
                 CreatedAt = createdAt
             };
 
@@ -142,15 +146,15 @@ namespace Hien_mau.Controllers
                 article.Tags = tags;
             }
 
-            _context.BloodArticles.Add(article);
+            _context.Contents.Add(article);
             await _context.SaveChangesAsync();
             // Ghi log
-            await logger.LogAsync(dto.UserId, "Create", "Article", article.ArticleId, $"Tạo bài viết: {dto.Title}");
+            await logger.LogAsync(dto.UserId, "Create", "Article", article.ContentID, $"Tạo bài viết: {dto.Title}");
 
             // Trả về đối tượng không chứa vòng lặp
             var response = new
             {
-                article.ArticleId,
+                article.ContentID,
                 article.Title,
                 article.Content,
                 article.ImgUrl,
@@ -167,16 +171,17 @@ namespace Hien_mau.Controllers
                 }).ToList()
             };
 
-            return CreatedAtAction(nameof(GetBloodArticle), new { id = article.ArticleId }, response);
+            return CreatedAtAction(nameof(GetBloodArticle), new { id = article.ContentID }, response);
         }
 
         // PUT: api/BloodArticles/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBloodArticle(int id, [FromBody] BloodArticleUpdateDto dto, [FromServices] ActivityLogger logger)
+        public async Task<IActionResult> UpdateBloodArticle(int id, [FromBody] ContentsUpdateDto dto, [FromServices] ActivityLogger logger)
         {
-            var article = await _context.BloodArticles
+            var article = await _context.Contents
+                .Where(c => c.ContentType == "Article")
                 .Include(a => a.Tags)
-                .FirstOrDefaultAsync(a => a.ArticleId == id);
+                .FirstOrDefaultAsync(a => a.ContentID == id);
 
             if (article == null)
             {
@@ -208,7 +213,7 @@ namespace Hien_mau.Controllers
 
             await _context.SaveChangesAsync();
             // Ghi log
-            await logger.LogAsync(dto.UserId, "Update", "Article", article.ArticleId, $"Cập nhật bài viết: {dto.Title}");
+            await logger.LogAsync(dto.UserId, "Update", "Article", article.ContentID, $"Cập nhật bài viết: {dto.Title}");
             return NoContent();
         }
 
@@ -216,9 +221,10 @@ namespace Hien_mau.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBloodArticle(int id, [FromQuery] int userId, [FromServices] ActivityLogger logger)
         {
-            var article = await _context.BloodArticles
+            var article = await _context.Contents
+                .Where(c => c.ContentType == "Article")
                 .Include(a => a.Tags)
-                .FirstOrDefaultAsync(a => a.ArticleId == id);
+                .FirstOrDefaultAsync(a => a.ContentID == id);
 
             if (article == null)
             {
@@ -228,10 +234,10 @@ namespace Hien_mau.Controllers
             // Xóa các bản ghi liên quan trong ArticleTags
             article.Tags.Clear();
 
-            _context.BloodArticles.Remove(article);
+            _context.Contents.Remove(article);
             await _context.SaveChangesAsync();
             // Ghi log
-            await logger.LogAsync(userId, "Delete", "Article", article.ArticleId, $"Xoá bài viết: {article.Title}");
+            await logger.LogAsync(userId, "Delete", "Article", article.ContentID, $"Xoá bài viết: {article.Title}");
             return NoContent();
         }
     }

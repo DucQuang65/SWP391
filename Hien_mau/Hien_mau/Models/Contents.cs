@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class News
+public partial class Contents
 {
     [Key]
-    public int PostId { get; set; }
+    public int ContentID { get; set; }
 
     public string Title { get; set; } = null!;
 
@@ -15,9 +15,11 @@ public partial class News
 
     public string? ImgUrl { get; set; }
 
+    public string? ContentType { get; set; }
+
     public int UserId { get; set; }
 
-    public DateTime? PostedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
     public virtual Users User { get; set; } = null!;
 

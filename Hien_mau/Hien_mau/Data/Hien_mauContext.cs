@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Azure;
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Hien_mau.Data;
 
@@ -22,19 +23,17 @@ public partial class Hien_mauContext : DbContext
 
     public virtual DbSet<Appointments> Appointments { get; set; }
 
-    public virtual DbSet<BloodArticles> BloodArticles { get; set; }
-
     public virtual DbSet<BloodDonationHistories> BloodDonationHistory { get; set; }
 
     public virtual DbSet<BloodInventories> BloodInventory { get; set; }
 
     public virtual DbSet<BloodRequests> BloodRequests { get; set; }
 
+    public virtual DbSet<Contents> Contents { get; set; }
+
     public virtual DbSet<DonationReminders> DonationReminders { get; set; }
 
     public virtual DbSet<HospitalInfo> HospitalInfos { get; set; }
-
-    public virtual DbSet<News> News { get; set; }
 
     public virtual DbSet<Notifications> Notifications { get; set; }
 
@@ -49,8 +48,6 @@ public partial class Hien_mauContext : DbContext
     public virtual DbSet<Users> Users { get; set; }
 
     public DbSet<Patients> Patients { get; set; }
-
-    //public virtual DbSet<UserLocation> UserLocations { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -99,40 +96,6 @@ public partial class Hien_mauContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Appointments_Users");
-        });
-
-        modelBuilder.Entity<BloodArticles>(entity =>
-        {
-            entity.HasKey(e => e.ArticleId).HasName("PK__BloodArt__9C6270C827BEB99B");
-
-            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
-            entity.Property(e => e.ImgUrl).HasMaxLength(255);
-            entity.Property(e => e.Title).HasMaxLength(255);
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.User).WithMany(p => p.BloodArticles)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodArti__UserI__66603565");
-
-            entity.HasMany(d => d.Tags).WithMany(p => p.Articles)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ArticleTag",
-                    r => r.HasOne<Tags>().WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ArticleTa__TagID__6C190EBB"),
-                    l => l.HasOne<BloodArticles>().WithMany()
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ArticleTa__Artic__6B24EA82"),
-                    j =>
-                    {
-                        j.HasKey("ArticleId", "TagId").HasName("PK__ArticleT__4A35BF6C47BC486E");
-                        j.ToTable("ArticleTags");
-                        j.IndexerProperty<int>("ArticleId").HasColumnName("ArticleID");
-                        j.IndexerProperty<int>("TagId").HasColumnName("TagID");
-                    });
         });
 
         modelBuilder.Entity<BloodDonationHistories>(entity =>
@@ -254,40 +217,49 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.WorkingHours).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<News>(entity =>
+        modelBuilder.Entity<Contents>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__News__AA126038FB3E3E48");
+            entity.HasKey(e => e.ContentID).HasName("PK__Contents__A2B0A3D1F5C8E4B6");
 
-            entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.ImgUrl).HasMaxLength(255);
-            entity.Property(e => e.PostedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.Property(e => e.ContentID).HasColumnName("ContentID");
+            entity.Property(e => e.Title).HasColumnName("Title");
+            entity.Property(e => e.Content).HasColumnName("Content");
+            entity.Property(e => e.ImgUrl).HasColumnName("ImgUrl");
+            entity.Property(e => e.ContentType).HasColumnName("ContentType");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.CreatedAt)
+                    .HasColumnName("CreatedAt")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Title).HasMaxLength(255);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.News)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Contents)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__News__UserID__6FE99F9F");
+                .HasConstraintName("FK_Contents_Users");
 
-            entity.HasMany(d => d.Tags).WithMany(p => p.Posts)
+            entity.HasMany(d => d.Tags)
+                .WithMany(p => p.Contents)
                 .UsingEntity<Dictionary<string, object>>(
-                    "NewsTag",
-                    r => r.HasOne<Tags>().WithMany()
-                        .HasForeignKey("TagId")
+                    "ContentTags",
+                    r => r.HasOne<Tags>()
+                        .WithMany()
+                        .HasForeignKey("TagID")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__NewsTags__TagID__73BA3083"),
-                    l => l.HasOne<News>().WithMany()
-                        .HasForeignKey("PostId")
+                        .HasConstraintName("FK_ContentTags_Tags"),
+                    l => l.HasOne<Contents>()
+                        .WithMany()
+                        .HasForeignKey("ContentID")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__NewsTags__PostID__72C60C4A"),
+                        .HasConstraintName("FK_ContentTags_Contents"),
                     j =>
                     {
-                        j.HasKey("PostId", "TagId").HasName("PK__NewsTags__7C45AF9C069C599E");
-                        j.ToTable("NewsTags");
-                        j.IndexerProperty<int>("PostId").HasColumnName("PostID");
-                        j.IndexerProperty<int>("TagId").HasColumnName("TagID");
+                        j.HasKey("ContentID", "TagID").HasName("PK_ContentTags");
+                        j.ToTable("ContentTags");
+                        j.IndexerProperty<int>("ContentID").HasColumnName("ContentID");
+                        j.IndexerProperty<int>("TagID").HasColumnName("TagID");
                     });
         });
 

@@ -37,7 +37,7 @@ public partial class BloodManagementSystemContext : DbContext
 
     public virtual DbSet<HospitalInfo> HospitalInfos { get; set; }
 
-    public virtual DbSet<News> News { get; set; }
+    public virtual DbSet<Contents> News { get; set; }
 
     public virtual DbSet<Notifications> Notifications { get; set; }
 
@@ -292,7 +292,7 @@ public partial class BloodManagementSystemContext : DbContext
             entity.Property(e => e.WorkingHours).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<News>(entity =>
+        modelBuilder.Entity<Contents>(entity =>
         {
             entity.HasKey(e => e.PostId).HasName("PK__News__AA1260385AEA2106");
 
@@ -315,7 +315,7 @@ public partial class BloodManagementSystemContext : DbContext
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__NewsTags__TagID__534D60F1"),
-                    l => l.HasOne<News>().WithMany()
+                    l => l.HasOne<Contents>().WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__NewsTags__PostID__52593CB8"),
