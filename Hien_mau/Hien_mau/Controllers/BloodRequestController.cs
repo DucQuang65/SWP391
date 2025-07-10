@@ -168,6 +168,22 @@ namespace Hien_mau.Controllers
             return Ok();
         }
 
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> PatchDistance(int id, UpdateStatusBloodRequestDto updateStatusBloodRequestDto)
+        {
+            var bloodRequest = await _context.BloodRequests.FindAsync(id);
+            if (bloodRequest == null)
+            {
+                return NotFound();
+            }
+
+            bloodRequest.Status = updateStatusBloodRequestDto.Status;
+            _context.BloodRequests.Update(bloodRequest);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBloodRequest(int id)
         {
