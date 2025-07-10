@@ -10,6 +10,18 @@ CREATE TABLE Roles (
     RoleName NVARCHAR(20) NOT NULL UNIQUE -- Guest, Member, Staff-Doctor, Staff-BloodManager, Admin
 );
 
+-- Department: Stores information about hospital department
+CREATE TABLE Departments(
+	DepartmentID INT PRIMARY KEY IDENTITY(1,1),
+	DepartmentName NVARCHAR(255),
+);
+
+-- Components table: Stores blood components
+CREATE TABLE Components (
+    ComponentID INT PRIMARY KEY IDENTITY(1,1),
+    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
+);
+
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
@@ -36,17 +48,12 @@ CREATE TABLE Users (
 
     Status TINYINT DEFAULT 1, -- 0: inactive, 1: active
     RoleID INT NOT NULL,
-    DepartmentID INT, -- For Staff-Doctor (e.g., Khoa A)
+    DepartmentID INT NULL, -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID),
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
--- Department: Stores information about hospital department
-CREATE TABLE Departments(
-	DepartmentID INT PRIMARY KEY IDENTITY(1,1),
-	DepartmentName NVARCHAR(255),
-);
 -- HospitalInfo table: Stores information about hospital
 CREATE TABLE HospitalInfo (
     ID INT PRIMARY KEY CHECK (ID = 1),-- Giới hạn insert
@@ -60,49 +67,29 @@ CREATE TABLE HospitalInfo (
     Longitude FLOAT NOT NULL
 );
 
--- BloodArticles table: Stores public blood group articles
-CREATE TABLE BloodArticles (
-    ArticleID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(255) NOT NULL,
-    Content NVARCHAR(MAX) NOT NULL,
-    ImgUrl NVARCHAR(MAX),
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    UserID INT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
-
--- BloodTypeTags table: For sorting blood type tags
+--Tags table: For sorting type of tags
 CREATE TABLE Tags(
     TagID INT IDENTITY(1,1) PRIMARY KEY,
     TagName NVARCHAR(50) NOT NULL -- A+, O−, Truyền máu, Khẩn cấp
 );
 
--- ArticleTags table: For sorting article tags
-CREATE TABLE ArticleTags (
-    ArticleID INT,
-    TagID INT,
-    PRIMARY KEY (ArticleID, TagID),
-    FOREIGN KEY (ArticleID) REFERENCES BloodArticles(ArticleID),
-    FOREIGN KEY (TagID) REFERENCES Tags(TagID)
-);
-
--- News table: Stores blog posts
-CREATE TABLE News (
-    PostID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(255) NOT NULL,
-    Content NVARCHAR(MAX)NOT NULL,
+ -- Contents table: For storing hospital content
+CREATE TABLE Contents (
+    ContentID INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(MAX) NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
     ImgUrl NVARCHAR(MAX),
+    ContentType NVARCHAR(20) NOT NULL, -- 'Article', 'News'
     UserID INT NOT NULL,
-    PostedAt DATETIME DEFAULT GETDATE(),
+    CreatedAt DATETIME DEFAULT GETDATE() NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- NewsTags table: For sorting blogs
-CREATE TABLE NewsTags (
-    PostID INT,
+CREATE TABLE ContentTags (
+    ContentID INT,
     TagID INT,
-    PRIMARY KEY (PostID, TagID),
-    FOREIGN KEY (PostID) REFERENCES News(PostID),
+    PRIMARY KEY (ContentID, TagID),
+    FOREIGN KEY (ContentID) REFERENCES Contents(ContentID),
     FOREIGN KEY (TagID) REFERENCES Tags(TagID)
 );
 
@@ -152,7 +139,7 @@ CREATE TABLE BloodInventoryHistories (
     ExpirationDate DATETIME, -- Expiration date
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
-    FOREIGN KEY (InventoryID) REFERENCES BloodInventory(InventoryID)
+    FOREIGN KEY (InventoryID) REFERENCES BloodInventories(InventoryID)
 );
 
  CREATE TABLE Patients (
@@ -188,12 +175,6 @@ CREATE TABLE BloodRequests (
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
-);
-
--- Components table: Stores blood components
-CREATE TABLE Components (
-    ComponentID INT PRIMARY KEY IDENTITY(1,1),
-    ComponentType NVARCHAR(20) NOT NULL -- RedCells, Plasma, Platelets, Whole
 );
 
 -- BloodDonationHistory table: Stores donation records
