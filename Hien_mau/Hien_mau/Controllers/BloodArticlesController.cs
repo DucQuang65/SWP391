@@ -23,7 +23,7 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBloodArticles()
         {
             var articles = await _context.BloodArticles
-        .Include(a => a.Tags) 
+        .Include(a => a.Tags)
         .ToListAsync();
 
 
@@ -64,7 +64,7 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<object>> GetBloodArticle(int id)
         {
             var article = await _context.BloodArticles
-         .Include(a => a.Tags) 
+         .Include(a => a.Tags)
          .FirstOrDefaultAsync(a => a.ArticleId == id);
 
             if (article == null)
@@ -105,7 +105,7 @@ namespace Hien_mau.Controllers
         // POST: api/BloodArticles
         [HttpPost]
         public async Task<ActionResult<object>> CreateBloodArticle([FromBody] BloodArticleCreateDto dto, [FromServices] ActivityLogger logger)
-        { 
+        {
             // Kiểm tra dữ liệu đầu vào
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
             {
@@ -120,7 +120,7 @@ namespace Hien_mau.Controllers
 
             var createdAt = DateTime.Now; // Lấy múi giờ địa phương
 
-            var article = new BloodArticle
+            var article = new BloodArticles
             {
                 Title = dto.Title,
                 Content = dto.Content,

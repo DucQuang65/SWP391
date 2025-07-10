@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class BloodDonationHistory
+public partial class BloodDonationHistories
 {
     [Key]
     public int DonationId { get; set; }
@@ -17,13 +17,15 @@ public partial class BloodDonationHistory
 
     public string RhType { get; set; } = null!;
 
-    public string ComponentType { get; set; } = null!;
+    public int? ComponentId { get; set; }
 
     public int Quantity { get; set; }
 
-    public bool? IsSuccessful { get; set; }
+    public bool? IsSuccess { get; set; }
 
     public string? Notes { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual Components? Component { get; set; }
+
+    public virtual Users User { get; set; } = null!;
 }

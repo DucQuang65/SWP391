@@ -27,10 +27,10 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .Select(i => new BloodInventoryDto
                     {
-                        InventoryID = i.InventoryID,
+                        InventoryID = i.InventoryId,
                         BloodGroup = i.BloodGroup,
                         RhType = i.RhType,
-                        ComponentType = i.ComponentType,
+                        ComponentId = i.ComponentId,
                         BagType = i.BagType,
                         Quantity = i.Quantity,
                         Status = i.Quantity <= 10 ? (byte)0 :
@@ -59,11 +59,11 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .Select(h => new
                     {
-                        h.InventoryID,
+                        h.InventoryId,
                         h.PerformedAt,
                         h.BloodGroup,
                         h.RhType,
-                        h.ComponentType,
+                        h.ComponentId,
                         h.Quantity,
                         h.ActionType,
                         h.BagType,
@@ -82,11 +82,11 @@ namespace Hien_mau.Controllers
 
                 var result = histories.Select(h => new BloodHistoryDto
                 {
-                    InventoryID = h.InventoryID ?? 0,
+                    InventoryID = h.InventoryId ?? 0,
                     PerformedAt = h.PerformedAt,
                     BloodGroup = h.BloodGroup ?? "",
                     RhType = h.RhType ?? "",
-                    ComponentType = h.ComponentType ?? "",
+                    ComponentId = h.ComponentId ,
                     Quantity = h.Quantity,
                     PerformedByName = users.TryGetValue(h.PerformedBy, out var name) ? name : "System",
                     ActionType = h.ActionType ?? "",
@@ -112,9 +112,9 @@ namespace Hien_mau.Controllers
                 if (request.Quantity <= 0)
                     return BadRequest("Số lượng phải lớn hơn 0.");
 
-                if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
-                    !IsValidComponentType(request.ComponentType) || !IsValidBagType(request.BagType))
-                    return BadRequest("Thông tin máu không hợp lệ.");
+                //if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
+                //    !IsValidComponentId(request.ComponentId) || !IsValidBagType(request.BagType))
+                //    return BadRequest("Thông tin máu không hợp lệ.");
 
                 var userExists = await _context.Users.AsNoTracking().AnyAsync(u => u.UserId == request.PerformedBy);
                 if (!userExists)
@@ -124,27 +124,27 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
                                             i.RhType == request.RhType &&
-                                            i.ComponentType == request.ComponentType &&
+                                            i.ComponentId == request.ComponentId &&
                                             i.BagType == request.BagType);
 
                 var receivedDate = DateTime.Now;
                 int? inventoryId;
 
-                DateTime? expirationDate = request.ComponentType switch
+                DateTime? expirationDate = request.ComponentId switch
                 {
-                    "Toàn phần" => receivedDate.AddDays(35),
-                    "Hồng cầu" => receivedDate.AddDays(42),
-                    "Tiểu cầu" => receivedDate.AddDays(5),
-                    "Huyết tương" => receivedDate.AddDays(365),
+                    1 => receivedDate.AddDays(35),
+                    2 => receivedDate.AddDays(42),
+                    4 => receivedDate.AddDays(5),
+                    3 => receivedDate.AddDays(365),
                     _ => null
                 };
                 if (inventory == null)
                 {
-                    var newInventory = new BloodInventory
+                    var newInventory = new BloodInventories
                     {
                         BloodGroup = request.BloodGroup,
                         RhType = request.RhType,
-                        ComponentType = request.ComponentType,
+                        ComponentId = request.ComponentId,
                         BagType = request.BagType,
                         Quantity = request.Quantity,
                         Status = request.Quantity <= 10 ? (byte)0 :
@@ -163,20 +163,20 @@ namespace Hien_mau.Controllers
                         .AsNoTracking()
                         .Where(i => i.BloodGroup == request.BloodGroup &&
                                     i.RhType == request.RhType &&
-                                    i.ComponentType == request.ComponentType &&
+                                    i.ComponentId == request.ComponentId &&
                                     i.BagType == request.BagType)
-                        .Select(i => i.InventoryID)
+                        .Select(i => i.InventoryId)
                         .FirstOrDefaultAsync();
                 }
                 else
                 {
-                    inventoryId = inventory.InventoryID;
-                    var updatedInventory = new BloodInventory
+                    inventoryId = inventory.InventoryId;
+                    var updatedInventory = new BloodInventories
                     {
-                        InventoryID = inventoryId.Value,
+                        InventoryId = inventoryId.Value,
                         BloodGroup = inventory.BloodGroup,
                         RhType = inventory.RhType,
-                        ComponentType = inventory.ComponentType,
+                        ComponentId = inventory.ComponentId,
                         BagType = inventory.BagType,
                         Quantity = inventory.Quantity + request.Quantity,
                         Status = (inventory.Quantity + request.Quantity) <= 10 ? (byte)0 :
@@ -195,12 +195,12 @@ namespace Hien_mau.Controllers
                 if (inventoryId == null)
                     throw new Exception("Không tìm thấy InventoryID.");
 
-                var history = new BloodInventoryHistory
+                var history = new BloodInventoryHistories
                 {
-                    InventoryID = inventoryId.Value,
+                    InventoryId = inventoryId.Value,
                     BloodGroup = request.BloodGroup,
                     RhType = request.RhType,
-                    ComponentType = request.ComponentType,
+                    ComponentId = request.ComponentId,
                     ActionType = "CheckIn",
                     Quantity = request.Quantity,
                     BagType = request.BagType,
@@ -233,9 +233,9 @@ namespace Hien_mau.Controllers
                 if (request.Quantity <= 0)
                     return BadRequest("Số lượng phải lớn hơn 0.");
 
-                if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
-                    !IsValidComponentType(request.ComponentType) || !IsValidBagType(request.BagType))
-                    return BadRequest("Thông tin máu không hợp lệ.");
+                //if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
+                //    !IsValidComponentId(request.ComponentId) || !IsValidBagType(request.BagType))
+                //    return BadRequest("Thông tin máu không hợp lệ.");
 
                 var userExists = await _context.Users.AsNoTracking().AnyAsync(u => u.UserId == request.PerformedBy);
                 if (!userExists)
@@ -245,7 +245,7 @@ namespace Hien_mau.Controllers
                     .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
                                             i.RhType == request.RhType &&
-                                            i.ComponentType == request.ComponentType &&
+                                            i.ComponentId == request.ComponentId &&
                                             i.BagType == request.BagType);
 
                 if (inventory == null)
@@ -257,21 +257,21 @@ namespace Hien_mau.Controllers
                 if (inventory.Quantity < request.Quantity)
                     return BadRequest("Số lượng trong kho không đủ.");
 
-                DateTime? expirationDate = request.ComponentType switch
+                DateTime? expirationDate = request.ComponentId switch
                 {
-                    "Toàn phần" => inventory.ReceivedDate.AddDays(35),
-                    "Hồng cầu" => inventory.ReceivedDate.AddDays(42),
-                    "Tiểu cầu" => inventory.ReceivedDate.AddDays(5),
-                    "Huyết tương" => inventory.ReceivedDate.AddDays(365),
+                    1 => inventory.ReceivedDate.AddDays(35),
+                    2 => inventory.ReceivedDate.AddDays(42),
+                    4 => inventory.ReceivedDate.AddDays(5),
+                    3 => inventory.ReceivedDate.AddDays(365),
                     _ => inventory.ExpirationDate
                 };
 
-                var updatedInventory = new BloodInventory
+                var updatedInventory = new BloodInventories
                 {
-                    InventoryID = inventory.InventoryID,
+                    InventoryId = inventory.InventoryId,
                     BloodGroup = inventory.BloodGroup,
                     RhType = inventory.RhType,
-                    ComponentType = inventory.ComponentType,
+                    ComponentId = inventory.ComponentId,
                     BagType = inventory.BagType,
                     Quantity = inventory.Quantity - request.Quantity,
                     IsRare = inventory.IsRare,
@@ -287,14 +287,14 @@ namespace Hien_mau.Controllers
                 _context.BloodInventory.Update(updatedInventory);
                 await _context.SaveChangesAsync();
 
-                var inventoryId = inventory.InventoryID;
+                var inventoryId = inventory.InventoryId;
 
-                var history = new BloodInventoryHistory
+                var history = new BloodInventoryHistories
                 {
-                    InventoryID = inventoryId,
+                    InventoryId = inventoryId,
                     BloodGroup = inventory.BloodGroup,
                     RhType = inventory.RhType,
-                    ComponentType = inventory.ComponentType,
+                    ComponentId = inventory.ComponentId,
                     ActionType = "CheckOut",
                     Quantity = request.Quantity,
                     BagType = inventory.BagType,
@@ -318,15 +318,15 @@ namespace Hien_mau.Controllers
             }
         }
 
-    
+
 
         private bool IsValidBloodGroup(string bloodGroup) =>
             new[] { "A", "B", "AB", "O" }.Contains(bloodGroup);
 
         private bool IsValidRhType(string rhType) =>
             new[] { "Rh+", "Rh-" }.Contains(rhType);
-        private bool IsValidComponentType(string componentType) =>
-                        new[] { "Toàn phần", "Hồng cầu", "Huyết tương", "Tiểu cầu" }.Contains(componentType);
+        private bool IsValidComponentId(string ComponentId) =>
+                        new[] { "Toàn phần", "Hồng cầu", "Huyết tương", "Tiểu cầu" }.Contains(ComponentId);
 
         private bool IsValidBagType(string bagType) =>
             new[] { "250ml", "350ml", "450ml" }.Contains(bagType);

@@ -31,7 +31,7 @@ namespace Hien_mau.Controllers
                 .Select(n => new
                 {
                     n.NotificationId,
-                    n.UserID,
+                    n.UserId,
                     UserName = n.User.Name,
                     n.Title,
                     n.Message,
@@ -59,7 +59,7 @@ namespace Hien_mau.Controllers
             return Ok(new
             {
                 notification.NotificationId,
-                notification.UserID,
+                notification.UserId,
                 UserName = notification.User.Name,
                 notification.Title,
                 notification.Message,
@@ -78,9 +78,10 @@ namespace Hien_mau.Controllers
                 return NotFound("User not found.");
 
             var notifications = await _context.Notifications
-                .Where(n => n.UserID == userId)
+                .Where(n => n.UserId == userId)
                 .OrderByDescending(n => n.SentAt)
-                .Select(n => new {
+                .Select(n => new
+                {
                     n.NotificationId,
                     n.Title,
                     n.Message,
@@ -118,9 +119,9 @@ namespace Hien_mau.Controllers
                 return NotFound(new { error = "User does not exist" });
             }
 
-            var notification = new Notification
+            var notification = new Notifications
             {
-                UserID = dto.UserId,
+                UserId = dto.UserId,
                 Title = dto.Title!,
                 Message = dto.Message!,
                 Type = dto.Type!,
@@ -165,10 +166,10 @@ namespace Hien_mau.Controllers
             }
 
             // Priority phải là 0 hoặc 1 nếu muốn cập nhật
-            if (dto.Priority >= 0 && dto.Priority <= 1)
-            {
-                notification.Priority = dto.Priority;
-            }
+            //if (dto.Priority >= 0 && dto.Priority <= 1)
+            //{
+            //    notification.Priority = dto.Priority;
+            //}
 
             // Cập nhật trạng thái đã đọc
             notification.IsRead = dto.IsRead;
@@ -182,7 +183,7 @@ namespace Hien_mau.Controllers
             return Ok(new
             {
                 notification.NotificationId,
-                notification.UserID,
+                notification.UserId,
                 notification.Title,
                 notification.Message,
                 notification.Type,
@@ -202,7 +203,7 @@ namespace Hien_mau.Controllers
 
             _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
-            await _logger.NotiLog(notification.UserID, "Notification", "Delete notification", "Delete");
+            await _logger.NotiLog(notification.UserId, "Notification", "Delete notification", "Delete");
 
             return NoContent();
         }

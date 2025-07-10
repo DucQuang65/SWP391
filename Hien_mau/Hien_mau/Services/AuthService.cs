@@ -39,13 +39,13 @@ namespace Hien_mau.Services
             return CreateToken(user);
         }
 
-        public async Task<User?> RegisterAsync(UserDto request)
+        public async Task<Users?> RegisterAsync(UserDto request)
         {            
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
             {
                 return null;
             }
-            var user = new User()
+            var user = new Users()
             {
                 Email = request.Email,
                 Password = request.Password,
@@ -63,17 +63,17 @@ namespace Hien_mau.Services
             return user;
         }
 
-        public async Task<User?> GetUserByEmailAsync(string email)
+        public async Task<Users?> GetUserByEmailAsync(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public async Task<User> CreateUserFromGoogleAsync(string email, string name)
+        public async Task<Users> CreateUserFromGoogleAsync(string email, string name)
         {
             var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
             var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
-            var user = new User
+            var user = new Users
             {
                 Email = email,
                 //Name = name,
@@ -87,7 +87,7 @@ namespace Hien_mau.Services
             return user;
         }
 
-        public string CreateToken(User user)
+        public string CreateToken(Users user)
         {
             var claims = new List<Claim>
             {

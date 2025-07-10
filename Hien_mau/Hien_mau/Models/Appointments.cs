@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class Appointment
+public partial class Appointments
 {
     [Key]
     public int AppointmentId { get; set; }
@@ -12,15 +12,18 @@ public partial class Appointment
     public int UserId { get; set; }
 
     public DateTime AppointmentDate { get; set; }
-    public byte Status { get; set; } 
-    public string TimeSlot { get; set; }
+
+    public byte? Status { get; set; }
 
     public string? Notes { get; set; }
+
+    public string? TimeSlot { get; set; }
+
     public DateTime? LastDonationDate { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
-    public bool Cancel { get; set; }    
+    public bool? Cancel { get; set; }
 
-    public virtual User User { get; set; } = null!;
-    
+    public DateTime? CreatedAt { get; set; }
+
+    public virtual Users User { get; set; } = null!;
 }

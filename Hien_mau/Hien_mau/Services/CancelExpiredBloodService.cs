@@ -32,12 +32,12 @@ namespace Hien_mau.Services
 
                     foreach (var inventory in expiredInventories)
                     {
-                        var updatedInventory = new BloodInventory
+                        var updatedInventory = new BloodInventories
                         {
-                            InventoryID = inventory.InventoryID,
+                            InventoryId = inventory.InventoryId,
                             BloodGroup = inventory.BloodGroup,
                             RhType = inventory.RhType,
-                            ComponentType = inventory.ComponentType,
+                            ComponentId = inventory.ComponentId,
                             BagType = inventory.BagType,
                             Quantity = 0,
                             IsRare = inventory.IsRare,
@@ -49,12 +49,12 @@ namespace Hien_mau.Services
 
                         context.BloodInventory.Update(updatedInventory);
 
-                        var history = new BloodInventoryHistory
+                        var history = new BloodInventoryHistories
                         {
-                            InventoryID = inventory.InventoryID,
+                            InventoryId = inventory.InventoryId,
                             BloodGroup = inventory.BloodGroup,
                             RhType = inventory.RhType,
-                            ComponentType = inventory.ComponentType,
+                            ComponentId = inventory.ComponentId,
                             ActionType = "Hủy",
                             Quantity = inventory.Quantity,
                             BagType = inventory.BagType,
@@ -79,7 +79,7 @@ namespace Hien_mau.Services
                     }
                 }
 
-               
+
                 await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
             }
         }

@@ -1,31 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hien_mau.Models
 {
-    [Table("ActivityLog")]
-    public partial class ActivityLog
+    [Table("ActivityLogs")]
+    public partial class ActivityLogs
     {
         [Key]
         public int LogId { get; set; }
-
         [Required]
-        public int UserID { get; set; }
-
+        public int UserId { get; set; }
         [Required]
         public string ActivityType { get; set; } = null!;
 
         public int? EntityId { get; set; }
-
         [Required]
         public string EntityType { get; set; } = null!;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
         public string? Description { get; set; }
 
+        public DateTime? CreatedAt { get; set; }
         [Required]
-        public virtual User User { get; set; } = null!;
-
+        public virtual Users User { get; set; } = null!;
     }
 }

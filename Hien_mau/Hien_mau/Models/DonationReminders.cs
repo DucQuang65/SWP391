@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class DonationReminder
+public partial class DonationReminders
 {
     [Key]
     public int ReminderId { get; set; }
@@ -17,5 +17,5 @@ public partial class DonationReminder
 
     public DateTime? SentAt { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual Users User { get; set; } = null!;
 }

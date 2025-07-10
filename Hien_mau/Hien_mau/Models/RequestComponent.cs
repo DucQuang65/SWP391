@@ -13,5 +13,5 @@ public partial class RequestComponent
 
     public string ComponentType { get; set; } = null!;
 
-    public virtual BloodRequest Request { get; set; } = null!;
+    public virtual BloodRequests Request { get; set; } = null!;
 }

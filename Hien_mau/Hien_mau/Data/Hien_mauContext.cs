@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,41 +16,39 @@ public partial class Hien_mauContext : DbContext
         : base(options)
     {
     }
-    public virtual DbSet<BloodInventoryHistory> BloodInventoryHistory { get; set; }
+    public virtual DbSet<BloodInventoryHistories> BloodInventoryHistory { get; set; }
 
-    public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
+    public virtual DbSet<ActivityLogs> ActivityLogs { get; set; }
 
-    public virtual DbSet<Appointment> Appointments { get; set; }
+    public virtual DbSet<Appointments> Appointments { get; set; }
 
-    public virtual DbSet<BloodArticle> BloodArticles { get; set; }
+    public virtual DbSet<BloodArticles> BloodArticles { get; set; }
 
-    public virtual DbSet<BloodDonationHistory> BloodDonationHistory { get; set; }
+    public virtual DbSet<BloodDonationHistories> BloodDonationHistory { get; set; }
 
-    public virtual DbSet<BloodInventory> BloodInventory { get; set; }
+    public virtual DbSet<BloodInventories> BloodInventory { get; set; }
 
-    public virtual DbSet<BloodRequest> BloodRequests { get; set; }
+    public virtual DbSet<BloodRequests> BloodRequests { get; set; }
 
-    public virtual DbSet<BloodRequestHistory> BloodRequestHistories { get; set; }
-
-    public virtual DbSet<DonationReminder> DonationReminders { get; set; }
+    public virtual DbSet<DonationReminders> DonationReminders { get; set; }
 
     public virtual DbSet<HospitalInfo> HospitalInfos { get; set; }
 
     public virtual DbSet<News> News { get; set; }
 
-    public virtual DbSet<Notification> Notifications { get; set; }
+    public virtual DbSet<Notifications> Notifications { get; set; }
 
     public virtual DbSet<PublicBloodRequest> PublicBloodRequests { get; set; }
 
     public virtual DbSet<RequestComponent> RequestComponents { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
+    public virtual DbSet<Roles> Roles { get; set; }
 
-    public virtual DbSet<Tag> Tags { get; set; }
+    public virtual DbSet<Tags> Tags { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Users> Users { get; set; }
 
-    public DbSet<Patient> Patients { get; set; }
+    public DbSet<Patients> Patients { get; set; }
 
     //public virtual DbSet<UserLocation> UserLocations { get; set; }
 
@@ -65,12 +64,12 @@ public partial class Hien_mauContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
-        modelBuilder.Entity<BloodInventoryHistory>().ToTable("BloodInventoryHistory");
-        modelBuilder.Entity<BloodInventory>().ToTable("BloodInventory");
-        modelBuilder.Entity<ActivityLog>(entity =>
+        modelBuilder.Entity<BloodInventoryHistories>().ToTable("BloodInventoryHistory");
+        modelBuilder.Entity<BloodInventories>().ToTable("BloodInventory");
+        modelBuilder.Entity<ActivityLogs>(entity =>
         {
             entity.HasKey(e => e.LogId);
-            entity.Property(e => e.UserID);
+            entity.Property(e => e.UserId);
             entity.Property(e => e.ActivityType);
             entity.Property(e => e.EntityType);
             entity.Property(e => e.Description);
@@ -80,18 +79,18 @@ public partial class Hien_mauContext : DbContext
 
             entity.HasOne(d => d.User)
                 .WithMany(p => p.ActivityLogs)
-                .HasForeignKey(d => d.UserID)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ActivityLogs_Users");
         });
-        modelBuilder.Entity<Appointment>(entity =>
+        modelBuilder.Entity<Appointments>(entity =>
         {
             entity.HasKey(e => e.AppointmentId);
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
             entity.Property(e => e.TimeSlot).HasMaxLength(50);
-           
+
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.Property(e => e.LastDonationDate).HasColumnType("date");
 
@@ -102,7 +101,7 @@ public partial class Hien_mauContext : DbContext
                 .HasConstraintName("FK_Appointments_Users");
         });
 
-        modelBuilder.Entity<BloodArticle>(entity =>
+        modelBuilder.Entity<BloodArticles>(entity =>
         {
             entity.HasKey(e => e.ArticleId).HasName("PK__BloodArt__9C6270C827BEB99B");
 
@@ -119,11 +118,11 @@ public partial class Hien_mauContext : DbContext
             entity.HasMany(d => d.Tags).WithMany(p => p.Articles)
                 .UsingEntity<Dictionary<string, object>>(
                     "ArticleTag",
-                    r => r.HasOne<Tag>().WithMany()
+                    r => r.HasOne<Tags>().WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__ArticleTa__TagID__6C190EBB"),
-                    l => l.HasOne<BloodArticle>().WithMany()
+                    l => l.HasOne<BloodArticles>().WithMany()
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__ArticleTa__Artic__6B24EA82"),
@@ -136,7 +135,7 @@ public partial class Hien_mauContext : DbContext
                     });
         });
 
-        modelBuilder.Entity<BloodDonationHistory>(entity =>
+        modelBuilder.Entity<BloodDonationHistories>(entity =>
         {
             entity.HasKey(e => e.DonationId).HasName("PK__BloodDon__C5082EDB37B9BA37");
 
@@ -144,9 +143,7 @@ public partial class Hien_mauContext : DbContext
 
             entity.Property(e => e.DonationId).HasColumnName("DonationID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            entity.Property(e => e.ComponentType).HasMaxLength(20);
             entity.Property(e => e.DonationDate).HasColumnType("datetime");
-            entity.Property(e => e.IsSuccessful).HasDefaultValue(true);
             entity.Property(e => e.Notes).HasMaxLength(255);
             entity.Property(e => e.RhType).HasMaxLength(3);
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -157,13 +154,12 @@ public partial class Hien_mauContext : DbContext
                 .HasConstraintName("FK__BloodDona__UserI__0A9D95DB");
         });
 
-        modelBuilder.Entity<BloodInventory>(entity =>
+        modelBuilder.Entity<BloodInventories>(entity =>
         {
-            entity.HasKey(e => e.InventoryID);
-            entity.Property(e => e.InventoryID).HasColumnName("InventoryID");
+            entity.HasKey(e => e.InventoryId);
+            entity.Property(e => e.InventoryId).HasColumnName("InventoryID");
             entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
             entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
-            entity.Property(e => e.ComponentType).HasMaxLength(20).IsRequired();
             entity.Property(e => e.BagType).HasMaxLength(5);
             entity.Property(e => e.Quantity).IsRequired();
             entity.Property(e => e.IsRare).HasDefaultValue(false).IsRequired();
@@ -172,20 +168,19 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.ReceivedDate).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
             entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
 
-            entity.HasMany(e => e.Histories)
+            entity.HasMany(e => e.BloodInventoryHistories)
                   .WithOne(h => h.BloodInventory)
-                  .HasForeignKey(h => h.InventoryID)
+                  .HasForeignKey(h => h.InventoryId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<BloodInventoryHistory>(entity =>
+        modelBuilder.Entity<BloodInventoryHistories>(entity =>
         {
-            entity.HasKey(e => e.HistoryID);
+            entity.HasKey(e => e.HistoryId);
             entity.ToTable("BloodInventoryHistory");
-            entity.Property(e => e.InventoryID);
+            entity.Property(e => e.InventoryId);
             entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
             entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
-            entity.Property(e => e.ComponentType).HasMaxLength(20).IsRequired();
             entity.Property(e => e.ActionType).HasMaxLength(10).IsRequired();
             entity.Property(e => e.Quantity).IsRequired();
             entity.Property(e => e.Notes).HasMaxLength(255);
@@ -196,8 +191,8 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
 
             entity.HasOne(e => e.BloodInventory)
-                  .WithMany(b => b.Histories)
-                  .HasForeignKey(e => e.InventoryID)
+                  .WithMany(b => b.BloodInventoryHistories)
+                  .HasForeignKey(e => e.InventoryId)
                   .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.PerformedByUser)
@@ -207,7 +202,7 @@ public partial class Hien_mauContext : DbContext
                   .OnDelete(DeleteBehavior.Restrict);
         });
 
-        modelBuilder.Entity<BloodRequest>(entity =>
+        modelBuilder.Entity<BloodRequests>(entity =>
         {
             entity.HasKey(e => e.RequestId).HasName("PK__BloodReq__33A8519A48D7A9B8");
 
@@ -216,7 +211,6 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.CreatedTime)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.IsAutoApproved).HasDefaultValue(false);
             entity.Property(e => e.Reason).HasMaxLength(1000);
             entity.Property(e => e.RhType).HasMaxLength(3);
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -227,32 +221,7 @@ public partial class Hien_mauContext : DbContext
                 .HasConstraintName("FK__BloodRequ__UserI__7E37BEF6");
         });
 
-        modelBuilder.Entity<BloodRequestHistory>(entity =>
-        {
-            entity.HasKey(e => e.HistoryId).HasName("PK__BloodReq__4D7B4ADDD8C51D74");
-
-            entity.ToTable("BloodRequestHistory");
-
-            entity.Property(e => e.HistoryId).HasColumnName("HistoryID");
-            entity.Property(e => e.Notes).HasMaxLength(255);
-            entity.Property(e => e.RequestId).HasColumnName("RequestID");
-            entity.Property(e => e.TimeStamp)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.Request).WithMany(p => p.BloodRequestHistories)
-                .HasForeignKey(d => d.RequestId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodRequ__Reque__04E4BC85");
-
-            entity.HasOne(d => d.User).WithMany(p => p.BloodRequestHistories)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodRequ__UserI__05D8E0BE");
-        });
-
-        modelBuilder.Entity<DonationReminder>(entity =>
+        modelBuilder.Entity<DonationReminders>(entity =>
         {
             entity.HasKey(e => e.ReminderId).HasName("PK__Donation__01A830A714C2E1D9");
 
@@ -305,7 +274,7 @@ public partial class Hien_mauContext : DbContext
             entity.HasMany(d => d.Tags).WithMany(p => p.Posts)
                 .UsingEntity<Dictionary<string, object>>(
                     "NewsTag",
-                    r => r.HasOne<Tag>().WithMany()
+                    r => r.HasOne<Tags>().WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__NewsTags__TagID__73BA3083"),
@@ -322,62 +291,28 @@ public partial class Hien_mauContext : DbContext
                     });
         });
 
-        modelBuilder.Entity<Notification>(entity =>
-        {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E320425465A");
+        //modelBuilder.Entity<Notifications>(entity =>
+        //{
+        //    entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E320425465A");
 
-            entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
-            entity.Property(e => e.IsRead).HasDefaultValue(false);
-            entity.Property(e => e.Message).HasMaxLength(255);
-            entity.Property(e => e.Priority).HasDefaultValue((byte)0);
-            entity.Property(e => e.SentAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.Title).HasMaxLength(255);
-            entity.Property(e => e.Type).HasMaxLength(50);
-            entity.Property(e => e.UserID).HasColumnName("UserID");
+        //    entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
+        //    entity.Property(e => e.IsRead).HasDefaultValue(false);
+        //    entity.Property(e => e.Message).HasMaxLength(255);
+        //    entity.Property(e => e.Priority).HasDefaultValue((byte)0);
+        //    entity.Property(e => e.SentAt)
+        //        .HasDefaultValueSql("(getdate())")
+        //        .HasColumnType("datetime");
+        //    entity.Property(e => e.Title).HasMaxLength(255);
+        //    entity.Property(e => e.Type).HasMaxLength(50);
+        //    entity.Property(e => e.UserId).HasColumnName("UserID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Notifications)
-                .HasForeignKey(d => d.UserID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Notificat__UserI__1EA48E88");
-        });
+        //    entity.HasOne(d => d.User).WithMany(p => p.Notifications)
+        //        .HasForeignKey(d => d.UserId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__Notificat__UserI__1EA48E88");
+        //});
 
-        modelBuilder.Entity<PublicBloodRequest>(entity =>
-        {
-            entity.HasKey(e => e.PublicRequestId).HasName("PK__PublicBl__FF814DC16BE6E91E");
-
-            entity.Property(e => e.PublicRequestId).HasColumnName("PublicRequestID");
-            entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.Deadline).HasColumnType("datetime");
-            entity.Property(e => e.IsRare).HasDefaultValue(false);
-            entity.Property(e => e.RequestId).HasColumnName("RequestID");
-            entity.Property(e => e.RhType).HasMaxLength(3);
-
-            entity.HasOne(d => d.Request).WithMany(p => p.PublicBloodRequests)
-                .HasForeignKey(d => d.RequestId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PublicBlo__Reque__10566F31");
-        });
-
-        modelBuilder.Entity<RequestComponent>(entity =>
-        {
-            entity.HasKey(e => e.ComponentId).HasName("PK__RequestC__D79CF02E56311009");
-
-            entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
-            entity.Property(e => e.ComponentType).HasMaxLength(20);
-            entity.Property(e => e.RequestId).HasColumnName("RequestID");
-
-            entity.HasOne(d => d.Request).WithMany(p => p.RequestComponents)
-                .HasForeignKey(d => d.RequestId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RequestCo__Reque__01142BA1");
-        });
-
-        modelBuilder.Entity<Role>(entity =>
+        modelBuilder.Entity<Roles>(entity =>
         {
             entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3A2C6F1841");
 
@@ -387,7 +322,7 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.RoleName).HasMaxLength(20);
         });
 
-        modelBuilder.Entity<Tag>(entity =>
+        modelBuilder.Entity<Tags>(entity =>
         {
             entity.HasKey(e => e.TagId).HasName("PK__Tags__657CFA4C22818AFF");
 
@@ -397,7 +332,7 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.TagName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<Users>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC841FE99C");
 
@@ -418,16 +353,23 @@ public partial class Hien_mauContext : DbContext
             entity.Property(e => e.Distance).HasColumnName("Distance");
             entity.Property(e => e.BloodGroup).HasMaxLength(2);
             entity.Property(e => e.RhType).HasMaxLength(3);
-            entity.Property(e => e.Weight).HasColumnType("float"); 
+            entity.Property(e => e.Weight).HasColumnType("float");
             entity.Property(e => e.Height).HasColumnType("float");
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
-            entity.Property(e => e.Department).HasMaxLength(50);
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleID__60A75C0F");
+
+            entity.HasOne(d => d.Role)
+                  .WithMany(p => p.Users)
+                  .HasForeignKey(d => d.RoleId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK__Users__RoleID__60A75C0F");
+
+            entity.HasOne(e => e.Department)
+                  .WithMany(d => d.Users)
+                  .HasForeignKey(e => e.DepartmentId)
+                  .HasConstraintName("FK__Users__DepartmentID");
         });
         //modelBuilder.Entity<Reminder>(entity =>
         //{

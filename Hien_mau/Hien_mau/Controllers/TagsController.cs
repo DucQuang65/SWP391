@@ -18,21 +18,21 @@ public class TagsController : ControllerBase
 
    
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Tag>>> GetAllTags()
+    public async Task<ActionResult<IEnumerable<Tags>>> GetAllTags()
     {
         return await _context.Tags.ToListAsync();
     }
 
 
     [HttpPost]
-    public async Task<ActionResult<Tag>> CreateTag([FromBody] TagDto tagDto)
+    public async Task<ActionResult<Tags>> CreateTag([FromBody] TagDto tagDto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var tag = new Tag
+        var tag = new Tags
         {
             TagName = tagDto.TagName
         };

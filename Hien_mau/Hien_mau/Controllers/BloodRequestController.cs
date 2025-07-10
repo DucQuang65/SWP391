@@ -24,9 +24,9 @@ namespace Hien_mau.Controllers
             var bloodRequests = await _context.BloodRequests
                 .Select(x => new BloodRequestDto
                 {
-                    UserID = x.UserId,
+                    UserId = x.UserId,
                     RequestId = x.RequestId,
-                    PatientID = x.PatientID,
+                    PatientId = x.PatientId,
                     PatientName = x.PatientName,
                     Age = x.Age,
                     Gender = x.Gender,
@@ -38,19 +38,20 @@ namespace Hien_mau.Controllers
                     RhType = x.RhType,
                     Quantity = x.Quantity,
                     Reason = x.Reason,
+                    Status = x.Status,
                     CreatedTime = x.CreatedTime
                 }).ToListAsync();
             return Ok(bloodRequests);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<BloodRequest>> GetRequestById(int id)
+        public async Task<ActionResult<BloodRequests>> GetRequestById(int id)
         {
             var bloodRequests = await _context.BloodRequests
                 .Select(x => new BloodRequestDto
                 {
-                    UserID = x.UserId,
+                    UserId = x.UserId,
                     RequestId = x.RequestId,
-                    PatientID = x.PatientID,
+                    PatientId = x.PatientId,
                     PatientName = x.PatientName,
                     Age = x.Age,
                     Gender = x.Gender,
@@ -62,6 +63,7 @@ namespace Hien_mau.Controllers
                     RhType = x.RhType,
                     Quantity = x.Quantity,
                     Reason = x.Reason,
+                    Status = x.Status,
                     CreatedTime = x.CreatedTime
                 }).FirstOrDefaultAsync();
 
@@ -79,7 +81,7 @@ namespace Hien_mau.Controllers
             }           
 
             var existingRequest = await _context.BloodRequests
-            .Where(x => x.UserId == bloodRequestDto.UserID && (x.Status == 0 || x.Status == 1)) 
+            .Where(x => x.UserId == bloodRequestDto.UserId && x.Status == 0) 
             .FirstOrDefaultAsync();
 
             if (existingRequest != null)
@@ -90,10 +92,10 @@ namespace Hien_mau.Controllers
             var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
             var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
-            var bloodRequest = new BloodRequest
+            var bloodRequest = new BloodRequests
             {
-                UserId = bloodRequestDto.UserID,
-                PatientID = bloodRequestDto.PatientID,
+                UserId = bloodRequestDto.UserId,
+                PatientId = bloodRequestDto.PatientId,
                 PatientName = bloodRequestDto.PatientName,
                 Age = bloodRequestDto.Age,
                 Gender = bloodRequestDto.Gender,
@@ -102,24 +104,23 @@ namespace Hien_mau.Controllers
                 RhType = bloodRequestDto.RhType,
                 Quantity = bloodRequestDto.Quantity,
                 Reason = bloodRequestDto.Reason,
-                Status = 0,
                 CreatedTime = vietNamTime
             };
 
-            if (bloodRequestDto.Relationship == "Doctor")
+            if (bloodRequestDto.Relationship == "Bác sĩ phụ trách")
             {
-                var doctorUser = await _context.Users.FindAsync(bloodRequestDto.UserID);
+                var doctorUser = await _context.Users.FindAsync(bloodRequestDto.UserId);
                 if (doctorUser != null)
                 {
                     bloodRequest.DoctorName = doctorUser.Name;
                     bloodRequest.DoctorPhone = doctorUser.Phone;
-                    bloodRequest.IsAutoApproved = true;
                     bloodRequest.Status = 1;
                     bloodRequest.FacilityName = "Ánh Dương";
                 }
             }
             else
             {
+                bloodRequest.Status = 0; 
                 bloodRequest.DoctorName = bloodRequestDto.DoctorName;
                 bloodRequest.DoctorPhone = bloodRequestDto.DoctorPhone;
                 bloodRequest.FacilityName = bloodRequestDto.FacilityName;
@@ -146,7 +147,7 @@ namespace Hien_mau.Controllers
             if (bloodRequest.Status == 2 || bloodRequest.Status == 3 || bloodRequest.Status == 4)
                 return BadRequest();
 
-            bloodRequest.PatientID = bloodRequestDto.PatientID;
+            bloodRequest.PatientId = bloodRequestDto.PatientId;
             bloodRequest.PatientName = bloodRequestDto.PatientName;
             bloodRequest.Age = bloodRequestDto.Age;
             bloodRequest.Gender = bloodRequestDto.Gender;

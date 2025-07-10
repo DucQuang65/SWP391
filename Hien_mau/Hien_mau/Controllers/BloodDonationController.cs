@@ -51,7 +51,7 @@ public class BloodDonationController : ControllerBase
         return Ok(user);
     }
 
-   
+
     [HttpGet("blood-donation-submissions")]
     public async Task<IActionResult> GetAllSubmissions()
     {
@@ -70,14 +70,14 @@ public class BloodDonationController : ControllerBase
                 Weight = (float)(a.User.Weight ?? 0),
                 Height = (float)(a.User.Height ?? 0),
                 AppointmentId = a.AppointmentId,
-                AppointmentDate =a.AppointmentDate,
+                AppointmentDate = a.AppointmentDate,
                 UserId = a.UserId,
                 CreatedAt = a.CreatedAt,
                 TimeSlot = a.TimeSlot,
                 LastDonationDate = a.LastDonationDate,
                 Status = a.Status,
                 Notes = a.Notes,
-                Cancel =a.Cancel
+                Cancel = a.Cancel
 
             })
             .ToListAsync();
@@ -85,7 +85,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submissions);
     }
 
- 
+
     [HttpGet("blood-donation-submissions/{appointmentId}")]
     public async Task<IActionResult> GetSubmissionById(int appointmentId)
     {
@@ -102,15 +102,15 @@ public class BloodDonationController : ControllerBase
                 DateOfBirth = a.User.DateOfBirth,
                 Gender = a.User.Gender,
                 RhType = a.User.RhType,
-                Weight = (float)(a.User.Weight ?? 0),   
-                Height = (float)(a.User.Height ?? 0),    
+                Weight = (float)(a.User.Weight ?? 0),
+                Height = (float)(a.User.Height ?? 0),
                 AppointmentId = a.AppointmentId,
-                AppointmentDate =a.AppointmentDate,
+                AppointmentDate = a.AppointmentDate,
                 UserId = a.UserId,
                 CreatedAt = a.CreatedAt,
                 TimeSlot = a.TimeSlot,
                 LastDonationDate = a.LastDonationDate,
-                Status=a.Status,
+                Status = a.Status,
                 Notes = a.Notes,
                 Cancel = a.Cancel
             })
@@ -124,7 +124,7 @@ public class BloodDonationController : ControllerBase
         return Ok(submission);
     }
 
-    
+
     [HttpPost("blood-donation-submissions")]
     public async Task<IActionResult> CreateSubmission([FromBody] BloodDonationSubmissionDto request)
     {
@@ -133,14 +133,14 @@ public class BloodDonationController : ControllerBase
             return BadRequest(new { error = "Invalid data" });
         }
 
-     
+
         var validTimeSlots = new[] { "Sáng (7:00-12:00)", "Chiều (13:00-17:00)" };
         if (!validTimeSlots.Contains(request.TimeSlot))
         {
             return BadRequest(new { error = "Invalid time slot. It must be either 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'." });
         }
 
-       
+
         if (request.LastDonationDate.HasValue && request.LastDonationDate.Value > DateTime.Now)
         {
             return BadRequest(new { error = "LastDonationDate cannot be in the future." });
@@ -152,12 +152,12 @@ public class BloodDonationController : ControllerBase
             return NotFound(new { error = "User does not exist" });
         }
 
-      
+
         user.Weight = request.Weight;
         user.Height = request.Height;
 
-   
-        var appointment = new Appointment
+
+        var appointment = new Appointments
         {
             UserId = request.UserId,
             AppointmentDate = request.RequestedDonationDate,
@@ -184,31 +184,31 @@ public class BloodDonationController : ControllerBase
             Height = user.Height,
             LastDonationDate = appointment.LastDonationDate,
             CreatedAt = appointment.CreatedAt,
-            Status =appointment.Status,
+            Status = appointment.Status,
             Notes = appointment.Notes
         };
 
         return CreatedAtAction(nameof(GetSubmissionById), new { appointmentId = appointment.AppointmentId }, response);
     }
 
-    
+
     [HttpPut("blood-donation-submissions/{appointmentId}/status")]
     public async Task<IActionResult> UpdateAppointmentStatus(int appointmentId, [FromBody] UpdateStatusDto request)
     {
-        
+
         if (request.Status < 0 || request.Status > 2)
         {
             return BadRequest(new { error = "Invalid status. Must be 0 (Fail), 1 (Success), or 2 (Canceled)." });
         }
 
-      
+
         var appointment = await _context.Appointments.FindAsync(appointmentId);
         if (appointment == null)
         {
             return NotFound(new { error = "Appointment not found" });
         }
 
-        
+
         appointment.Status = (byte)request.Status;
         appointment.Notes = request.Notes;
 
@@ -226,7 +226,7 @@ public class BloodDonationController : ControllerBase
     }
 
 
-   
+
     [HttpDelete("blood-donation-submissions/{appointmentId}")]
     public async Task<IActionResult> DeleteSubmission(int appointmentId)
     {
@@ -235,9 +235,9 @@ public class BloodDonationController : ControllerBase
         {
             return NotFound(new { error = "Blood donation submission not found!" });
         }
-        appointment.Cancel = true; 
+        appointment.Cancel = true;
 
-       
+
         await _context.SaveChangesAsync();
         // Ghi log sau khi đã lưu với UserId tương ứng
         await _logger.NotiLog(appointment.UserId, "Appointment", $"Xóa hẹn:", "Delete");

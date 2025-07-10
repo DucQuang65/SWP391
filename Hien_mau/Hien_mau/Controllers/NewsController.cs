@@ -212,7 +212,7 @@ namespace Hien_mau.Controllers
         // DELETE: api/News/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id, [FromQuery] int userId, [FromServices] ActivityLogger logger)
-{
+        {
             var news = await _context.News.Include(p => p.Tags).FirstOrDefaultAsync(p => p.PostId == id);
             if (news == null) return NotFound();
 

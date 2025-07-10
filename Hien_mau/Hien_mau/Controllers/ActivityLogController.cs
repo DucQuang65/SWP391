@@ -23,9 +23,10 @@ namespace Hien_mau.Controllers
                 .Include(l => l.User)
                 .OrderByDescending(l => l.CreatedAt)
                 .Take(100)
-                .Select(l => new {
+                .Select(l => new
+                {
                     l.LogId,
-                    l.UserID,
+                    l.UserId,
                     UserName = l.User.Name,
                     RoleName = l.User.Role.RoleName,
                     l.ActivityType,

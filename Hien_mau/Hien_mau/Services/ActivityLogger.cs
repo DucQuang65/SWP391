@@ -20,9 +20,9 @@ namespace Hien_mau.Services
                 throw new ArgumentException($"UserId {userId} does not exist.");
             }
 
-            var log = new ActivityLog
+            var log = new ActivityLogs
             {
-                UserID = userId,
+                UserId = userId,
                 ActivityType = action,
                 EntityType = entityType,
                 EntityId = entityId,
