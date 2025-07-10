@@ -50,6 +50,7 @@ CREATE TABLE Users (
     RoleID INT NOT NULL,
     DepartmentID INT NULL, -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
+    SelfReportedLastDonationDate DATETIME NULL,
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID),
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
@@ -180,30 +181,35 @@ CREATE TABLE BloodRequests (
 -- BloodDonationHistory table: Stores donation records
 CREATE TABLE BloodDonationHistories (
     DonationID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL,
+    AppointmentID INT NOT NULL,
     DonationDate DATETIME NOT NULL,
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
-    ComponentID INT, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
-    Quantity INT NOT NULL CHECK (Quantity > 0),
-    IsSuccess BIT DEFAULT 1,
-    Notes NVARCHAR(255),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID)
+    DoctorID INT NULL,
+    Notes NVARCHAR(255) NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    IsSuccess BIT NOT NULL DEFAULT 0,
+    FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID) ON DELETE SET NULL,
+    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) ON DELETE SET NULL
 );
 
 -- Appointments table: Stores appointment created
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL, -- Người đăng ký khám (thường là người hiến máu)
-    AppointmentDate DATE NOT NULL, -- Ngày giờ hẹn khám
-    Status TINYINT DEFAULT 0, --0--đang chờ duyệt, --1 không chấp nhận, --2 chấp nhận
-    Notes NVARCHAR(255),
-    TimeSlot NVARCHAR(50),
-    LastDonationDate DATE,
-    Cancel BIT DEFAULT 0,
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    UserID INT NOT NULL,
+    DoctorID INT NULL,
+    AppointmentDate DATE NOT NULL,
+    TimeSlot NVARCHAR(50) NOT NULL,
+    Status TINYINT NOT NULL DEFAULT 0, -- 0: chờ duyệt, 1: từ chối, 2: chấp nhận
+    Cancel BIT NOT NULL DEFAULT 0,
+    Notes NVARCHAR(255) NULL,
+    BloodPressure NVARCHAR(20) NULL,
+    HeartRate INT NULL,
+    Hemoglobin FLOAT NULL,
+    Temperature FLOAT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE SET NULL,
+    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) ON DELETE SET NULL
 );
 
 -- Notifications table: Stores user notifications
