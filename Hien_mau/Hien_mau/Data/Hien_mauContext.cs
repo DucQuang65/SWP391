@@ -49,12 +49,10 @@
 
         public virtual DbSet<Users> Users { get; set; }
 
-        public DbSet<Patients> Patients { get; set; }
-
-
-
-
         public virtual DbSet<Component> Components { get; set; }
+
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -84,8 +82,8 @@
 
 
 
-
-            modelBuilder.Entity<Component>(entity =>            {
+            modelBuilder.Entity<Component>(entity =>
+            {
 
                 entity.ToTable("Components"); 
                 entity.HasKey(e => e.ComponentId);
@@ -114,6 +112,7 @@
              .HasForeignKey(e => e.UserId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_Appointments_Users");
+
 
 
 
