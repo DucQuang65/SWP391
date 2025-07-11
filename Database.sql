@@ -128,7 +128,7 @@ CREATE TABLE BloodInventories (
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistories (
     HistoryId INT PRIMARY KEY IDENTITY(1,1),
-    InventoryId INT NOT NULL,
+    InventoryId INT NULL,
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
     BagType NVARCHAR(10),
