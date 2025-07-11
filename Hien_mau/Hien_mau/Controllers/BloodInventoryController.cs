@@ -177,7 +177,7 @@ namespace Hien_mau.Controllers
                     {
                         BloodGroup = request.BloodGroup,
                         RhType = request.RhType,
-                        ComponentId = request.ComponentId,
+                        
                         BagType = request.BagType,
                         Quantity = request.Quantity,
                         IsRare = IsRareBloodType(request.BloodGroup, request.RhType),
@@ -188,11 +188,10 @@ namespace Hien_mau.Controllers
                 }
                 else
                 {
-
                     inventory.Quantity += request.Quantity;
                     inventory.Status = CalculateStatus(inventory.Quantity);
                     inventory.LastUpdated = DateTime.Now;
-                    _context.BloodInventories.Update(inventory);
+
                 }
 
                 await _context.SaveChangesAsync();
@@ -261,7 +260,7 @@ namespace Hien_mau.Controllers
                 inventory.Quantity -= request.Quantity;
                 inventory.Status = CalculateStatus(inventory.Quantity);
                 inventory.LastUpdated = DateTime.Now;
-                _context.BloodInventories.Update(inventory);
+
 
                 // Create history record - Fixed: Correct logic for check-out
                 var history = new BloodInventoryHistories

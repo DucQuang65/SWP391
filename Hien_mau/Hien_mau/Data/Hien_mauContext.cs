@@ -49,8 +49,8 @@
 
         public virtual DbSet<Users> Users { get; set; }
 
-        public DbSet<Patients> Patients { get; set; }
         public virtual DbSet<Component> Components { get; set; }
+
 
 
 
@@ -81,8 +81,10 @@
             //});
 
 
+
             modelBuilder.Entity<Component>(entity =>
             {
+
                 entity.ToTable("Components"); 
                 entity.HasKey(e => e.ComponentId);
                 entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
@@ -105,19 +107,22 @@
         entity.Property(e => e.Cancel).HasDefaultValue(false);
         entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
 
-    entity.HasOne(e => e.User)
-         .WithMany(u => u.Appointments)
-         .HasForeignKey(e => e.UserId)
-         .OnDelete(DeleteBehavior.ClientSetNull)
-         .HasConstraintName("FK_Appointments_Users");
+        entity.HasOne(e => e.User)
+             .WithMany(u => u.Appointments)
+             .HasForeignKey(e => e.UserId)
+             .OnDelete(DeleteBehavior.ClientSetNull)
+             .HasConstraintName("FK_Appointments_Users");
 
 
-    entity.HasOne(e => e.Doctor)
-         .WithMany()
-         .HasForeignKey(e => e.DoctorId)
-         .OnDelete(DeleteBehavior.ClientSetNull)
-         .HasConstraintName("FK_Appointments_Doctor");
-});
+
+
+
+        entity.HasOne(e => e.Doctor)
+             .WithMany()
+             .HasForeignKey(e => e.DoctorId)
+             .OnDelete(DeleteBehavior.ClientSetNull)
+             .HasConstraintName("FK_Appointments_Doctor");
+    });
 
             modelBuilder.Entity<BloodDonationHistories>(entity =>
             {
@@ -198,6 +203,7 @@
 
                 entity.Property(e => e.Status)
                     .IsRequired();
+
 
                 entity.Property(e => e.LastUpdated)
                     .HasColumnType("datetime")
