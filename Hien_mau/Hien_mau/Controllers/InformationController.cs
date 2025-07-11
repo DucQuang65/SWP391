@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using FirebaseAdmin.Auth.Hash;
 using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Models;
@@ -197,7 +198,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPatch("{id}/password")]
-        public async Task<IActionResult> PatchPassword(int id, [FromBody] ResetPasswordDto dto)
+        public async Task<IActionResult> PatchPassword(int id, [FromBody] ChangePasswordDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -206,13 +207,18 @@ namespace Hien_mau.Controllers
             if (user == null)
                 return NotFound("User not found");
 
+            if (user.Password != dto.CurrentPassword)
+                return BadRequest("Mật khẩu hiện tại không đúng");
+
             user.Password = dto.NewPassword;
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return Ok("Password updated successfully");
+            return Ok("Mật khẩu đã được cập nhật thành công.");
         }
+
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
