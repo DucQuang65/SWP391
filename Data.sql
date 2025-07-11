@@ -1051,3 +1051,20 @@ VALUES
 -- Thành công
 (3, '2025-06-22 08:00:00', 'O', 'Rh+', 23, N'Máu đã được chấp nhận', GETDATE(), 1);
 
+INSERT INTO Reminders (UserId, Type, Message, RemindAt, IsDisabled, CreatedAt, IsSent, SentAt)
+VALUES
+(1, 'BloodDonation', N'Bạn có lịch hẹn hiến máu hôm nay!', '2025-07-10 08:00:00', 0, GETDATE(), 0, NULL),
+(2, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước!', '2025-07-09 08:00:00', 0, GETDATE(), 0, NULL),
+(3, 'BloodDonation', N'Bạn có lịch hẹn hiến máu hôm nay!', '2025-07-11 07:00:00', 0, GETDATE(), 0, NULL),
+(4, 'Recovery', N'Bạn đã đủ điều kiện hiến máu lại!', '2025-07-12 08:00:00', 0, GETDATE(), 0, NULL),
+(5, 'BloodDonation', N'Bạn có lịch hiến máu vào ngày mai!', '2025-07-13 08:00:00', 0, GETDATE(), 0, NULL),
+(6, 'Recovery', N'Bạn sẽ đủ điều kiện hiến máu lại vào tuần sau.', '2025-07-18 08:00:00', 0, GETDATE(), 0, NULL),
+(7, 'BloodDonation', N'Nhắc nhở hiến máu sắp tới!', '2025-07-20 08:00:00', 0, GETDATE(), 0, NULL),
+(8, 'Recovery', N'Bạn đã đủ 84 ngày sau hiến máu.', '2025-06-01 08:00:00', 0, GETDATE(), 1, '2025-06-01 08:01:00'),
+(9, 'BloodDonation', N'Bạn có lịch hôm nay.', '2025-07-01 08:00:00', 0, GETDATE(), 1, '2025-07-01 08:05:00'),
+(10, 'Recovery', N'Bạn đã đủ điều kiện hiến máu lại.', '2025-07-05 08:00:00', 1, GETDATE(), 0, NULL),
+(11, 'BloodDonation', N'Nhắc nhở bị tắt.', '2025-07-12 08:00:00', 1, GETDATE(), 0, NULL),
+(12, 'BloodDonation', N'Đừng quên lịch hiến máu sáng nay!', '2025-07-12 07:30:00', 0, GETDATE(), 0, NULL),
+(13, 'Recovery', N'Hôm nay là ngày bạn đủ điều kiện hiến máu lại!', '2025-07-12 09:00:00', 0, GETDATE(), 0, NULL),
+(14, 'BloodDonation', N'Lịch hiến máu vào ngày mai.', '2025-07-13 07:00:00', 0, GETDATE(), 0, NULL),
+(15, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước.', '2025-07-10 08:30:00', 0, GETDATE(), 0, NULL);
