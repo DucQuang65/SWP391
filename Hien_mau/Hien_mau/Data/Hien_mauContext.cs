@@ -53,6 +53,7 @@
 
 
 
+
         public virtual DbSet<Component> Components { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -83,7 +84,9 @@
 
 
 
+
             modelBuilder.Entity<Component>(entity =>            {
+
                 entity.ToTable("Components"); 
                 entity.HasKey(e => e.ComponentId);
                 entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
