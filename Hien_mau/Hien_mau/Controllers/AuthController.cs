@@ -68,14 +68,18 @@ namespace Hien_mau.Controllers
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+            string frontendUrl = "http://localhost:5173";
+
             if (!result.Succeeded)
-                return BadRequest("Google authentication failed");
+                //return BadRequest("Google authentication failed");
+                return Redirect($"{frontendUrl}/signin-google?error=auth_failed&error_description=Google authentication failed");
 
             var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
             var name = result.Principal.FindFirst(ClaimTypes.Name)?.Value;
 
             if (string.IsNullOrEmpty(email))
-                return BadRequest("Email not received from Google");
+                //return BadRequest("Email not received from Google");
+                return Redirect($"{frontendUrl}/signin-google?error=missing_email&error_description=Email not received from Google");
 
             var user = await _authService.GetUserByEmailAsync(email);
 
@@ -85,17 +89,20 @@ namespace Hien_mau.Controllers
                 user = await _authService.CreateUserFromGoogleAsync(email, name ?? "No Name");
 
                 if (user == null) // Kiểm tra lại sau khi tạo
-                    return StatusCode(500, "Failed to create user");
+                    //return StatusCode(500, "Failed to create user");
+                    return Redirect($"{frontendUrl}/signin-google?error=user_creation_failed&error_description=Failed to create user");
             }
 
             if (user.Status == 0)
             {
-                return BadRequest("Account is banned");
+                //return BadRequest("Account is banned");
+                return Redirect($"{frontendUrl}/signin-google?error=account_banned&error_description=Account is banned");
             }
 
             var token = _authService.CreateToken(user);
 
-            return Ok(token);          
+            //return Ok(token);
+            return Redirect($"{frontendUrl}/signin-google?token={token}");
         }
 
         [Authorize]
