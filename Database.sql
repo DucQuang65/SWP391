@@ -117,6 +117,8 @@ CREATE TABLE BloodInventories (
     Status INT NOT NULL,
     LastUpdated DATETIME NOT NULL DEFAULT GETDATE(),
     ComponentId INT NOT NULL
+	ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
+    ExpirationDate DATETIME, -- Expiration date
     FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
 
 );
@@ -126,7 +128,7 @@ CREATE TABLE BloodInventories (
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistories (
     HistoryId INT PRIMARY KEY IDENTITY(1,1),
-    InventoryId INT NOT NULL,
+    InventoryId INT NULL,
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
     BagType NVARCHAR(10),
