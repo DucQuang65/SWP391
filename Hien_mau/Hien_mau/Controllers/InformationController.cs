@@ -196,6 +196,23 @@ namespace Hien_mau.Controllers
             return Ok();
         }
 
+        [HttpPatch("{id}/password")]
+        public async Task<IActionResult> PatchPassword(int id, [FromBody] ResetPasswordDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound("User not found");
+
+            user.Password = dto.NewPassword;
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok("Password updated successfully");
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
