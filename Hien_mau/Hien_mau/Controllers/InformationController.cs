@@ -211,5 +211,19 @@ namespace Hien_mau.Controllers
 
             return Ok();
         }
+        [HttpPut("{id}/self-reported-donation")]
+        public async Task<IActionResult> UpdateSelfReportedDonationDate(int id, [FromBody] UpdateLastDonationDto dto)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound("Không tìm thấy người dùng");
+
+            user.SelfReportedLastDonationDate = dto.SelfReportedLastDonationDate;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Cập nhật thành công ngày hiến máu tự khai." });
+        }
+
     }
 }

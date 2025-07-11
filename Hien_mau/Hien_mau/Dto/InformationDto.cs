@@ -26,4 +26,9 @@
         public int? DepartmentId { get; set; }
         public DateTime? CreatedAt { get; set; }
     }
+    public class UpdateLastDonationDto
+    {
+        public DateTime SelfReportedLastDonationDate { get; set; }
+    }
+
 }
