@@ -109,18 +109,15 @@ CREATE TABLE ActivityLogs (
 -- Create BloodInventory table first
 CREATE TABLE BloodInventories (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
-    BloodGroup NVARCHAR(2) NOT NULL,
-    RhType NVARCHAR(3) NOT NULL,
-    BagType NVARCHAR(5),
-    Quantity INT NOT NULL,
-    IsRare BIT NOT NULL DEFAULT 0,
-    Status INT NOT NULL,
-    LastUpdated DATETIME NOT NULL DEFAULT GETDATE(),
-    ComponentId INT NOT NULL,
-	ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
-    ExpirationDate DATETIME, -- Expiration date
+    BloodGroup NVARCHAR(2) NOT NULL,               -- A, B, AB, O
+    RhType NVARCHAR(3) NOT NULL,                   -- Rh+, Rh-
+    BagType NVARCHAR(5),                           -- 250ml, 350ml, 450ml
+    Quantity INT NOT NULL CHECK (Quantity >= 0),   -- Tổng số túi
+    IsRare BIT NOT NULL DEFAULT 0,                 -- Rh- là máu hiếm
+    Status INT NOT NULL,                           -- 0=Khẩn cấp, 1=Thiếu, 2=TB, 3=An toàn
+    LastUpdated DATETIME NOT NULL DEFAULT GETDATE(), -- Ngày cập nhật cuối
+    ComponentId INT NOT NULL,                      -- FK loại máu
     FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
-
 );
 
 
@@ -128,23 +125,19 @@ CREATE TABLE BloodInventories (
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistories (
     HistoryId INT PRIMARY KEY IDENTITY(1,1),
-    InventoryId INT NULL,
-    BloodGroup NVARCHAR(2) NOT NULL,
-    RhType NVARCHAR(3) NOT NULL,
-    BagType NVARCHAR(10),
-    Quantity INT NOT NULL,
-    ActionType NVARCHAR(10) NOT NULL,
-    PerformedBy INT NOT NULL,
-    PerformedAt DATETIME NOT NULL DEFAULT GETDATE(),
-    ReceivedDate DATETIME NULL,
-    ExpirationDate DATETIME NULL,
-    Notes NVARCHAR(255),
-    ComponentId INT NOT NULL
-FOREIGN KEY (InventoryId) REFERENCES BloodInventories(InventoryID),
-FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
-FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
-
+    InventoryId INT NOT NULL,                        -- Liên kết đến bảng chính
+    ActionType NVARCHAR(10) NOT NULL,                -- CheckIn, CheckOut, Hủy
+    Quantity INT NOT NULL CHECK (Quantity > 0),      -- Số lượng thay đổi
+    Notes NVARCHAR(255),                             -- Ghi chú thao tác
+    PerformedBy INT NOT NULL,                        -- Người thao tác (-1 nếu System)
+    PerformedAt DATETIME NOT NULL DEFAULT GETDATE(), -- Thời điểm
+    BagType NVARCHAR(5),                             -- Dung tích
+    ReceivedDate DATETIME,                           -- Ngày nhận (nếu nhập kho)
+    ExpirationDate DATETIME,                         -- Ngày hết hạn
+    FOREIGN KEY (InventoryId) REFERENCES BloodInventories(InventoryID),
+    FOREIGN KEY (PerformedBy) REFERENCES Users(UserID)
 );
+
 
  CREATE TABLE Patients (
 	PatientID INT PRIMARY KEY IDENTITY(1,1),
