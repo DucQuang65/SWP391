@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hien_mau.Models;
 
@@ -58,7 +59,10 @@ public partial class Users
 
     public virtual ICollection<Appointments> Appointments { get; set; } = new List<Appointments>();
 
-    public virtual ICollection<BloodDonationHistories> BloodDonationHistories { get; set; } = new List<BloodDonationHistories>();
+    [InverseProperty(nameof(BloodDonationHistories.Doctor))]
+    public virtual ICollection<BloodDonationHistories> BloodDonationsAsDoctor { get; set; } = new List<BloodDonationHistories>();
+
+
 
     public virtual ICollection<BloodInventoryHistories> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistories>();
 

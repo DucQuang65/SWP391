@@ -18,9 +18,13 @@ public partial class BloodDonationHistories
     public string? Notes { get; set; }
     public DateTime CreatedAt { get; set; }
     public bool IsSuccess { get; set; } = false;
+    
+    
+    [ForeignKey(nameof(AppointmentId))]
     public Appointments? Appointment { get; set; }
 
     [ForeignKey(nameof(DoctorId))]
+    [InverseProperty(nameof(Users.BloodDonationsAsDoctor))]
     public Users? Doctor { get; set; }
 
 }
