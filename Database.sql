@@ -111,36 +111,37 @@ CREATE TABLE BloodInventories (
     InventoryID INT PRIMARY KEY IDENTITY(1,1),
     BloodGroup NVARCHAR(2) NOT NULL,
     RhType NVARCHAR(3) NOT NULL,
-    ComponentID INT NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
-    Quantity INT NOT NULL CHECK (Quantity >= 0),
-    IsRare BIT DEFAULT 0, -- 1 for rare blood (e.g., AB-)
-    Status TINYINT NOT NULL, -- 0: Khẩn cấp, 1: Thiếu máu, 2: Trung bình, 3: An toàn
-    LastUpdated DATETIME DEFAULT GETDATE(),
-    BagType NVARCHAR(5), -- 250ml, 350ml, 450ml
-    ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
-    ExpirationDate DATETIME, -- Expiration date
-    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID)
+    BagType NVARCHAR(5),
+    Quantity INT NOT NULL,
+    IsRare BIT NOT NULL DEFAULT 0,
+    Status INT NOT NULL,
+    LastUpdated DATETIME NOT NULL DEFAULT GETDATE(),
+    ComponentId INT NOT NULL
+    FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
+
 );
+
 
 
 -- Create BloodInventoryHistory table after BloodInventory
 CREATE TABLE BloodInventoryHistories (
-    HistoryID INT PRIMARY KEY IDENTITY(1,1),
-    InventoryID INT NULL,
-    BloodGroup NVARCHAR(2) NULL,
-    RhType NVARCHAR(3) NULL,
-    ComponentID INT NOT NULL, -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
+    HistoryId INT PRIMARY KEY IDENTITY(1,1),
+    InventoryId INT NOT NULL,
+    BloodGroup NVARCHAR(2) NOT NULL,
+    RhType NVARCHAR(3) NOT NULL,
+    BagType NVARCHAR(10),
+    Quantity INT NOT NULL,
     ActionType NVARCHAR(10) NOT NULL,
-    Quantity INT NOT NULL CHECK (Quantity > 0),
-    Notes NVARCHAR(255) NULL,
     PerformedBy INT NOT NULL,
-    PerformedAt DATETIME DEFAULT GETDATE(),
-    BagType NVARCHAR(5),
-    ReceivedDate DATETIME, -- Date received
-    ExpirationDate DATETIME, -- Expiration date
-    FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
-    FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
-    FOREIGN KEY (InventoryID) REFERENCES BloodInventories(InventoryID)
+    PerformedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    ReceivedDate DATETIME NULL,
+    ExpirationDate DATETIME NULL,
+    Notes NVARCHAR(255),
+    ComponentId INT NOT NULL
+FOREIGN KEY (InventoryId) REFERENCES BloodInventories(InventoryID),
+FOREIGN KEY (PerformedBy) REFERENCES Users(UserID),
+FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
+
 );
 
  CREATE TABLE Patients (
