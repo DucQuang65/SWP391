@@ -126,7 +126,7 @@ namespace Hien_mau.Controllers
             if (user.Status == 0)
                 return BadRequest("User is inactive or banned");
 
-            var token = await _authService.GeneratePasswordResetTokenAsync(email);
+            var token = await _authService.GeneratePasswordResetTokenAsync(user.Email);
             if (string.IsNullOrEmpty(token))
                 return BadRequest("Email not found or user is inactive");
 

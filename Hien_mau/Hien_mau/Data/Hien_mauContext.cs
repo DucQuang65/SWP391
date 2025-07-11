@@ -50,7 +50,7 @@
         public virtual DbSet<Users> Users { get; set; }
 
         public DbSet<Patients> Patients { get; set; }
-        public virtual DbSet<Components> Components { get; set; }
+        public virtual DbSet<Component> Components { get; set; }
 
 
 
@@ -81,7 +81,7 @@
             //});
 
 
-            modelBuilder.Entity<Components>(entity =>
+            modelBuilder.Entity<Component>(entity =>
             {
                 entity.ToTable("Components"); 
                 entity.HasKey(e => e.ComponentId);
