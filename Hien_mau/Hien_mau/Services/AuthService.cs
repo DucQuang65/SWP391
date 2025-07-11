@@ -195,9 +195,13 @@ namespace Hien_mau.Services
             {
                 From = new MailAddress(senderEmail),
                 Subject = "Reset Your Password",
-                Body = $"Click the following link to reset your password:\n\n{resetLink}\n\n" +
-                       "This link will expire in 30 minutes.\n\nIf you did not request a password reset, please ignore this email.",
-                IsBodyHtml = false
+                Body = $"Nhấn vào liên kết sau để đặt lại mật khẩu: " +
+                       $"<a href=\"{resetLink}\">Đặt lại mật khẩu</a><br><br>" +
+                       $"Liên kết này sẽ hết hạn sau 30 phút.<br><br>" +
+                       $"Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.",
+                IsBodyHtml = true
+
+
             };
 
             mail.To.Add(email);

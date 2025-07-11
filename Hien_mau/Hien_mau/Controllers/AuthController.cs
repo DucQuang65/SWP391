@@ -128,10 +128,7 @@ namespace Hien_mau.Controllers
 
             var token = await _authService.GeneratePasswordResetTokenAsync(user.Email);
             if (string.IsNullOrEmpty(token))
-                return BadRequest("Email not found or user is inactive");
-
-            var resetLink = $"http://localhost:5173/reset-password?token={token}";
-            await _authService.SendResetPasswordEmailAsync(email, resetLink);
+                return BadRequest("Email not found or user is inactive");           
 
             return Ok("Reset password email sent.");
         }
