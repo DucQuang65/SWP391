@@ -119,6 +119,13 @@ namespace Hien_mau.Controllers
             if (string.IsNullOrEmpty(email))
                 return BadRequest("Email is required");
 
+            var user = await _authService.GetUserByEmailAsync(email);
+            if (user == null)
+                return BadRequest("Email not found");
+
+            if (user.Status == 0)
+                return BadRequest("User is inactive or banned");
+
             var token = await _authService.GeneratePasswordResetTokenAsync(email);
             if (string.IsNullOrEmpty(token))
                 return BadRequest("Email not found or user is inactive");
