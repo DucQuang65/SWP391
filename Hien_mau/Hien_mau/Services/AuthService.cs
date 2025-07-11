@@ -219,5 +219,17 @@ namespace Hien_mau.Services
             await smtp.SendMailAsync(mail);
         }
 
+        public async Task<bool> ChangePasswordAsync(int userId, ChangePasswordDto dto)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null || user.Password != dto.CurrentPassword)
+                return false;
+
+            user.Password = dto.NewPassword;
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

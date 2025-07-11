@@ -13,5 +13,6 @@ namespace Hien_mau.Services
         Task<string> GeneratePasswordResetTokenAsync(string email);
         Task<bool> ResetPasswordAsync(string token, string newPassword);
         Task SendResetPasswordEmailAsync(string email, string resetLink);
+        Task<bool> ChangePasswordAsync(int userId, ChangePasswordDto dto);
     }
 }

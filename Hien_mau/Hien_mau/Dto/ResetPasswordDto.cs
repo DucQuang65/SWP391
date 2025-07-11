@@ -5,6 +5,7 @@ namespace Hien_mau.Dto
     public class ResetPasswordDto
     {
         public string Token { get; set; }
+
         [Required]
         [MinLength(6)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{6,}$",

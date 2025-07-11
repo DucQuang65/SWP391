@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hien_mau.Controllers
 {
@@ -49,6 +50,19 @@ namespace Hien_mau.Controllers
                 return Unauthorized();
 
             return Ok(result);
+        }
+
+        [HttpPatch("{id}/password")]
+        public async Task<IActionResult> PatchPassword(int id, [FromBody] ChangePasswordDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var success = await _authService.ChangePasswordAsync(id, dto);
+            if (!success)
+                return BadRequest("Mật khẩu hiện tại không đúng hoặc người dùng không tồn tại.");
+
+            return Ok("Mật khẩu đã được cập nhật thành công.");
         }
 
         [HttpGet("google-login")]
