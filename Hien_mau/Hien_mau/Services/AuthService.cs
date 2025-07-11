@@ -172,7 +172,8 @@ namespace Hien_mau.Services
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
                 if (user == null) return false;
 
-                
+                user.Password = newPassword; 
+
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
                 return true;
