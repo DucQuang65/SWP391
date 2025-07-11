@@ -79,35 +79,35 @@ public partial class Hien_mauContext : DbContext
         //});
 
         modelBuilder.Entity<Appointments>(entity =>
-{
-    entity.HasKey(e => e.AppointmentId);
-    entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
-    entity.Property(e => e.UserId).HasColumnName("UserID");
-    entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-    entity.Property(e => e.AppointmentDate).HasColumnType("date"); // Chỉ lưu ngày, không cần giờ
-    entity.Property(e => e.TimeSlot).HasMaxLength(50);
-    entity.Property(e => e.Notes).HasMaxLength(255);
-    entity.Property(e => e.BloodPressure).HasMaxLength(20); // Ví dụ: "120/80"
-    entity.Property(e => e.HeartRate);
-    entity.Property(e => e.Hemoglobin);
-    entity.Property(e => e.Temperature);
-    entity.Property(e => e.Status).HasDefaultValue((byte)0); // 0: chờ duyệt, 1: từ chối, 2: chấp nhận
-    entity.Property(e => e.Cancel).HasDefaultValue(false);
-    entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
+        {
+            entity.HasKey(e => e.AppointmentId);
+            entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
+            entity.Property(e => e.AppointmentDate).HasColumnType("date"); // Chỉ lưu ngày, không cần giờ
+            entity.Property(e => e.TimeSlot).HasMaxLength(50);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.BloodPressure).HasMaxLength(20); // Ví dụ: "120/80"
+            entity.Property(e => e.HeartRate);
+            entity.Property(e => e.Hemoglobin);
+            entity.Property(e => e.Temperature);
+            entity.Property(e => e.Status).HasDefaultValue((byte)0); // 0: chờ duyệt, 1: từ chối, 2: chấp nhận
+            entity.Property(e => e.Cancel).HasDefaultValue(false);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
 
-    entity.HasOne(e => e.User)
-         .WithMany(u => u.Appointments)
-         .HasForeignKey(e => e.UserId)
-         .OnDelete(DeleteBehavior.ClientSetNull)
-         .HasConstraintName("FK_Appointments_Users");
+            entity.HasOne(e => e.User)
+                 .WithMany(u => u.Appointments)
+                 .HasForeignKey(e => e.UserId)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Appointments_Users");
 
 
-    entity.HasOne(e => e.Doctor)
-         .WithMany()
-         .HasForeignKey(e => e.DoctorId)
-         .OnDelete(DeleteBehavior.ClientSetNull)
-         .HasConstraintName("FK_Appointments_Doctor");
-});
+            entity.HasOne(e => e.Doctor)
+                 .WithMany()
+                 .HasForeignKey(e => e.DoctorId)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Appointments_Doctor");
+        });
 
         modelBuilder.Entity<BloodDonationHistories>(entity =>
         {
