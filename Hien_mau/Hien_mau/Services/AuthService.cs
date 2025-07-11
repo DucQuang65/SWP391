@@ -68,7 +68,9 @@ namespace Hien_mau.Services
 
         public async Task<Users?> GetUserByEmailAsync(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            email = email.Trim().ToLower();
+
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email);
         }
 
         public async Task<Users> CreateUserFromGoogleAsync(string email, string name)
