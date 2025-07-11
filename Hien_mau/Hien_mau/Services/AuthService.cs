@@ -118,7 +118,7 @@ namespace Hien_mau.Services
         public string GeneratePasswordResetToken(string email)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Token"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
