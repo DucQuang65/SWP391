@@ -188,16 +188,14 @@ namespace Hien_mau.Controllers
                 }
                 else
                 {
-
                     inventory.Quantity += request.Quantity;
                     inventory.Status = CalculateStatus(inventory.Quantity);
                     inventory.LastUpdated = DateTime.Now;
-                    _context.BloodInventories.Update(inventory);
                 }
 
                 await _context.SaveChangesAsync();
 
-               
+
                 var history = new BloodInventoryHistories
                 {
                     InventoryId = inventory.InventoryId,
@@ -261,7 +259,7 @@ namespace Hien_mau.Controllers
                 inventory.Quantity -= request.Quantity;
                 inventory.Status = CalculateStatus(inventory.Quantity);
                 inventory.LastUpdated = DateTime.Now;
-                _context.BloodInventories.Update(inventory);
+
 
                 // Create history record - Fixed: Correct logic for check-out
                 var history = new BloodInventoryHistories
