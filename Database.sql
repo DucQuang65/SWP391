@@ -224,12 +224,16 @@ CREATE TABLE Notifications (
 );
 
 -- DonationReminders table: Stores donation reminders
-CREATE TABLE DonationReminders (
-    ReminderID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL,
-    SuggestedDate DATETIME NOT NULL,
+CREATE TABLE Reminders (
+    ReminderId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT NOT NULL,
+    Type NVARCHAR(50) NOT NULL,          -- BloodDonation, Recovery,...
+    Message NVARCHAR(255) NOT NULL,
+    RemindAt DATETIME NOT NULL,
+    IsDisabled BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE(),
     IsSent BIT DEFAULT 0,
-    SentAt DATETIME,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    SentAt DATETIME NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(UserID)
 );
 GO
