@@ -1058,18 +1058,6 @@ VALUES
     (12, 7, N'Đỗ Thị Lan', 19, N'Nữ', N'Bản thân', N'Bệnh viện Chấn thương Chỉnh hình', N'Ngô Văn Phát', '0967890123', 'B', 'Rh-', 2, 1, N'Phẫu thuật xương', 0, '2025-06-29 15:10:00');
 GO		
 	
--- Insert data into BloodDonationHistory table
-INSERT INTO BloodDonationHistories (AppointmentID, DonationDate, BloodGroup, RhType, DoctorID, Notes, CreatedAt, IsSuccess)
-VALUES
--- Thành công
-(1, '2025-06-20 08:00:00', 'A', 'Rh+', 4, N'Máu đã được chấp nhận', GETDATE(), 1),
-
--- Thất bại do lý do liên quan đến máu
-(2, '2025-06-21 14:00:00', 'B', 'Rh-', 6, N'Phát hiện kháng thể bất thường trong máu', GETDATE(), 0),
-
--- Thành công
-(3, '2025-06-22 08:00:00', 'O', 'Rh+', 23, N'Máu đã được chấp nhận', GETDATE(), 1);
-
 
 -- Insert data into Notifications table
 INSERT INTO Notifications (UserID, Title, Message, Type, IsRead, SentAt)
@@ -1124,4 +1112,16 @@ VALUES
 (1, '2025-07-02', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
 (2, '2025-07-03', N'Chiều (13:00-17:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE()),
 (3, '2025-07-04', N'Sáng (7:00-12:00)', 1, 0, N'Đặt lịch bị từ chối', GETDATE());
+
+-- Insert data into BloodDonationHistory table
+INSERT INTO BloodDonationHistories (AppointmentID, DonationDate, BloodGroup, RhType, DoctorID, Notes, CreatedAt, IsSuccess)
+VALUES
+-- Thành công
+(1, '2025-06-20 08:00:00', 'A', 'Rh+', 4, N'Máu đã được chấp nhận', GETDATE(), 1),
+
+-- Thất bại do lý do liên quan đến máu
+(2, '2025-06-21 14:00:00', 'B', 'Rh-', 6, N'Phát hiện kháng thể bất thường trong máu', GETDATE(), 0),
+
+-- Thành công
+(3, '2025-06-22 08:00:00', 'O', 'Rh+', 23, N'Máu đã được chấp nhận', GETDATE(), 1);
 
