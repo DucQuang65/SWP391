@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hien_mau.Models;
 
@@ -18,6 +19,8 @@ public partial class BloodDonationHistories
     public DateTime CreatedAt { get; set; }
     public bool IsSuccess { get; set; } = false;
     public Appointments? Appointment { get; set; }
+
+    [ForeignKey(nameof(DoctorId))]
     public Users? Doctor { get; set; }
 
 }

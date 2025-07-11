@@ -95,17 +95,18 @@ public partial class Hien_mauContext : DbContext
     entity.Property(e => e.Cancel).HasDefaultValue(false);
     entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
 
-    entity.HasOne(d => d.User)
-        .WithMany(p => p.Appointments)
-        .HasForeignKey(d => d.UserId)
-        .OnDelete(DeleteBehavior.ClientSetNull)
-        .HasConstraintName("FK_Appointments_Users");
+    entity.HasOne(e => e.User)
+         .WithMany(u => u.Appointments)
+         .HasForeignKey(e => e.UserId)
+         .OnDelete(DeleteBehavior.ClientSetNull)
+         .HasConstraintName("FK_Appointments_Users");
 
-    entity.HasOne(d => d.Doctor)
-        .WithMany() // Không cần navigation property ngược nếu bác sĩ không lưu danh sách lịch hẹn
-        .HasForeignKey(d => d.DoctorId)
-        .OnDelete(DeleteBehavior.ClientSetNull)
-        .HasConstraintName("FK_Appointments_Doctor");
+
+    entity.HasOne(e => e.Doctor)
+         .WithMany()
+         .HasForeignKey(e => e.DoctorId)
+         .OnDelete(DeleteBehavior.ClientSetNull)
+         .HasConstraintName("FK_Appointments_Doctor");
 });
 
         modelBuilder.Entity<BloodDonationHistories>(entity =>

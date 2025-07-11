@@ -79,29 +79,30 @@ public class AppointmentController : ControllerBase
         var user = await _context.Users.FindAsync(userId);
         if (user == null) return NotFound("User not found");
 
-        // Kiểm tra lần hiến gần nhất từ BloodDonationHistories
-        var lastDonationFromSystem = await _context.BloodDonationHistories
+        // Lấy toàn bộ entity để kiểm tra DonationDate
+        var lastDonationRecord = await _context.BloodDonationHistories
+            .Include(x => x.Appointment)
             .Where(x => x.Appointment.UserId == userId && x.IsSuccess == true)
             .OrderByDescending(x => x.DonationDate)
-            .Select(x => x.DonationDate)
             .FirstOrDefaultAsync();
 
-        if (lastDonationFromSystem != default)
+        DateTime? lastDonationFromSystem = lastDonationRecord?.DonationDate;
+
+        if (lastDonationFromSystem.HasValue)
         {
             return Ok(new AppointmentLastDonationDTO
             {
                 HasDonationHistory = true,
                 LastDonationDate = lastDonationFromSystem,
-                IsEditable = false 
+                IsEditable = false
             });
         }
 
-        
         return Ok(new AppointmentLastDonationDTO
         {
             HasDonationHistory = false,
             LastDonationDate = user.SelfReportedLastDonationDate,
-            IsEditable = true 
+            IsEditable = true
         });
     }
 
@@ -111,23 +112,35 @@ public class AppointmentController : ControllerBase
         var user = await _context.Users.FindAsync(dto.UserId);
         if (user == null) return NotFound("User not found");
 
-        // Tính ngày hiến máu gần nhất
-        var lastDonationFromSystem = await _context.BloodDonationHistories
-            .Where(x => x.Appointment.UserId == dto.UserId && x.IsSuccess == true)
-            .OrderByDescending(x => x.DonationDate)
-            .Select(x => x.DonationDate)
-            .FirstOrDefaultAsync();
+        var lastDonationRecord = await _context.BloodDonationHistories
+    .Where(x => x.IsSuccess && x.Appointment != null && x.Appointment.UserId == dto.UserId)
+    .OrderByDescending(x => x.DonationDate)
+    .Select(x => new { x.DonationDate })
+    .FirstOrDefaultAsync();
 
-        var lastDonationDate = lastDonationFromSystem != default
-            ? lastDonationFromSystem
-            : user.SelfReportedLastDonationDate;
+
+        DateTime? lastDonationFromSystem = lastDonationRecord?.DonationDate;
+        DateTime? lastDonationDate = lastDonationFromSystem ?? user.SelfReportedLastDonationDate;
+
+
+
+        if (dto.TimeSlot != "Sáng (7:00-12:00)" && dto.TimeSlot != "Chiều (13:00-17:00)")
+            return BadRequest("TimeSlot must be 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'");
+        if (dto.AppointmentDate.Date < DateTime.Today)
+            return BadRequest("AppointmentDate cannot be in the past");
+
+
+        if (!lastDonationFromSystem.HasValue && !user.SelfReportedLastDonationDate.HasValue)
+        {
+            return BadRequest("Vui lòng nhập ngày hiến máu gần nhất (tự khai) trước khi tạo lịch hẹn nếu bạn đã từng hiến máu.");
+        }
 
         if (lastDonationDate.HasValue)
         {
             var daysSinceLastDonation = (dto.AppointmentDate - lastDonationDate.Value).TotalDays;
 
 
-            var minDays = 84; // Thời gian tối thiểu giữa các lần hiến máu (12 tuần = 84 ngày)
+            var minDays = 84;
 
             if (daysSinceLastDonation < minDays)
             {
@@ -135,20 +148,16 @@ public class AppointmentController : ControllerBase
             }
         }
 
-        
-        if (dto.TimeSlot != "Sáng (7:00-12:00)" && dto.TimeSlot != "Chiều (13:00-17:00)")
-            return BadRequest("TimeSlot must be 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'");
-
-        if (dto.AppointmentDate.Date < DateTime.Today)
-            return BadRequest("AppointmentDate cannot be in the past");
-
+     
+    
+       
         var appointment = new Appointments
         {
             UserId = dto.UserId,
             AppointmentDate = dto.AppointmentDate,
             TimeSlot = dto.TimeSlot,
-
-            Status = 0, 
+           
+            Status = 0,
             CreatedAt = DateTime.Now
         };
 
@@ -158,7 +167,7 @@ public class AppointmentController : ControllerBase
         return Ok(new { Message = "Appointment created successfully", AppointmentId = appointment.AppointmentId });
     }
 
-    
+
     [HttpPost("doctor-update/{id}")]
     public async Task<IActionResult> DoctorUpdate(int id, [FromBody] DoctorUpdateDTO dto)
     {
