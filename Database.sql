@@ -116,7 +116,7 @@ CREATE TABLE BloodInventories (
     IsRare BIT NOT NULL DEFAULT 0,
     Status INT NOT NULL,
     LastUpdated DATETIME NOT NULL DEFAULT GETDATE(),
-    ComponentId INT NOT NULL
+    ComponentId INT NOT NULL,
 	ReceivedDate DATETIME NOT NULL DEFAULT GETDATE(), -- Date received
     ExpirationDate DATETIME, -- Expiration date
     FOREIGN KEY (ComponentId) REFERENCES Components(ComponentID)
