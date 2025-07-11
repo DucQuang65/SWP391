@@ -10,5 +10,8 @@ namespace Hien_mau.Services
         Task<Users?> GetUserByEmailAsync(string email);
         Task<Users> CreateUserFromGoogleAsync(string email, string name);
         string CreateToken(Users user);
+        Task<string> GeneratePasswordResetTokenAsync(string email);
+        Task<bool> ResetPasswordAsync(string token, string newPassword);
+        Task SendResetPasswordEmailAsync(string email, string resetLink);
     }
 }

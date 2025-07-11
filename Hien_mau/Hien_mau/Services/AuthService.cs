@@ -9,6 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using System.Net.Mail;
+using System.Net;
+using FirebaseAdmin.Auth.Hash;
 
 namespace Hien_mau.Services
 {
@@ -111,5 +114,101 @@ namespace Hien_mau.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
+
+        public string GeneratePasswordResetToken(string email)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] {
+                          new Claim(ClaimTypes.Email, email),
+                          new Claim("ResetPassword", "true") // Đánh dấu token này là cho reset password
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Status != 0);
+            if (user == null) return null;
+
+            var token = GeneratePasswordResetToken(email);
+            var resetLink = $"http://localhost:5173/reset-password?token={token}";
+
+            await SendResetPasswordEmailAsync(email, resetLink);
+            return token;
+        }
+
+        public async Task<bool> ResetPasswordAsync(string token, string newPassword)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var email = principal.FindFirst(ClaimTypes.Email)?.Value;
+                var isReset = principal.FindFirst("ResetPassword")?.Value == "true";
+
+                if (!isReset || string.IsNullOrEmpty(email)) return false;
+
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+                if (user == null) return false;
+
+                
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public async Task SendResetPasswordEmailAsync(string email, string resetLink)
+        {
+            var smtpServer = _configuration["EmailSettings:SmtpServer"];
+            var smtpPort = int.Parse(_configuration["EmailSettings:SmtpPort"]);
+            var senderEmail = _configuration["EmailSettings:SenderEmail"];
+            var senderPassword = _configuration["EmailSettings:SenderPassword"];
+
+            var mail = new MailMessage
+            {
+                From = new MailAddress(senderEmail),
+                Subject = "Reset Your Password",
+                Body = $"Click the following link to reset your password:\n\n{resetLink}\n\n" +
+                       "This link will expire in 30 minutes.\n\nIf you did not request a password reset, please ignore this email.",
+                IsBodyHtml = false
+            };
+
+            mail.To.Add(email);
+
+            using var smtp = new SmtpClient(smtpServer)
+            {
+                Port = smtpPort,
+                Credentials = new NetworkCredential(senderEmail, senderPassword),
+                EnableSsl = true
+            };
+
+            await smtp.SendMailAsync(mail);
+        }
+
     }
 }

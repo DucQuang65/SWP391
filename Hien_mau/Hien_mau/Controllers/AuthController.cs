@@ -113,5 +113,35 @@ namespace Hien_mau.Controllers
             return Ok("Logged out");
         }
 
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return BadRequest("Email is required");
+
+            var token = await _authService.GeneratePasswordResetTokenAsync(email);
+            if (string.IsNullOrEmpty(token))
+                return BadRequest("Email not found or user is inactive");
+
+            var resetLink = $"http://localhost:5173/reset-password?token={token}";
+            await _authService.SendResetPasswordEmailAsync(email, resetLink);
+
+            return Ok("Reset password email sent.");
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _authService.ResetPasswordAsync(dto.Token, dto.NewPassword);
+
+            if (!result)
+                return BadRequest("Invalid or expired token");
+
+            return Ok("Password has been reset successfully.");
+        }
+
     }
 }
