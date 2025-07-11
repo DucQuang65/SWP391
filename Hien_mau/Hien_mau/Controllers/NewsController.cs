@@ -28,7 +28,6 @@ namespace Hien_mau.Controllers
             var blogs = await _context.Contents
                 .Where(c => c.ContentType == "News")
                 .Include(p => p.Tags)
-                .Include(p => p.User)
                 .ToListAsync();
 
             var response = blogs.Select(p => new
