@@ -52,10 +52,8 @@
         public DbSet<Patients> Patients { get; set; }
 
 
+
         public virtual DbSet<Component> Components { get; set; }
-
-
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -85,9 +83,7 @@
 
 
 
-            modelBuilder.Entity<Component>(entity =>
-
-            {
+            modelBuilder.Entity<Component>(entity =>            {
                 entity.ToTable("Components"); 
                 entity.HasKey(e => e.ComponentId);
                 entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
@@ -115,6 +111,7 @@
              .HasForeignKey(e => e.UserId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_Appointments_Users");
+
 
 
 
@@ -204,6 +201,7 @@
 
                 entity.Property(e => e.Status)
                     .IsRequired();
+
 
                 entity.Property(e => e.LastUpdated)
                     .HasColumnType("datetime")
