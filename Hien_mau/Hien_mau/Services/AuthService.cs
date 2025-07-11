@@ -151,7 +151,7 @@ namespace Hien_mau.Services
         public async Task<bool> ResetPasswordAsync(string token, string newPassword)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Token"]);
 
             try
             {
@@ -167,10 +167,12 @@ namespace Hien_mau.Services
                 var email = principal.FindFirst(ClaimTypes.Email)?.Value;
                 var isReset = principal.FindFirst("ResetPassword")?.Value == "true";
 
-                if (!isReset || string.IsNullOrEmpty(email)) return false;
+                if (!isReset || string.IsNullOrEmpty(email)) 
+                    return false;
 
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-                if (user == null) return false;
+                if (user == null) 
+                    return false;
 
                 user.Password = newPassword; 
 
