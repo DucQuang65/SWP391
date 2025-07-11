@@ -52,7 +52,7 @@ namespace Hien_mau.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("{id}/password")]
+        [HttpPatch("change-password/{id}")]
         public async Task<IActionResult> PatchPassword(int id, [FromBody] ChangePasswordDto dto)
         {
             if (!ModelState.IsValid)
