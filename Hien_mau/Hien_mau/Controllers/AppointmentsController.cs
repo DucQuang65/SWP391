@@ -163,6 +163,27 @@ public class AppointmentController : ControllerBase
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
+       
+        var remindTime = dto.AppointmentDate.AddDays(-1).Date.AddHours(8);
+        var reminder = new Reminder
+        {
+            UserId = dto.UserId,
+            Type = "BloodDonation",
+            Message = $"Nhắc bạn chuẩn bị hiến máu vào ngày {dto.AppointmentDate:dd/MM/yyyy} ({dto.TimeSlot})",
+            RemindAt = remindTime,
+            CreatedAt = DateTime.Now,
+            IsDisabled = false,
+            IsSent = false
+        };
+
+        _context.Reminders.Add(reminder);
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            Message = "Appointment created successfully",
+            AppointmentId = appointment.AppointmentId
+        });
 
         return Ok(new { Message = "Appointment created successfully", AppointmentId = appointment.AppointmentId });
     }

@@ -22,10 +22,12 @@
         public virtual DbSet<ActivityLogs> ActivityLogs { get; set; }
 
         public virtual DbSet<Appointments> Appointments { get; set; }
+        public DbSet<Reminder> Reminders { get; set; }
 
-   
 
-        public virtual DbSet<BloodDonationHistories> BloodDonationHistories { get; set; }
+
+
+    public virtual DbSet<BloodDonationHistories> BloodDonationHistories { get; set; }
 
         public virtual DbSet<BloodInventories> BloodInventories { get; set; }
 
@@ -33,7 +35,7 @@
 
         public virtual DbSet<Contents> Contents { get; set; }
 
-        public virtual DbSet<DonationReminders> DonationReminders { get; set; }
+     
 
         public virtual DbSet<HospitalInfo> HospitalInfos { get; set; }
 
@@ -270,23 +272,21 @@
                     .HasConstraintName("FK__BloodRequ__UserI__7E37BEF6");
             });
 
-            modelBuilder.Entity<DonationReminders>(entity =>
-            {
-                entity.HasKey(e => e.ReminderId).HasName("PK__Donation__01A830A714C2E1D9");
+        modelBuilder.Entity<Reminder>(entity =>
+        {
+            entity.ToTable("Reminders");
+            entity.HasKey(r => r.ReminderId);
+            entity.Property(r => r.Type).IsRequired().HasMaxLength(50);
+            entity.Property(r => r.Message).IsRequired().HasMaxLength(255);
+            entity.Property(r => r.UserId).HasColumnName("UserID"); // Nếu DB dùng UserID
+            entity.HasOne(r => r.User)
+                  .WithMany(u => u.Reminders)
+                  .HasForeignKey(r => r.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
 
-                entity.Property(e => e.ReminderId).HasColumnName("ReminderID");
-                entity.Property(e => e.IsSent).HasDefaultValue(false);
-                entity.Property(e => e.SentAt).HasColumnType("datetime");
-                entity.Property(e => e.SuggestedDate).HasColumnType("datetime");
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.User).WithMany(p => p.DonationReminders)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DonationR__UserI__22751F6C");
-            });
-
-            modelBuilder.Entity<HospitalInfo>(entity =>
+        modelBuilder.Entity<HospitalInfo>(entity =>
             {
                 entity.HasKey(e => e.Id).HasName("PK__Hospital__3214EC27AA656362");
 

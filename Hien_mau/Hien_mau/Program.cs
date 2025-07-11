@@ -63,6 +63,8 @@ namespace Hien_mau
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<NotificationLog>();
             builder.Services.AddScoped<ActivityLogger>();
+            builder.Services.AddTransient<ReminderJob>();
+            builder.Services.AddScoped<AppointmentCompletionJob>();
             //builder.Services.AddHostedService<CancelExpiredService>();
 
 
@@ -110,6 +112,16 @@ namespace Hien_mau
                     "*/10 * * * *"   // chạy mỗi 10 phút
                 );
 
+            RecurringJob.AddOrUpdate<ReminderJob>(
+                    "reminder-job",
+                    job => job.Run(),
+                    "*/10 * * * *" // mỗi 10 phút
+                );
+            RecurringJob.AddOrUpdate<AppointmentCompletionJob>(
+                    "recovery-reminder-job",
+                    job => job.Run(),
+                    "*/10 * * * *" // Chạy mỗi 10 phút
+                );
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

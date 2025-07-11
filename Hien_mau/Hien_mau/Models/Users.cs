@@ -70,7 +70,9 @@ public partial class Users
 
     public virtual Departments? Department { get; set; }
 
-    public virtual ICollection<DonationReminders> DonationReminders { get; set; } = new List<DonationReminders>();
+
+    public virtual ICollection<Reminder> Reminders { get; set; } = new List<Reminder>();
+
 
     public virtual ICollection<Contents> Contents { get; set; } = new List<Contents>();
 

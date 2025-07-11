@@ -33,8 +33,8 @@ public partial class BloodManagementSystemContext : DbContext
 
     public virtual DbSet<Departments> Departments { get; set; }
 
-    public virtual DbSet<DonationReminders> DonationReminders { get; set; }
-
+   
+    public virtual DbSet<Reminder> Reminders { get; set; } 
     public virtual DbSet<HospitalInfo> HospitalInfos { get; set; }
 
     public virtual DbSet<Contents> News { get; set; }
@@ -232,17 +232,17 @@ public partial class BloodManagementSystemContext : DbContext
             entity.Property(e => e.DepartmentName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<DonationReminders>(entity =>
+        modelBuilder.Entity<Reminder>(entity =>
         {
             entity.HasKey(e => e.ReminderId).HasName("PK__Donation__01A830A7B29CF6FE");
 
             entity.Property(e => e.ReminderId).HasColumnName("ReminderID");
             entity.Property(e => e.IsSent).HasDefaultValue(false);
             entity.Property(e => e.SentAt).HasColumnType("datetime");
-            entity.Property(e => e.SuggestedDate).HasColumnType("datetime");
+           
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.DonationReminders)
+            entity.HasOne(d => d.User).WithMany(p => p.Reminders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__DonationR__UserI__03F0984C");
