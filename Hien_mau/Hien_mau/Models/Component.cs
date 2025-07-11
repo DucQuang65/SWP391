@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class Components
+public partial class Component
 {
     [Key]
     public int ComponentId { get; set; }
@@ -13,9 +13,9 @@ public partial class Components
 
    
 
-    public virtual ICollection<BloodInventories> BloodInventories { get; set; } = new List<BloodInventories>();
+    public ICollection<BloodInventories> BloodInventories { get; set; }
 
-    public virtual ICollection<BloodInventoryHistories> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistories>();
+ 
 
     public virtual ICollection<BloodRequests> BloodRequests { get; set; } = new List<BloodRequests>();
 }

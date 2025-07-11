@@ -29,7 +29,7 @@ public partial class BloodManagementSystemContext : DbContext
 
     public virtual DbSet<BloodRequests> BloodRequests { get; set; }
 
-    public virtual DbSet<Components> Components { get; set; }
+    public virtual DbSet<Component> Components { get; set; }
 
     public virtual DbSet<Departments> Departments { get; set; }
 
@@ -126,24 +126,26 @@ public partial class BloodManagementSystemContext : DbContext
             entity.HasKey(e => e.InventoryId).HasName("PK__BloodInv__F5FDE6D34D37A6CB");
 
             entity.Property(e => e.InventoryId).HasColumnName("InventoryID");
+            entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
+            entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
             entity.Property(e => e.BagType).HasMaxLength(5);
-            entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
-            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+            entity.Property(e => e.Quantity).IsRequired();
             entity.Property(e => e.IsRare).HasDefaultValue(false);
+            entity.Property(e => e.Status).IsRequired();
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.ReceivedDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.RhType).HasMaxLength(3);
+                  .HasDefaultValueSql("(getdate())")
+                  .HasColumnType("datetime");
+            entity.Property(e => e.ComponentId).HasColumnName("ComponentId"); // d thường!
 
-            entity.HasOne(d => d.Component).WithMany(p => p.BloodInventories)
-                .HasForeignKey(d => d.ComponentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodInve__Compo__5FB337D6");
+
+
+            entity.HasOne(d => d.Component)
+                  .WithMany(p => p.BloodInventories)
+                  .HasForeignKey(d => d.ComponentId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK__BloodInve__Compo__5FB337D6");
         });
+
 
         modelBuilder.Entity<BloodInventoryHistories>(entity =>
         {
@@ -152,8 +154,7 @@ public partial class BloodManagementSystemContext : DbContext
             entity.Property(e => e.HistoryId).HasColumnName("HistoryID");
             entity.Property(e => e.ActionType).HasMaxLength(10);
             entity.Property(e => e.BagType).HasMaxLength(5);
-            entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
+           
             entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
             entity.Property(e => e.InventoryId).HasColumnName("InventoryID");
             entity.Property(e => e.Notes).HasMaxLength(255);
@@ -161,21 +162,23 @@ public partial class BloodManagementSystemContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.ReceivedDate).HasColumnType("datetime");
-            entity.Property(e => e.RhType).HasMaxLength(3);
-
-            entity.HasOne(d => d.Component).WithMany(p => p.BloodInventoryHistories)
-                .HasForeignKey(d => d.ComponentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodInve__Compo__6477ECF3");
-
+      
             entity.HasOne(d => d.Inventory).WithMany(p => p.BloodInventoryHistories)
                 .HasForeignKey(d => d.InventoryId)
                 .HasConstraintName("FK__BloodInve__Inven__66603565");
 
-            entity.HasOne(d => d.PerformedByNavigation).WithMany(p => p.BloodInventoryHistories)
+            entity.HasOne(d => d.PerformedByUser)
+                .WithMany(p => p.BloodInventoryHistories)
                 .HasForeignKey(d => d.PerformedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BloodInve__Perfo__656C112C");
+                .HasConstraintName("FK_BloodInventoryHistories_Users_PerformedBy");
+            //entity.Property(e => e.ComponentId).HasColumnName("ComponentID").IsRequired();
+            //entity.HasOne(d => d.Component)
+                //.WithMany()  // hoặc .WithMany(p => p.BloodInventoryHistories) nếu có collection
+                //.HasForeignKey(d => d.ComponentId)
+                //.OnDelete(DeleteBehavior.ClientSetNull)
+                //.HasConstraintName("FK_BloodInventoryHistories_Components");
+
         });
 
         modelBuilder.Entity<BloodRequests>(entity =>
@@ -213,7 +216,7 @@ public partial class BloodManagementSystemContext : DbContext
                 .HasConstraintName("FK__BloodRequ__UserI__6E01572D");
         });
 
-        modelBuilder.Entity<Components>(entity =>
+        modelBuilder.Entity<Component>(entity =>
         {
             entity.HasKey(e => e.ComponentId).HasName("PK__Componen__D79CF02EA17E01A7");
 

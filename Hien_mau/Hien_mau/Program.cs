@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Hangfire;
 
 
 
@@ -54,10 +55,15 @@ namespace Hien_mau
 
             builder.Services.AddDbContext<Hien_mauContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+            builder.Services.AddHangfire(config =>
+                config.UseSqlServerStorage(builder.Configuration.GetConnectionString("MyDB")));
+            builder.Services.AddHangfireServer();
+
+            builder.Services.AddScoped<BloodInventoryExpiryJob>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<NotificationLog>();
             builder.Services.AddScoped<ActivityLogger>();
-            builder.Services.AddHostedService<CancelExpiredService>();
+            //builder.Services.AddHostedService<CancelExpiredService>();
 
 
 
@@ -96,6 +102,14 @@ namespace Hien_mau
             builder.Services.AddAuthorization();
 
             var app = builder.Build();
+            app.UseHangfireDashboard();
+
+            RecurringJob.AddOrUpdate<BloodInventoryExpiryJob>(
+                    "cancel-expired-blood",
+                    job => job.CheckAndExpireBlood(),   
+                    "*/10 * * * *"   // chạy mỗi 10 phút
+                );
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
