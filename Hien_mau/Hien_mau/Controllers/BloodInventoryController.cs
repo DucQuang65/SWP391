@@ -196,7 +196,6 @@ namespace Hien_mau.Controllers
 
                 await _context.SaveChangesAsync();
 
-
                
                 var history = new BloodInventoryHistories
                 {
@@ -261,6 +260,7 @@ namespace Hien_mau.Controllers
                 inventory.Quantity -= request.Quantity;
                 inventory.Status = CalculateStatus(inventory.Quantity);
                 inventory.LastUpdated = DateTime.Now;
+
 
                 // Create history record - Fixed: Correct logic for check-out
                 var history = new BloodInventoryHistories
