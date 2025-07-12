@@ -50,7 +50,7 @@ CREATE TABLE Users (
     RoleID INT NOT NULL,
     DepartmentID INT NULL, -- For Staff-Doctor (e.g., Khoa A)
     CreatedAt DATETIME DEFAULT GETDATE(),
-    SelfReportedLastDonationDate DATETIME NULL,
+    SelfReportedLastDonationDate DATETIME2 NULL,
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID),
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
