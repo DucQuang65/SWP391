@@ -24,7 +24,6 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<List<InformationDto>>> GetUsers()
         {
             var users = await _context.Users
-                .Where(u => u.Status == 1)
                 .Select(u => new InformationDto
         {
                 UserID = u.UserId,
@@ -58,7 +57,6 @@ namespace Hien_mau.Controllers
         public async Task<ActionResult<Users>> GetUserByID(int id)
         {
             var user = await _context.Users
-           .Where(u => u.UserId == id && u.Status == 1)
            .Select(u => new InformationDto{
                 UserID = u.UserId,
                 Email = u.Email,
