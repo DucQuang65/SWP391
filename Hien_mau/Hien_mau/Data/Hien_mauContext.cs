@@ -51,6 +51,8 @@
 
         public virtual DbSet<Users> Users { get; set; }
 
+        public virtual DbSet<Patients> Patients { get; set; }
+
         public virtual DbSet<Component> Components { get; set; }
 
 

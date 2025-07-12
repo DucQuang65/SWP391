@@ -55,11 +55,12 @@ namespace Hien_mau.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUserByID(int id)
+        public async Task<ActionResult<Users>> GetUserById(int id)
         {
             var user = await _context.Users
-           .Select(u => new InformationDto{
-                UserID = u.UserId,
+            .Where(u => u.UserId == id)
+            .Select(u => new InformationDto{
+                UserID = u.UserId,  
                 Email = u.Email,
                 Phone = u.Phone,
                 IDCardType = u.IdcardType,
@@ -132,7 +133,7 @@ namespace Hien_mau.Controllers
             informationDto.UserID = newUser.UserId;
             informationDto.CreatedAt = newUser.CreatedAt;
 
-            return CreatedAtAction(nameof(GetUserByID), new { id = newUser.UserId }, informationDto);
+            return CreatedAtAction(nameof(GetUserById), new { id = newUser.UserId }, informationDto);
         }
 
         [HttpPut("{id}")]
