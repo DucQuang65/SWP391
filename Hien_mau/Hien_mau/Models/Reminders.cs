@@ -19,7 +19,7 @@ namespace Hien_mau.Models
         public bool IsSent { get; set; } = false;
         public DateTime? SentAt { get; set; }
 
-        // Navigation
+      
         public virtual Users User { get; set; }
     }
 }

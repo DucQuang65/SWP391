@@ -37,7 +37,7 @@ public class DoctorUpdateDTO
 }
 public class AppointmentLastDonationDTO
 {
-    public bool HasDonationHistory { get; set; } // Có record trong hệ thống không
-    public DateTime? LastDonationDate { get; set; } // Ngày hiến gần nhất
-    public bool IsEditable { get; set; } // Có thể chỉnh sửa không
+    public bool HasDonationHistory { get; set; } 
+    public DateTime? LastDonationDate { get; set; } 
+    public bool IsEditable { get; set; } 
 }

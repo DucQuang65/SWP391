@@ -21,7 +21,7 @@ namespace Hien_mau.Controllers
             _logger = logger;
         }
 
-        // GET: api/News
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetBlogPosts()
         {
@@ -52,7 +52,7 @@ namespace Hien_mau.Controllers
             return Ok(response);
         }
 
-        // GET: api/News/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<object>> GetBlogPost(int id)
         {
@@ -89,7 +89,7 @@ namespace Hien_mau.Controllers
             return Ok(response);
         }
 
-        // POST: api/News
+     
         [HttpPost]
         public async Task<ActionResult<object>> CreateBlogPost([FromBody] ContentsCreateDto dto, [FromServices] ActivityLogger logger)
         {
@@ -106,7 +106,7 @@ namespace Hien_mau.Controllers
                 return BadRequest("Invalid UserId.");
             }
 
-            var postedAt = DateTime.Now; // Lấy múi giờ địa phương
+            var postedAt = DateTime.Now; 
 
             var news = new Contents
             {
@@ -156,7 +156,7 @@ namespace Hien_mau.Controllers
 
         }
 
-        // PUT: api/News/5
+      
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBlogPost(int id, [FromBody] ContentsUpdateDto dto, [FromServices] ActivityLogger logger)
         {
@@ -196,7 +196,7 @@ namespace Hien_mau.Controllers
             return NoContent();
         }
 
-        // DELETE: api/News/5
+     
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id, [FromQuery] int userId, [FromServices] ActivityLogger logger)
         {

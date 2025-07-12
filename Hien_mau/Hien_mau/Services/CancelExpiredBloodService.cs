@@ -50,7 +50,7 @@ public class BloodInventoryExpiryJob
             };
             _context.BloodInventoryHistories.Add(expiredLog);
 
-            // 2. Trừ số lượng máu hiện tại trong kho
+           
             var inventory = await _context.BloodInventories.FindAsync(item.InventoryId);
             if (inventory != null && inventory.Quantity >= item.Quantity)
             {

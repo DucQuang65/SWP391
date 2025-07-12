@@ -18,7 +18,7 @@ namespace Hien_mau.Controllers
         private readonly Hien_mauContext _context;
         private readonly ILogger<BloodInventoryController> _logger;
 
-        // Validation constants
+       
         private static readonly string[] ValidBloodGroups = { "A", "B", "AB", "O" };
         private static readonly string[] ValidRhTypes = { "Rh+", "Rh-" };
         private static readonly string[] ValidBagTypes = { "250ml", "350ml", "450ml" };
@@ -98,7 +98,7 @@ namespace Hien_mau.Controllers
                     PerformedAt = h.PerformedAt,
                     BloodGroup = h.BloodGroup ?? "",
                     RhType = h.RhType ?? "",
-                    //ComponentId = h.ComponentId,
+                    
                     Quantity = h.Quantity,
                     PerformedByName = h.PerformedBy == -1 ? "Hệ thống" : users.TryGetValue(h.PerformedBy, out var name) ? name : "Unknown",
                     ActionType = h.ActionType ?? "",
@@ -149,7 +149,7 @@ namespace Hien_mau.Controllers
         [HttpPost("check-in")]
         public async Task<IActionResult> CheckInBlood([FromBody] CheckInOutRequestDto request)
         {
-            // Validate input
+           
             var validationResult = ValidateRequest(request);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.ErrorMessage);
@@ -157,7 +157,7 @@ namespace Hien_mau.Controllers
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                // Check if component and user exist
+                
                 var validationCheck = await ValidateComponentAndUser(request.ComponentId, request.PerformedBy);
                 if (!validationCheck.IsValid)
                     return BadRequest(validationCheck.ErrorMessage);
@@ -231,7 +231,7 @@ namespace Hien_mau.Controllers
         [HttpPost("check-out")]
         public async Task<IActionResult> CheckOutBlood([FromBody] CheckInOutRequestDto request)
         {
-            // Validate input
+         
             var validationResult = ValidateRequest(request);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.ErrorMessage);
@@ -239,7 +239,7 @@ namespace Hien_mau.Controllers
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                // Check if component and user exist
+                
                 var validationCheck = await ValidateComponentAndUser(request.ComponentId, request.PerformedBy);
                 if (!validationCheck.IsValid)
                     return BadRequest(validationCheck.ErrorMessage);
@@ -256,13 +256,13 @@ namespace Hien_mau.Controllers
                 if (inventory.Quantity < request.Quantity)
                     return BadRequest("Số lượng không đủ.");
 
-                // Update inventory
+            
                 inventory.Quantity -= request.Quantity;
                 inventory.Status = CalculateStatus(inventory.Quantity);
                 inventory.LastUpdated = DateTime.Now;
 
 
-                // Create history record - Fixed: Correct logic for check-out
+                
                 var history = new BloodInventoryHistories
                 {
                     InventoryId = inventory.InventoryId,
@@ -272,8 +272,8 @@ namespace Hien_mau.Controllers
                     Notes = request.Notes,
                     PerformedBy = request.PerformedBy,
                     PerformedAt = DateTime.Now,
-                    ReceivedDate = null, // Fixed: No received date for check-out
-                    ExpirationDate = null // Fixed: No expiration date for check-out
+                    ReceivedDate = null, 
+                    ExpirationDate = null 
                 };
 
                 _context.BloodInventoryHistories.Add(history);
@@ -294,7 +294,7 @@ namespace Hien_mau.Controllers
             }
         }
 
-        // Helper methods
+     
         private (bool IsValid, string ErrorMessage) ValidateRequest(CheckInOutRequestDto request)
         {
             if (request == null)
@@ -335,10 +335,10 @@ namespace Hien_mau.Controllers
         {
             return componentId switch
             {
-                1 => receivedDate.AddDays(35), // Red Blood Cells
-                2 => receivedDate.AddDays(42), // Whole Blood
-                3 => receivedDate.AddDays(365), // Plasma
-                4 => receivedDate.AddDays(5), // Platelets
+                1 => receivedDate.AddDays(35), 
+                2 => receivedDate.AddDays(42), 
+                3 => receivedDate.AddDays(365), 
+                4 => receivedDate.AddDays(5), 
                 _ => null
             };
         }
@@ -348,21 +348,21 @@ namespace Hien_mau.Controllers
             quantity <= 30 ? (byte)1 :
             quantity <= 60 ? (byte)2 : (byte)3;
 
-        // Improved rare blood type logic
+     
         private bool IsRareBloodType(string bloodGroup, string rhType)
         {
             if (string.IsNullOrEmpty(bloodGroup) || string.IsNullOrEmpty(rhType))
                 return false;
 
-            // More medically accurate rare blood type definition
+            
             if (rhType == "Rh-")
             {
                 return bloodGroup switch
                 {
-                    "AB" => true, // AB- is rare
-                    "A" => true,  // A- is less common
-                    "B" => true,  // B- is less common
-                    "O" => false, // O- is universal donor, not necessarily rare
+                    "AB" => true, 
+                    "A" => true, 
+                    "B" => true, 
+                    "O" => false,
                     _ => false
                 };
             }

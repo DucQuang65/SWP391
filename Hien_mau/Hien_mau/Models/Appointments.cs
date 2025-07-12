@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         public int UserId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public string? TimeSlot { get; set; }
-        public byte Status { get; set; } = 0; // 0: chờ duyệt, 1: từ chối, 2: chấp nhận
+        public byte Status { get; set; } = 0; 
         public string? Notes { get; set; }
         public string? BloodPressure { get; set; } 
         public int? HeartRate { get; set; }

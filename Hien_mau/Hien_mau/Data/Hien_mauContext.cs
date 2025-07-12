@@ -69,21 +69,6 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Entity<BloodInventories>(entity =>
-            //{
-            //    entity.HasKey(e => e.InventoryId);
-            //    entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            //    entity.Property(e => e.RhType).HasMaxLength(3);
-            //    entity.Property(e => e.BagType).HasMaxLength(5);
-            //    entity.Property(e => e.LastUpdated).HasDefaultValueSql("(getdate())");
-            //    entity.Property(e => e.ReceivedDate).HasDefaultValueSql("(getdate())");
-
-            //    entity.HasOne(e => e.Component)
-            //          .WithMany(c => c.BloodInventories)
-            //          .HasForeignKey(e => e.ComponentId)
-            //          .OnDelete(DeleteBehavior.ClientSetNull);
-            //});
-
 
 
             modelBuilder.Entity<Component>(entity =>
@@ -155,29 +140,7 @@
             });
 
 
-            //modelBuilder.Entity<BloodInventoryHistories>(entity =>
-            //{
-            //    entity.HasKey(e => e.HistoryId);
-            //    entity.Property(e => e.BloodGroup).HasMaxLength(2);
-            //    entity.Property(e => e.RhType).HasMaxLength(3);
-            //    entity.Property(e => e.ActionType).HasMaxLength(10);
-            //    entity.Property(e => e.BagType).HasMaxLength(5);
-            //    entity.Property(e => e.PerformedAt).HasDefaultValueSql("(getdate())");
-
-            //    entity.HasOne(e => e.Component)
-            //          .WithMany()
-            //          .HasForeignKey(e => e.ComponentId);
-
-            //    entity.HasOne(e => e.PerformedByUser)
-            //          .WithMany(u => u.BloodInventoryHistories)
-            //          .HasForeignKey(e => e.PerformedBy)
-            //          .OnDelete(DeleteBehavior.ClientSetNull);
-
-            //    entity.HasOne(e => e.BloodInventory)
-            //          .WithMany(i => i.BloodInventoryHistories)
-            //          .HasForeignKey(e => e.InventoryId)
-            //          .OnDelete(DeleteBehavior.Restrict);
-            //});
+          
 
             modelBuilder.Entity<BloodInventories>(entity =>
             {
@@ -215,14 +178,14 @@
 
                 entity.Property(e => e.ComponentId).HasColumnName("ComponentID"); 
 
-                // Quan hệ với bảng Components
+              
                 entity.HasOne(e => e.Component)
                     .WithMany(c => c.BloodInventories)
                     .HasForeignKey(e => e.ComponentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BloodInventories_Components");
 
-                // Quan hệ với bảng BloodInventoryHistories
+             
                 entity.HasMany(e => e.BloodInventoryHistories)
                     .WithOne(h => h.Inventory)
                     .HasForeignKey(h => h.InventoryId)
@@ -280,7 +243,7 @@
             entity.HasKey(r => r.ReminderId);
             entity.Property(r => r.Type).IsRequired().HasMaxLength(50);
             entity.Property(r => r.Message).IsRequired().HasMaxLength(255);
-            entity.Property(r => r.UserId).HasColumnName("UserID"); // Nếu DB dùng UserID
+            entity.Property(r => r.UserId).HasColumnName("UserID"); 
             entity.HasOne(r => r.User)
                   .WithMany(u => u.Reminders)
                   .HasForeignKey(r => r.UserId)
@@ -351,26 +314,6 @@
                         });
             });
 
-            //modelBuilder.Entity<Notifications>(entity =>
-            //{
-            //    entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E320425465A");
-
-            //    entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
-            //    entity.Property(e => e.IsRead).HasDefaultValue(false);
-            //    entity.Property(e => e.Message).HasMaxLength(255);
-            //    entity.Property(e => e.Priority).HasDefaultValue((byte)0);
-            //    entity.Property(e => e.SentAt)
-            //        .HasDefaultValueSql("(getdate())")
-            //        .HasColumnType("datetime");
-            //    entity.Property(e => e.Title).HasMaxLength(255);
-            //    entity.Property(e => e.Type).HasMaxLength(50);
-            //    entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            //    entity.HasOne(d => d.User).WithMany(p => p.Notifications)
-            //        .HasForeignKey(d => d.UserId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK__Notificat__UserI__1EA48E88");
-            //});
 
             modelBuilder.Entity<Roles>(entity =>
             {
@@ -431,24 +374,7 @@
                       .HasForeignKey(e => e.DepartmentId)
                       .HasConstraintName("FK__Users__DepartmentID");
             });
-            //modelBuilder.Entity<Reminder>(entity =>
-            //{
-            //    entity.HasKey(e => e.ReminderId);
-            //    entity.Property(e => e.Type).HasMaxLength(100);
-            //    entity.Property(e => e.Message).IsRequired();
-            //    entity.Property(e => e.RemindAt).HasColumnType("datetime");
-            //    entity.Property(e => e.IsDisabled).HasDefaultValue(false);
-            //    entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-
-            //    entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            //    entity.HasOne(e => e.User)
-            //          .WithMany(u => u.Reminders)
-            //          .HasForeignKey(e => e.UserId)
-            //          .OnDelete(DeleteBehavior.ClientSetNull)
-            //          .HasConstraintName("FK_Reminders_Users");
-            //});
-
+           
 
             OnModelCreatingPartial(modelBuilder);
         }

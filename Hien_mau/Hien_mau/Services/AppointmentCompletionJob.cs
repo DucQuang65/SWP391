@@ -14,9 +14,9 @@ public class AppointmentCompletionJob
 
     public async Task Run()
     {
-        var now = DateTime.Now; // Nếu cần test thì có thể ép: new DateTime(2025, 07, 12)
+        var now = DateTime.Now; 
 
-        // Lấy danh sách các hiến máu thành công đủ 84 ngày
+       
         var donations = await _context.BloodDonationHistories
             .Include(d => d.Appointment)
             .Where(d => d.IsSuccess

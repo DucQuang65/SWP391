@@ -17,7 +17,7 @@ namespace Hien_mau.Controllers
             _context = context;
         }
 
-        // GET: api/remind/user/1
+      
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<ReminderDto>>> GetRemindersByUser(int userId)
         {
@@ -43,7 +43,7 @@ namespace Hien_mau.Controllers
             return Ok(reminders);
         }
 
-        // POST: api/remind
+       
         [HttpPost]
         public async Task<ActionResult> CreateReminder([FromBody] ReminderCreateDto dto)
         {
@@ -70,7 +70,7 @@ namespace Hien_mau.Controllers
             return CreatedAtAction(nameof(GetRemindersByUser), new { userId = dto.UserId }, reminder);
         }
 
-        // PATCH: api/remind/disable/65
+        
         [HttpPatch("disable/{id}")]
         public async Task<IActionResult> DisableReminder(int id)
         {
@@ -83,7 +83,7 @@ namespace Hien_mau.Controllers
             return NoContent();
         }
 
-        // PATCH: api/remind/enable/65
+      
         [HttpPatch("enable/{id}")]
         public async Task<IActionResult> EnableReminder(int id)
         {
@@ -96,7 +96,7 @@ namespace Hien_mau.Controllers
             return NoContent();
         }
 
-        // DELETE: api/remind/65
+      
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReminder(int id)
         {
