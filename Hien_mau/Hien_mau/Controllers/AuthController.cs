@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hien_mau.Controllers
 {
@@ -51,6 +52,19 @@ namespace Hien_mau.Controllers
             return Ok(result);
         }
 
+        [HttpPatch("change-password/{id}")]
+        public async Task<IActionResult> PatchPassword(int id, [FromBody] ChangePasswordDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var success = await _authService.ChangePasswordAsync(id, dto);
+            if (!success)
+                return BadRequest("Mật khẩu hiện tại không đúng hoặc người dùng không tồn tại.");
+
+            return Ok("Mật khẩu đã được cập nhật thành công.");
+        }
+
         [HttpGet("google-login")]
         public IActionResult GoogleLogin()
         {
@@ -68,14 +82,18 @@ namespace Hien_mau.Controllers
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+            string frontendUrl = "http://localhost:5173";
+
             if (!result.Succeeded)
-                return BadRequest("Google authentication failed");
+                //return BadRequest("Google authentication failed");
+                return Redirect($"{frontendUrl}/signin-google?error=auth_failed&error_description=Google authentication failed");
 
             var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
             var name = result.Principal.FindFirst(ClaimTypes.Name)?.Value;
 
             if (string.IsNullOrEmpty(email))
-                return BadRequest("Email not received from Google");
+                //return BadRequest("Email not received from Google");
+                return Redirect($"{frontendUrl}/signin-google?error=missing_email&error_description=Email not received from Google");
 
             var user = await _authService.GetUserByEmailAsync(email);
 
@@ -85,17 +103,20 @@ namespace Hien_mau.Controllers
                 user = await _authService.CreateUserFromGoogleAsync(email, name ?? "No Name");
 
                 if (user == null) // Kiểm tra lại sau khi tạo
-                    return StatusCode(500, "Failed to create user");
+                    //return StatusCode(500, "Failed to create user");
+                    return Redirect($"{frontendUrl}/signin-google?error=user_creation_failed&error_description=Failed to create user");
             }
 
             if (user.Status == 0)
             {
-                return BadRequest("Account is banned");
+                //return BadRequest("Account is banned");
+                return Redirect($"{frontendUrl}/signin-google?error=account_banned&error_description=Account is banned");
             }
 
             var token = _authService.CreateToken(user);
 
-            return Ok(token);          
+            //return Ok(token);
+            return Redirect($"{frontendUrl}/signin-google?token={token}");
         }
 
         [Authorize]
@@ -104,6 +125,40 @@ namespace Hien_mau.Controllers
         {
             await HttpContext.SignOutAsync();
             return Ok("Logged out");
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return BadRequest("Email is required");
+
+            var user = await _authService.GetUserByEmailAsync(email);
+            if (user == null)
+                return BadRequest("Email not found");
+
+            if (user.Status == 0)
+                return BadRequest("User is inactive or banned");
+
+            var token = await _authService.GeneratePasswordResetTokenAsync(user.Email);
+            if (string.IsNullOrEmpty(token))
+                return BadRequest("Email not found or user is inactive");           
+
+            return Ok("Reset password email sent.");
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _authService.ResetPasswordAsync(dto.Token, dto.NewPassword);
+
+            if (!result)
+                return BadRequest("Invalid or expired token");
+
+            return Ok("Password has been reset successfully.");
         }
 
     }

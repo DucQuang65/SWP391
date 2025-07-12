@@ -2,86 +2,66 @@
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hien_mau.Services
+public class BloodInventoryExpiryJob
 {
-    public class CancelExpiredService : BackgroundService
+    private readonly Hien_mauContext _context;
+
+    public BloodInventoryExpiryJob(Hien_mauContext context)
     {
-        private readonly IServiceScopeFactory _scopeFactory;
-        private readonly ILogger<CancelExpiredService> _logger;
+        _context = context;
+    }
 
-        public CancelExpiredService(IServiceScopeFactory scopeFactory, ILogger<CancelExpiredService> logger)
-        {
-            _scopeFactory = scopeFactory;
-            _logger = logger;
-        }
+    public async Task CheckAndExpireBlood()
+    {
+        var now = DateTime.Now;
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+       
+        var expiredCheckIns = await _context.BloodInventoryHistories
+            .Where(h => h.ActionType == "CheckIn"
+                        && h.ExpirationDate < now)
+            .ToListAsync();
+
+        int expiredCount = 0;
+
+        foreach (var item in expiredCheckIns)
         {
-            while (!stoppingToken.IsCancellationRequested)
+           
+            var alreadyCheckedOut = await _context.BloodInventoryHistories.AnyAsync(h =>
+                h.ActionType == "CheckOut"
+                && h.Notes == "Tự động hủy do hết hạn"
+                && h.ReceivedDate == item.ReceivedDate
+                && h.ExpirationDate == item.ExpirationDate
+                && h.InventoryId == item.InventoryId);
+
+            if (alreadyCheckedOut) continue;
+
+           
+            var expiredLog = new BloodInventoryHistories
             {
-                _logger.LogInformation("Checking and canceling expired blood units...");
+                InventoryId = item.InventoryId,
+                ActionType = "Hủy",
+                Quantity = item.Quantity,
+                Notes = "Tự động hủy do hết hạn",
+                PerformedBy = -1,
+                PerformedAt = DateTime.Now,
+                BagType = item.BagType,
+                ReceivedDate = item.ReceivedDate,
+                ExpirationDate = item.ExpirationDate
+            };
+            _context.BloodInventoryHistories.Add(expiredLog);
 
-                using (var scope = _scopeFactory.CreateScope())
-                {
-                    var context = scope.ServiceProvider.GetRequiredService<Hien_mauContext>();
-
-                    var expiredInventories = await context.BloodInventories
-                        .AsNoTracking()
-                        .Where(i => i.ExpirationDate < DateTime.Now && i.Quantity > 0)
-                        .ToListAsync();
-
-                    foreach (var inventory in expiredInventories)
-                    {
-                        var updatedInventory = new BloodInventories
-                        {
-                            InventoryId = inventory.InventoryId,
-                            BloodGroup = inventory.BloodGroup,
-                            RhType = inventory.RhType,
-                            ComponentId = inventory.ComponentId,
-                            BagType = inventory.BagType,
-                            Quantity = 0,
-                            IsRare = inventory.IsRare,
-                            Status = 0,
-                            ReceivedDate = inventory.ReceivedDate,
-                            LastUpdated = DateTime.Now,
-                            ExpirationDate = inventory.ExpirationDate
-                        };
-
-                        context.BloodInventories.Update(updatedInventory);
-
-                        var history = new BloodInventoryHistories
-                        {
-                            InventoryId = inventory.InventoryId,
-                            BloodGroup = inventory.BloodGroup,
-                            RhType = inventory.RhType,
-                            ComponentId = inventory.ComponentId,
-                            ActionType = "Hủy",
-                            Quantity = inventory.Quantity,
-                            BagType = inventory.BagType,
-                            Notes = "Máu hết hạn tự động hủy",
-                            PerformedBy = -1,
-                            PerformedAt = DateTime.Now,
-                            ReceivedDate = inventory.ReceivedDate,
-                            ExpirationDate = inventory.ExpirationDate
-                        };
-
-                        context.BloodInventoryHistories.Add(history);
-                        await context.SaveChangesAsync();
-                    }
-
-                    if (expiredInventories.Count > 0)
-                    {
-                        _logger.LogInformation($"Successfully canceled {expiredInventories.Count} expired blood unit");
-                    }
-                    else
-                    {
-                        _logger.LogInformation("No expired blood units found.");
-                    }
-                }
-
-
-                await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
+            // 2. Trừ số lượng máu hiện tại trong kho
+            var inventory = await _context.BloodInventories.FindAsync(item.InventoryId);
+            if (inventory != null && inventory.Quantity >= item.Quantity)
+            {
+                inventory.Quantity -= item.Quantity;
             }
+
+            expiredCount++;
         }
+
+        await _context.SaveChangesAsync();
+
+        Console.WriteLine($" Đã tự động hủy {expiredCount} túi máu hết hạn.");
     }
 }

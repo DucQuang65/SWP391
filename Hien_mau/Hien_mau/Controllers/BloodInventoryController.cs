@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Hien_mau.Data;
 using Hien_mau.Dtos;
 using Hien_mau.Models;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using static Hien_mau.Dtos.BloodInventoryDtos;
+using Microsoft.Extensions.Logging;
 
 namespace Hien_mau.Controllers
 {
@@ -12,10 +16,17 @@ namespace Hien_mau.Controllers
     public class BloodInventoryController : ControllerBase
     {
         private readonly Hien_mauContext _context;
+        private readonly ILogger<BloodInventoryController> _logger;
 
-        public BloodInventoryController(Hien_mauContext context)
+        // Validation constants
+        private static readonly string[] ValidBloodGroups = { "A", "B", "AB", "O" };
+        private static readonly string[] ValidRhTypes = { "Rh+", "Rh-" };
+        private static readonly string[] ValidBagTypes = { "250ml", "350ml", "450ml" };
+
+        public BloodInventoryController(Hien_mauContext context, ILogger<BloodInventoryController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -28,25 +39,24 @@ namespace Hien_mau.Controllers
                     .Select(i => new BloodInventoryDto
                     {
                         InventoryID = i.InventoryId,
-                        BloodGroup = i.BloodGroup,
-                        RhType = i.RhType,
+                        BloodGroup = i.BloodGroup ?? "",
+                        RhType = i.RhType ?? "",
                         ComponentId = i.ComponentId,
-                        BagType = i.BagType,
+                        BagType = i.BagType ?? "",
                         Quantity = i.Quantity,
                         Status = i.Quantity <= 10 ? (byte)0 :
                                  i.Quantity <= 30 ? (byte)1 :
-                                 i.Quantity <= 60 ? (byte)2 :
-                                 (byte)3,
-                        IsRare = i.IsRare ?? false,
-                        LastUpdated = i.LastUpdated ?? DateTime.Now,
-                        ExpirationDate = i.ExpirationDate
+                                 i.Quantity <= 60 ? (byte)2 : (byte)3,
+                        IsRare = i.IsRare,
+                        LastUpdated = i.LastUpdated
                     })
                     .ToListAsync();
                 return Ok(inventories);
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, "Error retrieving blood inventories");
+                return StatusCode(500, "Internal server error");
             }
         }
 
@@ -57,41 +67,44 @@ namespace Hien_mau.Controllers
             {
                 var histories = await _context.BloodInventoryHistories
                     .AsNoTracking()
+                    .Include(h => h.Inventory)
                     .Select(h => new
                     {
                         h.InventoryId,
                         h.PerformedAt,
-                        h.BloodGroup,
-                        h.RhType,
-                        h.ComponentId,
+                        BloodGroup = h.Inventory != null ? h.Inventory.BloodGroup : "",
+                        RhType = h.Inventory != null ? h.Inventory.RhType : "",
+                        ComponentId = h.Inventory != null ? h.Inventory.ComponentId : 0,
                         h.Quantity,
                         h.ActionType,
                         h.BagType,
                         h.Notes,
+                        h.ReceivedDate,
                         h.ExpirationDate,
                         h.PerformedBy
                     })
                     .OrderByDescending(h => h.PerformedAt)
                     .ToListAsync();
 
-                var userIds = histories.Select(h => h.PerformedBy).Distinct().ToList();
+                var userIds = histories.Select(h => h.PerformedBy).Where(id => id != -1).Distinct().ToList();
                 var users = await _context.Users
-.AsNoTracking()
+                    .AsNoTracking()
                     .Where(u => userIds.Contains(u.UserId))
                     .ToDictionaryAsync(u => u.UserId, u => u.Name ?? "Unknown");
 
                 var result = histories.Select(h => new BloodHistoryDto
                 {
-                    InventoryID = h.InventoryId ?? 0,
+                    InventoryID = h.InventoryId,
                     PerformedAt = h.PerformedAt,
                     BloodGroup = h.BloodGroup ?? "",
                     RhType = h.RhType ?? "",
-                    ComponentId = h.ComponentId ,
+                    //ComponentId = h.ComponentId,
                     Quantity = h.Quantity,
-                    PerformedByName = users.TryGetValue(h.PerformedBy, out var name) ? name : "System",
+                    PerformedByName = h.PerformedBy == -1 ? "Hệ thống" : users.TryGetValue(h.PerformedBy, out var name) ? name : "Unknown",
                     ActionType = h.ActionType ?? "",
-                    BagType = h.BagType,
-                    Notes = h.Notes,
+                    BagType = h.BagType ?? "",
+                    Notes = h.Notes ?? "",
+                    ReceivedDate = h.ReceivedDate,
                     ExpirationDate = h.ExpirationDate
                 }).ToList();
 
@@ -99,108 +112,94 @@ namespace Hien_mau.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, "Error retrieving blood inventory history");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet("selection-options")]
+        public async Task<IActionResult> GetSelectionOptions()
+        {
+            try
+            {
+                var components = await _context.Components
+                    .AsNoTracking()
+                    .Select(c => new ComponentSelectionDto
+                    {
+                        ComponentId = c.ComponentId,
+                        ComponentName = c.ComponentType ?? ""
+                    })
+                    .ToListAsync();
+
+                var selection = new BloodSelectionDto
+                {
+                    Components = components,
+                    BloodGroups = ValidBloodGroups.ToList(),
+                    RhTypes = ValidRhTypes.ToList()
+                };
+                return Ok(selection);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving selection options");
+                return StatusCode(500, "Internal server error");
             }
         }
 
         [HttpPost("check-in")]
         public async Task<IActionResult> CheckInBlood([FromBody] CheckInOutRequestDto request)
         {
+            // Validate input
+            var validationResult = ValidateRequest(request);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.ErrorMessage);
+
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                if (request.Quantity <= 0)
-                    return BadRequest("Số lượng phải lớn hơn 0.");
-
-                //if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
-                //    !IsValidComponentId(request.ComponentId) || !IsValidBagType(request.BagType))
-                //    return BadRequest("Thông tin máu không hợp lệ.");
-
-                var userExists = await _context.Users.AsNoTracking().AnyAsync(u => u.UserId == request.PerformedBy);
-                if (!userExists)
-                    return BadRequest("Người thực hiện không tồn tại.");
+                // Check if component and user exist
+                var validationCheck = await ValidateComponentAndUser(request.ComponentId, request.PerformedBy);
+                if (!validationCheck.IsValid)
+                    return BadRequest(validationCheck.ErrorMessage);
 
                 var inventory = await _context.BloodInventories
-                    .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
-                                            i.RhType == request.RhType &&
-                                            i.ComponentId == request.ComponentId &&
-                                            i.BagType == request.BagType);
+                                             i.RhType == request.RhType &&
+                                             i.ComponentId == request.ComponentId &&
+                                             i.BagType == request.BagType);
 
                 var receivedDate = DateTime.Now;
-                int? inventoryId;
+                var expirationDate = CalculateExpirationDate(request.ComponentId, receivedDate);
 
-                DateTime? expirationDate = request.ComponentId switch
-                {
-                    1 => receivedDate.AddDays(35),
-                    2 => receivedDate.AddDays(42),
-                    4 => receivedDate.AddDays(5),
-                    3 => receivedDate.AddDays(365),
-                    _ => null
-                };
                 if (inventory == null)
                 {
-                    var newInventory = new BloodInventories
+                    inventory = new BloodInventories
                     {
                         BloodGroup = request.BloodGroup,
                         RhType = request.RhType,
-                        ComponentId = request.ComponentId,
+                        
                         BagType = request.BagType,
                         Quantity = request.Quantity,
-                        Status = request.Quantity <= 10 ? (byte)0 :
-                                 request.Quantity <= 30 ? (byte)1 :
-                                 request.Quantity <= 60 ? (byte)2 :
-                                 (byte)3,
                         IsRare = IsRareBloodType(request.BloodGroup, request.RhType),
-                        ReceivedDate = receivedDate,
-                        LastUpdated = DateTime.Now,
-                        ExpirationDate = expirationDate
+                        Status = CalculateStatus(request.Quantity),
+                        LastUpdated = DateTime.Now
                     };
-                    _context.BloodInventories.Add(newInventory);
-                    await _context.SaveChangesAsync();
-
-                    inventoryId = await _context.BloodInventories
-                        .AsNoTracking()
-                        .Where(i => i.BloodGroup == request.BloodGroup &&
-                                    i.RhType == request.RhType &&
-                                    i.ComponentId == request.ComponentId &&
-                                    i.BagType == request.BagType)
-                        .Select(i => i.InventoryId)
-                        .FirstOrDefaultAsync();
+                    _context.BloodInventories.Add(inventory);
                 }
                 else
                 {
-                    inventoryId = inventory.InventoryId;
-                    var updatedInventory = new BloodInventories
-                    {
-                        InventoryId = inventoryId.Value,
-                        BloodGroup = inventory.BloodGroup,
-                        RhType = inventory.RhType,
-                        ComponentId = inventory.ComponentId,
-                        BagType = inventory.BagType,
-                        Quantity = inventory.Quantity + request.Quantity,
-                        Status = (inventory.Quantity + request.Quantity) <= 10 ? (byte)0 :
-                                 (inventory.Quantity + request.Quantity) <= 30 ? (byte)1 :
-                                 (inventory.Quantity + request.Quantity) <= 60 ? (byte)2 :
-                                 (byte)3,
-                        IsRare = inventory.IsRare,
-                        ReceivedDate = receivedDate,
-                        LastUpdated = DateTime.Now,
-                        ExpirationDate = expirationDate
-                    };
-                    _context.BloodInventories.Update(updatedInventory);
-                    await _context.SaveChangesAsync();
+                    inventory.Quantity += request.Quantity;
+                    inventory.Status = CalculateStatus(inventory.Quantity);
+                    inventory.LastUpdated = DateTime.Now;
+
                 }
 
-                if (inventoryId == null)
-                    throw new Exception("Không tìm thấy InventoryID.");
+                await _context.SaveChangesAsync();
 
+               
                 var history = new BloodInventoryHistories
                 {
-                    InventoryId = inventoryId.Value,
-                    BloodGroup = request.BloodGroup,
-                    RhType = request.RhType,
-                    ComponentId = request.ComponentId,
+                    InventoryId = inventory.InventoryId,
                     ActionType = "CheckIn",
                     Quantity = request.Quantity,
                     BagType = request.BagType,
@@ -215,133 +214,159 @@ namespace Hien_mau.Controllers
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();
+
+                _logger.LogInformation("Blood check-in successful: {BloodGroup} {RhType} {ComponentId} {Quantity}",
+                    request.BloodGroup, request.RhType, request.ComponentId, request.Quantity);
+
                 return Ok(new { Message = "Nhập kho thành công" });
             }
-            catch
+            catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw;
+                _logger.LogError(ex, "Error during blood check-in");
+                return StatusCode(500, "Lỗi hệ thống trong quá trình nhập kho");
             }
         }
 
         [HttpPost("check-out")]
         public async Task<IActionResult> CheckOutBlood([FromBody] CheckInOutRequestDto request)
         {
+            // Validate input
+            var validationResult = ValidateRequest(request);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.ErrorMessage);
+
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                if (request.Quantity <= 0)
-                    return BadRequest("Số lượng phải lớn hơn 0.");
-
-                //if (!IsValidBloodGroup(request.BloodGroup) || !IsValidRhType(request.RhType) ||
-                //    !IsValidComponentId(request.ComponentId) || !IsValidBagType(request.BagType))
-                //    return BadRequest("Thông tin máu không hợp lệ.");
-
-                var userExists = await _context.Users.AsNoTracking().AnyAsync(u => u.UserId == request.PerformedBy);
-                if (!userExists)
-                    return BadRequest("Người thực hiện không tồn tại.");
+                // Check if component and user exist
+                var validationCheck = await ValidateComponentAndUser(request.ComponentId, request.PerformedBy);
+                if (!validationCheck.IsValid)
+                    return BadRequest(validationCheck.ErrorMessage);
 
                 var inventory = await _context.BloodInventories
-                    .AsNoTracking()
                     .FirstOrDefaultAsync(i => i.BloodGroup == request.BloodGroup &&
-                                            i.RhType == request.RhType &&
-                                            i.ComponentId == request.ComponentId &&
-                                            i.BagType == request.BagType);
+                                             i.RhType == request.RhType &&
+                                             i.ComponentId == request.ComponentId &&
+                                             i.BagType == request.BagType);
 
                 if (inventory == null)
                     return NotFound("Không tìm thấy kho máu.");
 
-                if (inventory.ExpirationDate < DateTime.Now)
-                    return BadRequest("Máu đã hết hạn sử dụng.");
-
                 if (inventory.Quantity < request.Quantity)
-                    return BadRequest("Số lượng trong kho không đủ.");
+                    return BadRequest("Số lượng không đủ.");
 
-                DateTime? expirationDate = request.ComponentId switch
-                {
-                    1 => inventory.ReceivedDate.AddDays(35),
-                    2 => inventory.ReceivedDate.AddDays(42),
-                    4 => inventory.ReceivedDate.AddDays(5),
-                    3 => inventory.ReceivedDate.AddDays(365),
-                    _ => inventory.ExpirationDate
-                };
+                // Update inventory
+                inventory.Quantity -= request.Quantity;
+                inventory.Status = CalculateStatus(inventory.Quantity);
+                inventory.LastUpdated = DateTime.Now;
 
-                var updatedInventory = new BloodInventories
-                {
-                    InventoryId = inventory.InventoryId,
-                    BloodGroup = inventory.BloodGroup,
-                    RhType = inventory.RhType,
-                    ComponentId = inventory.ComponentId,
-                    BagType = inventory.BagType,
-                    Quantity = inventory.Quantity - request.Quantity,
-                    IsRare = inventory.IsRare,
-                    Status = (inventory.Quantity - request.Quantity) <= 10 ? (byte)0 :
-                             (inventory.Quantity - request.Quantity) <= 30 ? (byte)1 :
-                             (inventory.Quantity - request.Quantity) <= 60 ? (byte)2 :
-                             (byte)3,
-                    ReceivedDate = inventory.ReceivedDate,
-                    LastUpdated = DateTime.Now,
-                    ExpirationDate = expirationDate
-                };
 
-                _context.BloodInventories.Update(updatedInventory);
-                await _context.SaveChangesAsync();
-
-                var inventoryId = inventory.InventoryId;
-
+                // Create history record - Fixed: Correct logic for check-out
                 var history = new BloodInventoryHistories
                 {
-                    InventoryId = inventoryId,
-                    BloodGroup = inventory.BloodGroup,
-                    RhType = inventory.RhType,
-                    ComponentId = inventory.ComponentId,
+                    InventoryId = inventory.InventoryId,
                     ActionType = "CheckOut",
                     Quantity = request.Quantity,
-                    BagType = inventory.BagType,
+                    BagType = request.BagType,
                     Notes = request.Notes,
                     PerformedBy = request.PerformedBy,
                     PerformedAt = DateTime.Now,
-                    ReceivedDate = inventory.ReceivedDate,
-                    ExpirationDate = expirationDate
+                    ReceivedDate = null, // Fixed: No received date for check-out
+                    ExpirationDate = null // Fixed: No expiration date for check-out
                 };
 
                 _context.BloodInventoryHistories.Add(history);
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();
+
+                _logger.LogInformation("Blood check-out successful: {BloodGroup} {RhType} {ComponentId} {Quantity}",
+                    request.BloodGroup, request.RhType, request.ComponentId, request.Quantity);
+
                 return Ok(new { Message = "Xuất kho thành công" });
             }
-            catch
+            catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw;
+                _logger.LogError(ex, "Error during blood check-out");
+                return StatusCode(500, "Lỗi hệ thống trong quá trình xuất kho");
             }
         }
 
+        // Helper methods
+        private (bool IsValid, string ErrorMessage) ValidateRequest(CheckInOutRequestDto request)
+        {
+            if (request == null)
+                return (false, "Request không hợp lệ.");
 
+            if (request.Quantity <= 0)
+                return (false, "Số lượng phải lớn hơn 0.");
 
-        private bool IsValidBloodGroup(string bloodGroup) =>
-            new[] { "A", "B", "AB", "O" }.Contains(bloodGroup);
+            if (string.IsNullOrEmpty(request.BloodGroup) || !ValidBloodGroups.Contains(request.BloodGroup))
+                return (false, "Nhóm máu không hợp lệ.");
 
-        private bool IsValidRhType(string rhType) =>
-            new[] { "Rh+", "Rh-" }.Contains(rhType);
-        private bool IsValidComponentId(string ComponentId) =>
-                        new[] { "Toàn phần", "Hồng cầu", "Huyết tương", "Tiểu cầu" }.Contains(ComponentId);
+            if (string.IsNullOrEmpty(request.RhType) || !ValidRhTypes.Contains(request.RhType))
+                return (false, "Loại Rh không hợp lệ.");
 
-        private bool IsValidBagType(string bagType) =>
-            new[] { "250ml", "350ml", "450ml" }.Contains(bagType);
+            if (string.IsNullOrEmpty(request.BagType) || !ValidBagTypes.Contains(request.BagType))
+                return (false, "Túi máu không hợp lệ.");
 
-        private bool IsRareBloodType(string bloodGroup, string rhType) =>
-            (bloodGroup == "AB" && rhType == "Rh-") || (bloodGroup == "O" && rhType == "Rh-") ||
-            (bloodGroup == "A" && rhType == "Rh-") || (bloodGroup == "B" && rhType == "Rh-");
+            return (true, string.Empty);
+        }
 
-        private int GetBagSize(string bagType) =>
-            bagType switch
+        private async Task<(bool IsValid, string ErrorMessage)> ValidateComponentAndUser(int componentId, int performedBy)
+        {
+            var componentExists = await _context.Components.AnyAsync(c => c.ComponentId == componentId);
+            if (!componentExists)
+                return (false, "Thành phần máu không tồn tại.");
+
+            if (performedBy != -1)
             {
-                "250ml" => 250,
-                "350ml" => 350,
-                "450ml" => 450,
-                _ => 0
+                var userExists = await _context.Users.AnyAsync(u => u.UserId == performedBy);
+                if (!userExists)
+                    return (false, "Người thực hiện không tồn tại.");
+            }
+
+            return (true, string.Empty);
+        }
+
+        private DateTime? CalculateExpirationDate(int componentId, DateTime receivedDate)
+        {
+            return componentId switch
+            {
+                1 => receivedDate.AddDays(35), // Red Blood Cells
+                2 => receivedDate.AddDays(42), // Whole Blood
+                3 => receivedDate.AddDays(365), // Plasma
+                4 => receivedDate.AddDays(5), // Platelets
+                _ => null
             };
+        }
+
+        private byte CalculateStatus(int quantity) =>
+            quantity <= 10 ? (byte)0 :
+            quantity <= 30 ? (byte)1 :
+            quantity <= 60 ? (byte)2 : (byte)3;
+
+        // Improved rare blood type logic
+        private bool IsRareBloodType(string bloodGroup, string rhType)
+        {
+            if (string.IsNullOrEmpty(bloodGroup) || string.IsNullOrEmpty(rhType))
+                return false;
+
+            // More medically accurate rare blood type definition
+            if (rhType == "Rh-")
+            {
+                return bloodGroup switch
+                {
+                    "AB" => true, // AB- is rare
+                    "A" => true,  // A- is less common
+                    "B" => true,  // B- is less common
+                    "O" => false, // O- is universal donor, not necessarily rare
+                    _ => false
+                };
+            }
+            return false;
+        }
     }
 }

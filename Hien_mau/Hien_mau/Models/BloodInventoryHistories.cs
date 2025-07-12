@@ -8,40 +8,23 @@ namespace Hien_mau.Models;
 public partial class BloodInventoryHistories
 {
     [Key]
-    public int HistoryId { get; set; }
+    public int HistoryId { get; set; } // Khóa chính
 
-    public int? InventoryId { get; set; }
-    [Required]
-    public string? BloodGroup { get; set; }
-    [Required]
-    public string? RhType { get; set; }
-    [Required]
-    public int ComponentId { get; set; }
-    [Required]
-    public string ActionType { get; set; } = null!;
-    [Required]
-    public int Quantity { get; set; }
-    public string? Notes { get; set; }
-    [Required]
-    public int PerformedBy { get; set; }
-    [Required]
-    public DateTime? PerformedAt { get; set; }
+    public int InventoryId { get; set; } // FK → BloodInventory
+    public BloodInventories Inventory { get; set; }
 
-    public string? BagType { get; set; }
+    public string ActionType { get; set; } // CheckIn, CheckOut, Hủy
+    public int Quantity { get; set; } // Số lượng thay đổi (+/-)
 
-    public DateTime? ReceivedDate { get; set; }
+    public string Notes { get; set; } // Ghi chú nếu có
 
-    public DateTime? ExpirationDate { get; set; }
+    public int PerformedBy { get; set; } // FK → Users (ID người thực hiện)
+    public Users PerformedByUser { get; set; }
 
-    public virtual Components Component { get; set; } = null!;
+  
+    public DateTime PerformedAt { get; set; } // Ngày thực hiện thao tác
 
-    public virtual BloodInventories? Inventory { get; set; }
-
-    public virtual Users PerformedByNavigation { get; set; } = null!;
-
-    [ForeignKey("InventoryId")]
-    public BloodInventories BloodInventory { get; set; } = null!;
-
-    [ForeignKey("PerformedBy")]
-    public Users PerformedByUser { get; set; } = null!;
+    public string BagType { get; set; } // Loại túi trong thao tác
+    public DateTime? ReceivedDate { get; set; } // Ngày nhận (nếu là nhập kho)
+    public DateTime? ExpirationDate { get; set; } // Ngày hết hạn (nếu là nhập kho)
 }
