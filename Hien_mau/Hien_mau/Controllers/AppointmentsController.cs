@@ -151,9 +151,6 @@ public class AppointmentController : ControllerBase
                 return BadRequest($"Chưa đủ thời gian nghỉ sau hiến máu. Cần ít nhất {minDays} ngày kể từ {lastDonationDate.Value:dd/MM/yyyy}.");
             }
         }
-
-     
-    
        
         var appointment = new Appointments
         {
