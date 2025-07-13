@@ -53,7 +53,7 @@
 
         public virtual DbSet<Patients> Patients { get; set; }
 
-        public virtual DbSet<Component> Components { get; set; }
+        public virtual DbSet<Components> Components { get; set; }
 
 
 
@@ -71,7 +71,7 @@
 
 
 
-            modelBuilder.Entity<Component>(entity =>
+            modelBuilder.Entity<Components>(entity =>
             {
 
                 entity.ToTable("Components"); 
@@ -172,16 +172,17 @@
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ComponentId).HasColumnName("ComponentID"); 
+                entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
 
-              
-                entity.HasOne(e => e.Component)
+
+                entity.HasOne(e => e.Components)
                     .WithMany(c => c.BloodInventories)
-                    .HasForeignKey(e => e.ComponentId)
+                    .HasForeignKey(e => e.ComponentId)  // Sử dụng property ComponentId
+                    .HasPrincipalKey(c => c.ComponentId)  // Thêm dòng này để chỉ rõ khóa chính
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BloodInventories_Components");
 
-             
+
                 entity.HasMany(e => e.BloodInventoryHistories)
                     .WithOne(h => h.Inventory)
                     .HasForeignKey(h => h.InventoryId)

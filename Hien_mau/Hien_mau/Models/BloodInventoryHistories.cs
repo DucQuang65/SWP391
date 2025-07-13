@@ -21,7 +21,8 @@ public partial class BloodInventoryHistories
     public int PerformedBy { get; set; } // FK → Users (ID người thực hiện)
     public Users PerformedByUser { get; set; }
 
-  
+    public Components components { get; set; } 
+
     public DateTime PerformedAt { get; set; } // Ngày thực hiện thao tác
 
     public string BagType { get; set; } // Loại túi trong thao tác

@@ -228,12 +228,12 @@ public class AppointmentController : ControllerBase
 
    
     [HttpPatch("{id}/status/{status}")]
-    public async Task<IActionResult> UpdateStatus(int id, byte status, [FromServices] NotificationLog logger)
+    public async Task<IActionResult> UpdateStatus(int id, bool status, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
 
-        if (status > 2) return BadRequest("Invalid status");
+        //if (status > 2) return BadRequest("Invalid status");
 
         appointment.Status = status;
         await _context.SaveChangesAsync();

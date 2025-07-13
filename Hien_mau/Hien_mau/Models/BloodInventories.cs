@@ -24,9 +24,7 @@ public partial class BloodInventories
     public DateTime LastUpdated { get; set; } 
 
     public int ComponentId { get; set; } 
-    public virtual Component Component { get; set; } 
+    public virtual Components Components { get; set; } 
 
     public virtual ICollection<BloodInventoryHistories> BloodInventoryHistories { get; set; } = new List<BloodInventoryHistories>();
-
-    
 }

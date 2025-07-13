@@ -9,7 +9,7 @@ public class AppointmentCreateDTO
     public DateTime AppointmentDate { get; set; }
     public string? TimeSlot { get; set; }
     public byte Process { get; set; }
-    public byte Status { get; set; }
+    public bool Status { get; set; }
 }
 public class AppointmentDTO
 
@@ -18,7 +18,7 @@ public class AppointmentDTO
     public int UserId { get; set; }
     public DateTime AppointmentDate { get; set; }
     public string? TimeSlot { get; set; }
-    public byte Status { get; set; }
+    public bool? Status { get; set; }
     public byte Process { get; set; }
     public string? Notes { get; set; }
     public int? HeartRate { get; set; }
@@ -40,7 +40,7 @@ public class DoctorUpdateDTO
     public double? Temperature { get; set; }
     public int DoctorId { get; set; }
     public byte Process { get; set; }
-    public byte Status { get; set; }
+    public bool Status { get; set; }
     }
 public class AppointmentLastDonationDTO
 {
