@@ -181,7 +181,7 @@ CREATE TABLE Appointments (
     DoctorID INT NULL,
     AppointmentDate DATE NOT NULL,
     TimeSlot NVARCHAR(50) NOT NULL,
-    Status TINYINT NOT NULL DEFAULT 0, -- 0: chờ duyệt, 1: từ chối, 2: chấp nhận
+    Status BIT, -- 0:từ chối, 1: chấp nhận
     Process TINYINT NOT NULL DEFAULT 0,--0-- dang ky, 1--kham suc khoe, 2-- lay mau, 3--xet nghiem, 4--nhap kho
     Cancel BIT NOT NULL DEFAULT 0,
     Notes NVARCHAR(255) NULL,
