@@ -14,6 +14,7 @@
         public string DoctorPhone { get; set; }
         public string BloodGroup { get; set; }
         public string RhType { get; set; }
+        public int? ComponentId { get; set; }
         public int Quantity { get; set; }
         public string Reason { get; set; }
         public byte Status { get; set; } = 0;

@@ -37,6 +37,7 @@ namespace Hien_mau.Controllers
                     BloodGroup = x.BloodGroup,
                     RhType = x.RhType,
                     Quantity = x.Quantity,
+                    ComponentId = x.ComponentId,
                     Reason = x.Reason,
                     Status = x.Status,
                     CreatedTime = x.CreatedTime
@@ -61,6 +62,7 @@ namespace Hien_mau.Controllers
                     DoctorPhone = x.DoctorPhone,
                     BloodGroup = x.BloodGroup,
                     RhType = x.RhType,
+                    ComponentId = x.ComponentId,
                     Quantity = x.Quantity,
                     Reason = x.Reason,
                     Status = x.Status,
@@ -102,6 +104,7 @@ namespace Hien_mau.Controllers
                 Relationship = bloodRequestDto.Relationship,
                 BloodGroup = bloodRequestDto.BloodGroup,
                 RhType = bloodRequestDto.RhType,
+                ComponentId = bloodRequestDto.ComponentId,
                 Quantity = bloodRequestDto.Quantity,
                 Reason = bloodRequestDto.Reason,
                 CreatedTime = vietNamTime
@@ -157,6 +160,7 @@ namespace Hien_mau.Controllers
             bloodRequest.DoctorPhone = bloodRequestDto.DoctorPhone;
             bloodRequest.BloodGroup = bloodRequestDto.BloodGroup;
             bloodRequest.RhType = bloodRequestDto.RhType;
+            bloodRequest.ComponentId = bloodRequestDto.ComponentId;
             bloodRequest.Quantity = bloodRequestDto.Quantity;
             bloodRequest.Reason = bloodRequestDto.Reason;
 
