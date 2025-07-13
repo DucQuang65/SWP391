@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hien_mau.Models;
 
-public partial class Component
+public partial class Components
 {
     [Key]
     public int ComponentId { get; set; }
