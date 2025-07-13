@@ -4,6 +4,7 @@ namespace Hien_mau.Dto;
 
 public class AppointmentCreateDTO
 {
+    public int AppointmentId { get; }
     public int UserId { get; set; }
     public DateTime AppointmentDate { get; set; }
     public string? TimeSlot { get; set; }
@@ -31,6 +32,7 @@ public class AppointmentDTO
 
 public class DoctorUpdateDTO
 {
+    public int AppointmentId { get; }
     public string? Notes { get; set; }
     public string? BloodPressure { get; set; }
     public int? HeartRate { get; set; }

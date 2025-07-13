@@ -2,8 +2,10 @@
 using Hien_mau.Dto;
 
 using Hien_mau.Models;
+using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Hien_mau.Controllers;
 
@@ -109,7 +111,7 @@ public class AppointmentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAppointment([FromBody] AppointmentCreateDTO dto)
+    public async Task<IActionResult> CreateAppointment([FromBody] AppointmentCreateDTO dto, [FromServices] NotificationLog logger)
     {
         var user = await _context.Users.FindAsync(dto.UserId);
         if (user == null) return NotFound("User not found");
@@ -182,18 +184,14 @@ public class AppointmentController : ControllerBase
         _context.Reminders.Add(reminder);
         await _context.SaveChangesAsync();
 
-        return Ok(new
-        {
-            Message = "Appointment created successfully",
-            AppointmentId = appointment.AppointmentId
-        });
+        await logger.NotiLog(dto.AppointmentId, "Appointment", $"Tạo hẹn:", "Create");
 
         return Ok(new { Message = "Appointment created successfully", AppointmentId = appointment.AppointmentId });
     }
 
 
     [HttpPost("doctor-update/{id}")]
-    public async Task<IActionResult> DoctorUpdate(int id, [FromBody] DoctorUpdateDTO dto)
+    public async Task<IActionResult> DoctorUpdate(int id, [FromBody] DoctorUpdateDTO dto, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
@@ -208,6 +206,7 @@ public class AppointmentController : ControllerBase
         appointment.Process = dto.Process;
 
         await _context.SaveChangesAsync();
+        await logger.NotiLog(dto.AppointmentId, "Appointment", $"Cập nhật hẹn:", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -229,7 +228,7 @@ public class AppointmentController : ControllerBase
 
    
     [HttpPatch("{id}/status/{status}")]
-    public async Task<IActionResult> UpdateStatus(int id, byte status)
+    public async Task<IActionResult> UpdateStatus(int id, byte status, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
@@ -238,7 +237,7 @@ public class AppointmentController : ControllerBase
 
         appointment.Status = status;
         await _context.SaveChangesAsync();
-
+        await logger.NotiLog(id, "Appointment", $"Cập nhật trạng thái:", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -258,7 +257,36 @@ public class AppointmentController : ControllerBase
         });
     }
 
-   
+    [HttpPatch("{id}/process/{process}")]
+    public async Task<IActionResult> UpdateProcess(int id, byte process, [FromServices] NotificationLog logger)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound();
+
+        if (process > 5) return BadRequest("Invalid status");
+
+        appointment.Process = process;
+        await _context.SaveChangesAsync();
+        await logger.NotiLog(id, "Appointment", $"Cập nhật quy trình:", "Update");
+        return Ok(new AppointmentDTO
+        {
+            AppointmentId = appointment.AppointmentId,
+            UserId = appointment.UserId,
+            AppointmentDate = appointment.AppointmentDate,
+            TimeSlot = appointment.TimeSlot,
+            Status = appointment.Status,
+            Process = appointment.Process,
+            Notes = appointment.Notes,
+            BloodPressure = appointment.BloodPressure,
+            HeartRate = appointment.HeartRate,
+            Hemoglobin = appointment.Hemoglobin,
+            Temperature = appointment.Temperature,
+            DoctorId = appointment.DoctorId,
+            Cancel = appointment.Cancel,
+            CreatedAt = appointment.CreatedAt
+        });
+    }
+
     [HttpPatch("{id}/cancel")]
     public async Task<IActionResult> CancelAppointment(int id)
     {

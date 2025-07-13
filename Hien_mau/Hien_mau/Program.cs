@@ -144,7 +144,7 @@ namespace Hien_mau
             app.UseAuthorization();
 
             app.MapControllers();
-
+            app.UseStaticFiles();
             app.Run();
         }
         private static SecurityKey GetIssuerSigningKey(IConfiguration configuration)
