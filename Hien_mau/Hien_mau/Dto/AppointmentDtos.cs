@@ -10,6 +10,7 @@ public class AppointmentCreateDTO
     public string? TimeSlot { get; set; }
     public byte Process { get; set; }
     public bool? Status { get; set; }
+    public bool Cancel { get; set; }
 }
 public class AppointmentDTO
 

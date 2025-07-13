@@ -117,10 +117,10 @@ public class AppointmentController : ControllerBase
         if (user == null) return NotFound("User not found");
 
         var lastDonationRecord = await _context.BloodDonationHistories
-    .Where(x => x.IsSuccess && x.Appointment != null && x.Appointment.UserId == dto.UserId)
-    .OrderByDescending(x => x.DonationDate)
-    .Select(x => new { x.DonationDate })
-    .FirstOrDefaultAsync();
+            .Where(x => x.IsSuccess && x.Appointment != null && x.Appointment.UserId == dto.UserId)
+            .OrderByDescending(x => x.DonationDate)
+            .Select(x => new { x.DonationDate })
+            .FirstOrDefaultAsync();
 
 
         DateTime? lastDonationFromSystem = lastDonationRecord?.DonationDate;
@@ -184,7 +184,7 @@ public class AppointmentController : ControllerBase
         _context.Reminders.Add(reminder);
         await _context.SaveChangesAsync();
 
-        await logger.NotiLog(dto.AppointmentId, "Appointment", $"Tạo hẹn:", "Create");
+        await logger.NotiLog(dto.UserId, "Appointment", $"Tạo hẹn:", "Create");
 
         return Ok(new { Message = "Appointment created successfully", AppointmentId = appointment.AppointmentId });
     }
