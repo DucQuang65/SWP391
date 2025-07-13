@@ -203,7 +203,7 @@ public class AppointmentController : ControllerBase
         appointment.Process = dto.Process;
 
         await _context.SaveChangesAsync();
-        await logger.NotiLog(dto.AppointmentId, "Appointment", $"Cập nhật hẹn:", "Update");
+        await logger.NotiLog(dto.DoctorId, "Appointment", $"Cập nhật hẹn:", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
