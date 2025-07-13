@@ -924,7 +924,8 @@ VALUES
 ('O', 'Rh-', '250ml', 2, 1, 2, 3, GETDATE());
 GO
 
--- Insert data into BloodInventoryHistory
+
+-- Insert data into BloodInventoryHistories
 INSERT INTO BloodInventoryHistories (InventoryID, ActionType, Quantity, Notes, PerformedBy, PerformedAt, BagType, ReceivedDate, ExpirationDate)
 VALUES
 (1, N'Check in', 2, N'Nhập kho từ hiến máu', 3, '2025-06-01', '250ml', '2025-06-01', '2025-07-01'),
@@ -948,15 +949,15 @@ VALUES
 (3, N'Check in', 2, N'Nhập kho nội viện', 3, '2025-06-19', '250ml', '2025-06-19', '2025-07-29'),
 (4, N'Check out', 1, N'Ca phẫu thuật tim', 4, '2025-06-20', '450ml', '2025-06-20', '2025-07-25'),
 (5, N'Cancel', 2, N'Máu không đạt chất lượng', 1, '2025-06-21', '350ml', '2025-06-21', '2025-07-21'),
-(6, N'Check in', 3, N'Hiến máu tại sự kiện trường học', 2', '2025-06-22', '250ml', '2025-06-22', '2025-08-01'),
+(6, N'Check in', 3, N'Hiến máu tại sự kiện trường học', 2, '2025-06-22', '250ml', '2025-06-22', '2025-08-01'),
 (7, N'Check out', 1, N'Truyền máu ngoại viện', 5, '2025-06-23', '450ml', '2025-06-23', '2025-07-30'),
 (8, N'Cancel', 3, N'Rách rỗ', 3, '2025-06-24', '350ml', '2025-06-24', '2025-07-26'),
 (1, N'Check in', 1, N'Hiến máu nhân đạo', 4, '2025-06-25', '250ml', '2025-06-25', '2025-07-31'),
 (2, N'Check out', 3, N'Dùng cho trẻ em thiếu máu', 3, '2025-06-26', '450ml', '2025-06-26', '2025-08-02'),
-(3, N'Cancel', 2, N'Máu quá hạn', 2', '2025-06-27', '350ml', '2025-06-27', '2025-07-27'),
+(3, N'Cancel', 2, N'Máu quá hạn', 2, '2025-06-27', '350ml', '2025-06-27', '2025-07-27'),
 (4, N'Check in', 4, N'Tiếp nhận từ ngân hàng máu', 1, '2025-06-28', '250ml', '2025-06-28', '2025-08-05'),
 (5, N'Check out', 1, N'Cấp cứu ngoại viện', 4, '2025-06-29', '450ml', '2025-06-29', '2025-08-01'),
-(6', N'Cancel', 2, N'Máu bị vón cục', 1, '2025-06-30', '350ml', '2025-06-30', '2025-07-30');
+(6, N'Cancel', 2, N'Máu bị vón cục', 1, '2025-06-30', '350ml', '2025-06-30', '2025-07-30');
 GO
 
 INSERT INTO Patients (FullName, Gender, DateOfBirth, Age, Phone, Address, Email)
