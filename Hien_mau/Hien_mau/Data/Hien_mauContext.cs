@@ -177,8 +177,8 @@
 
                 entity.HasOne(e => e.Components)
                     .WithMany(c => c.BloodInventories)
-                    .HasForeignKey(e => e.ComponentId)  // Sử dụng property ComponentId
-                    .HasPrincipalKey(c => c.ComponentId)  // Thêm dòng này để chỉ rõ khóa chính
+                    .HasForeignKey(e => e.ComponentId)  
+                    .HasPrincipalKey(c => c.ComponentId)  
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BloodInventories_Components");
 
