@@ -31,6 +31,7 @@ public class AppointmentController : ControllerBase
                 AppointmentDate = a.AppointmentDate,
                 TimeSlot = a.TimeSlot,
                 Status = a.Status,
+                Process = a.Process,
                 Notes = a.Notes,
                 BloodPressure = a.BloodPressure, 
                 HeartRate = a.HeartRate,
@@ -57,6 +58,7 @@ public class AppointmentController : ControllerBase
                 AppointmentDate = a.AppointmentDate,
                 TimeSlot = a.TimeSlot,
                 Status = a.Status,
+                Process = a.Process,
                 Notes = a.Notes,
                 BloodPressure = a.BloodPressure,
                 HeartRate = a.HeartRate,
@@ -157,7 +159,8 @@ public class AppointmentController : ControllerBase
             AppointmentDate = dto.AppointmentDate,
             TimeSlot = dto.TimeSlot,
            
-            Status = 0,
+            Status = dto.Status,
+            Process = dto.Process,
             CreatedAt = DateTime.Now
         };
 
@@ -201,7 +204,8 @@ public class AppointmentController : ControllerBase
         appointment.Hemoglobin = dto.Hemoglobin;
         appointment.Temperature = dto.Temperature;
         appointment.DoctorId = dto.DoctorId;
-        appointment.Status = 2; 
+        appointment.Status = dto.Status; 
+        appointment.Process = dto.Process;
 
         await _context.SaveChangesAsync();
         return Ok(new AppointmentDTO
@@ -211,6 +215,7 @@ public class AppointmentController : ControllerBase
             AppointmentDate = appointment.AppointmentDate,
             TimeSlot = appointment.TimeSlot,
             Status = appointment.Status,
+            Process = appointment.Process,
             Notes = appointment.Notes,
             BloodPressure = appointment.BloodPressure, 
             HeartRate = appointment.HeartRate,
@@ -241,6 +246,7 @@ public class AppointmentController : ControllerBase
             AppointmentDate = appointment.AppointmentDate,
             TimeSlot = appointment.TimeSlot,
             Status = appointment.Status,
+            Process = appointment.Process,
             Notes = appointment.Notes,
             BloodPressure = appointment.BloodPressure, 
             HeartRate = appointment.HeartRate,

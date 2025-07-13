@@ -92,7 +92,7 @@
         entity.Property(e => e.HeartRate);
         entity.Property(e => e.Hemoglobin);
         entity.Property(e => e.Temperature);
-        entity.Property(e => e.Status).HasDefaultValue((byte)0); // 0: chờ duyệt, 1: từ chối, 2: chấp nhận
+        entity.Property(e => e.Status).HasColumnName("Status");
         entity.Property(e => e.Cancel).HasDefaultValue(false);
         entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
 
@@ -101,10 +101,6 @@
              .HasForeignKey(e => e.UserId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_Appointments_Users");
-
-
-
-
 
         entity.HasOne(e => e.Doctor)
              .WithMany()
