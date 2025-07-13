@@ -74,8 +74,6 @@ VALUES
     -- Khoa Huyết học
     ('phong.huyethoc@gmail.com', 'Ab1234@', '0966666001', 'Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 'AB', 'Rh+', 1, 2, 1),
     ('trang.huyethoc@gmail.com', 'Ab1234@', '0966666002', 'Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 'O', 'Rh-', 1, 2, 1);
-
-
 GO
 
 -- Insert data into HospitalInfo table
@@ -153,7 +151,7 @@ VALUES
     'article1.jpg', 
     2, 
     'Article', 
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm A Rh-
     (N'Giới thiệu nhóm máu A Rh-', 
@@ -174,7 +172,7 @@ VALUES
     'article2.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm B Rh+
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -210,7 +208,7 @@ Lưu ý:
     'article3.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm AB Rh+
     (N'Giới thiệu nhóm máu AB Rh+', 
@@ -231,7 +229,7 @@ Lưu ý:
     'article5.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm AB Rh-
     (N'Giới thiệu nhóm máu AB Rh-', 
@@ -252,7 +250,7 @@ Lưu ý:
     'article6.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm O Rh+
     (N'Giới thiệu nhóm máu O Rh+', 
@@ -273,7 +271,7 @@ Lưu ý:
     'article7.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Nhóm O Rh-
     (N'Giới thiệu nhóm máu O Rh-', 
@@ -294,7 +292,7 @@ Lưu ý:
     'article8.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
     
     -- Hiến máu lần đầu
 	(N'Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu',
@@ -334,7 +332,7 @@ Lưu ý:
     'article9.jpg',
     6,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Lưu ý hiến máu định kỳ
     (N'Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -375,7 +373,7 @@ Lưu ý:
     'article10.jpg',
     6,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N'Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ',
@@ -414,7 +412,7 @@ Lưu ý:
     'article11.jpg',
     6,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Hiểu về nhóm máu và vai trò
     (N'Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu',
@@ -477,7 +475,7 @@ Lưu ý:
     'article12.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Lưu và sử dụng máu hiến
     (N'Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?',
@@ -528,7 +526,7 @@ Lưu ý:
     'article13.jpg',
     6,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu',
@@ -576,7 +574,7 @@ Lưu ý:
     'article14.jpg',
     2,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
     -- Câu chuyện thật
     (N'Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu',
@@ -616,7 +614,7 @@ Lưu ý:
     'article15.jpg',
     6,
     'Article',
-    '2025-05-01'),
+    01/05/2025),
 
    -- Sự kiến hiến máu
 (N' CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG ',
@@ -641,7 +639,7 @@ Lưu ý:
     'event1.jpg',
     2,
     'News',
-    '2025-07-01'),
+    01/07/2025),
 
     -- Ngày hiến máu thế giới
 (N' NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI ',
@@ -669,7 +667,7 @@ Lưu ý:
     'event2.jpg',
     6,
     'News',
-    '2025-06-01'),
+    01/06/2025),
 
     -- Sinh viên hiến máu
 (N'HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ',
@@ -693,7 +691,7 @@ Lưu ý:
     'event3.jpg',
     6,
     'News',
-    '2025-04-16'),
+    16/04/2025),
 
     -- Chương trình máu hiếm
 (N'CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG',
@@ -719,7 +717,7 @@ Lưu ý:
     'event4.jpg',
     2,
     'News',
-    '2025-06-15'),
+    15/06/2025),
 
     -- Vinh danh người hiến máu
 (N'LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI',
@@ -744,7 +742,7 @@ Lưu ý:
     'event5.jpg',
     6,
     'News',
-    '2025-08-01'),
+    01/08/2025),
 
     -- Hiến máu tiểu cầu
 (N'TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ',
@@ -772,7 +770,7 @@ Lưu ý:
     'event6.jpg',
     2,
     'News',
-    '2025-10-15');
+    15/10/2025);
 GO
 
 -- Insert data into ArticleTags table
@@ -1067,3 +1065,4 @@ VALUES
 (13, 'Recovery', N'Hôm nay là ngày bạn đủ điều kiện hiến máu lại!', '2025-07-12 09:00:00', 0, GETDATE(), 0, NULL),
 (14, 'BloodDonation', N'Lịch hiến máu vào ngày mai.', '2025-07-13 07:00:00', 0, GETDATE(), 0, NULL),
 (15, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước.', '2025-07-10 08:30:00', 0, GETDATE(), 0, NULL);
+
