@@ -237,4 +237,12 @@ CREATE TABLE Reminders (
     SentAt DATETIME NULL,
     FOREIGN KEY (UserId) REFERENCES Users(UserID)
 );
+
+CREATE TABLE UploadedFiles (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FileName NVARCHAR(255),
+    FileUrl NVARCHAR(500),
+    UploadDate DATETIME,
+    UploadedBy INT -- hoặc tên người upload
+)
 GO
