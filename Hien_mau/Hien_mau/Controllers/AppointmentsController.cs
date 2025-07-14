@@ -234,7 +234,7 @@ public class AppointmentController : ControllerBase
 
         appointment.Status = status;
         await _context.SaveChangesAsync();
-        await logger.NotiLog(id, "Appointment", $"Cập nhật trạng thái:", "Update");
+        await logger.NotiLog(appointment.UserId, "Appointment", $"Cập nhật trạng thái:", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -264,7 +264,7 @@ public class AppointmentController : ControllerBase
 
         appointment.Process = process;
         await _context.SaveChangesAsync();
-        await logger.NotiLog(id, "Appointment", $"Cập nhật quy trình:", "Update");
+        await logger.NotiLog(appointment.UserId, "Appointment", $"Cập nhật quy trình:", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
