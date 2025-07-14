@@ -84,10 +84,10 @@
         entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
         entity.Property(e => e.UserId).HasColumnName("UserID");
         entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-        entity.Property(e => e.AppointmentDate).HasColumnType("date"); // Chỉ lưu ngày, không cần giờ
+        entity.Property(e => e.AppointmentDate).HasColumnType("date"); 
         entity.Property(e => e.TimeSlot).HasMaxLength(50);
         entity.Property(e => e.Notes).HasMaxLength(255);
-        entity.Property(e => e.BloodPressure).HasMaxLength(20); // Ví dụ: "120/80"
+        entity.Property(e => e.BloodPressure).HasMaxLength(20); 
         entity.Property(e => e.HeartRate);
         entity.Property(e => e.Hemoglobin);
         entity.Property(e => e.Temperature);

@@ -29,6 +29,8 @@ public class AppointmentDTO
     public string? BloodPressure { get; set; }
     public bool Cancel { get; set; }
     public DateTime CreatedAt { get; set; }
+    public float? WeightAppointment { get; set; }
+    public float? HeightAppointment { get; set; }
 }
 
 public class DoctorUpdateDTO
@@ -39,6 +41,8 @@ public class DoctorUpdateDTO
     public int? HeartRate { get; set; }
     public double? Hemoglobin { get; set; }
     public double? Temperature { get; set; }
+    public float? WeightAppointment { get; set; }
+    public float? HeightAppointment { get; set; }
     public int DoctorId { get; set; }
     public byte Process { get; set; }
     public bool? Status { get; set; }

@@ -40,7 +40,9 @@ public class AppointmentController : ControllerBase
                 Temperature = a.Temperature,
                 DoctorId = a.DoctorId,
                 Cancel = a.Cancel,
-                CreatedAt = a.CreatedAt
+                CreatedAt = a.CreatedAt,
+                WeightAppointment=a.WeightAppointment,
+                HeightAppointment = a.HeightAppointment
             })
             .ToListAsync();
 
@@ -67,7 +69,9 @@ public class AppointmentController : ControllerBase
                 Temperature = a.Temperature,
                 DoctorId = a.DoctorId,
                 Cancel = a.Cancel,
-                CreatedAt = a.CreatedAt
+                CreatedAt = a.CreatedAt,
+                WeightAppointment=a.WeightAppointment,
+                HeightAppointment = a.HeightAppointment
             })
             .FirstOrDefaultAsync();
 
@@ -200,6 +204,8 @@ public class AppointmentController : ControllerBase
         appointment.DoctorId = dto.DoctorId;
         appointment.Status = dto.Status; 
         appointment.Process = dto.Process;
+        appointment.WeightAppointment = dto.WeightAppointment;
+        appointment.HeightAppointment = dto.HeightAppointment;
 
         await _context.SaveChangesAsync();
         await logger.NotiLog(dto.DoctorId, "Appointment", $"Cập nhật hẹn:", "Update");
@@ -218,7 +224,9 @@ public class AppointmentController : ControllerBase
             Temperature = appointment.Temperature,
             DoctorId = appointment.DoctorId,
             Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt
+            CreatedAt = appointment.CreatedAt,
+            WeightAppointment = appointment.WeightAppointment,
+            HeightAppointment = appointment.HeightAppointment
         });
     }
 
