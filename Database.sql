@@ -190,6 +190,8 @@ CREATE TABLE Appointments (
     Hemoglobin FLOAT NULL,
     Temperature FLOAT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+	WeightAppointment FLOAT NULL,
+	HeightAppointment FLOAT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
 );
