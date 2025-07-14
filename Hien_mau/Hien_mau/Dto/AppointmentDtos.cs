@@ -53,3 +53,7 @@ public class AppointmentLastDonationDTO
     public DateTime? LastDonationDate { get; set; } 
     public bool IsEditable { get; set; } 
 }
+public class NoteUpdateDTO
+{
+    public string Notes { get; set; }
+}

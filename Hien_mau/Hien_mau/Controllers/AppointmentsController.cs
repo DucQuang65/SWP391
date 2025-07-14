@@ -302,4 +302,17 @@ public class AppointmentController : ControllerBase
 
         return Ok(new { message = "Appointment cancelled" });
     }
+
+    [HttpPatch("{id}/note")]
+    public async Task<IActionResult> UpdateNote(int id, [FromBody] NoteUpdateDTO dto)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound("Appointment not found");
+
+        appointment.Notes = dto.Notes;
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Note updated successfully" });
+    }
+
 }
