@@ -21,8 +21,8 @@ using System.ComponentModel.DataAnnotations.Schema;
         public double? Temperature { get; set; }
         public int? DoctorId { get; set; }
         public bool Cancel { get; set; } = false;
-    public float? WeightAppointment { get; set; }
-    public float? HeightAppointment { get; set; }   
+    public double? WeightAppointment { get; set; }
+    public double? HeightAppointment { get; set; }   
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     [ForeignKey(nameof(UserId))]
