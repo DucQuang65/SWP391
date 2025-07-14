@@ -54,11 +54,10 @@
         public virtual DbSet<Patients> Patients { get; set; }
 
         public virtual DbSet<Components> Components { get; set; }
+        public virtual DbSet<UploadedFile> UploadedFiles { get; set; }
 
 
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Name=MyDB", sqlOptions =>
                 sqlOptions.UseCompatibilityLevel(120))
@@ -371,10 +370,16 @@
                       .HasForeignKey(e => e.DepartmentId)
                       .HasConstraintName("FK__Users__DepartmentID");
             });
-           
 
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<UploadedFile>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__Uploaded__3214EC078BEAE4EF");
+
+                entity.Property(e => e.FileName).HasMaxLength(255);
+                entity.Property(e => e.FileUrl).HasMaxLength(500);
+                entity.Property(e => e.UploadDate).HasColumnType("datetime");
+            });
+        OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
