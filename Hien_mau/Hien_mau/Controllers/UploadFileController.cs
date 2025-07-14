@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hien_mau.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hien_mau.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UploadFileController : Controller
+    public class UploadFileController : ControllerBase
     {
         private readonly IWebHostEnvironment _env;// Inject IWebHostEnvironment to access web root path
         public UploadFileController(IWebHostEnvironment env)
@@ -13,8 +14,10 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost("image")]
-        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadImage([FromForm] FileUploadDto dto)
         {
+            var file = dto.File;
+
             if (file == null || file.Length == 0)
                 return BadRequest("Không có file được gửi lên.");
 
@@ -36,8 +39,10 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadFile([FromForm] FileUploadDto dto)
         {
+            var file = dto.File;
+
             if (file == null || file.Length == 0)
                 return BadRequest("Không có file được gửi lên.");
 
