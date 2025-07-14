@@ -24,8 +24,7 @@ public class AppointmentController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppointmentDTO>>> GetAppointments()
     {
-        var appointments = await _context.Appointments
-            .Where(a => !a.Cancel)
+        var appointments = await _context.Appointments     
             .Select(a => new AppointmentDTO
             {
                 AppointmentId = a.AppointmentId,
@@ -52,7 +51,7 @@ public class AppointmentController : ControllerBase
     public async Task<ActionResult<AppointmentDTO>> GetAppointmentById(int id)
     {
         var appointment = await _context.Appointments
-            .Where(a => a.AppointmentId == id && !a.Cancel)
+            .Where(a => a.AppointmentId == id)
             .Select(a => new AppointmentDTO
             {
                 AppointmentId = a.AppointmentId,
