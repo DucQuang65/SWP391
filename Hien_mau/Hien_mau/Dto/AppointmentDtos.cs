@@ -31,6 +31,7 @@ public class AppointmentDTO
     public DateTime CreatedAt { get; set; }
     public double? WeightAppointment { get; set; }
     public double? HeightAppointment { get; set; }
+    public double? DonationCapacity { get; set; }
 }
 
 public class DoctorUpdateDTO
@@ -46,6 +47,7 @@ public class DoctorUpdateDTO
     public int DoctorId { get; set; }
     public byte Process { get; set; }
     public bool? Status { get; set; }
+    public double? DonationCapacity {  get; set; }
     }
 public class AppointmentLastDonationDTO
 {

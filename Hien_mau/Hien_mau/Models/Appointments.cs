@@ -22,7 +22,9 @@ using System.ComponentModel.DataAnnotations.Schema;
         public int? DoctorId { get; set; }
         public bool Cancel { get; set; } = false;
     public double? WeightAppointment { get; set; }
-    public double? HeightAppointment { get; set; }   
+    public double? HeightAppointment { get; set; }
+    public double? DonationCapacity { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     [ForeignKey(nameof(UserId))]

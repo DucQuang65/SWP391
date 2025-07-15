@@ -95,7 +95,9 @@
         entity.Property(e => e.Cancel).HasDefaultValue(false);
         entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
         entity.Property(e => e.WeightAppointment).HasColumnType("float");  
-        entity.Property(e => e.HeightAppointment).HasColumnType("float"); 
+        entity.Property(e => e.HeightAppointment).HasColumnType("float");
+        entity.Property(e => e.DonationCapacity).HasColumnType("float").HasColumnName("DonationCapacity");
+
 
         entity.HasOne(e => e.User)
              .WithMany(u => u.Appointments)

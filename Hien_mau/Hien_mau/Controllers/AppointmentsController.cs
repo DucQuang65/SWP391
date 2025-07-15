@@ -42,7 +42,8 @@ public class AppointmentController : ControllerBase
                 Cancel = a.Cancel,
                 CreatedAt = a.CreatedAt,
                 WeightAppointment=a.WeightAppointment,
-                HeightAppointment = a.HeightAppointment
+                HeightAppointment = a.HeightAppointment,
+                DonationCapacity =a.DonationCapacity
             })
             .ToListAsync();
 
@@ -71,7 +72,8 @@ public class AppointmentController : ControllerBase
                 Cancel = a.Cancel,
                 CreatedAt = a.CreatedAt,
                 WeightAppointment=a.WeightAppointment,
-                HeightAppointment = a.HeightAppointment
+                HeightAppointment = a.HeightAppointment,
+                DonationCapacity=a.DonationCapacity
             })
             .FirstOrDefaultAsync();
 
@@ -206,6 +208,7 @@ public class AppointmentController : ControllerBase
         appointment.Process = dto.Process;
         appointment.WeightAppointment = dto.WeightAppointment;
         appointment.HeightAppointment = dto.HeightAppointment;
+        appointment.DonationCapacity = dto.DonationCapacity;
 
         await _context.SaveChangesAsync();
         await logger.NotiLog(dto.DoctorId, "Appointment", $"Cập nhật hẹn:", "Update");
@@ -226,7 +229,8 @@ public class AppointmentController : ControllerBase
             Cancel = appointment.Cancel,
             CreatedAt = appointment.CreatedAt,
             WeightAppointment = appointment.WeightAppointment,
-            HeightAppointment = appointment.HeightAppointment
+            HeightAppointment = appointment.HeightAppointment,
+            DonationCapacity=appointment.DonationCapacity
         });
     }
 
