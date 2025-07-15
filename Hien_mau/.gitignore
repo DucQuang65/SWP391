@@ -77,3 +77,4 @@ runtimes/
 *.deps.json
 *.runtimeconfig.json
 *.staticwebassets.endpoints.json
+Hien_mau.Tests/
