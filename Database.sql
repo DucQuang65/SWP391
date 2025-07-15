@@ -192,7 +192,7 @@ CREATE TABLE Appointments (
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	WeightAppointment FLOAT NULL,
 	HeightAppointment FLOAT NULL,
-	DonationCapacity FLOAT NULL;
+	DonationCapacity FLOAT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
 );
