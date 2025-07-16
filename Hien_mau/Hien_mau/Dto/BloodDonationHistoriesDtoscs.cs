@@ -35,3 +35,8 @@ public class BloodDonationHistoryDTO
     public DateTime CreatedAt { get; set; }
     public bool IsSuccess { get; set; }
 }
+public class BloodGroupUpdateDTO
+{
+    public string BloodGroup { get; set; }
+    public string RhType { get; set; }
+}

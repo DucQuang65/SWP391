@@ -141,4 +141,32 @@ public class BloodDonationHistoryController : ControllerBase
 
         return Ok(new { message = "Blood donation history deleted" });
     }
+   
+    [HttpPost("{id}/blood-info")]
+    public async Task<IActionResult> PostBloodGroupAndRhType(int id, [FromBody] BloodGroupUpdateDTO dto)
+    {
+        var donation = await _context.BloodDonationHistories.FindAsync(id);
+        if (donation == null)
+            return NotFound("Donation record not found.");
+
+        if (string.IsNullOrWhiteSpace(dto.BloodGroup) || !new[] { "A", "B", "AB", "O" }.Contains(dto.BloodGroup))
+            return BadRequest("Invalid BloodGroup. Must be A, B, AB, or O.");
+
+        if (string.IsNullOrWhiteSpace(dto.RhType) || !new[] { "Rh+", "Rh-" }.Contains(dto.RhType))
+            return BadRequest("Invalid RhType. Must be Rh+ or Rh-.");
+
+        donation.BloodGroup = dto.BloodGroup;
+        donation.RhType = dto.RhType;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Blood group and Rh type updated successfully",
+            donationId = donation.DonationId,
+            bloodGroup = donation.BloodGroup,
+            rhType = donation.RhType
+        });
+    }
+
 }
