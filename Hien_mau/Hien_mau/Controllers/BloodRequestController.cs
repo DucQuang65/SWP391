@@ -43,7 +43,10 @@ namespace Hien_mau.Controllers
                     ComponentId = x.ComponentId,
                     Reason = x.Reason,
                     Status = x.Status,
-                    CreatedTime = x.CreatedTime
+                    CreatedTime = x.CreatedTime,
+                    MedicalReportUrl = x.MedicalReport != null
+                    ? $"{Request.Scheme}://{Request.Host}{x.MedicalReport}"
+                    : null
                 }).ToListAsync();
             return Ok(bloodRequests);
         }
@@ -69,7 +72,10 @@ namespace Hien_mau.Controllers
                     Quantity = x.Quantity,
                     Reason = x.Reason,
                     Status = x.Status,
-                    CreatedTime = x.CreatedTime
+                    CreatedTime = x.CreatedTime,
+                    MedicalReportUrl = x.MedicalReport != null
+                    ? $"{Request.Scheme}://{Request.Host}{x.MedicalReport}"
+                    : null
                 }).FirstOrDefaultAsync();
 
             if (bloodRequests == null) 
