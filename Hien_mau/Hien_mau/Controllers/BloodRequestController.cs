@@ -78,7 +78,8 @@ namespace Hien_mau.Controllers
             return Ok(bloodRequests);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateBloodRequest([FromBody] BloodRequestDto bloodRequestDto)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateBloodRequest([FromForm] BloodRequestDto bloodRequestDto)
         {
             if (!ModelState.IsValid)
             {
@@ -95,6 +96,7 @@ namespace Hien_mau.Controllers
             }
 
             string? uploadedFileName = null;
+
             if (bloodRequestDto.MedicalFile != null)
             {
                 var allowedExtensions = new[] { ".pdf" };
