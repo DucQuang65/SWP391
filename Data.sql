@@ -148,7 +148,7 @@ VALUES
 
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Trong truyền máu, yếu tố Rh đóng vai trò quan trọng. Người Rh+ có thể nhận máu Rh- nhưng ngược lại thì không an toàn.',
-    'article1.jpg', 
+    'https://vieclam123.vn/ckfinder/userfiles/images/images/nhom-mau-a-la-gi(1).jpg', 
     2, 
     'Article', 
     01/05/2025),
@@ -205,7 +205,7 @@ Lưu ý:
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.',
     
-    'article3.jpg',
+    'https://benhvienphuongdong.vn/public/uploads/tin-tuc/bai-viet/phu-nu-nhom-mau-b-1-1.jpg',
     2,
     'Article',
     01/05/2025),
@@ -226,7 +226,7 @@ Lưu ý:
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.',
     
-    'article5.jpg',
+    'https://esuhai.vn/upload/news/2019/10/28/157224376892.jpg',
     2,
     'Article',
     01/05/2025),
@@ -329,7 +329,7 @@ Lưu ý:
     N'5. Kết Luận' + CHAR(13) + CHAR(10) +
     N'Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.',
 
-    'article9.jpg',
+    'https://tudienbenhhoc.com/wp-content/uploads/2019/07/12-1.jpg',
     6,
     'Article',
     01/05/2025),
@@ -370,7 +370,7 @@ Lưu ý:
     N'- Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.' + CHAR(13) + CHAR(10) +
     N'Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.',
     
-    'article10.jpg',
+    'https://static.vecteezy.com/system/resources/previews/000/682/458/non_2x/blood-donation-giving-blood-from-heart-to-heart.jpg',
     6,
     'Article',
     01/05/2025),
@@ -409,7 +409,7 @@ Lưu ý:
     N'Kết Luận' + CHAR(13) + CHAR(10) +
     N'Hiến máu định kỳ không chỉ cứu người mà còn là liệu pháp giúp bạn sống khỏe mạnh, hạnh phúc và có ích hơn cho cộng đồng. Hãy biến việc hiến máu trở thành thói quen đẹp trong cuộc sống của bạn.',
 
-    'article11.jpg',
+    'https://content.health.harvard.edu/wp-content/uploads/2023/08/b0dc8f35-3126-4eae-b575-38285553c9a4.jpg',
     6,
     'Article',
     01/05/2025),
@@ -472,7 +472,7 @@ Lưu ý:
     N'Việc hiểu đúng về các nhóm máu không chỉ giúp bạn bảo vệ sức khỏe cá nhân mà còn giúp bạn chủ động hơn trong việc tham gia hiến máu phù hợp, đúng thời điểm, đúng nhu cầu. Dù bạn thuộc nhóm máu nào, mỗi giọt máu bạn cho đi đều mang lại cơ hội sống cho người khác.' + CHAR(13) + CHAR(10) +
     N'Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.',
 
-    'article12.jpg',
+    'https://images.ctfassets.net/pxcfulgsd9e2/articleImage90323/86f549d15651b745eab20e1e20c5cc84/Blood-donation-myths-HN1221-Stock-844661710-Sized.png',
     2,
     'Article',
     01/05/2025),
@@ -523,7 +523,7 @@ Lưu ý:
     N'Kết Luận' + CHAR(13) + CHAR(10) +
     N'Máu bạn hiến ra không hề lãng phí – nó trải qua một quá trình kiểm định chặt chẽ và được sử dụng để mang lại sự sống cho những người đang chiến đấu với bệnh tật hoặc tai nạn. Mỗi giọt máu là một tia hy vọng. Hãy tiếp tục hành trình nhân đạo này, vì bạn có thể đang giữ trong mình “chìa khóa sống” của ai đó.',
 
-    'article13.jpg',
+    'https://www.trentondaily.com/wp-content/uploads/2024/06/Baldwin-1-10-Reasons-to-Donate-Blood.jpg',
     6,
     'Article',
     01/05/2025),
@@ -571,7 +571,7 @@ Lưu ý:
     N'Dù là hiến máu toàn phần hay hiến tiểu cầu, mỗi giọt máu bạn trao đi đều mang trong mình giá trị sống vô giá. Việc hiểu rõ từng hình thức không chỉ giúp bạn chuẩn bị tốt hơn mà còn đảm bảo đóng góp hiệu quả nhất cho cộng đồng.' + CHAR(13) + CHAR(10) +
     N' Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!',
 
-    'article14.jpg',
+    'https://www.singlecare.com/blog/wp-content/uploads/2019/12/Blog_010620_Who_Can_Cant_Donate_Blood.png',
     2,
     'Article',
     01/05/2025),
@@ -611,7 +611,7 @@ Lưu ý:
     N'Hiến máu không mất đi – chỉ là đang trao đi sự sống.' + CHAR(13) + CHAR(10) +
     N'Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.',
     
-    'article15.jpg',
+    'https://nbs.gov.gh/wp-content/uploads/2021/10/blood-donation2.gif',
     6,
     'Article',
     01/05/2025),
@@ -636,7 +636,7 @@ Lưu ý:
     N' Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia',
     
-    'event1.jpg',
+    'https://i.pinimg.com/474x/63/a5/ab/63a5ab75a44bfd09356d456f0fcccced.jpg',
     2,
     'News',
     01/07/2025),
@@ -664,7 +664,7 @@ Lưu ý:
     N' Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm' + CHAR(13) + CHAR(10) +
     N' Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu',
 
-    'event2.jpg',
+    'https://img.lovepik.com/free-png/20210926/lovepik-blood-donation-and-blood-transfusion-png-image_401443027_wh1200.png',
     6,
     'News',
     01/06/2025),
@@ -688,7 +688,7 @@ Lưu ý:
     N' Địa điểm: Đại học FPT HCM.' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.',
 
-    'event3.jpg',
+    'https://img.lovepik.com/free-png/20210926/lovepik-world-blood-donation-day-vector-illustration-blood-png-image_401398810_wh1200.png',
     6,
     'News',
     16/04/2025),
@@ -714,7 +714,7 @@ Lưu ý:
     N' Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu',
 
-    'event4.jpg',
+    'https://img.lovepik.com/free-png/20210923/lovepik-world-blood-donation-day-love-png-image_401281054_wh1200.png',
     2,
     'News',
     15/06/2025),
@@ -739,7 +739,7 @@ Lưu ý:
     N' Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: Người hiến máu, cộng đồng, và những ai yêu mến hành động nhân đạo',
 
-    'event5.jpg',
+    'https://www.mindray.com/content/dam/xpace/en/media-center/press-center/blog/transfusion-safety-of-donated-blood/blood-donor-day-23-kv-pc.jpg',
     6,
     'News',
     01/08/2025),
@@ -767,7 +767,7 @@ Lưu ý:
     N' Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu A+, B+, AB+, O+' + CHAR(13) + CHAR(10) +
     N' Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu',
 
-    'event6.jpg',
+    'https://stanfordbloodcenter.org/wp-content/uploads/2020/06/Blood-facts_10-illustration-graphics__canteen.png',
     2,
     'News',
     15/10/2025);
