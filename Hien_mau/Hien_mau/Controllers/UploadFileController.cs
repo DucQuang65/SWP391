@@ -41,4 +41,14 @@ namespace Hien_mau.Controllers
             }
 
             // Tạo URL trả về
-            var fileUrl = $"{Requ
+            var fileUrl = $"{Request.Scheme}://{Request.Host}/uploads/{fileName}";
+
+            return Ok(new
+            {
+                message = "Tải file thành công!",
+                fileName = fileName,
+                url = fileUrl
+            });
+        }
+    }
+}
