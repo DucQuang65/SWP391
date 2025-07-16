@@ -12,8 +12,8 @@ public partial class BloodDonationHistories
    
     public int AppointmentId { get; set; }
     public DateTime DonationDate { get; set; }
-    public string BloodGroup { get; set; } = null!;
-    public string RhType { get; set; } = null!;
+    public string? BloodGroup { get; set; } = null!;
+    public string? RhType { get; set; } = null!;
     public int? DoctorId { get; set; }
     public string? Notes { get; set; }
     public DateTime CreatedAt { get; set; }
