@@ -41,6 +41,8 @@ public partial class BloodRequests
 
     public DateTime? CreatedTime { get; set; }
 
+    public string? MedicalReport { get; set; }
+
     public virtual Components? Component { get; set; }
 
     public virtual Patients? Patient { get; set; }

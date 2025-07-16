@@ -13,10 +13,13 @@ namespace Hien_mau.Controllers
     {
         private readonly Hien_mauContext _context;
         private readonly NotificationLog _logger;
-        public BloodRequestController(Hien_mauContext context, NotificationLog logger)
+        private readonly IWebHostEnvironment _env;
+        public BloodRequestController(Hien_mauContext context, NotificationLog logger, IWebHostEnvironment env)
         {
             _context = context;
             _logger = logger;
+            _env = env;
+
         }
         [HttpGet]
         public async Task<ActionResult<List<BloodRequestDto>>> GetBloodRequest()
@@ -91,6 +94,27 @@ namespace Hien_mau.Controllers
                 return BadRequest();
             }
 
+            string? uploadedFileName = null;
+            if (bloodRequestDto.MedicalFile != null)
+            {
+                var allowedExtensions = new[] { ".pdf" };
+                var extension = Path.GetExtension(bloodRequestDto.MedicalFile.FileName).ToLowerInvariant();
+                if (!allowedExtensions.Contains(extension))
+                    return BadRequest("Chỉ chấp nhận file PDF");
+
+                var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                uploadedFileName = $"{Guid.NewGuid()}{extension}";
+                var filePath = Path.Combine(uploadsFolder, uploadedFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await bloodRequestDto.MedicalFile.CopyToAsync(stream);
+                }
+            }
+
             var vietNamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
             var vietNamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietNamTimeZone);
 
@@ -107,7 +131,8 @@ namespace Hien_mau.Controllers
                 ComponentId = bloodRequestDto.ComponentId,
                 Quantity = bloodRequestDto.Quantity,
                 Reason = bloodRequestDto.Reason,
-                CreatedTime = vietNamTime
+                CreatedTime = vietNamTime,
+                MedicalReport = uploadedFileName != null ? $"/uploads/{uploadedFileName}" : null
             };
 
             if (bloodRequestDto.Relationship == "Bác sĩ phụ trách")
@@ -136,7 +161,8 @@ namespace Hien_mau.Controllers
 
             bloodRequestDto.RequestId = bloodRequest.RequestId;
             bloodRequestDto.Status = bloodRequest.Status;
-            bloodRequestDto.CreatedTime = bloodRequest.CreatedTime;
+            bloodRequestDto.CreatedTime = bloodRequest.CreatedTime; 
+            bloodRequestDto.MedicalReportUrl = bloodRequest.MedicalReport;
 
             return CreatedAtAction(nameof(GetRequestById), new { id = bloodRequest.RequestId }, bloodRequestDto);
         }

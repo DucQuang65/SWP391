@@ -21,7 +21,6 @@ CREATE TABLE Components (
     ComponentID INT PRIMARY KEY IDENTITY(1,1),
     ComponentType NVARCHAR(20) NOT NULL -- Hồng cầu, Huyết tương, Tiểu cầu, Toàn phần
 );
-
 -- Users table: Stores user accounts with encrypted data
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
@@ -169,6 +168,7 @@ CREATE TABLE BloodRequests (
     Reason NVARCHAR(1000),
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected, 4: Delete
     CreatedTime DATETIME DEFAULT GETDATE(),
+	MedicalReport NVARCHAR(500) NULL,
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)

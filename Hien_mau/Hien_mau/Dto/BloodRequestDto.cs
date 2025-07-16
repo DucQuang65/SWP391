@@ -19,5 +19,7 @@
         public string Reason { get; set; }
         public byte Status { get; set; } = 0;
         public DateTime? CreatedTime { get; set; }
+        public IFormFile? MedicalFile { get; set; }
+        public string? MedicalReportUrl { get; set; }
     }
 }
