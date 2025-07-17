@@ -1065,4 +1065,4 @@ VALUES
 (13, 'Recovery', N'Hôm nay là ngày bạn đủ điều kiện hiến máu lại!', '2025-07-12 09:00:00', 0, GETDATE(), 0, NULL),
 (14, 'BloodDonation', N'Lịch hiến máu vào ngày mai.', '2025-07-13 07:00:00', 0, GETDATE(), 0, NULL),
 (15, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước.', '2025-07-10 08:30:00', 0, GETDATE(), 0, NULL);
-
+GO

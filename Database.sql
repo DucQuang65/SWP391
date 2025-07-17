@@ -243,8 +243,8 @@ CREATE TABLE Reminders (
 
 CREATE TABLE UploadedFiles (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    FileName NVARCHAR(255),
-    FileUrl NVARCHAR(500),
+    FileName NVARCHAR(500),
+    FileUrl NVARCHAR(MAX),
     UploadDate DATETIME,
     UploadedBy INT -- hoặc tên người upload
 )

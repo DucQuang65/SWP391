@@ -28,15 +28,6 @@ namespace Hien_mau.Controllers
                 .Include(a => a.Tags)
                 .ToListAsync();
 
-
-            foreach (var article in articles)
-            {
-                if (article.CreatedAt < new DateTime(2025, 1, 1))
-                {
-                    article.CreatedAt = DateTime.Now;
-                    _context.Contents.Update(article);
-                }
-            }
             await _context.SaveChangesAsync();
 
             var response = articles.Select(a => new
@@ -73,14 +64,6 @@ namespace Hien_mau.Controllers
             if (article == null)
             {
                 return NotFound();
-            }
-
-            // Cập nhật CreatedAt nếu là giá trị mặc định ban đầu
-            if (article.CreatedAt < new DateTime(2025, 1, 1))
-            {
-                article.CreatedAt = DateTime.Now;
-                _context.Contents.Update(article);
-                await _context.SaveChangesAsync();
             }
 
             var response = new
