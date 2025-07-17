@@ -106,7 +106,7 @@ namespace Hien_mau.Controllers
                 return BadRequest("Invalid UserId.");
             }
 
-            var postedAt = DateTime.Now; 
+            var postedAt = DateTime.UtcNow.AddHours(7); // Giờ GMT+7
 
             var news = new Contents
             {

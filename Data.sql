@@ -151,7 +151,7 @@ VALUES
     'https://vieclam123.vn/ckfinder/userfiles/images/images/nhom-mau-a-la-gi(1).jpg', 
     2, 
     'Article', 
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm A Rh-
     (N'Giới thiệu nhóm máu A Rh-', 
@@ -172,7 +172,7 @@ VALUES
     'https://img.jagranjosh.com/images/2022/July/2672022/blood-group-peronality-test-blood-type-a-personality.jpg',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm B Rh+
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -188,7 +188,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'https://phongkhambienviet.com/hinhanh/images/nhom-mau.jpg', 2, 'Article',01/05/2025),
+     'https://phongkhambienviet.com/hinhanh/images/nhom-mau.jpg', 2, 'Article','2025-05-01'),
 
     -- Nhóm B Rh-
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -208,7 +208,7 @@ Lưu ý:
     'https://benhvienphuongdong.vn/public/uploads/tin-tuc/bai-viet/phu-nu-nhom-mau-b-1-1.jpg',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm AB Rh+
     (N'Giới thiệu nhóm máu AB Rh+', 
@@ -229,7 +229,7 @@ Lưu ý:
     'https://esuhai.vn/upload/news/2019/10/28/157224376892.jpg',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm AB Rh-
     (N'Giới thiệu nhóm máu AB Rh-', 
@@ -250,7 +250,7 @@ Lưu ý:
     'https://tudienbenhhoc.com/wp-content/uploads/2019/08/nhom-mau-1.jpg',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm O Rh+
     (N'Giới thiệu nhóm máu O Rh+', 
@@ -271,7 +271,7 @@ Lưu ý:
     'https://cdn.vietnammoi.vn/2019/4/24/583749802262586157325502275917074281267200n-1556102897580755669015.png',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Nhóm O Rh-
     (N'Giới thiệu nhóm máu O Rh-', 
@@ -292,7 +292,7 @@ Lưu ý:
     'https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/182FF/production/_107317099_blooddonor976.jpg',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
     
     -- Hiến máu lần đầu
 	(N'Hiến Máu Lần Đầu: Hành Trình Nhân Ái Bắt Đầu Từ Một Giọt Máu',
@@ -332,7 +332,7 @@ Lưu ý:
     'https://tudienbenhhoc.com/wp-content/uploads/2019/07/12-1.jpg',
     6,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Lưu ý hiến máu định kỳ
     (N'Người Hiến Máu Thường Xuyên Cần Lưu Ý Điều Gì?', 
@@ -373,7 +373,7 @@ Lưu ý:
     'https://static.vecteezy.com/system/resources/previews/000/682/458/non_2x/blood-donation-giving-blood-from-heart-to-heart.jpg',
     6,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Lợi ích hiến máu hiến máu định kỳ
     (N'Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ',
@@ -412,7 +412,7 @@ Lưu ý:
     'https://content.health.harvard.edu/wp-content/uploads/2023/08/b0dc8f35-3126-4eae-b575-38285553c9a4.jpg',
     6,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Hiểu về nhóm máu và vai trò
     (N'Hiểu Đúng Về Các Nhóm Máu Và Vai Trò Trong Hiến Máu',
@@ -475,7 +475,7 @@ Lưu ý:
     'https://images.ctfassets.net/pxcfulgsd9e2/articleImage90323/86f549d15651b745eab20e1e20c5cc84/Blood-donation-myths-HN1221-Stock-844661710-Sized.png',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Lưu và sử dụng máu hiến
     (N'Máu Hiến Sẽ Đi Đâu Và Được Sử Dụng Như Thế Nào?',
@@ -526,7 +526,7 @@ Lưu ý:
     'https://www.trentondaily.com/wp-content/uploads/2024/06/Baldwin-1-10-Reasons-to-Donate-Blood.jpg',
     6,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Hiến toàn phần và hiến tiểu cầu
     (N'Sự Khác Biệt Giữa Hiến Máu Toàn Phần Và Hiến Tiểu Cầu',
@@ -574,7 +574,7 @@ Lưu ý:
     'https://www.singlecare.com/blog/wp-content/uploads/2019/12/Blog_010620_Who_Can_Cant_Donate_Blood.png',
     2,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
     -- Câu chuyện thật
     (N'Câu Chuyện Thật: Một Đơn Vị Máu, Một Cuộc Đời Được Cứu',
@@ -614,7 +614,7 @@ Lưu ý:
     'https://nbs.gov.gh/wp-content/uploads/2021/10/blood-donation2.gif',
     6,
     'Article',
-    01/05/2025),
+    '2025-05-01'),
 
    -- Sự kiến hiến máu
 (N' CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025 - KẾT NỐI YÊU THƯƠNG ',
@@ -639,7 +639,7 @@ Lưu ý:
     'https://i.pinimg.com/474x/63/a5/ab/63a5ab75a44bfd09356d456f0fcccced.jpg',
     2,
     'News',
-    01/07/2025),
+    '2025-07-01'),
 
     -- Ngày hiến máu thế giới
 (N' NGÀY HIẾN MÁU THẾ GIỚI 2025 - LAN TỎA TÌNH NHÂN ÁI ',
@@ -667,7 +667,7 @@ Lưu ý:
     'https://img.lovepik.com/free-png/20210926/lovepik-blood-donation-and-blood-transfusion-png-image_401443027_wh1200.png',
     6,
     'News',
-    01/06/2025),
+    '2025-06-01'),
 
     -- Sinh viên hiến máu
 (N'HIẾN MÁU NHÂN ĐẠO 2025 - TIẾP NGUỒN SINH KHÍ',
@@ -691,7 +691,7 @@ Lưu ý:
     'https://img.lovepik.com/free-png/20210926/lovepik-world-blood-donation-day-vector-illustration-blood-png-image_401398810_wh1200.png',
     6,
     'News',
-    16/04/2025),
+    '2025-04-16'),
 
     -- Chương trình máu hiếm
 (N'CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025 - ÁNH SÁNG HY VỌNG',
@@ -717,7 +717,7 @@ Lưu ý:
     'https://img.lovepik.com/free-png/20210923/lovepik-world-blood-donation-day-love-png-image_401281054_wh1200.png',
     2,
     'News',
-    15/06/2025),
+    '2025-06-15'),
 
     -- Vinh danh người hiến máu
 (N'LỄ VINH DANH NGƯỜI HIẾN MÁU XUẤT SẮC 2025 - NHỮNG NGỌN LỬA NHÂN ÁI',
@@ -742,7 +742,7 @@ Lưu ý:
     'https://www.mindray.com/content/dam/xpace/en/media-center/press-center/blog/transfusion-safety-of-donated-blood/blood-donor-day-23-kv-pc.jpg',
     6,
     'News',
-    01/08/2025),
+    '2025-08-01'),
 
     -- Hiến máu tiểu cầu
 (N'TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025 - HỖ TRỢ BỆNH NHÂN UNG THƯ',
@@ -770,7 +770,7 @@ Lưu ý:
     'https://stanfordbloodcenter.org/wp-content/uploads/2020/06/Blood-facts_10-illustration-graphics__canteen.png',
     2,
     'News',
-    15/10/2025);
+    '2025-10-15');
 GO
 
 -- Insert data into ArticleTags table

@@ -104,7 +104,7 @@ namespace Hien_mau.Controllers
                 return BadRequest($"UserId {dto.UserId} does not exist in Users table.");
             }
 
-            var createdAt = DateTime.Now; // Lấy múi giờ địa phương
+            var postedAt = DateTime.UtcNow.AddHours(7); // Giờ GMT+7
 
             var article = new Contents
             {
@@ -113,7 +113,7 @@ namespace Hien_mau.Controllers
                 ImgUrl = dto.ImgUrl,
                 UserId = dto.UserId,
                 ContentType = "Article",
-                CreatedAt = createdAt
+                CreatedAt = postedAt
             };
 
             // Chỉ truy vấn Tags nếu cần
