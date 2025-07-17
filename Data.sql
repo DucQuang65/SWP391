@@ -169,7 +169,7 @@ VALUES
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.',
     
-    'article2.jpg',
+    'https://img.jagranjosh.com/images/2022/July/2672022/blood-group-peronality-test-blood-type-a-personality.jpg',
     2,
     'Article',
     01/05/2025),
@@ -188,7 +188,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'article3.jpg', 2, 'Article',01/05/2025),
+     'https://phongkhambienviet.com/hinhanh/images/nhom-mau.jpg', 2, 'Article',01/05/2025),
 
     -- Nhóm B Rh-
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -247,7 +247,7 @@ Lưu ý:
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.',
     
-    'article6.jpg',
+    'https://tudienbenhhoc.com/wp-content/uploads/2019/08/nhom-mau-1.jpg',
     2,
     'Article',
     01/05/2025),
@@ -268,7 +268,7 @@ Lưu ý:
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Không thể nhận từ các nhóm A, B, AB vì có kháng thể.',
     
-    'article7.jpg',
+    'https://cdn.vietnammoi.vn/2019/4/24/583749802262586157325502275917074281267200n-1556102897580755669015.png',
     2,
     'Article',
     01/05/2025),
@@ -289,7 +289,7 @@ Lưu ý:
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.',
     
-    'article8.jpg',
+    'https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/182FF/production/_107317099_blooddonor976.jpg',
     2,
     'Article',
     01/05/2025),
