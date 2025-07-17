@@ -170,8 +170,9 @@ public class AppointmentController : ControllerBase
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
-       
-        var remindTime = dto.AppointmentDate.AddDays(-1).Date.AddHours(8);
+        await logger.NotiLog(dto.UserId, "Appointment", $"Lịch hẹn đã được tạo, vui lòng qua lịch sử hoạt động để xem chi tiết", "Create");
+
+        var remindTime = dto.AppointmentDate.AddDays(-1).Date.AddHours(7);
         var reminder = new Reminder
         {
             UserId = dto.UserId,
@@ -186,9 +187,7 @@ public class AppointmentController : ControllerBase
         _context.Reminders.Add(reminder);
         await _context.SaveChangesAsync();
 
-        await logger.NotiLog(dto.UserId, "Appointment", $"Tạo hẹn:", "Create");
-
-        return Ok(new { Message = "Appointment created successfully", AppointmentId = appointment.AppointmentId });
+        return Ok(new { Message = "Lịch hẹn đã được tạo", AppointmentId = appointment.AppointmentId });
     }
 
 
@@ -211,7 +210,7 @@ public class AppointmentController : ControllerBase
         appointment.DonationCapacity = dto.DonationCapacity;
 
         await _context.SaveChangesAsync();
-        await logger.NotiLog(dto.DoctorId, "Appointment", $"Cập nhật hẹn:", "Update");
+        await logger.NotiLog(dto.DoctorId, "Appointment", $"Lịch hẹn đã được cập nhật", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -245,7 +244,7 @@ public class AppointmentController : ControllerBase
 
         appointment.Status = status;
         await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Cập nhật trạng thái:", "Update");
+        await logger.NotiLog(appointment.UserId, "Appointment", $"Lịch hẹn đã được cập nhật, vui lòng qua lịch sử hoạt động để xem chi tiết", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -275,7 +274,7 @@ public class AppointmentController : ControllerBase
 
         appointment.Process = process;
         await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Cập nhật quy trình:", "Update");
+        await logger.NotiLog(appointment.UserId, "Appointment", $"Quy trình đã được cập nhật", "Update");
         return Ok(new AppointmentDTO
         {
             AppointmentId = appointment.AppointmentId,
@@ -304,7 +303,7 @@ public class AppointmentController : ControllerBase
         appointment.Cancel = true;
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = "Appointment cancelled" });
+        return Ok(new { message = "Đã hủy hẹn" });
     }
 
     [HttpPatch("{id}/note")]
@@ -316,7 +315,7 @@ public class AppointmentController : ControllerBase
         appointment.Notes = dto.Notes;
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = "Note updated successfully" });
+        return Ok(new { message = "Ghi chú đã được cập nhật thành công" });
     }
 
 }
