@@ -295,14 +295,14 @@ public class AppointmentController : ControllerBase
     }
 
     [HttpPatch("{id}/cancel")]
-    public async Task<IActionResult> CancelAppointment(int id)
+    public async Task<IActionResult> CancelAppointment(int id, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
 
         appointment.Cancel = true;
         await _context.SaveChangesAsync();
-
+        await logger.NotiLog(appointment.UserId, "Appointment", $"Bạn đã hủy lịch hẹn, vui lòng qua lịch sử hoạt động để xem chi tiết", "Update");
         return Ok(new { message = "Đã hủy hẹn" });
     }
 
