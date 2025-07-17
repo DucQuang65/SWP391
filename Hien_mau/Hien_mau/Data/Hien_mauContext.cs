@@ -119,8 +119,8 @@
                 entity.Property(e => e.DonationId).HasColumnName("DonationID");
                 entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID").IsRequired();
                 entity.Property(e => e.DonationDate).HasColumnType("datetime").IsRequired();
-                entity.Property(e => e.BloodGroup).HasMaxLength(2).IsRequired();
-                entity.Property(e => e.RhType).HasMaxLength(3).IsRequired();
+                entity.Property(e => e.BloodGroup).HasMaxLength(2);
+                entity.Property(e => e.RhType).HasMaxLength(3);
                 entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
                 entity.Property(e => e.Notes).HasMaxLength(255);
                 entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");

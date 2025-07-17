@@ -142,7 +142,7 @@ public class BloodDonationHistoryController : ControllerBase
         return Ok(new { message = "Blood donation history deleted" });
     }
    
-    [HttpPost("{id}/blood-info")]
+    [HttpPut("{id}/blood-info")]
     public async Task<IActionResult> PostBloodGroupAndRhType(int id, [FromBody] BloodGroupUpdateDTO dto)
     {
         var donation = await _context.BloodDonationHistories.FindAsync(id);

@@ -203,8 +203,6 @@ namespace Hien_mau.Services
                        $"Liên kết này sẽ hết hạn sau 30 phút.<br><br>" +
                        $"Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.",
                 IsBodyHtml = true
-
-
             };
 
             mail.To.Add(email);
