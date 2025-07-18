@@ -105,10 +105,10 @@ namespace Hien_mau.Controllers
 
             if (bloodRequestDto.MedicalFile != null)
             {
-                var allowedExtensions = new[] { ".pdf" };
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".pdf" };
                 var extension = Path.GetExtension(bloodRequestDto.MedicalFile.FileName).ToLowerInvariant();
                 if (!allowedExtensions.Contains(extension))
-                    return BadRequest("Chỉ chấp nhận file PDF");
+                    return BadRequest("Chỉ hỗ trợ file ảnh (.jpg, .jpeg, .png, .gif) và PDF.");
 
                 var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
                 if (!Directory.Exists(uploadsFolder))
