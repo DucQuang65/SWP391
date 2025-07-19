@@ -21,17 +21,17 @@ using System.ComponentModel.DataAnnotations.Schema;
         public double? Temperature { get; set; }
         public int? DoctorId { get; set; }
         public bool Cancel { get; set; } = false;
-    public double? WeightAppointment { get; set; }
-    public double? HeightAppointment { get; set; }
-    public double? DonationCapacity { get; set; }
+        public double? WeightAppointment { get; set; }
+        public double? HeightAppointment { get; set; }
+        public double? DonationCapacity { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    [ForeignKey(nameof(UserId))]
-    public Users? User { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public Users? User { get; set; }
 
-    [ForeignKey(nameof(DoctorId))]
-    public Users? Doctor { get; set; }
+        [ForeignKey(nameof(DoctorId))]
+        public Users? Doctor { get; set; }
 }
 
   

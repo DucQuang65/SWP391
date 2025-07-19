@@ -27,7 +27,7 @@
 
 
 
-    public virtual DbSet<BloodDonationHistories> BloodDonationHistories { get; set; }
+        public virtual DbSet<BloodDonationHistories> BloodDonationHistories { get; set; }
 
         public virtual DbSet<BloodInventories> BloodInventories { get; set; }
 
