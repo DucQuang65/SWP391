@@ -65,6 +65,8 @@ namespace Hien_mau
             builder.Services.AddScoped<ActivityLogger>();
             builder.Services.AddTransient<ReminderJob>();
             builder.Services.AddScoped<AppointmentCompletionJob>();
+            builder.Services.AddScoped<ISendEmail, SendEmail>();
+
             //builder.Services.AddHostedService<CancelExpiredService>();
 
 

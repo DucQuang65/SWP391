@@ -2,6 +2,7 @@
 using Hien_mau.Dto;
 using Hien_mau.DTOs;
 using Hien_mau.Models;
+using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,12 @@ namespace Hien_mau.Controllers;
 public class BloodDonationHistoryController : ControllerBase
 {
     private readonly Hien_mauContext _context;
+    private readonly ISendEmail _sendEmail;
 
-    public BloodDonationHistoryController(Hien_mauContext context)
+    public BloodDonationHistoryController(Hien_mauContext context, ISendEmail sendEmail)
     {
         _context = context;
+        _sendEmail = sendEmail;
     }
 
   
@@ -168,5 +171,24 @@ public class BloodDonationHistoryController : ControllerBase
             rhType = donation.RhType
         });
     }
+
+    [HttpPatch("{id}/mark-success")]
+    public async Task<IActionResult> MarkDonationSuccess(int id)
+    {
+        var donation = await _context.BloodDonationHistories
+            .FirstOrDefaultAsync(d => d.DonationId == id);
+
+        if (donation == null)
+            return NotFound("Không tìm thấy thông tin hiến máu.");
+
+        donation.IsSuccess = true;
+        _context.BloodDonationHistories.Update(donation);
+        await _context.SaveChangesAsync();
+
+        await _sendEmail.SendThankYouEmailAsync(donation);
+
+        return Ok("Đã gửi email cảm ơn.");
+    }
+
 
 }
