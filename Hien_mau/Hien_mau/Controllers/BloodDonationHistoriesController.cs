@@ -1,6 +1,7 @@
 ﻿using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.DTOs;
+using Hien_mau.Interface;
 using Hien_mau.Models;
 using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -183,8 +184,8 @@ public class BloodDonationHistoryController : ControllerBase
 
         donation.IsSuccess = true;
         _context.BloodDonationHistories.Update(donation);
-        await _context.SaveChangesAsync();
 
+        await _context.SaveChangesAsync();
         await _sendEmail.SendThankYouEmailAsync(donation);
 
         return Ok("Đã gửi email cảm ơn.");

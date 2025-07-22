@@ -1,6 +1,6 @@
 ﻿using Hien_mau.Models;
 
-namespace Hien_mau.Services
+namespace Hien_mau.Interface
 {
     public interface ISendEmail
     {

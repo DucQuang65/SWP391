@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Hangfire;
+using Hien_mau.Interface;
 
 
 
@@ -66,6 +67,8 @@ namespace Hien_mau
             builder.Services.AddTransient<ReminderJob>();
             builder.Services.AddScoped<AppointmentCompletionJob>();
             builder.Services.AddScoped<ISendEmail, SendEmail>();
+            builder.Services.AddScoped<IBloodRequestService, BloodRequestService>();
+            builder.Services.AddScoped<IInformationService, InformationService>();
 
             //builder.Services.AddHostedService<CancelExpiredService>();
 

@@ -22,4 +22,9 @@
         public IFormFile? MedicalFile { get; set; }
         public string? MedicalReportUrl { get; set; }
     }
+
+    public class UpdateStatusBloodRequestDto
+    {
+        public byte Status { get; set; }
+    }
 }

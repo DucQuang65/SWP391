@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
+using Hien_mau.Interface;
 
 namespace Hien_mau.Controllers
 {
@@ -23,7 +24,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<Users>> Register(UserDto request)
+        public async Task<ActionResult<Users>> Register(LoginDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -36,7 +37,7 @@ namespace Hien_mau.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(LoginDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

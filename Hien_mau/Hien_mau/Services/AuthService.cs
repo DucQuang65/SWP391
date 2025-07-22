@@ -6,12 +6,9 @@ using Hien_mau.Dto;
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using FirebaseAdmin;
-using FirebaseAdmin.Auth;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using System.Net.Mail;
 using System.Net;
-using FirebaseAdmin.Auth.Hash;
+using Hien_mau.Interface;
 
 namespace Hien_mau.Services
 {
@@ -26,7 +23,7 @@ namespace Hien_mau.Services
             _configuration = configuration;
         }
 
-        public async Task<string> LoginAsync(UserDto request)
+        public async Task<string> LoginAsync(LoginDto request)
         {           
             var user = await _context.Users.FirstOrDefaultAsync
                 (u => u.Email == request.Email && u.Password == request.Password);
@@ -42,7 +39,7 @@ namespace Hien_mau.Services
             return CreateToken(user);
         }
 
-        public async Task<Users?> RegisterAsync(UserDto request)
+        public async Task<Users?> RegisterAsync(LoginDto request)
         {            
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
             {

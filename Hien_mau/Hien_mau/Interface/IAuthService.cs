@@ -1,12 +1,12 @@
 ﻿using Hien_mau.Dto;
 using Hien_mau.Models;
 
-namespace Hien_mau.Services
+namespace Hien_mau.Interface
 {
     public interface IAuthService
     {
-        Task<Users?> RegisterAsync(UserDto request);
-        Task<string?> LoginAsync(UserDto request);
+        Task<Users?> RegisterAsync(LoginDto request);
+        Task<string?> LoginAsync(LoginDto request);
         Task<Users?> GetUserByEmailAsync(string email);
         Task<Users> CreateUserFromGoogleAsync(string email, string name);
         string CreateToken(Users user);
