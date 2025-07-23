@@ -178,11 +178,12 @@ CREATE TABLE BloodRequests (
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
-    DoctorID INT NULL,
+    DoctorID1 INT NULL, -- Bác sĩ khám sức khỏe (update lần 1)
+    DoctorID2 INT NULL, -- Bác sĩ xét nghiệm (update lần 2)
     AppointmentDate DATE NOT NULL,
     TimeSlot NVARCHAR(50) NOT NULL,
-    Status BIT NULL, -- 0:từ chối, 1: chấp nhận
-    Process TINYINT NOT NULL DEFAULT 0,--0-- dang ky, 1--kham suc khoe, 2-- lay mau, 3--xet nghiem, 4--nhap kho
+    Status BIT NULL, -- 0: từ chối, 1: chấp nhận
+    Process TINYINT NOT NULL DEFAULT 0, -- 0: đăng ký, 1: khám sức khỏe, 2: lấy máu, 3: xét nghiệm, 4: nhập kho
     Cancel BIT NOT NULL DEFAULT 0,
     Notes NVARCHAR(255) NULL,
     BloodPressure NVARCHAR(20) NULL,
@@ -190,28 +191,16 @@ CREATE TABLE Appointments (
     Hemoglobin FLOAT NULL,
     Temperature FLOAT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-	WeightAppointment FLOAT NULL,
-	HeightAppointment FLOAT NULL,
-	DonationCapacity FLOAT NULL,
+    WeightAppointment FLOAT NULL,
+    HeightAppointment FLOAT NULL,
+    DonationCapacity FLOAT NULL,
+    DonationDate DATETIME NULL, -- Ngày hiến máu thực tế (do bác sĩ nhập sau, có thể NULL)
+    BloodGroup NVARCHAR(2) NULL, -- Nhóm máu từ xét nghiệm
+    RhType NVARCHAR(3) NULL, -- Rh từ xét nghiệm
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (DoctorID) REFERENCES Users(UserID)
+    FOREIGN KEY (DoctorID1) REFERENCES Users(UserID),
+    FOREIGN KEY (DoctorID2) REFERENCES Users(UserID)
 );
-
--- BloodDonationHistory table: Stores donation records
-CREATE TABLE BloodDonationHistories (
-    DonationID INT PRIMARY KEY IDENTITY(1,1),
-    AppointmentID INT NOT NULL,
-    DonationDate DATETIME NOT NULL,
-    BloodGroup NVARCHAR(2) NULL,
-    RhType NVARCHAR(3) NULL,
-    DoctorID INT NULL,
-    Notes NVARCHAR(255) NULL,
-    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-    IsSuccess BIT NOT NULL DEFAULT 0,
-    FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID),
-    FOREIGN KEY (DoctorID) REFERENCES Users(UserID) 
-);
-
 
 
 -- Notifications table: Stores user notifications
