@@ -1,6 +1,7 @@
-﻿using Hien_mau.Data;
+﻿
+using Hien_mau.Data;
 using Hien_mau.Dto;
-
+using Hien_mau.Interface;
 using Hien_mau.Models;
 using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,36 +15,41 @@ namespace Hien_mau.Controllers;
 public class AppointmentController : ControllerBase
 {
     private readonly Hien_mauContext _context;
+    private readonly ISendEmail _sendEmail;
 
-    public AppointmentController(Hien_mauContext context)
+    public AppointmentController(Hien_mauContext context, ISendEmail sendEmail)
     {
         _context = context;
+        _sendEmail = sendEmail;
     }
 
-  
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppointmentDTO>>> GetAppointments()
     {
-        var appointments = await _context.Appointments     
+        var appointments = await _context.Appointments
             .Select(a => new AppointmentDTO
             {
-                AppointmentId = a.AppointmentId,
-                UserId = a.UserId,
+                AppointmentId = a.AppointmentID,
+                UserId = a.UserID,
                 AppointmentDate = a.AppointmentDate,
                 TimeSlot = a.TimeSlot,
                 Status = a.Status,
                 Process = a.Process,
                 Notes = a.Notes,
-                BloodPressure = a.BloodPressure, 
+                BloodPressure = a.BloodPressure,
                 HeartRate = a.HeartRate,
                 Hemoglobin = a.Hemoglobin,
                 Temperature = a.Temperature,
-                DoctorId = a.DoctorId,
+                DoctorId1 = a.DoctorID1,
+                DoctorId2 = a.DoctorID2,
                 Cancel = a.Cancel,
                 CreatedAt = a.CreatedAt,
-                WeightAppointment=a.WeightAppointment,
+                WeightAppointment = a.WeightAppointment,
                 HeightAppointment = a.HeightAppointment,
-                DonationCapacity =a.DonationCapacity
+                DonationCapacity = a.DonationCapacity,
+                DonationDate = a.DonationDate,
+                BloodGroup = a.BloodGroup,
+                RhType = a.RhType
             })
             .ToListAsync();
 
@@ -54,11 +60,11 @@ public class AppointmentController : ControllerBase
     public async Task<ActionResult<AppointmentDTO>> GetAppointmentById(int id)
     {
         var appointment = await _context.Appointments
-            .Where(a => a.AppointmentId == id)
+            .Where(a => a.AppointmentID == id)
             .Select(a => new AppointmentDTO
             {
-                AppointmentId = a.AppointmentId,
-                UserId = a.UserId,
+                AppointmentId = a.AppointmentID,
+                UserId = a.UserID,
                 AppointmentDate = a.AppointmentDate,
                 TimeSlot = a.TimeSlot,
                 Status = a.Status,
@@ -68,12 +74,16 @@ public class AppointmentController : ControllerBase
                 HeartRate = a.HeartRate,
                 Hemoglobin = a.Hemoglobin,
                 Temperature = a.Temperature,
-                DoctorId = a.DoctorId,
+                DoctorId1 = a.DoctorID1,
+                DoctorId2 = a.DoctorID2,
                 Cancel = a.Cancel,
                 CreatedAt = a.CreatedAt,
-                WeightAppointment=a.WeightAppointment,
+                WeightAppointment = a.WeightAppointment,
                 HeightAppointment = a.HeightAppointment,
-                DonationCapacity=a.DonationCapacity
+                DonationCapacity = a.DonationCapacity,
+                DonationDate = a.DonationDate,
+                BloodGroup = a.BloodGroup,
+                RhType = a.RhType
             })
             .FirstOrDefaultAsync();
 
@@ -82,16 +92,37 @@ public class AppointmentController : ControllerBase
         return Ok(appointment);
     }
 
+    [HttpGet("donation-histories")]
+    public async Task<ActionResult<IEnumerable<BloodDonationHistoryDTO>>> GetDonationHistories()
+    {
+        var donations = await _context.Appointments
+            .Where(a => (a.Process == 2 && a.Status == true) || a.Process == 3 || a.Process == 4)
+            .Select(a => new BloodDonationHistoryDTO
+            {
+                DonationId = a.AppointmentID,
+                AppointmentId = a.AppointmentID,
+                UserId = a.UserID,
+                DonationDate = a.DonationDate,
+                BloodGroup = a.BloodGroup,
+                RhType = a.RhType,
+                DoctorId = a.DoctorID2,
+                Notes = a.Notes,
+                CreatedAt = a.CreatedAt
+            })
+            .ToListAsync();
+
+        return Ok(donations);
+    }
+
     [HttpGet("last-donation/{userId}")]
     public async Task<ActionResult<AppointmentLastDonationDTO>> GetLastDonation(int userId)
     {
         var user = await _context.Users.FindAsync(userId);
         if (user == null) return NotFound("User not found");
 
-        // Lấy toàn bộ entity để kiểm tra DonationDate
-        var lastDonationRecord = await _context.BloodDonationHistories
-            .Include(x => x.Appointment)
-            .Where(x => x.Appointment.UserId == userId && x.IsSuccess == true)
+        var lastDonationRecord = await _context.Appointments
+            .Where(x => x.UserID == userId &&
+                        ((x.Process == 2 && x.Status == true) || x.Process == 3 || x.Process == 4))
             .OrderByDescending(x => x.DonationDate)
             .FirstOrDefaultAsync();
 
@@ -121,56 +152,40 @@ public class AppointmentController : ControllerBase
         var user = await _context.Users.FindAsync(dto.UserId);
         if (user == null) return NotFound("User not found");
 
-        var lastDonationRecord = await _context.BloodDonationHistories
-            .Where(x => x.IsSuccess && x.Appointment != null && x.Appointment.UserId == dto.UserId)
-            .OrderByDescending(x => x.DonationDate)
-            .Select(x => new { x.DonationDate })
-            .FirstOrDefaultAsync();
-
-
-        DateTime? lastDonationFromSystem = lastDonationRecord?.DonationDate;
-        DateTime? lastDonationDate = lastDonationFromSystem ?? user.SelfReportedLastDonationDate;
-
-
+        var lastDonationResult = await GetLastDonation(dto.UserId);
+        var lastDonationDto = lastDonationResult.Value as AppointmentLastDonationDTO;
+        DateTime? lastDonationDate = lastDonationDto?.LastDonationDate;
 
         if (dto.TimeSlot != "Sáng (7:00-12:00)" && dto.TimeSlot != "Chiều (13:00-17:00)")
-            return BadRequest("TimeSlot must be 'Sáng (7:00-12:00)' or 'Chiều (13:00-17:00)'");
+            return BadRequest("Invalid TimeSlot");
         if (dto.AppointmentDate.Date < DateTime.Today)
             return BadRequest("AppointmentDate cannot be in the past");
 
-
-        if (!lastDonationFromSystem.HasValue && !user.SelfReportedLastDonationDate.HasValue)
-        {
-            return BadRequest("Vui lòng nhập ngày hiến máu gần nhất (tự khai) trước khi tạo lịch hẹn nếu bạn đã từng hiến máu.");
-        }
-
         if (lastDonationDate.HasValue)
         {
-            var daysSinceLastDonation = (dto.AppointmentDate - lastDonationDate.Value).TotalDays;
-
-
-            var minDays = 84;
-
-            if (daysSinceLastDonation < minDays)
-            {
-                return BadRequest($"Chưa đủ thời gian nghỉ sau hiến máu. Cần ít nhất {minDays} ngày kể từ {lastDonationDate.Value:dd/MM/yyyy}.");
-            }
+            var daysSince = (dto.AppointmentDate - lastDonationDate.Value).TotalDays;
+            if (daysSince < 84)
+                return BadRequest($"Chưa đủ 84 ngày từ lần hiến cuối ({lastDonationDate.Value:dd/MM/yyyy}).");
         }
-       
+        else if (lastDonationDto.HasDonationHistory == false && user.SelfReportedLastDonationDate == null)
+        {
+            return BadRequest("Vui lòng khai báo lần hiến máu cuối (nếu có) trước khi tạo lịch.");
+        }
+
         var appointment = new Appointments
         {
-            UserId = dto.UserId,
+            UserID = dto.UserId,
             AppointmentDate = dto.AppointmentDate,
             TimeSlot = dto.TimeSlot,
-           
             Status = dto.Status,
             Process = dto.Process,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.Now,
+            DonationDate = dto.AppointmentDate
         };
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
-        await logger.NotiLog(dto.UserId, "Appointment", $"Lịch hẹn đã được tạo, vui lòng qua lịch sử hoạt động để xem chi tiết", "Create");
+        await logger.NotiLog(dto.UserId, "Appointment", $"Lịch hẹn created", "Create");
 
         var remindTime = dto.AppointmentDate.AddDays(-1).Date.AddHours(7);
         var reminder = new Reminder
@@ -183,102 +198,37 @@ public class AppointmentController : ControllerBase
             IsDisabled = false,
             IsSent = false
         };
-
         _context.Reminders.Add(reminder);
         await _context.SaveChangesAsync();
 
-        return Ok(new { Message = "Lịch hẹn đã được tạo", AppointmentId = appointment.AppointmentId });
+        return Ok(new { Message = "Created", AppointmentId = appointment.AppointmentID });
     }
 
-
-    [HttpPost("doctor-update/{id}")]
-    public async Task<IActionResult> DoctorUpdate(int id, [FromBody] DoctorUpdateDTO dto, [FromServices] NotificationLog logger)
+    [HttpPatch("doctor-health-check/{id}")]
+    public async Task<IActionResult> DoctorHealthCheckUpdate(int id, [FromBody] DoctorHealthCheckDTO dto, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
 
         appointment.Notes = dto.Notes;
-        appointment.BloodPressure = dto.BloodPressure; 
+        appointment.BloodPressure = dto.BloodPressure;
         appointment.HeartRate = dto.HeartRate;
         appointment.Hemoglobin = dto.Hemoglobin;
         appointment.Temperature = dto.Temperature;
-        appointment.DoctorId = dto.DoctorId;
-        appointment.Status = dto.Status; 
-        appointment.Process = dto.Process;
         appointment.WeightAppointment = dto.WeightAppointment;
         appointment.HeightAppointment = dto.HeightAppointment;
         appointment.DonationCapacity = dto.DonationCapacity;
+        appointment.DoctorID1 = dto.DoctorId;
+        appointment.Status = dto.Status;
+        appointment.Process = dto.Process;
 
         await _context.SaveChangesAsync();
-        await logger.NotiLog(dto.DoctorId, "Appointment", $"Lịch hẹn đã được cập nhật", "Update");
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Khám sức khỏe updated", "Update");
+
         return Ok(new AppointmentDTO
         {
-            AppointmentId = appointment.AppointmentId,
-            UserId = appointment.UserId,
-            AppointmentDate = appointment.AppointmentDate,
-            TimeSlot = appointment.TimeSlot,
-            Status = appointment.Status,
-            Process = appointment.Process,
-            Notes = appointment.Notes,
-            BloodPressure = appointment.BloodPressure, 
-            HeartRate = appointment.HeartRate,
-            Hemoglobin = appointment.Hemoglobin,
-            Temperature = appointment.Temperature,
-            DoctorId = appointment.DoctorId,
-            Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt,
-            WeightAppointment = appointment.WeightAppointment,
-            HeightAppointment = appointment.HeightAppointment,
-            DonationCapacity=appointment.DonationCapacity
-        });
-    }
-
-   
-    [HttpPatch("{id}/status/{status}")]
-    public async Task<IActionResult> UpdateStatus(int id, bool status, [FromServices] NotificationLog logger)
-    {
-        var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) return NotFound();
-
-        //if (status > 2) return BadRequest("Invalid status");
-
-        appointment.Status = status;
-        await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Lịch hẹn đã được cập nhật, vui lòng qua lịch sử hoạt động để xem chi tiết", "Update");
-        return Ok(new AppointmentDTO
-        {
-            AppointmentId = appointment.AppointmentId,
-            UserId = appointment.UserId,
-            AppointmentDate = appointment.AppointmentDate,
-            TimeSlot = appointment.TimeSlot,
-            Status = appointment.Status,
-            Process = appointment.Process,
-            Notes = appointment.Notes,
-            BloodPressure = appointment.BloodPressure, 
-            HeartRate = appointment.HeartRate,
-            Hemoglobin = appointment.Hemoglobin,
-            Temperature = appointment.Temperature,
-            DoctorId = appointment.DoctorId,
-            Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt
-        });
-    }
-
-    [HttpPatch("{id}/process/{process}")]
-    public async Task<IActionResult> UpdateProcess(int id, byte process, [FromServices] NotificationLog logger)
-    {
-        var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) return NotFound();
-
-        if (process > 5) return BadRequest("Invalid status");
-
-        appointment.Process = process;
-        await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Quy trình đã được cập nhật", "Update");
-        return Ok(new AppointmentDTO
-        {
-            AppointmentId = appointment.AppointmentId,
-            UserId = appointment.UserId,
+            AppointmentId = appointment.AppointmentID,
+            UserId = appointment.UserID,
             AppointmentDate = appointment.AppointmentDate,
             TimeSlot = appointment.TimeSlot,
             Status = appointment.Status,
@@ -288,9 +238,150 @@ public class AppointmentController : ControllerBase
             HeartRate = appointment.HeartRate,
             Hemoglobin = appointment.Hemoglobin,
             Temperature = appointment.Temperature,
-            DoctorId = appointment.DoctorId,
+            DoctorId1 = appointment.DoctorID1,
+            DoctorId2 = appointment.DoctorID2,
             Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt
+            CreatedAt = appointment.CreatedAt,
+            WeightAppointment = appointment.WeightAppointment,
+            HeightAppointment = appointment.HeightAppointment,
+            DonationCapacity = appointment.DonationCapacity,
+            DonationDate = appointment.DonationDate,
+            BloodGroup = appointment.BloodGroup,
+            RhType = appointment.RhType
+        });
+    }
+
+    [HttpPatch("doctor-examination/{id}")]
+    public async Task<IActionResult> DoctorExaminationUpdate(int id, [FromBody] DoctorExaminationDTO dto, [FromServices] NotificationLog logger)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound();
+
+        if (!new[] { "A", "B", "AB", "O" }.Contains(dto.BloodGroup))
+            return BadRequest("Invalid BloodGroup");
+        if (!new[] { "Rh+", "Rh-" }.Contains(dto.RhType))
+            return BadRequest("Invalid RhType");
+
+        appointment.BloodGroup = dto.BloodGroup;
+        appointment.RhType = dto.RhType;
+        appointment.DonationDate = dto.DonationDate;
+        appointment.DoctorID2 = dto.DoctorId;
+        appointment.Process = dto.Process;
+
+        await _context.SaveChangesAsync();
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Xét nghiệm updated", "Update");
+
+        return Ok(new AppointmentDTO
+        {
+            AppointmentId = appointment.AppointmentID,
+            UserId = appointment.UserID,
+            AppointmentDate = appointment.AppointmentDate,
+            TimeSlot = appointment.TimeSlot,
+            Status = appointment.Status,
+            Process = appointment.Process,
+            Notes = appointment.Notes,
+            BloodPressure = appointment.BloodPressure,
+            HeartRate = appointment.HeartRate,
+            Hemoglobin = appointment.Hemoglobin,
+            Temperature = appointment.Temperature,
+            DoctorId1 = appointment.DoctorID1,
+            DoctorId2 = appointment.DoctorID2,
+            Cancel = appointment.Cancel,
+            CreatedAt = appointment.CreatedAt,
+            WeightAppointment = appointment.WeightAppointment,
+            HeightAppointment = appointment.HeightAppointment,
+            DonationCapacity = appointment.DonationCapacity,
+            DonationDate = appointment.DonationDate,
+            BloodGroup = appointment.BloodGroup,
+            RhType = appointment.RhType
+        });
+    }
+
+    [HttpPatch("{id}/mark-success")]
+    public async Task<IActionResult> MarkSuccess(int id, [FromServices] NotificationLog logger)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound();
+
+        appointment.Process = 4;
+
+        await _context.SaveChangesAsync();
+        await _sendEmail.SendThankYouEmailAsync(appointment);
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Hiến máu thành công", "Update");
+
+        return Ok("Hiến máu thành công.");
+    }
+
+    [HttpPatch("{id}/status/{status}")]
+    public async Task<IActionResult> UpdateStatus(int id, bool status, [FromServices] NotificationLog logger)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound();
+
+        appointment.Status = status;
+        await _context.SaveChangesAsync();
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Status updated to {status}", "Update");
+
+        return Ok(new AppointmentDTO
+        {
+            AppointmentId = appointment.AppointmentID,
+            UserId = appointment.UserID,
+            AppointmentDate = appointment.AppointmentDate,
+            TimeSlot = appointment.TimeSlot,
+            Status = appointment.Status,
+            Process = appointment.Process,
+            Notes = appointment.Notes,
+            BloodPressure = appointment.BloodPressure,
+            HeartRate = appointment.HeartRate,
+            Hemoglobin = appointment.Hemoglobin,
+            Temperature = appointment.Temperature,
+            DoctorId1 = appointment.DoctorID1,
+            DoctorId2 = appointment.DoctorID2,
+            Cancel = appointment.Cancel,
+            CreatedAt = appointment.CreatedAt,
+            WeightAppointment = appointment.WeightAppointment,
+            HeightAppointment = appointment.HeightAppointment,
+            DonationCapacity = appointment.DonationCapacity,
+            DonationDate = appointment.DonationDate,
+            BloodGroup = appointment.BloodGroup,
+            RhType = appointment.RhType
+        });
+    }
+
+    [HttpPatch("{id}/process/{process}")]
+    public async Task<IActionResult> UpdateProcess(int id, byte process, [FromServices] NotificationLog logger)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null) return NotFound();
+        if (process > 4) return BadRequest("Invalid process");
+
+        appointment.Process = process;
+        await _context.SaveChangesAsync();
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Process updated to {process}", "Update");
+
+        return Ok(new AppointmentDTO
+        {
+            AppointmentId = appointment.AppointmentID,
+            UserId = appointment.UserID,
+            AppointmentDate = appointment.AppointmentDate,
+            TimeSlot = appointment.TimeSlot,
+            Status = appointment.Status,
+            Process = appointment.Process,
+            Notes = appointment.Notes,
+            BloodPressure = appointment.BloodPressure,
+            HeartRate = appointment.HeartRate,
+            Hemoglobin = appointment.Hemoglobin,
+            Temperature = appointment.Temperature,
+            DoctorId1 = appointment.DoctorID1,
+            DoctorId2 = appointment.DoctorID2,
+            Cancel = appointment.Cancel,
+            CreatedAt = appointment.CreatedAt,
+            WeightAppointment = appointment.WeightAppointment,
+            HeightAppointment = appointment.HeightAppointment,
+            DonationCapacity = appointment.DonationCapacity,
+            DonationDate = appointment.DonationDate,
+            BloodGroup = appointment.BloodGroup,
+            RhType = appointment.RhType
         });
     }
 
@@ -302,20 +393,21 @@ public class AppointmentController : ControllerBase
 
         appointment.Cancel = true;
         await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserId, "Appointment", $"Bạn đã hủy lịch hẹn, vui lòng qua lịch sử hoạt động để xem chi tiết", "Update");
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Bạn đã hủy lịch hẹn", "Update");
+
         return Ok(new { message = "Đã hủy hẹn" });
     }
 
     [HttpPatch("{id}/note")]
-    public async Task<IActionResult> UpdateNote(int id, [FromBody] NoteUpdateDTO dto)
+    public async Task<IActionResult> UpdateNote(int id, [FromBody] NoteUpdateDTO dto, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) return NotFound("Appointment not found");
+        if (appointment == null) return NotFound();
 
         appointment.Notes = dto.Notes;
         await _context.SaveChangesAsync();
+        await logger.NotiLog(appointment.UserID, "Appointment", $"Ghi chú updated", "Update");
 
-        return Ok(new { message = "Ghi chú đã được cập nhật thành công" });
+        return Ok(new { message = "Ghi chú đã được cập nhật" });
     }
-
 }

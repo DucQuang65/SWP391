@@ -24,11 +24,6 @@
         public virtual DbSet<Appointments> Appointments { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
 
-
-
-
-        public virtual DbSet<BloodDonationHistories> BloodDonationHistories { get; set; }
-
         public virtual DbSet<BloodInventories> BloodInventories { get; set; }
 
         public virtual DbSet<BloodRequests> BloodRequests { get; set; }
@@ -78,70 +73,53 @@
                 entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
             });
 
-            modelBuilder.Entity<Appointments>(entity =>
-    {
-        entity.HasKey(e => e.AppointmentId);
-        entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
-        entity.Property(e => e.UserId).HasColumnName("UserID");
-        entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-        entity.Property(e => e.AppointmentDate).HasColumnType("date"); 
-        entity.Property(e => e.TimeSlot).HasMaxLength(50);
-        entity.Property(e => e.Notes).HasMaxLength(255);
-        entity.Property(e => e.BloodPressure).HasMaxLength(20); 
-        entity.Property(e => e.HeartRate);
-        entity.Property(e => e.Hemoglobin);
-        entity.Property(e => e.Temperature);
-        entity.Property(e => e.Status).HasColumnName("Status");
-        entity.Property(e => e.Cancel).HasDefaultValue(false);
-        entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-        entity.Property(e => e.WeightAppointment).HasColumnType("float");  
-        entity.Property(e => e.HeightAppointment).HasColumnType("float");
-        entity.Property(e => e.DonationCapacity).HasColumnType("float").HasColumnName("DonationCapacity");
+
+        modelBuilder.Entity<Appointments>(entity =>
+        {
+            entity.HasKey(e => e.AppointmentID);
+            entity.Property(e => e.AppointmentID).HasColumnName("AppointmentID").ValueGeneratedOnAdd();
+            entity.Property(e => e.UserID).HasColumnName("UserID");
+            entity.Property(e => e.DoctorID1).HasColumnName("DoctorID1");
+            entity.Property(e => e.DoctorID2).HasColumnName("DoctorID2");
+            entity.Property(e => e.AppointmentDate).HasColumnType("date");
+            entity.Property(e => e.TimeSlot).HasMaxLength(50);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.BloodPressure).HasMaxLength(20);
+            entity.Property(e => e.HeartRate);
+            entity.Property(e => e.Hemoglobin);
+            entity.Property(e => e.Temperature);
+            entity.Property(e => e.Status).HasColumnName("Status");
+            entity.Property(e => e.Cancel).HasDefaultValue(false);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
+            entity.Property(e => e.WeightAppointment).HasColumnType("float");
+            entity.Property(e => e.HeightAppointment).HasColumnType("float");
+            entity.Property(e => e.DonationCapacity).HasColumnType("float").HasColumnName("DonationCapacity");
+            entity.Property(e => e.DonationDate).HasColumnType("datetime");
+            entity.Property(e => e.BloodGroup).HasMaxLength(2);
+            entity.Property(e => e.RhType).HasMaxLength(3);
 
 
-        entity.HasOne(e => e.User)
-             .WithMany(u => u.Appointments)
-             .HasForeignKey(e => e.UserId)
-             .OnDelete(DeleteBehavior.ClientSetNull)
-             .HasConstraintName("FK_Appointments_Users");
+            entity.HasOne(e => e.User)
+                 .WithMany(u => u.Appointments)
+                 .HasForeignKey(e => e.UserID)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Appointments_Users");
 
-        entity.HasOne(e => e.Doctor)
-             .WithMany()
-             .HasForeignKey(e => e.DoctorId)
-             .OnDelete(DeleteBehavior.ClientSetNull)
-             .HasConstraintName("FK_Appointments_Doctor");
-    });
+            entity.HasOne(e => e.Doctor1)
+                 .WithMany()
+                 .HasForeignKey(e => e.DoctorID1)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Appointments_Doctor1");
 
-            modelBuilder.Entity<BloodDonationHistories>(entity =>
-            {
-                entity.HasKey(e => e.DonationId).HasName("PK__BloodDon__C5082EDB4BC21583");
-
-                entity.Property(e => e.DonationId).HasColumnName("DonationID");
-                entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID").IsRequired();
-                entity.Property(e => e.DonationDate).HasColumnType("datetime").IsRequired();
-                entity.Property(e => e.BloodGroup).HasMaxLength(2);
-                entity.Property(e => e.RhType).HasMaxLength(3);
-                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-                entity.Property(e => e.Notes).HasMaxLength(255);
-                entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-
-                entity.HasOne(d => d.Appointment)
-                    .WithMany()
-                    .HasForeignKey(d => d.AppointmentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BloodDonationHistories_Appointments");
-
-                entity.HasOne(d => d.Doctor)
-                    .WithMany(u => u.BloodDonationsAsDoctor)
-                    .HasForeignKey(d => d.DoctorId)
-                    .OnDelete(DeleteBehavior.SetNull) 
-                    .HasConstraintName("FK_BloodDonationHistories_Users_Doctor");
-            });
+            entity.HasOne(e => e.Doctor2)
+                 .WithMany()
+                 .HasForeignKey(e => e.DoctorID2)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Appointments_Doctor2");
+        });
 
 
-          
-
-            modelBuilder.Entity<BloodInventories>(entity =>
+        modelBuilder.Entity<BloodInventories>(entity =>
             {
                 entity.HasKey(e => e.InventoryId);
 

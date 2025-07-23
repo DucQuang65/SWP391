@@ -4,6 +4,6 @@ namespace Hien_mau.Interface
 {
     public interface ISendEmail
     {
-        Task SendThankYouEmailAsync(BloodDonationHistories donation);
+        Task SendThankYouEmailAsync(Appointments appointment);
     }
 }

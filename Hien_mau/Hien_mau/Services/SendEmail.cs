@@ -17,28 +17,26 @@ namespace Hien_mau.Services
             _context = context;
             _config = config;
         }
-        public async Task SendThankYouEmailAsync(BloodDonationHistories donation)
+        public async Task SendThankYouEmailAsync(Appointments appointment)
         {
-            var appointment = await _context.Appointments
-                .Include(a => a.User)
-                .FirstOrDefaultAsync(a => a.AppointmentId == donation.AppointmentId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == appointment.UserID);
 
-            if (appointment?.User == null || string.IsNullOrEmpty(appointment.User.Email))
+            if (user == null || string.IsNullOrEmpty(user.Email))
                 return;
 
             var recipientEmail = appointment.User.Email;
             var donorName = appointment.User.Name ?? "Bạn";
 
-            var bloodGroup = donation.BloodGroup ?? "";
-            var rhSymbol = (donation.RhType ?? "").Replace("Rh", "").Trim();
-            var fullBloodType = $"{bloodGroup}{rhSymbol}"; 
-            var donationDate = donation.DonationDate.ToString("dd/MM/yyyy");
+            var bloodGroup = appointment.BloodGroup ?? "";
+            var rhSymbol = (appointment.RhType ?? "").Replace("Rh", "").Trim();
+            var fullBloodType = $"{bloodGroup}{rhSymbol}";
+            var donationDate = appointment.DonationDate.HasValue ? appointment.DonationDate.Value.ToString("dd/MM/yyyy") : "N/A";
 
             // Lấy tên bác sĩ từ chính donation.DoctorId (nếu có)
             var doctorName = "Bác sĩ";
-            if (donation.DoctorId != null)
+            if (appointment.DoctorID2 != null)
             {
-                var doctor = await _context.Users.FirstOrDefaultAsync(d => d.UserId == donation.DoctorId);
+                var doctor = await _context.Users.FirstOrDefaultAsync(d => d.UserId == appointment.DoctorID2);
                 if (doctor != null)
                     doctorName = doctor.Name ?? "Bác sĩ";
             }
@@ -53,7 +51,7 @@ namespace Hien_mau.Services
                 <p>Chúng tôi chân thành cảm ơn bạn đã tham gia hiến máu vào ngày <strong>{donationDate}</strong>.</p>
                 <p>Nhóm máu của bạn: <strong>{fullBloodType}</strong>.</p>
                 <p>Bác sĩ phụ trách: <strong>{doctorName}</strong>.</p>
-                <p>Ghi chú: {donation.Notes ?? "Không có"}</p>
+                <p>Ghi chú: {appointment.Notes ?? "Không có"}</p>
                 <br />
                 <p>Bạn đã góp phần cứu sống những người đang cần. Một lần nữa, xin chân thành cảm ơn!</p>
                 <p>Trân trọng,</p>

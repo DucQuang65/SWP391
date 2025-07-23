@@ -2,7 +2,6 @@
 using Hien_mau.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 public class AppointmentCompletionJob
 {
     private readonly Hien_mauContext _context;
@@ -14,21 +13,19 @@ public class AppointmentCompletionJob
 
     public async Task Run()
     {
-        var now = DateTime.Now; 
+        var now = DateTime.Now;
 
-       
-        var donations = await _context.BloodDonationHistories
-            .Include(d => d.Appointment)
-            .Where(d => d.IsSuccess
-                        && d.DonationDate.AddDays(84).Date <= now.Date)
+        var appointments = await _context.Appointments
+            .Where(a => (a.Process == 2 && a.Status == true) || a.Process == 3 || a.Process == 4)
+            .Where(a => a.DonationDate.Value.AddDays(84).Date <= now.Date)
             .ToListAsync();
 
-        foreach (var donation in donations)
+        foreach (var appointment in appointments)
         {
-            var remindDate = donation.DonationDate.AddDays(84).Date;
+            var remindDate = appointment.DonationDate.Value.AddDays(84).Date;
 
             bool exists = await _context.Reminders.AnyAsync(r =>
-                r.UserId == donation.Appointment.UserId &&
+                r.UserId == appointment.UserID &&
                 r.Type == "Recovery" &&
                 r.RemindAt.Date == remindDate);
 
@@ -36,7 +33,7 @@ public class AppointmentCompletionJob
 
             var reminder = new Reminder
             {
-                UserId = donation.Appointment.UserId,
+                UserId = appointment.UserID,
                 Type = "Recovery",
                 Message = "Đã đủ 12 tuần kể từ lần hiến máu trước! Bạn đã có thể hiến máu lại.",
                 RemindAt = remindDate,

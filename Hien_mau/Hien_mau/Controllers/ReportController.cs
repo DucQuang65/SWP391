@@ -101,17 +101,18 @@ namespace Hien_mau.Controllers
             var unprocessedRequests = await _context.BloodRequests.Where(r => r.Status == 0).CountAsync();
             var processedRequests = await _context.BloodRequests.Where(r => r.Status != 0).CountAsync();
 
-            var bloodDonors = await _context.BloodDonationHistories
-                .Include(d => d.Appointment).ThenInclude(a => a.User).ThenInclude(u => u.Role)
-                .GroupBy(d => d.Appointment.UserId)
-                .Select(g => new
-                {
-                    UserId = g.Key,
-                    UserName = g.Select(x => x.Appointment.User.Name).FirstOrDefault(),
-                    RoleName = g.Select(x => x.Appointment.User.Role.RoleName).FirstOrDefault(),
-                    DonationCount = g.Count()
-                })
-                .ToListAsync();
+            var bloodDonors = await _context.Appointments
+                 .Include(a => a.User).ThenInclude(u => u.Role)
+                 .Where(a => (a.Process == 2 && a.Status == true) || a.Process == 3 || a.Process == 4)
+                 .GroupBy(a => a.UserID)
+                 .Select(g => new
+                 {
+                     UserId = g.Key,
+                     UserName = g.Select(x => x.User.Name).FirstOrDefault(),
+                     RoleName = g.Select(x => x.User.Role.RoleName).FirstOrDefault(),
+                     DonationCount = g.Count()
+                 })
+                 .ToListAsync();
 
             var totalDonors = bloodDonors.Count;
 
