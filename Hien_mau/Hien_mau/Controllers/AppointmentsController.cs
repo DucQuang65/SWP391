@@ -153,8 +153,24 @@ public class AppointmentController : ControllerBase
         if (user == null) return NotFound("User not found");
 
         var lastDonationResult = await GetLastDonation(dto.UserId);
-        var lastDonationDto = lastDonationResult.Value as AppointmentLastDonationDTO;
-        DateTime? lastDonationDate = lastDonationDto?.LastDonationDate;
+        if (lastDonationResult.Result is NotFoundObjectResult) // Sửa: Kiểm tra NotFoundObjectResult thay vì NotFoundResult
+        {
+            return NotFound("User not found or no donation history");
+        }
+
+        var okResult = lastDonationResult.Result as OkObjectResult; // Sửa: Lấy OkObjectResult từ Result
+        if (okResult == null)
+        {
+            return BadRequest("Unexpected response from GetLastDonation");
+        }
+
+        var lastDonationDto = okResult.Value as AppointmentLastDonationDTO; // Sửa: Lấy Value từ OkObjectResult
+        if (lastDonationDto == null)
+        {
+            return BadRequest("Invalid response format from GetLastDonation");
+        }
+
+        DateTime? lastDonationDate = lastDonationDto.LastDonationDate;
 
         if (dto.TimeSlot != "Sáng (7:00-12:00)" && dto.TimeSlot != "Chiều (13:00-17:00)")
             return BadRequest("Invalid TimeSlot");
@@ -167,10 +183,10 @@ public class AppointmentController : ControllerBase
             if (daysSince < 84)
                 return BadRequest($"Chưa đủ 84 ngày từ lần hiến cuối ({lastDonationDate.Value:dd/MM/yyyy}).");
         }
-        else if (lastDonationDto.HasDonationHistory == false && user.SelfReportedLastDonationDate == null)
-        {
-            return BadRequest("Vui lòng khai báo lần hiến máu cuối (nếu có) trước khi tạo lịch.");
-        }
+        //else if (lastDonationDto.HasDonationHistory == false && user.SelfReportedLastDonationDate == null)
+        //{
+        //    return BadRequest("Vui lòng khai báo lần hiến máu cuối (nếu có) trước khi tạo lịch.");
+        //}
 
         var appointment = new Appointments
         {
