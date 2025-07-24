@@ -83,7 +83,7 @@ namespace Hien_mau.Controllers
 
         }
 
-        [HttpPut("{id}/self-reported-donation")]
+        [HttpPatch("{id}/self-reported-donation")]
         public async Task<IActionResult> UpdateSelfReportedDonationDate(int id, [FromBody] UpdateLastDonationDto dto)
         {
             var result = await _service.UpdateSelfReportedDonationDate(id, dto.SelfReportedLastDonationDate);

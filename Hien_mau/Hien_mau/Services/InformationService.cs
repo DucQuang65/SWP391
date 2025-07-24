@@ -42,7 +42,8 @@ namespace Hien_mau.Services
                 Status = u.Status,
                 RoleID = u.RoleId,
                 DepartmentId = u.DepartmentId,
-                CreatedAt = u.CreatedAt
+                CreatedAt = u.CreatedAt,
+                SelfReportedLastDonationDate = u.SelfReportedLastDonationDate
             }).ToListAsync();
         }
 
@@ -71,7 +72,8 @@ namespace Hien_mau.Services
                 Status = u.Status,
                 RoleID = u.RoleId,
                 DepartmentId = u.DepartmentId,
-                CreatedAt = u.CreatedAt
+                CreatedAt = u.CreatedAt,
+                SelfReportedLastDonationDate = u.SelfReportedLastDonationDate
             }).FirstOrDefaultAsync();
         }
 
@@ -107,7 +109,8 @@ namespace Hien_mau.Services
                 Status = dto.Status,
                 RoleId = dto.RoleID,
                 DepartmentId = dto.DepartmentId,
-                CreatedAt = vnTime
+                CreatedAt = vnTime,
+                SelfReportedLastDonationDate = dto.SelfReportedLastDonationDate
             };
 
             _context.Users.Add(newUser);
@@ -152,6 +155,7 @@ namespace Hien_mau.Services
             user.Status = dto.Status;
             user.RoleId = dto.RoleID;
             user.DepartmentId = dto.DepartmentId;
+            user.SelfReportedLastDonationDate = dto.SelfReportedLastDonationDate;
 
             _context.Users.Update(user);
 

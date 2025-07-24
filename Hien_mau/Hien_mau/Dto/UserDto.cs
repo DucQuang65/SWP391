@@ -27,6 +27,7 @@ namespace Hien_mau.Dto
         public int RoleID { get; set; }
         public int? DepartmentId { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public DateTime? SelfReportedLastDonationDate { get; set; }
     }
     public class UpdateLastDonationDto
     {
