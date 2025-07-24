@@ -183,10 +183,10 @@ public class AppointmentController : ControllerBase
             if (daysSince < 84)
                 return BadRequest($"Chưa đủ 84 ngày từ lần hiến cuối ({lastDonationDate.Value:dd/MM/yyyy}).");
         }
-        //else if (lastDonationDto.HasDonationHistory == false && user.SelfReportedLastDonationDate == null)
-        //{
-        //    return BadRequest("Vui lòng khai báo lần hiến máu cuối (nếu có) trước khi tạo lịch.");
-        //}
+        else if (lastDonationDto.HasDonationHistory == false && user.SelfReportedLastDonationDate == null)
+        {
+            return BadRequest("Vui lòng khai báo lần hiến máu cuối (nếu có) trước khi tạo lịch.");
+        }
 
         var appointment = new Appointments
         {
