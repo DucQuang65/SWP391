@@ -167,8 +167,9 @@ CREATE TABLE BloodRequests (
     Quantity INT NOT NULL CHECK (Quantity > 0),
     Reason NVARCHAR(1000),
     Status TINYINT NOT NULL, -- 0: Pending, 1: Accepted, 2: Completed, 3: Rejected, 4: Delete
+    Note NVARCHAR(500) NULL,
     CreatedTime DATETIME DEFAULT GETDATE(),
-	MedicalReport NVARCHAR(500) NULL,
+    MedicalReport NVARCHAR(500) NULL,
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
