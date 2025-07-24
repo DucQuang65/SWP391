@@ -297,7 +297,7 @@ public class AppointmentController : ControllerBase
         });
     }
 
-    [HttpPatch("{id}/mark-success")]
+    [HttpPatch("{id}/send-email")]
     public async Task<IActionResult> MarkSuccess(int id, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
