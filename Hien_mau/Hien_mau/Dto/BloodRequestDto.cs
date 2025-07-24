@@ -18,6 +18,7 @@
         public int Quantity { get; set; }
         public string Reason { get; set; }
         public byte Status { get; set; } = 0;
+        public string? Note { get; set; }
         public DateTime? CreatedTime { get; set; }
         public IFormFile? MedicalFile { get; set; }
         public string? MedicalReportUrl { get; set; }

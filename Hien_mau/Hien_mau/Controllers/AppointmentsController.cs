@@ -301,15 +301,22 @@ public class AppointmentController : ControllerBase
     public async Task<IActionResult> MarkSuccess(int id, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) return NotFound();
+        if (appointment == null) 
+            return NotFound();
 
-        appointment.Process = 4;
+        appointment.Status = true;
 
+        _context.Appointments.Update(appointment);
         await _context.SaveChangesAsync();
-        await _sendEmail.SendThankYouEmailAsync(appointment);
-        await logger.NotiLog(appointment.UserID, "Appointment", $"Hiến máu thành công", "Update");
 
-        return Ok("Hiến máu thành công.");
+        if (appointment.Process == 4)
+        {
+            await _sendEmail.SendThankYouEmailAsync(appointment);
+            await logger.NotiLog(appointment.UserID, "Appointment", $"Hiến máu thành công", "Update");
+
+            return Ok("Đã gửi email cảm ơn.");
+        }
+        return Ok();
     }
 
     [HttpPatch("{id}/status/{status}")]

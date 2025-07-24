@@ -39,6 +39,8 @@ public partial class BloodRequests
 
     public byte Status { get; set; }
 
+    public string? Note { get; set; }
+
     public DateTime? CreatedTime { get; set; }
 
     public string? MedicalReport { get; set; }

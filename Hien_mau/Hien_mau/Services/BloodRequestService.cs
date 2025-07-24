@@ -39,6 +39,7 @@ namespace Hien_mau.Services
                 Quantity = x.Quantity,
                 Reason = x.Reason,
                 Status = x.Status,
+                Note = x.Note,
                 CreatedTime = x.CreatedTime,
                 MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null
             }).ToListAsync();
@@ -65,6 +66,7 @@ namespace Hien_mau.Services
                     Quantity = x.Quantity,
                     Reason = x.Reason,
                     Status = x.Status,
+                    Note = x.Note,
                     CreatedTime = x.CreatedTime,
                     MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null
                 }).FirstOrDefaultAsync();
@@ -96,7 +98,7 @@ namespace Hien_mau.Services
             var vnTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
                 TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
 
-            var entity = new BloodRequests
+            var bloodRequest = new BloodRequests
             {
                 UserId = dto.UserId,
                 PatientId = dto.PatientId,
@@ -109,6 +111,7 @@ namespace Hien_mau.Services
                 ComponentId = dto.ComponentId,
                 Quantity = dto.Quantity,
                 Reason = dto.Reason,
+                Note = dto.Note,
                 CreatedTime = vnTime,
                 MedicalReport = uploadedFileName != null ? $"/uploads/{uploadedFileName}" : null,
             };
@@ -118,81 +121,84 @@ namespace Hien_mau.Services
                 var user = await _context.Users.FindAsync(dto.UserId);
                 if (user != null)
                 {
-                    entity.DoctorName = user.Name;
-                    entity.DoctorPhone = user.Phone;
-                    entity.Status = 1;
-                    entity.FacilityName = "Ánh Dương";
+                    bloodRequest.DoctorName = user.Name;
+                    bloodRequest.DoctorPhone = user.Phone;
+                    bloodRequest.Status = 1;
+                    bloodRequest.FacilityName = "Ánh Dương";
                 }
             }
             else
             {
-                entity.Status = 0;
-                entity.DoctorName = dto.DoctorName;
-                entity.DoctorPhone = dto.DoctorPhone;
-                entity.FacilityName = dto.FacilityName;
+                bloodRequest.Status = 0;
+                bloodRequest.DoctorName = dto.DoctorName;
+                bloodRequest.DoctorPhone = dto.DoctorPhone;
+                bloodRequest.FacilityName = dto.FacilityName;
             }
 
-            _context.BloodRequests.Add(entity);
+            _context.BloodRequests.Add(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(entity.UserId, "Yêu cầu máu", "Tạo yêu cầu", "Create");
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", "Tạo yêu cầu", "Create");
 
-            dto.RequestId = entity.RequestId;
-            dto.Status = entity.Status;
-            dto.CreatedTime = entity.CreatedTime;
-            dto.MedicalReportUrl = entity.MedicalReport;
+            dto.RequestId = bloodRequest.RequestId;
+            dto.Status = bloodRequest.Status;
+            dto.CreatedTime = bloodRequest.CreatedTime;
+            dto.MedicalReportUrl = bloodRequest.MedicalReport;
 
             return dto;
         }
 
         public async Task<bool> UpdateBloodRequest(int id, BloodRequestDto dto)
         {
-            var req = await _context.BloodRequests.FindAsync(id);
-            if (req == null || req.Status == 2 || req.Status == 3 || req.Status == 4) return false;
+            var bloodRequest = await _context.BloodRequests.FindAsync(id);
+            if (bloodRequest == null || bloodRequest.Status == 2 || bloodRequest.Status == 3 || bloodRequest.Status == 4) 
+                return false;
 
-            req.PatientId = dto.PatientId;
-            req.PatientName = dto.PatientName;
-            req.Age = dto.Age;
-            req.Gender = dto.Gender;
-            req.Relationship = dto.Relationship;
-            req.FacilityName = dto.FacilityName;
-            req.DoctorName = dto.DoctorName;
-            req.DoctorPhone = dto.DoctorPhone;
-            req.BloodGroup = dto.BloodGroup;
-            req.RhType = dto.RhType;
-            req.ComponentId = dto.ComponentId;
-            req.Quantity = dto.Quantity;
-            req.Reason = dto.Reason;
+            bloodRequest.PatientId = dto.PatientId;
+            bloodRequest.PatientName = dto.PatientName;
+            bloodRequest.Age = dto.Age;
+            bloodRequest.Gender = dto.Gender;
+            bloodRequest.Relationship = dto.Relationship;
+            bloodRequest.FacilityName = dto.FacilityName;
+            bloodRequest.DoctorName = dto.DoctorName;
+            bloodRequest.DoctorPhone = dto.DoctorPhone;
+            bloodRequest.BloodGroup = dto.BloodGroup;
+            bloodRequest.RhType = dto.RhType;
+            bloodRequest.ComponentId = dto.ComponentId;
+            bloodRequest.Quantity = dto.Quantity;
+            bloodRequest.Reason = dto.Reason;
+            bloodRequest.Note = dto.Note;
 
-            _context.BloodRequests.Update(req);
+            _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(req.UserId, "Yêu cầu máu", "Sửa yêu cầu", "Update");
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", "Sửa yêu cầu", "Update");
             return true;
         }
 
         public async Task<bool> PatchStatusBloodRequest(int id, byte status)
         {
-            var req = await _context.BloodRequests.FindAsync(id);
-            if (req == null) return false;
+            var bloodRequest = await _context.BloodRequests.FindAsync(id);
+            if (bloodRequest == null) 
+                return false;
 
-            req.Status = status;
-            _context.BloodRequests.Update(req);
+            bloodRequest.Status = status;
+            _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> DeleteBloodRequest(int id)
         {
-            var req = await _context.BloodRequests.FindAsync(id);
-            if (req == null) 
+            var bloodRequest = await _context.BloodRequests.FindAsync(id);
+            if (bloodRequest == null) 
                 return false;
 
-            req.Status = 4;
-            _context.BloodRequests.Update(req);
+            bloodRequest.Status = 4;
+            _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(req.UserId, "Yêu cầu máu", "Xóa yêu cầu", "Delete");
+            await _logger.NotiLog(bloodRequest.UserId, "Yêu cầu máu", "Xóa yêu cầu", "Delete");
             return true;
         }
     }
