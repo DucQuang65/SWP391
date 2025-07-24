@@ -83,12 +83,12 @@ namespace Hien_mau.Controllers
 
         }
 
-        [HttpPatch("{id}/self-reported-donation")]
+        [HttpPut("{id}/self-reported-donation")]
         public async Task<IActionResult> UpdateSelfReportedDonationDate(int id, [FromBody] UpdateLastDonationDto dto)
         {
             var result = await _service.UpdateSelfReportedDonationDate(id, dto.SelfReportedLastDonationDate);
-            
-            if (!result) 
+
+            if (!result)
                 return NotFound("Không tìm thấy người dùng");
 
             return Ok(new { Message = "Cập nhật thành công ngày hiến máu tự khai." });
