@@ -204,7 +204,7 @@ public class AppointmentController : ControllerBase
         return Ok(new { Message = "Created", AppointmentId = appointment.AppointmentID });
     }
 
-    [HttpPatch("doctor-health-check/{id}")]
+    [HttpPut("doctor-health-check/{id}")]
     public async Task<IActionResult> DoctorHealthCheckUpdate(int id, [FromBody] DoctorHealthCheckDTO dto, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
@@ -251,7 +251,7 @@ public class AppointmentController : ControllerBase
         });
     }
 
-    [HttpPatch("doctor-examination/{id}")]
+    [HttpPut("doctor-examination/{id}")]
     public async Task<IActionResult> DoctorExaminationUpdate(int id, [FromBody] DoctorExaminationDTO dto, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
@@ -295,64 +295,27 @@ public class AppointmentController : ControllerBase
             BloodGroup = appointment.BloodGroup,
             RhType = appointment.RhType
         });
-    }
-
-    [HttpPatch("{id}/send-email")]
-    public async Task<IActionResult> MarkSuccess(int id, [FromServices] NotificationLog logger)
-    {
-        var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) 
-            return NotFound();
-
-        appointment.Status = true;
-
-        _context.Appointments.Update(appointment);
-        await _context.SaveChangesAsync();
-
-        if (appointment.Process == 4)
-        {
-            await _sendEmail.SendThankYouEmailAsync(appointment);
-            await logger.NotiLog(appointment.UserID, "Appointment", $"Hiến máu thành công", "Update");
-
-            return Ok("Đã gửi email cảm ơn.");
-        }
-        return Ok();
-    }
+    }   
 
     [HttpPatch("{id}/status/{status}")]
     public async Task<IActionResult> UpdateStatus(int id, bool status, [FromServices] NotificationLog logger)
     {
         var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null) return NotFound();
+        if (appointment == null) 
+            return NotFound();
 
         appointment.Status = status;
+
+        _context.Appointments.Update(appointment);
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Status updated to {status}", "Update");
 
-        return Ok(new AppointmentDTO
+        if (appointment.Process == 4 && appointment.Status == true)
         {
-            AppointmentId = appointment.AppointmentID,
-            UserId = appointment.UserID,
-            AppointmentDate = appointment.AppointmentDate,
-            TimeSlot = appointment.TimeSlot,
-            Status = appointment.Status,
-            Process = appointment.Process,
-            Notes = appointment.Notes,
-            BloodPressure = appointment.BloodPressure,
-            HeartRate = appointment.HeartRate,
-            Hemoglobin = appointment.Hemoglobin,
-            Temperature = appointment.Temperature,
-            DoctorId1 = appointment.DoctorID1,
-            DoctorId2 = appointment.DoctorID2,
-            Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt,
-            WeightAppointment = appointment.WeightAppointment,
-            HeightAppointment = appointment.HeightAppointment,
-            DonationCapacity = appointment.DonationCapacity,
-            DonationDate = appointment.DonationDate,
-            BloodGroup = appointment.BloodGroup,
-            RhType = appointment.RhType
-        });
+            await _sendEmail.SendThankYouEmailAsync(appointment);
+            return Ok("Đã gửi email cảm ơn.");
+        }
+        return Ok();
     }
 
     [HttpPatch("{id}/process/{process}")]
@@ -360,36 +323,15 @@ public class AppointmentController : ControllerBase
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
-        if (process > 4) return BadRequest("Invalid process");
+        if (process > 4) 
+            return BadRequest("Invalid process");
 
         appointment.Process = process;
+
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Process updated to {process}", "Update");
 
-        return Ok(new AppointmentDTO
-        {
-            AppointmentId = appointment.AppointmentID,
-            UserId = appointment.UserID,
-            AppointmentDate = appointment.AppointmentDate,
-            TimeSlot = appointment.TimeSlot,
-            Status = appointment.Status,
-            Process = appointment.Process,
-            Notes = appointment.Notes,
-            BloodPressure = appointment.BloodPressure,
-            HeartRate = appointment.HeartRate,
-            Hemoglobin = appointment.Hemoglobin,
-            Temperature = appointment.Temperature,
-            DoctorId1 = appointment.DoctorID1,
-            DoctorId2 = appointment.DoctorID2,
-            Cancel = appointment.Cancel,
-            CreatedAt = appointment.CreatedAt,
-            WeightAppointment = appointment.WeightAppointment,
-            HeightAppointment = appointment.HeightAppointment,
-            DonationCapacity = appointment.DonationCapacity,
-            DonationDate = appointment.DonationDate,
-            BloodGroup = appointment.BloodGroup,
-            RhType = appointment.RhType
-        });
+        return Ok();
     }
 
     [HttpPatch("{id}/cancel")]
@@ -399,6 +341,7 @@ public class AppointmentController : ControllerBase
         if (appointment == null) return NotFound();
 
         appointment.Cancel = true;
+
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Bạn đã hủy lịch hẹn", "Update");
 
@@ -412,6 +355,7 @@ public class AppointmentController : ControllerBase
         if (appointment == null) return NotFound();
 
         appointment.Notes = dto.Notes;
+
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Ghi chú updated", "Update");
 
