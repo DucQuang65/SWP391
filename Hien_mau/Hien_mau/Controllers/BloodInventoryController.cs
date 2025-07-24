@@ -146,6 +146,31 @@ namespace Hien_mau.Controllers
             }
         }
 
+        [HttpGet("statistics")]
+        public async Task<IActionResult> GetBloodInventoryStatistics()
+        {
+            try
+            {
+                var statistics = await _context.BloodInventories
+                    .GroupBy(i => new { i.BloodGroup, i.RhType })
+                    .Select(g => new
+                    {
+                        BloodGroup = g.Key.BloodGroup,
+                        RhType = g.Key.RhType,
+                        Quantity = g.Sum(x => x.Quantity)
+                    })
+                    .ToListAsync();
+
+                return Ok(statistics);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving blood inventory statistics");
+                return StatusCode(500, "Lỗi hệ thống khi thống kê kho máu");
+            }
+        }
+
+
         [HttpPost("check-in")]
         public async Task<IActionResult> CheckInBlood([FromBody] CheckInOutRequestDto request)
         {
