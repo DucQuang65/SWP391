@@ -190,7 +190,7 @@ namespace Hien_mau.Services
             }
             else
             {
-                bloodRequest.Note = null; // Xóa note nếu status != 3 (tuỳ yêu cầu)
+                bloodRequest.Note = null; 
             }
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
