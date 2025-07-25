@@ -40,49 +40,50 @@ namespace Hien_mau.Services
 
 
             var body = $@"
-            <div style='font-family: Arial, sans-serif; font-size: 15px; color: #333; font-weight: 600;'>
+            <div style='font-family: Arial, Helvetica, sans-serif; background-color:#f8f9fa; padding:20px;'>
+      <div style='max-width:600px; background-color:#ffffff; margin:0 auto; padding:30px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); color:#333333;'>
+        
+        <div style='text-align:center; color:#B71C1C; font-size:22px; font-weight:bold; margin-bottom:10px;'>Thư Tri Ân Hiến Máu</div>
+        <div style='text-align:center; font-size:16px; color:#555; margin-bottom:20px;'>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</div>
+        
+        <p>Kính gửi <strong>{donorName}</strong>,</p>
+        
+        <p>
+            Trung tâm Hiến máu <strong>Bệnh viện Đa khoa Ánh Dương</strong> xin gửi lời tri ân sâu sắc đến bạn vì đã tham gia hiến máu tình nguyện vào ngày 
+            <strong>{donationDate}</strong>, với <strong>{donationCapacity}ml</strong> máu nhóm <strong>{fullBloodType}</strong>.
+        </p>
+        
+        <p>
+            Đây không chỉ là một hành động cao đẹp, mà còn là món quà vô giá mà bạn đã trao tặng cho những bệnh nhân đang chiến đấu với bệnh tật từng ngày. 
+            Sự sẻ chia quý báu này đã góp phần giúp duy trì sự sống và mang lại hy vọng cho những người đang cần máu khẩn cấp.
+        </p>
+        
+        <div style='font-style:italic; color:#B71C1C; text-align:center; font-size:16px; margin:20px 0; font-weight:bold;'>
+            “Mỗi giọt máu cho đi – Một cuộc đời ở lại.”
+        </div>
+        
+        <p>Chúng tôi hy vọng bạn sẽ tiếp tục đồng hành cùng chương trình hiến máu trong những lần tới để lan tỏa nghĩa cử nhân văn này đến cộng đồng.</p>
+        
+        <div style='background-color:#fce4ec; padding:15px; border-radius:8px; margin-top:20px; font-size:14px;'>
+            <p><strong>Nếu bạn cần thêm thông tin hoặc có bất kỳ vấn đề gì sau khi hiến máu, vui lòng liên hệ với chúng tôi qua:</strong></p>
+            <p>📞 028 3855 4137<br>
+            📧 <a href='mailto:trungtamhienmau.anhduong@gmail.com' style='color:#B71C1C; text-decoration:none;'>trungtamhienmau.anhduong@gmail.com</a></p>
+        </div>
+        
+        <p style='margin-top:10px'>Một lần nữa, xin chân thành cảm ơn và chúc bạn luôn mạnh khỏe, hạnh phúc!</p>
+        
+        <p><strong>Trân trọng,</strong><br>
+        Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương<br>
+        <span style='color:#800080;'>Địa chỉ: Đường CMT8, Q.3, TP.HCM, Việt Nam</span></p>
+        
+        <p style='font-size:13px; color:#666;'><em>Lưu ý: Bạn có thể hiến máu lần tiếp theo sau ít nhất 84 ngày.</em>
+        </p>
+        <p style='font-size:13px; color:#666;'><em> Thông tin sức khoẻ và quy trình hiến máu của bạn đã được chúng tôi cập nhật trên website. Bạn có thể đăng nhập vào website để xem lại chi tiết.</em>
+        </p>
 
-                <p>Kính gửi <strong style='font-weight: 700;'>{donorName}</strong>,</p>
+      </div>
+    </div>";
 
-                <p>
-                    Trung tâm Hiến máu <strong>Bệnh viện Đa khoa Ánh Dương</strong> xin gửi lời tri ân sâu sắc đến bạn vì đã tham gia hiến máu tình nguyện vào ngày 
-                    <strong>{donationDate}</strong>, với <strong>{donationCapacity}ml</strong> máu nhóm <strong>{fullBloodType}</strong>.
-                </p>
-
-                <p>
-                    Đây không chỉ là một hành động cao đẹp, mà còn là món quà vô giá mà bạn đã trao tặng cho những bệnh nhân đang chiến đấu với bệnh tật từng ngày. 
-                    Sự sẻ chia quý báu này đã góp phần giúp duy trì sự sống và mang lại hy vọng cho những người đang cần máu khẩn cấp.
-                </p>
-
-                <p style='font-style: italic; color: #b30000; font-weight: bold; font-size: 16px;'>
-                    💗 “Mỗi giọt máu cho đi – Một cuộc đời ở lại.”
-                </p>
-
-                <p>
-                    Chúng tôi hy vọng bạn sẽ tiếp tục đồng hành cùng chương trình hiến máu trong những lần tới để lan tỏa nghĩa cử nhân văn này đến cộng đồng.
-                </p>
-
-                <p>Nếu bạn cần thêm thông tin hoặc có bất kỳ vấn đề gì sau khi hiến máu, vui lòng liên hệ với chúng tôi qua:</p>
-
-                <ul style='list-style: none; padding: 0; font-weight: bold;'>
-                    <li>📞 028 3855 4137</li>
-                    <li>📧 <a href='mailto:trungtamhienmau.anhduong@gmail.com'>trungtamhienmau.anhduong@gmail.com</a></li>
-                </ul>
-
-                <p>
-                    Một lần nữa, xin chân thành cảm ơn và chúc bạn luôn mạnh khỏe, hạnh phúc!
-                </p>
-
-                <p>Trân trọng,</p>
-
-                <p><strong>Trung tâm Hiến máu Ánh Dương</strong></p>
-                <p style='color: #800080;'>Địa chỉ: Đường CMT8, Q.3, TP.HCM, Việt Nam</p>
-
-                <p style='font-size: 13px; color: #666;'><em>Lưu ý: Bạn có thể hiến máu lần tiếp theo sau ít nhất 84 ngày.</em></p>
-    
-                <hr style='margin-top: 30px;' />
-
-            </div>";
 
             var mail = new MailMessage
             {
