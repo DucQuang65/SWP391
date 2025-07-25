@@ -40,11 +40,11 @@ namespace Hien_mau.Services
 
 
             var body = $@"
-            <div style='font-family: Arial, Helvetica, sans-serif; background-color:#f8f9fa; padding:20px;'>
+            <div style='font-family: Arial, Helvetica, sans-serif; background-color:#f8f9fa; padding:20px;'> 
             <div style='max-width:600px; background-color:#ffffff; margin:0 auto; padding:30px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); color:#333333;'>
     
-            <div style='text-align:center; color:#B71C1C; font-size:22px; font-weight:bold; margin-bottom:10px;'>Thư Tri Ân Hiến Máu</div>
-            <div style='text-align:center; font-size:16px; color:#555; margin-bottom:20px;'>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</div>
+            <div style='text-align:center; color:#555; font-size:22px; font-weight:bold; margin-bottom:10px;'>Thư Tri Ân Hiến Máu</div>
+            <div style='text-align:center; font-size:17px; color:#B71C1C; margin-bottom:20px; font-weight:bold;'>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</div>
     
             <p style='color:#000000'>Kính gửi <strong>{donorName}</strong>,</p>
     
@@ -62,56 +62,58 @@ namespace Hien_mau.Services
                 “Mỗi giọt máu cho đi – Một cuộc đời ở lại.”
             </div>
     
-            <p style='color:#000000'>Chúng tôi hy vọng bạn sẽ tiếp tục đồng hành cùng chương trình hiến máu trong những lần tới để lan tỏa nghĩa cử nhân văn này đến cộng đồng.</p>
+            <p style='color:#000000'>Bạn có thể tiếp tục hiến máu sau ít nhất 84 ngày kể từ lần hiến gần nhất.</p>
     
-            <div style='background-color:#fce4ec; padding:15px; border-radius:8px; margin-top:20px; font-size:14px;'>
-                <p style='color:#000000'><strong>Nếu bạn cần thêm thông tin hoặc có bất kỳ vấn đề gì sau khi hiến máu, vui lòng liên hệ với chúng tôi qua:</strong></p>
-                <p style='color:#000000'>📞 028 3855 4137<br>
-                📧 <a href='mailto:trungtamhienmau.anhduong@gmail.com' style='color:#B71C1C; text-decoration:none;'>trungtamhienmau.anhduong@gmail.com</a></p>
-            </div>
+            <p style='color:#000000'>Chúng tôi rất mong tiếp tục nhận được sự đồng hành quý báu từ bạn trong những lần hiến máu sắp tới, để cùng nhau lan tỏa tinh thần nhân ái và sẻ chia đến với cộng đồng.</p>
     
             <p style='margin-top:10px; color:#000000'>Một lần nữa, xin chân thành cảm ơn và chúc bạn luôn mạnh khỏe, hạnh phúc!</p>
     
-            <!DOCTYPE html>
-            <html>
-              <body>
+            <p style='color:#000000'><strong>Trân trọng,</strong><br>
+            Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương<br>
+
+            <div style='background-color:#fce4ec; padding:15px; border-radius:8px; margin-top:20px; font-size:14px;'>
+                <p style='color:#000000'><strong>Thông tin sức khỏe và lịch sử hiến máu của bạn đã được cập nhật trên hệ thống. Vui lòng đăng nhập vào website để theo dõi chi tiết.  <br>
+                Nếu bạn cần thêm thông tin hoặc có bất kỳ vấn đề gì sau khi hiến máu, vui lòng liên hệ với chúng tôi qua:</strong></p>
                 <table style=""border:none; border-collapse:collapse; font-family:Arial, sans-serif;"">
-                  <tr>
-                    <!-- Logo -->
-                    <td style=""padding-right:15px; vertical-align:top;"">
-                      <img src=""https://i.postimg.cc/W4hDRcDH/logo.png"" 
-                           alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
-                    </td>
-                    <!-- Thông tin -->
-                    <td style=""vertical-align:top; font-size:14px; line-height:20px; color:#333; padding-left:10px; border-left:3px solid #b4004e;"">
-                      <!-- Tiêu đề -->
-                      <div style=""font-size:16px; font-weight:bold; color:#b4004e; margin-bottom:4px;"">
-                        Trung tâm Hiến máu<br>Bệnh viện Đa khoa Ánh Dương
-                      </div>
-                      <!-- Địa chỉ -->
-                      <div style=""margin:6px 0;"">
-                        <span style=""color:#b4004e;"">📍</span> 
-                        <strong>Địa chỉ:</strong> Đường CMT8, Q.3, TP.HCM
-                      </div>
-                      <!-- Liên hệ -->
-                      <div style=""margin:6px 0;"">
-                        <span style=""color:#b4004e;"">📞</span> 
-                        <strong>Liên hệ:</strong> <a href=""tel:+842838554137"" style=""text-decoration:none; color:#333;"">028 3855 4137</a>
-                      </div>
-                      <!-- Email -->
-                      <div style=""margin:6px 0;"">
-                        <span style=""color:#b4004e;"">📧</span> 
-                        <strong>Email:</strong> 
-                        <a href=""mailto:trungtamhienmau.anhduong@gmail.com"" style=""text-decoration:none; color:#1a73e8;"">
-                          trungtamhienmau.anhduong@gmail.com
-                        </a>
-                      </div>
-         
-                    </td>
-                  </tr>
-                </table>
-              </body>
-            </html>";
+            <tr>
+            <!-- Logo -->
+            <td style=""padding-right:15px; vertical-align:top;"">
+              <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+                    alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
+            </td>
+            <!-- Thông tin -->
+            <td style=""vertical-align:top; font-size:14px; line-height:20px; color:#333; padding-left:10px; border-left:3px solid #b4004e;"">
+              <!-- Tiêu đề -->
+              <div style=""font-size:16px; font-weight:bold; color:#b4004e; margin-bottom:4px;"">
+                Trung tâm Hiến máu<br>Bệnh viện Đa khoa Ánh Dương
+              </div>
+              <!-- Địa chỉ -->
+              <div style=""margin:6px 0;"">
+                <span style=""style='color:#000000';""></span> 
+                <strong>Địa chỉ:</strong> Đường CMT8, Q.3, TP.HCM
+              </div>
+              <!-- Liên hệ -->
+              <div style=""margin:6px 0;"">
+                <span style=""style='color:#000000';""></span> 
+                <strong>Liên hệ:</strong> <a href=""tel:+842838554137"" style=""text-decoration:none; color:#333;"">028 3855 4137</a>
+              </div>
+              <!-- Email -->
+              <div style=""margin:6px 0;"">
+                <span style=""style='color:#000000';""></span> 
+                <strong>Email:</strong> 
+                <a href=""mailto:trungtamhienmau.anhduong@gmail.com"" style=""text-decoration:none; color:#1a73e8;"">
+                  trungtamhienmau.anhduong@gmail.com
+                </a>
+              </div>
+     
+            </td>
+          </tr>
+        </table>
+
+            </div>
+
+          </div>
+        </div>";
 
             var mail = new MailMessage
             {
