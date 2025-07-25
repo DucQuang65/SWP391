@@ -176,13 +176,22 @@ namespace Hien_mau.Services
             return true;
         }
 
-        public async Task<bool> PatchStatusBloodRequest(int id, byte status)
+        public async Task<bool> PatchStatusBloodRequest(int id, byte status,string? note = null)
         {
             var bloodRequest = await _context.BloodRequests.FindAsync(id);
             if (bloodRequest == null) 
                 return false;
 
             bloodRequest.Status = status;
+
+            if (status == 3 && !string.IsNullOrWhiteSpace(note))
+            {
+                bloodRequest.Note = note;
+            }
+            else
+            {
+                bloodRequest.Note = null; // Xóa note nếu status != 3 (tuỳ yêu cầu)
+            }
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
             return true;

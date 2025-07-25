@@ -8,7 +8,7 @@ namespace Hien_mau.Interface
         Task<BloodRequestDto?> GetBloodRequestById(int id, HttpRequest request);
         Task<BloodRequestDto?> CreateBloodRequest(BloodRequestDto dto, HttpRequest request);
         Task<bool> UpdateBloodRequest(int id, BloodRequestDto dto);
-        Task<bool> PatchStatusBloodRequest(int id, byte status);
+        Task<bool> PatchStatusBloodRequest(int id, byte status,string? note = null);
         Task<bool> DeleteBloodRequest(int id);
     }
 }

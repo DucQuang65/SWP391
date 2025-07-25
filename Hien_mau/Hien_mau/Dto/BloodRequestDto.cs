@@ -27,5 +27,6 @@
     public class UpdateStatusBloodRequestDto
     {
         public byte Status { get; set; }
+        public string? Note { get; set; }
     }
 }
