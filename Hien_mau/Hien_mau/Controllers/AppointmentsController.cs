@@ -326,11 +326,6 @@ public class AppointmentController : ControllerBase
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Status updated to {status}", "Update");
 
-        if (appointment.Process == 4 && appointment.Status == true)
-        {
-            await _sendEmail.SendThankYouEmailAsync(appointment);
-            return Ok("Đã gửi email cảm ơn.");
-        }
         return Ok();
     }
 
@@ -346,7 +341,12 @@ public class AppointmentController : ControllerBase
 
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Process updated to {process}", "Update");
-
+        
+        if (appointment.Process == 4)
+        {
+            await _sendEmail.SendThankYouEmailAsync(appointment);
+            return Ok("Đã gửi email cảm ơn.");
+        }
         return Ok();
     }
 
