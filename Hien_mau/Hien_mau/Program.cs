@@ -69,7 +69,7 @@ namespace Hien_mau
             builder.Services.AddScoped<ISendEmail, SendEmail>();
             builder.Services.AddScoped<IBloodRequestService, BloodRequestService>();
             builder.Services.AddScoped<IInformationService, InformationService>();
-
+            builder.Services.AddScoped<IHospitalInfo, HospitalInfoService>();
             //builder.Services.AddHostedService<CancelExpiredService>();
 
 
