@@ -30,6 +30,7 @@ namespace Hien_mau.Services
             var bloodGroup = appointment.BloodGroup ?? "";
             var rhSymbol = (appointment.RhType ?? "").Replace("Rh", "").Trim();
             var fullBloodType = $"{bloodGroup}{rhSymbol}";
+            var donationCapacity = appointment.DonationCapacity;
             var donationDate = appointment.DonationDate.HasValue ? appointment.DonationDate.Value.ToString("dd/MM/yyyy") : "N/A";
 
             var smtpServer = _config["EmailSettings:SmtpServer"];
@@ -37,16 +38,19 @@ namespace Hien_mau.Services
             var senderEmail = _config["EmailSettings:SenderEmail"];
             var senderPassword = _config["EmailSettings:SenderPassword"];
 
+
             var body = $@"
-                <p>Xin chào {donorName},</p>
-                <p>Chúng tôi chân thành cảm ơn bạn đã tham gia hiến máu vào ngày <strong>{donationDate}</strong>.</p>
-                <p>Nhóm máu của bạn: <strong>{fullBloodType}</strong>.</p>
-                <p>Ghi chú: {appointment.Notes ?? "Không có"}</p>
-                <br />
-                <p>Bạn đã góp phần cứu sống những người đang cần. Một lần nữa, xin chân thành cảm ơn!</p>
-                <p>Trân trọng,</p>
-                <p><strong>Hệ thống Hiến máu</strong></p>
-            ";
+            <p>Xin chào {donorName},</p>
+            <p>Chúng tôi xin gửi lời cảm ơn sâu sắc đến bạn vì đã tham gia hiến máu tình nguyện vào ngày <strong>{donationDate}</strong>. Hành động của bạn thật cao đẹp và đáng trân trọng.</p>    
+            <p>Thông tin buổi hiến máu:</p>
+            <ul>
+                <li><strong>Nhóm máu:</strong> {fullBloodType}</li>
+                <li><strong>Lượng máu đã hiến:</strong> {donationCapacity}ml</li>
+                <li><strong>Ghi chú:</strong> {appointment.Notes ?? "Không có"}</li>
+            </ul>
+            <p>Bạn đã góp phần cứu sống những người đang cần. Một lần nữa, xin chân thành cảm ơn!</p>
+            <p>Trân trọng,</p>
+            <p><strong>Hệ thống Hiến máu</strong></p>";
 
             var mail = new MailMessage
             {

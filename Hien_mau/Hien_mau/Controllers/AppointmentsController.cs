@@ -334,7 +334,7 @@ public class AppointmentController : ControllerBase
     {
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment == null) return NotFound();
-        if (process > 4) 
+        if (process > 5) 
             return BadRequest("Invalid process");
 
         appointment.Process = process;
@@ -342,7 +342,7 @@ public class AppointmentController : ControllerBase
         await _context.SaveChangesAsync();
         await logger.NotiLog(appointment.UserID, "Appointment", $"Process updated to {process}", "Update");
         
-        if (appointment.Process == 4)
+        if (appointment.Process == 5)
         {
             await _sendEmail.SendThankYouEmailAsync(appointment);
             return Ok("Đã gửi email cảm ơn.");
