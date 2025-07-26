@@ -151,17 +151,75 @@ namespace Hien_mau.Controllers
         {
             try
             {
-                var statistics = await _context.BloodInventories
-                    .GroupBy(i => new { i.BloodGroup, i.RhType })
+                var inventoryStats = await _context.BloodInventories
+                    .AsNoTracking()
+                    .Include(i => i.Components)
+                    .GroupBy(i => new { i.BloodGroup, i.RhType, i.ComponentId, i.Components.ComponentType })
                     .Select(g => new
                     {
                         BloodGroup = g.Key.BloodGroup,
                         RhType = g.Key.RhType,
+                        ComponentId = g.Key.ComponentId,
+                        ComponentName = g.Key.ComponentType,
                         Quantity = g.Sum(x => x.Quantity)
                     })
                     .ToListAsync();
 
-                return Ok(statistics);
+                var donorStats = await _context.Appointments
+                    .AsNoTracking()
+                    .Where(a => a.Status == true && a.Process == 4 && a.Cancel == false && a.DonationDate != null)
+                    .GroupBy(a => new { a.BloodGroup, a.RhType })
+                    .Select(g => new
+                    {
+                        BloodGroup = g.Key.BloodGroup,
+                        RhType = g.Key.RhType,
+                        NumDonors = g.Select(a => a.UserID).Distinct().Count()
+                    })
+                    .ToListAsync();
+
+                var recipientStats = await (
+                    from rc in _context.RequestComponents
+                    join r in _context.BloodRequests on rc.RequestId equals r.RequestId
+                    select new { r.BloodGroup, r.RhType, rc.ComponentId, r.UserId }
+                )
+                .GroupBy(x => new { x.BloodGroup, x.RhType, x.ComponentId })
+                .Select(g => new
+                {
+                    BloodGroup = g.Key.BloodGroup,
+                    RhType = g.Key.RhType,
+                    ComponentId = g.Key.ComponentId,
+                    NumRecipients = g.Select(x => x.UserId).Distinct().Count()
+                })
+                .ToListAsync();
+
+
+                var combinedStats = (
+                    from inv in inventoryStats
+                    join don in donorStats
+                        on new { inv.BloodGroup, inv.RhType }
+                        equals new { don.BloodGroup, don.RhType }
+                        into donorGroup
+                    from don in donorGroup.DefaultIfEmpty()
+
+                    join rec in recipientStats
+                        on new { inv.BloodGroup, inv.RhType, inv.ComponentId }
+                        equals new { rec.BloodGroup, rec.RhType, rec.ComponentId }
+                        into recipientGroup
+                    from rec in recipientGroup.DefaultIfEmpty()
+
+                    select new
+                    {
+                        inv.BloodGroup,
+                        inv.RhType,
+                        inv.ComponentId,
+                        inv.ComponentName,
+                        inv.Quantity,
+                        NumDonors = don?.NumDonors ?? 0,
+                        NumRecipients = rec?.NumRecipients ?? 0
+                    }
+                ).ToList();
+
+                return Ok(combinedStats);
             }
             catch (Exception ex)
             {
@@ -169,6 +227,7 @@ namespace Hien_mau.Controllers
                 return StatusCode(500, "Lỗi hệ thống khi thống kê kho máu");
             }
         }
+
 
 
         [HttpPost("check-in")]
