@@ -146,6 +146,13 @@ public class AppointmentController : ControllerBase
         });
     }
 
+    [HttpPost("send-reminders")]
+    public async Task<IActionResult> SendReminders()
+    {
+        await _sendEmail.SendAppointmentRemindersAsync();
+        return Ok("Email nhắc nhở đã được gửi cho các cuộc hẹn ngày mai.");
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateAppointment([FromBody] AppointmentCreateDTO dto, [FromServices] NotificationLog logger)
     {

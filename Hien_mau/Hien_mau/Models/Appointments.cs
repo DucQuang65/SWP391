@@ -5,7 +5,7 @@ public class Appointments
     public int AppointmentID { get; set; }
     public int UserID { get; set; }
     public int? DoctorID1 { get; set; }
-    public DateTime AppointmentDate { get; set; }
+    public DateTime? AppointmentDate { get; set; }
     public string TimeSlot { get; set; }
     public bool? Status { get; set; }
     public byte Process { get; set; } = 0;

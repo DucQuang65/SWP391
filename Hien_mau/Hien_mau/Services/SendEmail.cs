@@ -135,5 +135,84 @@ namespace Hien_mau.Services
             await smtp.SendMailAsync(mail);
         }
 
+        public async Task SendAppointmentRemindersAsync()
+        {
+            var vnTime = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var nowVN = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vnTime);
+
+            var tomorrow = nowVN.Date.AddDays(1);
+
+            var appointments = await _context.Appointments
+                .Include(a => a.User)
+                .Where(a => a.AppointmentDate.HasValue &&
+                            a.AppointmentDate.Value.Date == tomorrow &&
+                            a.Cancel == false)
+                .ToListAsync();
+
+            foreach (var appointment in appointments)
+            {
+                if (string.IsNullOrWhiteSpace(appointment.User?.Email))
+                    continue;
+
+                var donorName = appointment.User.Name ?? "Bạn";
+                var dateStr = appointment.AppointmentDate.Value.ToString("dd/MM/yyyy");
+                var slot = appointment.TimeSlot ?? "";
+
+                var smtpServer = _config["EmailSettings:SmtpServer"];
+                var smtpPort = int.Parse(_config["EmailSettings:SmtpPort"]);
+                var senderEmail = _config["EmailSettings:SenderEmail"];
+                var senderPassword = _config["EmailSettings:SenderPassword"];
+
+                var body = $@"
+        <div style='font-family: Arial; font-size: 14px; color: #333;'>
+            <p><strong>Kính gửi {donorName},</strong></p>
+
+            <p>Cảm ơn bạn đã đăng ký tham gia chương trình hiến máu tình nguyện do <strong>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</strong> tổ chức. Chúng tôi xin gửi đến bạn thông tin chi tiết về buổi hiến máu sắp tới:</p>
+
+            <p><strong>Thời gian:</strong>{dateStr}</p>
+            <p><strong>Giờ:</strong> {slot}</p>
+            <p><strong>Địa điểm:</strong> Trung tâm Hiến máu Ánh Dương - Đường CMT8, Q.3, TP.HCM</p>
+
+            <p>Hiến máu là một nghĩa cử cao đẹp, và sự tham gia của bạn sẽ góp phần mang lại cơ hội sống cho nhiều bệnh nhân đang cần máu.</p>
+
+            <p><strong>Để buổi hiến máu diễn ra an toàn và thuận lợi, bạn vui lòng lưu ý:</strong></p>
+            <ul>
+                <li>Ăn nhẹ và uống đủ nước trước khi hiến máu.</li>
+                <li>Nghỉ ngơi đầy đủ vào đêm trước đó.</li>
+                <li>Tránh sử dụng rượu bia trong vòng 24 giờ trước khi hiến máu.</li>
+                <li>Mang theo giấy tờ tùy thân (CMND/CCCD) khi đến địa điểm hiến máu.</li>
+            </ul>
+
+            <p>Nếu bạn cần hỗ trợ hoặc có thay đổi về lịch trình, vui lòng liên hệ với chúng tôi qua:</p>
+            <p>📞 Hotline: <strong>028 3855 4137</strong></p>
+            <p>📧 Email: <a href='mailto:trungtamhienmau.anhduong@gmail.com'>trungtamhienmau.anhduong@gmail.com</a></p>
+
+            <p>Một lần nữa, cảm ơn bạn đã đồng hành cùng chúng tôi trong hành trình lan tỏa sự sống.</p>
+            <p><strong>Rất mong được gặp bạn tại buổi hiến máu.</strong></p>
+
+            <p>Trân trọng,</p>
+            <p><strong>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</strong></p>
+        </div>";
+
+                var mail = new MailMessage
+                {
+                    From = new MailAddress(senderEmail, "Trung tâm Hiến máu"),
+                    Subject = "Nhắc nhở lịch hiến máu",
+                    Body = body,
+                    IsBodyHtml = true
+                };
+
+                mail.To.Add(appointment.User.Email);
+
+                using var smtp = new SmtpClient(smtpServer)
+                {
+                    Port = smtpPort,
+                    Credentials = new NetworkCredential(senderEmail, senderPassword),
+                    EnableSsl = true
+                };
+
+                await smtp.SendMailAsync(mail);
+            }
+        }
     }
 }

@@ -50,5 +50,5 @@ public partial class BloodRequests
     public virtual Patients? Patient { get; set; }
 
     public virtual Users User { get; set; } = null!;
-    public virtual ICollection<Components> RequestComponents { get; set; } = new List<Components>();
+    //public virtual ICollection<Components> RequestComponents { get; set; } = new List<Components>();
 }

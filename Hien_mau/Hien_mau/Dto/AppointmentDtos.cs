@@ -5,7 +5,7 @@ public class AppointmentDTO
 {
     public int AppointmentId { get; set; }
     public int UserId { get; set; }
-    public DateTime AppointmentDate { get; set; }
+    public DateTime? AppointmentDate { get; set; }
     public string TimeSlot { get; set; }
     public bool? Status { get; set; }
     public byte Process { get; set; }
