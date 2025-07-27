@@ -1,10 +1,12 @@
-﻿using Hien_mau.Data;
+﻿using DocumentFormat.OpenXml.InkML;
+using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Interface;
 using Hien_mau.Models;
 using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Hien_mau.Dtos.BloodInventoryDtos;
 
 namespace Hien_mau.Controllers
 {
@@ -13,6 +15,7 @@ namespace Hien_mau.Controllers
     public class BloodRequestController : ControllerBase
     {
         private readonly IBloodRequestService _service;
+        private readonly Hien_mauContext _context;
 
         public BloodRequestController(IBloodRequestService service)
         {
@@ -35,6 +38,25 @@ namespace Hien_mau.Controllers
                 return NotFound();
             return Ok(result);
 
+        }
+
+        [HttpGet("statistics/recipients")]
+        public async Task<IActionResult> GetBloodRecipientStatistics()
+        {
+                var recipientStats = await _context.BloodRequests
+                    .AsNoTracking()
+                    .GroupBy(r => new { r.BloodGroup, r.RhType, r.ComponentId })
+                    .Select(g => new
+                    {
+                        BloodGroup = g.Key.BloodGroup,
+                        RhType = g.Key.RhType,
+                        ComponentId = g.Key.ComponentId,
+                        NumRecipients = g.Select(r => r.UserId).Distinct().Count(),
+                        TotalRequests = g.Count()
+                    })
+                    .ToListAsync();
+
+                return Ok(recipientStats);
         }
 
         [HttpPost]
