@@ -117,7 +117,7 @@ namespace Hien_mau.Services
 
             var mail = new MailMessage
             {
-                From = new MailAddress(senderEmail, "Hệ thống hiến máu"),
+                From = new MailAddress(senderEmail, "Trung tâm Hiến máu"),
                 Subject = "Cảm ơn bạn đã hiến máu",
                 Body = body,
                 IsBodyHtml = true
@@ -214,5 +214,7 @@ namespace Hien_mau.Services
                 await smtp.SendMailAsync(mail);
             }
         }
+
+
     }
 }
