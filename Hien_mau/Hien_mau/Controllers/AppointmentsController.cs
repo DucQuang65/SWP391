@@ -149,8 +149,15 @@ public class AppointmentController : ControllerBase
     [HttpPost("send-reminders")]
     public async Task<IActionResult> SendReminders()
     {
-        await _sendEmail.SendAppointmentRemindersAsync();
+        await _sendEmail.SendAppointmentReminders();
         return Ok("Email nhắc nhở đã được gửi cho các cuộc hẹn ngày mai.");
+    }
+
+    [HttpPost("send-donation-call")]
+    public async Task<IActionResult> SendEmergencyCall()
+    {
+        await _sendEmail.SendDonationBloodCall();
+        return Ok("Đã gửi email kêu gọi hiến máu.");
     }
 
     [HttpPost]
@@ -351,7 +358,7 @@ public class AppointmentController : ControllerBase
         
         if (appointment.Process == 5)
         {
-            await _sendEmail.SendThankYouEmailAsync(appointment);
+            await _sendEmail.SendThankYouEmail(appointment);
             return Ok("Đã gửi email cảm ơn.");
         }
         return Ok();

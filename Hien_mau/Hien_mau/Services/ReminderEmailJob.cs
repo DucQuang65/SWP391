@@ -31,7 +31,7 @@ namespace Hien_mau.Services
 
                 using var scope = _scopeFactory.CreateScope();
                 var emailService = scope.ServiceProvider.GetRequiredService<ISendEmail>();
-                await emailService.SendAppointmentRemindersAsync();
+                await emailService.SendAppointmentReminders();
             }
         }
     }
