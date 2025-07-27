@@ -56,5 +56,17 @@
             public string Notes { get; set; } // Ghi chú
             public int PerformedBy { get; set; } // ID người thực hiện
         }
+
+        public class BloodInventoryStatisticsDto
+        {
+            public string? BloodGroup { get; set; }
+            public string? RhType { get; set; }
+            public int ComponentId { get; set; }
+            public string? ComponentName { get; set; }
+            public int Quantity { get; set; }
+            public int NumDonors { get; set; }
+            public int NumRecipients { get; set; }
+        }
+
     }
 }

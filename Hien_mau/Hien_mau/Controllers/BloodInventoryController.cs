@@ -149,77 +149,29 @@ namespace Hien_mau.Controllers
         [HttpGet("statistics")]
         public async Task<IActionResult> GetBloodInventoryStatistics()
         {
+            if (_context == null)
+                return StatusCode(500, "Lỗi hệ thống: Kết nối cơ sở dữ liệu không khả dụng");
+
             try
             {
                 var inventoryStats = await _context.BloodInventories
                     .AsNoTracking()
                     .Include(i => i.Components)
                     .GroupBy(i => new { i.BloodGroup, i.RhType, i.ComponentId, i.Components.ComponentType })
-                    .Select(g => new
+                    .Select(g => new BloodInventoryStatisticsDto
                     {
-                        BloodGroup = g.Key.BloodGroup,
-                        RhType = g.Key.RhType,
+                        BloodGroup = g.Key.BloodGroup ?? "",// g.Key.BloodGroup is the value of the BloodGroup property in the group key by using LINQ
+                        RhType = g.Key.RhType ?? "",
                         ComponentId = g.Key.ComponentId,
-                        ComponentName = g.Key.ComponentType,
-                        Quantity = g.Sum(x => x.Quantity)
+                        ComponentName = g.Key.ComponentType ?? "",
+                        Quantity = g.Sum(x => x.Quantity),
+                        NumDonors = 0,
+                        NumRecipients = 0
                     })
                     .ToListAsync();
 
-                var donorStats = await _context.Appointments
-                    .AsNoTracking()
-                    .Where(a => a.Status == true && a.Process == 4 && a.Cancel == false && a.DonationDate != null)
-                    .GroupBy(a => new { a.BloodGroup, a.RhType })
-                    .Select(g => new
-                    {
-                        BloodGroup = g.Key.BloodGroup,
-                        RhType = g.Key.RhType,
-                        NumDonors = g.Select(a => a.UserID).Distinct().Count()
-                    })
-                    .ToListAsync();
-
-                var recipientStats = await (
-                    from rc in _context.RequestComponents
-                    join r in _context.BloodRequests on rc.RequestId equals r.RequestId
-                    select new { r.BloodGroup, r.RhType, rc.ComponentId, r.UserId }
-                )
-                .GroupBy(x => new { x.BloodGroup, x.RhType, x.ComponentId })
-                .Select(g => new
-                {
-                    BloodGroup = g.Key.BloodGroup,
-                    RhType = g.Key.RhType,
-                    ComponentId = g.Key.ComponentId,
-                    NumRecipients = g.Select(x => x.UserId).Distinct().Count()
-                })
-                .ToListAsync();
-
-
-                var combinedStats = (
-                    from inv in inventoryStats
-                    join don in donorStats
-                        on new { inv.BloodGroup, inv.RhType }
-                        equals new { don.BloodGroup, don.RhType }
-                        into donorGroup
-                    from don in donorGroup.DefaultIfEmpty()
-
-                    join rec in recipientStats
-                        on new { inv.BloodGroup, inv.RhType, inv.ComponentId }
-                        equals new { rec.BloodGroup, rec.RhType, rec.ComponentId }
-                        into recipientGroup
-                    from rec in recipientGroup.DefaultIfEmpty()
-
-                    select new
-                    {
-                        inv.BloodGroup,
-                        inv.RhType,
-                        inv.ComponentId,
-                        inv.ComponentName,
-                        inv.Quantity,
-                        NumDonors = don?.NumDonors ?? 0,
-                        NumRecipients = rec?.NumRecipients ?? 0
-                    }
-                ).ToList();
-
-                return Ok(combinedStats);
+                _logger.LogInformation("Retrieved blood inventory statistics successfully");
+                return Ok(inventoryStats);
             }
             catch (Exception ex)
             {
@@ -227,6 +179,7 @@ namespace Hien_mau.Controllers
                 return StatusCode(500, "Lỗi hệ thống khi thống kê kho máu");
             }
         }
+
 
 
 
