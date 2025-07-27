@@ -154,21 +154,50 @@ namespace Hien_mau.Controllers
 
             try
             {
+
                 var inventoryStats = await _context.BloodInventories
                     .AsNoTracking()
                     .Include(i => i.Components)
                     .GroupBy(i => new { i.BloodGroup, i.RhType, i.ComponentId, i.Components.ComponentType })
                     .Select(g => new BloodInventoryStatisticsDto
                     {
-                        BloodGroup = g.Key.BloodGroup ?? "",// g.Key.BloodGroup is the value of the BloodGroup property in the group key by using LINQ
+                        BloodGroup = g.Key.BloodGroup ?? "", 
                         RhType = g.Key.RhType ?? "",
                         ComponentId = g.Key.ComponentId,
                         ComponentName = g.Key.ComponentType ?? "",
                         Quantity = g.Sum(x => x.Quantity),
-                        NumDonors = 0,
+                        NumDonors = 0,  
                         NumRecipients = 0
                     })
                     .ToListAsync();
+
+                var donorCounts = await _context.Appointments
+                    .Where(a => a.Status == true && a.Process == 4)
+                    .GroupBy(a => new { a.BloodGroup, a.RhType })
+                    .Select(g => new
+                    {
+                        g.Key.BloodGroup,
+                        g.Key.RhType,
+                        Count = g.Select(a => a.UserID).Distinct().Count()
+                    })
+                    .ToDictionaryAsync(d => (d.BloodGroup ?? "", d.RhType ?? ""), d => d.Count);
+
+                var recipientCounts = await _context.BloodRequests
+                    .GroupBy(r => new { r.BloodGroup, r.RhType, r.ComponentId })
+                    .Select(g => new
+                    {
+                        g.Key.BloodGroup,
+                        g.Key.RhType,
+                        g.Key.ComponentId,
+                        Count = g.Select(r => r.UserId).Distinct().Count()
+                    })
+                    .ToDictionaryAsync(d => (d.BloodGroup ?? "", d.RhType ?? "", d.ComponentId), d => d.Count);
+
+                foreach (var stat in inventoryStats)
+                {
+                    stat.NumDonors = donorCounts.GetValueOrDefault((stat.BloodGroup, stat.RhType), 0);
+                    stat.NumRecipients = recipientCounts.GetValueOrDefault((stat.BloodGroup, stat.RhType, stat.ComponentId), 0);
+                }
 
                 _logger.LogInformation("Retrieved blood inventory statistics successfully");
                 return Ok(inventoryStats);
