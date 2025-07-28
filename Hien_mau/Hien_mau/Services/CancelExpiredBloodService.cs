@@ -39,7 +39,7 @@ public class BloodInventoryExpiryJob
             var expiredLog = new BloodInventoryHistories
             {
                 InventoryId = item.InventoryId,
-                ActionType = "Hủy",
+                ActionType = "Cancel",
                 Quantity = item.Quantity,
                 Notes = "Tự động hủy do hết hạn",
                 PerformedBy = -1,
