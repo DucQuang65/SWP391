@@ -1,12 +1,10 @@
-﻿using DocumentFormat.OpenXml.InkML;
-using Hien_mau.Data;
+﻿using Hien_mau.Data;
 using Hien_mau.Dto;
 using Hien_mau.Interface;
 using Hien_mau.Models;
 using Hien_mau.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using static Hien_mau.Dtos.BloodInventoryDtos;
 
 namespace Hien_mau.Controllers
 {
@@ -17,9 +15,10 @@ namespace Hien_mau.Controllers
         private readonly IBloodRequestService _service;
         private readonly Hien_mauContext _context;
 
-        public BloodRequestController(IBloodRequestService service)
+        public BloodRequestController(IBloodRequestService service, Hien_mauContext context)
         {
             _service = service;
+            _context = context;
         }
 
         [HttpGet]
