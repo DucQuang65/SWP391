@@ -329,7 +329,7 @@ Lưu ý:
     N'5. Kết Luận' + CHAR(13) + CHAR(10) +
     N'Hiến máu không chỉ là hành động cứu người mà còn mang lại nhiều lợi ích cho chính bạn. Nếu bạn đang cân nhắc hiến máu lần đầu, hãy chuẩn bị kỹ lưỡng và đừng ngần ngại tham gia. Một giọt máu cho đi, một cuộc đời ở lại.',
 
-    'https://tudienbenhhoc.com/wp-content/uploads/2019/07/12-1.jpg',
+    'https://cdni.iconscout.com/illustration/premium/thumb/boy-donating-blood-6358731-5270679.png',
     6,
     'Article',
     '2025-05-01'),
@@ -370,7 +370,7 @@ Lưu ý:
     N'- Tránh vận động mạnh: trong 24 giờ đầu sau hiến máu.' + CHAR(13) + CHAR(10) +
     N'Những lưu ý này giúp cơ thể bạn phục hồi nhanh chóng và chuẩn bị tốt cho lần hiến máu tiếp theo.',
     
-    'https://static.vecteezy.com/system/resources/previews/000/682/458/non_2x/blood-donation-giving-blood-from-heart-to-heart.jpg',
+    'https://thumbs.dreamstime.com/b/blood-donation-illustration-concept-can-use-web-banners-infographics-hero-images-flat-illustration-isolated-white-270884972.jpg',
     6,
     'Article',
     '2025-05-01'),
@@ -611,7 +611,7 @@ Lưu ý:
     N'Hiến máu không mất đi – chỉ là đang trao đi sự sống.' + CHAR(13) + CHAR(10) +
     N'Hãy tham gia – để mỗi giọt máu bạn cho đi là một câu chuyện hồi sinh diệu kỳ.',
     
-    'https://nbs.gov.gh/wp-content/uploads/2021/10/blood-donation2.gif',
+    'https://static.vecteezy.com/system/resources/previews/017/012/867/non_2x/man-donating-his-blood-blood-donation-illustration-free-vector.jpg',
     6,
     'Article',
     '2025-05-01'),
@@ -636,7 +636,7 @@ Lưu ý:
     N' Địa điểm: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia',
     
-    'https://i.pinimg.com/474x/63/a5/ab/63a5ab75a44bfd09356d456f0fcccced.jpg',
+    'https://c8.alamy.com/comp/2D6N38T/blood-donation-transfusion-vector-flat-cartoon-illustration-volunteer-female-donor-donating-blood-in-medical-hospital-laboratory-world-blood-donor-2D6N38T.jpg',
     2,
     'News',
     '2025-07-01'),
@@ -664,7 +664,7 @@ Lưu ý:
     N' Đối tượng tham gia: Tất cả những ai đủ điều kiện sức khỏe, đặc biệt người có nhóm máu hiếm' + CHAR(13) + CHAR(10) +
     N' Hoạt động: Kiểm tra nhóm máu miễn phí, chia sẻ câu chuyện hiến máu, vinh danh các nhà hiến máu tiêu biểu',
 
-    'https://img.lovepik.com/free-png/20210926/lovepik-blood-donation-and-blood-transfusion-png-image_401443027_wh1200.png',
+    'https://static.vecteezy.com/system/resources/previews/007/926/239/non_2x/blood-donation-illustration-concept-with-blood-bag-world-blood-donor-day-vector.jpg',
     6,
     'News',
     '2025-06-01'),
@@ -688,7 +688,7 @@ Lưu ý:
     N' Địa điểm: Đại học FPT HCM.' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: dành cho toàn thể cán bộ, giảng viên, nhân viên và sinh viên Đại học FPT HCM.',
 
-    'https://img.lovepik.com/free-png/20210926/lovepik-world-blood-donation-day-vector-illustration-blood-png-image_401398810_wh1200.png',
+    'https://static.vecteezy.com/system/resources/previews/013/927/153/original/blood-donation-illustration-concept-on-white-background-vector.jpg',
     6,
     'News',
     '2025-04-16'),
@@ -714,7 +714,7 @@ Lưu ý:
     N' Địa điểm đăng ký: Trung Tâm Hiến Máu, đường CMT8, Q.3, TP.HCM' + CHAR(13) + CHAR(10) +
     N' Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu',
 
-    'https://img.lovepik.com/free-png/20210923/lovepik-world-blood-donation-day-love-png-image_401281054_wh1200.png',
+    'https://static.vecteezy.com/system/resources/previews/004/449/815/original/blood-donation-2d-isolated-illustration-man-in-chair-on-blood-transfusion-donor-with-smiling-nurse-flat-characters-on-cartoon-background-charity-work-and-volunteering-colourful-scene-vector.jpg',
     2,
     'News',
     '2025-06-15'),
