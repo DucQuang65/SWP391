@@ -286,7 +286,9 @@ namespace Hien_mau.Services
                     continue;
 
                 var donorName = appointment.User.Name ?? "Bạn";
-                var lastDonation = appointment.DonationDate?.ToString("dd/MM/yyyy") ?? "không rõ";
+                var bloodGroup = appointment.BloodGroup ?? "";
+                var rhSymbol = (appointment.RhType ?? "").Replace("Rh", "").Trim();
+                var fullBloodType = $"{bloodGroup}{rhSymbol}";
 
                 var smtpServer = _config["EmailSettings:SmtpServer"];
                 var smtpPort = int.Parse(_config["EmailSettings:SmtpPort"]);
@@ -294,22 +296,82 @@ namespace Hien_mau.Services
                 var senderPassword = _config["EmailSettings:SenderPassword"];
 
                 var body = $@"
-            <div style='font-family: Arial; font-size: 14px; color: #333;'>
-            <p><strong>Kính gửi {donorName},</strong></p>
+            <div style='font-family: Arial, Helvetica, sans-serif; background-color:#f8f9fa; padding:20px;'> 
+<div style='max-width:600px; background-color:#ffffff; margin:0 auto; padding:30px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); color:#333333;'>
+    
+    <!-- Tiêu đề -->
+    <h2 style=""color: #B71C1C; font-size: 20px; margin-bottom: 20px; text-align:center;"">[Khẩn] Cần gấp máu <span style=""font-weight:bold; tẽ""></span> <br> Rất mong nhận được sự hỗ trợ từ bạn</h2>
+    
+    <!-- Lời chào -->
+    <p style=""color:#000000;""><strong>Kính gửi {donorName},</strong></p>
+    
+    <!-- Nội dung cảm ơn -->
+    <p style=""color:#000000;"" >Trước tiên, Trung tâm Hiến máu <strong>Bệnh viện Đa khoa Ánh Dương</strong> xin gửi lời cảm ơn sâu sắc đến bạn vì đã tin tưởng và đồng hành cùng chương trình hiến máu trong suốt thời gian qua. Nghĩa cử cao đẹp của bạn chính là nguồn cảm hứng và sức mạnh để cộng đồng tiếp tục lan tỏa yêu thương.</p>
+    
+    <!-- Nội dung chính --> 
+    <p style=""color: #B71C1C;""><strong>Hiện tại, ngân hàng máu của bệnh viện đang rất cần nhóm máu {fullBloodType} của bạn</strong> để kịp thời hỗ trợ những ca bệnh cấp cứu. Theo thông tin bạn đã đăng ký, bạn thuộc nhóm máu phù hợp và đủ điều kiện tham gia hiến máu trong thời điểm này.</p>
+    
+    <p style=""color:#000000;"">Chúng tôi rất mong bạn dành chút thời gian tham gia hiến máu hoặc chia sẽ cho mọi người biết đến, bởi mỗi đơn vị máu bạn trao đi không chỉ cứu sống một người mà còn là món quà vô giá, thắp sáng niềm hy vọng cho nhiều gia đình.</p>
+    
+    <!-- Thông tin buổi hiến máu -->
+    <div style=""border-left: 4px solid #B71C1C; padding-left: 15px; margin: 20px 0;"">
+      <p style=""color:#000000;""><strong>Thông tin buổi hiến máu:</strong></p>
+      <p style=""color:#000000;""><strong>Thời gian: </strong>7:00 - 17:00</p>
+      <p style=""color:#000000;""><strong>Địa điểm:</strong>  Đường CMT8, Q.3, TP.HCM</p>
+    </div>
+    
+<p style=""color:#000000;""><em>Một hành động nhỏ hôm nay có thể thay đổi cuộc sống của ai đó vào ngày mai.</em><br>
+    Chúng tôi rất mong sớm nhận được sự chung tay quý báu từ bạn.</p>
 
-            <p>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương xin trân trọng cảm ơn bạn vì đã từng tham gia hiến máu vào ngày {lastDonation}.</p>
+    <p style='color:#000000'>Trân trọng,<br>
+      <strong>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</strong>
+    </p>
+      
+        <div style='background-color:#fce4ec; padding:15px; border-radius:8px; margin-top:20px; font-size:14px;'>
+        <p style='color:#000000'><strong>
+        Nếu bạn cần thêm thông tin hoặc có bất kỳ vấn đề gì sau khi hiến máu, vui lòng liên hệ với chúng tôi qua:</strong></p>
+        <table style=""border:none; border-collapse:collapse; font-family:Arial, sans-serif;"">
+    <tr>
+    <!-- Logo -->
+    <td style=""padding-right:15px; vertical-align:top;"">
+      <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+            alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
+    </td>
+    <!-- Thông tin -->
+    <td style=""vertical-align:top; font-size:14px; line-height:20px; color:#333; padding-left:10px; border-left:3px solid #b4004e;"">
+      <!-- Tiêu đề -->
+      <div style=""font-size:16px; font-weight:bold; color:#b4004e; margin-bottom:4px;"">
+        Trung tâm Hiến máu<br>Bệnh viện Đa khoa Ánh Dương
+      </div>
+      <!-- Địa chỉ -->
+      <div style=""margin:6px 0;"">
+        <span style=""style='color:#000000';""></span> 
+        <strong>Địa chỉ:</strong> Đường CMT8, Q.3, TP.HCM
+      </div>
+      <!-- Liên hệ -->
+      <div style=""margin:6px 0;"">
+        <span style=""style='color:#000000';""></span> 
+        <strong>Liên hệ:</strong> <a href=""tel:+842838554137"" style=""text-decoration:none; color:#333;"">028 3855 4137</a>
+      </div>
+      <!-- Email -->
+      <div style=""margin:6px 0;"">
+        <span style=""style='color:#000000';""></span> 
+        <strong>Email:</strong> 
+        <a href=""mailto:trungtamhienmau.anhduong@gmail.com"" style=""text-decoration:none; color:#1a73e8;"">
+          trungtamhienmau.anhduong@gmail.com
+        </a>
+      </div>
+     
+    </td>
+  </tr>
+</table>
 
-            <p>Hiện tại, chúng tôi đang đối mặt với tình trạng thiếu máu nghiêm trọng và rất cần sự giúp đỡ của bạn.</p>
+    </div>
 
-            <p>Nếu bạn đã đủ điều kiện hiến máu (cách lần hiến máu trước ít nhất 84 ngày), xin hãy cân nhắc đăng ký lại để cứu giúp các bệnh nhân đang cần máu khẩn cấp.</p>
-
-            <p>👉 <strong><a href='https://trungtamhiemau.vn/dat-lich' target='_blank'>Đặt lịch hiến máu ngay</a></strong></p>
-
-            <p>📞 Hotline: <strong>028 3855 4137</strong></p>
-            <p>📧 Email: <a href='mailto:trungtamhienmau.anhduong@gmail.com'>trungtamhienmau.anhduong@gmail.com</a></p>
-
-            <p>Trân trọng,<br/><strong>Trung tâm Hiến máu Bệnh viện Đa khoa Ánh Dương</strong></p>
-            </div>";
+  
+  </div>
+</div>
+";
 
                 var mail = new MailMessage
                 {
