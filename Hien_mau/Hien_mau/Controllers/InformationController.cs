@@ -16,10 +16,12 @@ namespace Hien_mau.Controllers
     public class InformationController : ControllerBase
     {
         private readonly IInformationService _service;
+        private readonly NotificationLog _logger; 
 
-        public InformationController(IInformationService service)
+        public InformationController(IInformationService service, NotificationLog logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -57,7 +59,7 @@ namespace Hien_mau.Controllers
 
             if (!updated) 
                 return NotFound("Không thể cập nhật.");
-
+            await _logger.NotiLog(id, "UserProfile", "Hồ sơ đã cập nhật", "Update");
             return Ok();
         }
 

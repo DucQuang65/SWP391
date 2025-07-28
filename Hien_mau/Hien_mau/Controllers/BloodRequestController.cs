@@ -14,11 +14,13 @@ namespace Hien_mau.Controllers
     {
         private readonly IBloodRequestService _service;
         private readonly Hien_mauContext _context;
+        private readonly NotificationLog _logger;
 
-        public BloodRequestController(IBloodRequestService service, Hien_mauContext context)
+        public BloodRequestController(IBloodRequestService service, Hien_mauContext context, NotificationLog logger)
         {
             _service = service;
             _context = context;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -68,7 +70,7 @@ namespace Hien_mau.Controllers
 
             if (result == null) 
                 return BadRequest("Yêu cầu không hợp lệ hoặc đã tồn tại.");
-
+            await _logger.NotiLog(result.UserId, "BloodRequest", "Yêu cầu hiến máu đã tạo", "Create");
             return CreatedAtAction(nameof(GetRequestById), new { id = result.RequestId }, result);
         }
 
