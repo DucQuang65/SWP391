@@ -985,11 +985,12 @@ GO
 -- Insert data into Notifications table
 INSERT INTO Notifications (UserID, Title, Message, Type, IsRead, SentAt)
 VALUES
-    (1, N'Nhắc Hiến Máu', N'Bạn có thể hiến lại sau 2 tuần', 'Reminder', 0, GETDATE()),
     (2, N'Yêu cầu khẩn cấp', N'Chúng tôi cần máu của bạn cho trường hợp khẩn cấp', 'Alert', 0, GETDATE()),
-    (3, N'Cảm ơn', N'Cảm ơn bạn đã hiến máu!', 'Report', 1, GETDATE()),
     (4, N'Yêu cầu máu đã chấp nhận', N'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
-    (5, N'Có 1 bài viết mới', N'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());
+    (1, N'Lịch Hẹn Đã Hủy', N'Bạn đã hủy lịch hẹn hiến máu ngày 24/06/2025.', 'Report', 1, '2025-06-24 09:00:00'),
+    (2, N'Nhắc Hồi Phục Hiến Máu', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước (01/04/2025)! Bạn có thể hiến lại.', 'Reminder', 1, '2025-06-24 07:01:00'),
+    (2, N'Cảm ơn', N'Cảm ơn bạn đã hiến máu!', 'Report', 1, '2025-04-01 12:00:00');
+    (5, N'Có 1 bài viết mới', N'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());	
 GO
 
 INSERT INTO ActivityLogs (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
@@ -1014,44 +1015,24 @@ VALUES
 (6, 'Delete', 'News', 6, N'Xoá tin tức: TẦM QUAN TRỌNG CỦA HIẾN TIỂU CẦU 2025', '2025-06-19');
 GO
 
-INSERT INTO Appointments (UserID, AppointmentDate, TimeSlot, Status, Process, Cancel, Notes, CreatedAt)
+INSERT INTO Appointments (UserID, AppointmentDate, TimeSlot, Status, Process, Cancel, Notes, CreatedAt, DonationDate)
 VALUES
-(1, '2025-06-20', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-20')),
-(2, '2025-06-21', N'Chiều (13:00-17:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-21')),
-(3, '2025-06-22', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-22')),
+-- UserID 1: Lịch đã hủy
+(1, '2025-06-24', N'Chiều (13:00-17:00)', NULL, 0, 1, N'Người dùng hủy lịch hẹn', DATEADD(DAY, -10, '2025-06-24'), NULL),
 
-(1, '2025-06-23', N'Chiều (13:00-17:00)', 0, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-23')),
-(2, '2025-06-24', N'Sáng (7:00-12:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', DATEADD(DAY, -10, '2025-06-24')),
-(3, '2025-06-25', N'Chiều (13:00-17:00)', 0, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-25')),
+-- UserID 1: Lịch hoàn chỉnh với ngày cách >=84 ngày (đổi từ 2025-06-30 sang 2025-04-01)
+(1, '2025-04-01', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công ngày 01/04/2025', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01'),
 
-(1, '2025-06-26', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-26')),
-(2, '2025-06-27', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-27')),
-(3, '2025-06-28', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-28')),
+-- UserID 2: Chỉ lịch hoàn chỉnh (ngày xa quá khứ để đủ điều kiện tạo lịch mới)
+(2, '2025-04-01', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01');
 
-(1, '2025-06-29', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-29')),
-(2, '2025-06-30', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-30')),
-(3, '2025-07-01', N'Chiều (13:00-17:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', DATEADD(DAY, -10, '2025-07-01')),
-
-(1, '2025-07-26', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-26')),
-(2, '2025-07-27', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-27')),
-(3, '2025-07-28', N'Chiều (13:00-17:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-28'));
+GO
 
 
 INSERT INTO Reminders (UserId, Type, Message, RemindAt, IsDisabled, CreatedAt, IsSent, SentAt)
 VALUES
-(1, 'BloodDonation', N'Bạn có lịch hẹn hiến máu hôm nay!', '2025-07-10 08:00:00', 0, GETDATE(), 0, NULL),
-(2, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước!', '2025-07-09 08:00:00', 0, GETDATE(), 0, NULL),
-(3, 'BloodDonation', N'Bạn có lịch hẹn hiến máu hôm nay!', '2025-07-11 07:00:00', 0, GETDATE(), 0, NULL),
-(4, 'Recovery', N'Bạn đã đủ điều kiện hiến máu lại!', '2025-07-12 08:00:00', 0, GETDATE(), 0, NULL),
-(5, 'BloodDonation', N'Bạn có lịch hiến máu vào ngày mai!', '2025-07-13 08:00:00', 0, GETDATE(), 0, NULL),
-(6, 'Recovery', N'Bạn sẽ đủ điều kiện hiến máu lại vào tuần sau.', '2025-07-18 08:00:00', 0, GETDATE(), 0, NULL),
-(7, 'BloodDonation', N'Nhắc nhở hiến máu sắp tới!', '2025-07-20 08:00:00', 0, GETDATE(), 0, NULL),
-(8, 'Recovery', N'Bạn đã đủ 84 ngày sau hiến máu.', '2025-06-01 08:00:00', 0, GETDATE(), 1, '2025-06-01 08:01:00'),
-(9, 'BloodDonation', N'Bạn có lịch hôm nay.', '2025-07-01 08:00:00', 0, GETDATE(), 1, '2025-07-01 08:05:00'),
-(10, 'Recovery', N'Bạn đã đủ điều kiện hiến máu lại.', '2025-07-05 08:00:00', 1, GETDATE(), 0, NULL),
-(11, 'BloodDonation', N'Nhắc nhở bị tắt.', '2025-07-12 08:00:00', 1, GETDATE(), 0, NULL),
-(12, 'BloodDonation', N'Đừng quên lịch hiến máu sáng nay!', '2025-07-12 07:30:00', 0, GETDATE(), 0, NULL),
-(13, 'Recovery', N'Hôm nay là ngày bạn đủ điều kiện hiến máu lại!', '2025-07-12 09:00:00', 0, GETDATE(), 0, NULL),
-(14, 'BloodDonation', N'Lịch hiến máu vào ngày mai.', '2025-07-13 07:00:00', 0, GETDATE(), 0, NULL),
-(15, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước.', '2025-07-10 08:30:00', 0, GETDATE(), 0, NULL);
+-- UserID 1: BloodDonation trước 1 ngày cho lịch 30/7/2025 (chưa gửi vì tương lai)
+(1, 'BloodDonation', N'Nhắc bạn chuẩn bị hiến máu vào ngày 30/07/2025 (Sáng 7:00-12:00)', '2025-07-29 07:00:00', 0, '2025-07-20 12:00:00', 0, NULL),
+-- UserID 2: Recovery sau 84 ngày từ DonationDate 01/4/2025 (đã gửi vì quá khứ)
+(2, 'Recovery', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước (01/04/2025)! Bạn có thể hiến lại.', '2025-06-24 07:00:00', 0, '2025-04-01 12:00:00', 1, '2025-06-24 07:01:00');
 GO
