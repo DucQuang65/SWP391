@@ -189,16 +189,16 @@ namespace Hien_mau.Services
 
                 <p style=""color:#000000;"">Hiến máu là một nghĩa cử cao đẹp, và sự tham gia của bạn sẽ góp phần mang lại cơ hội sống cho nhiều bệnh nhân đang cần máu.</p
 
-                <p style=""font-weight:bold;color:#B71C1C;; margin:20px 0;font-size:16px;"">Để buổi hiến máu diễn ra an toàn và thuận lợi, bạn vui lòng lưu ý:</p>
+                <p style=""font-weight:bold;color:#B71C1C; margin:20px 0;font-size:16px;"">Để buổi hiến máu diễn ra an toàn và thuận lợi, bạn vui lòng lưu ý:</p>
                 <ul>
-                    <li>Ăn nhẹ và uống đủ nước trước khi hiến máu.</li>
-                    <li>Nghỉ ngơi đầy đủ vào đêm trước đó.</li>
-                    <li>Tránh sử dụng rượu bia trong vòng 24 giờ trước khi hiến máu.</li>
-                    <li>Mang theo giấy tờ tùy thân (CMND/CCCD) khi đến địa điểm hiến máu.</li>
+                    <li style=""color:#000000;"" >Ăn nhẹ và uống đủ nước trước khi hiến máu.</li>
+                    <li style=""color:#000000;"" >Nghỉ ngơi đầy đủ vào đêm trước đó.</li>
+                    <li style=""color:#000000;"" >Tránh sử dụng rượu bia trong vòng 24 giờ trước khi hiến máu.</li>
+                    <li style=""color:#000000;"" >Mang theo giấy tờ tùy thân (CMND/CCCD) khi đến địa điểm hiến máu.</li>
                 </ul>
 
              
-                <p style=""margin-top:20px; "">Một lần nữa, cảm ơn bạn đã đồng hành cùng chúng tôi trong hành trình lan tỏa sự sống.</p>
+                <p style=""margin-top:20px; ""color:#000000;"">Một lần nữa, cảm ơn bạn đã đồng hành cùng chúng tôi trong hành trình lan tỏa sự sống.</p>
                 <p style=""color:#000000; font-weight:bold;"">Rất mong được gặp bạn tại buổi hiến máu.</p>
 
                 <p style=""color:#000000;""><strong>Trân trọng,</strong><br>
@@ -213,30 +213,30 @@ namespace Hien_mau.Services
                     <tr>
                     <!-- Logo -->
                         <td style=""padding-right:15px; vertical-align:top;"">
-                <img src=""""https://i.postimg.cc/W4hDRcDH/logo.png""""
-                            alt=""""Logo"""" width=""""90"""" style=""""display:block; border-radius:6px;"""">
+                <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+                            alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
                         </td>
                     <!-- Thông tin -->
-                        <td style=""""vertical-align:top; font-size:14px; line-height:20px; color:#333; padding-left:10px; border-left:3px solid #b4004e;"""">
+                        <td style=""vertical-align:top; font-size:14px; line-height:20px; color:#333; padding-left:10px; border-left:3px solid #b4004e;"">
                   <!-- Tiêu đề -->
-                  <div style=""""font-size:16px; font-weight:bold; color:#b4004e; margin-bottom:4px;"""">
+                  <div style=""font-size:16px; font-weight:bold; color:#b4004e; margin-bottom:4px;"">
                     Trung tâm Hiến máu<br>Bệnh viện Đa khoa Ánh Dương
                   </div>
                   <!-- Địa chỉ -->
-                  <div style=""""margin:6px 0;"""">
-                    <span style=""""style='color:#000000';""""></span> 
+                  <div style=""margin:6px 0;"">
+                    <span style=""style='color:#000000';""></span> 
                     <strong>Địa chỉ:</strong> Đường CMT8, Q.3, TP.HCM
                   </div>
                     <!-- Liên hệ -->
-                    <div style=""""margin:6px 0;"""">
-                        <span style=""""style='color:#000000';""""></span> 
-                        <strong>Liên hệ:</strong> <a href=""""tel:+842838554137"""" style=""""text-decoration:none; color:#333;"""">028 3855 4137</a>
+                    <div style=""margin:6px 0;"">
+                        <span style=""style='color:#000000';""></span> 
+                        <strong>Liên hệ:</strong> <a href=""""tel:+842838554137"" style=""text-decoration:none; color:#333;"">028 3855 4137</a>
                     </div>
                     <!-- Email -->
-                    <div style=""""margin:6px 0;"""">
-                        <span style=""""style='color:#000000';""""></span> 
+                    <div style=""margin:6px 0;"">
+                        <span style=""style='color:#000000';""></span> 
                         <strong>Email:</strong> 
-                        <a href=""""mailto:trungtamhienmau.anhduong@gmail.com"""" style=""""text-decoration:none; color:#1a73e8;"""">
+                        <a href=""mailto:trungtamhienmau.anhduong@gmail.com"" style=""text-decoration:none; color:#1a73e8;"">
                           trungtamhienmau.anhduong@gmail.com
                         </a>
                   </div>
