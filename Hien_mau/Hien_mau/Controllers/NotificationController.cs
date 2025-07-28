@@ -13,12 +13,10 @@ namespace Hien_mau.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly Hien_mauContext _context;
-        private readonly NotificationLog _logger;
 
-        public NotificationController(Hien_mauContext context, NotificationLog logger)
+        public NotificationController(Hien_mauContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         // GET: api/Notification
@@ -132,7 +130,6 @@ namespace Hien_mau.Controllers
 
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            await _logger.NotiLog(dto.UserId, "Notification", "Tạo thông báo", "Create");
 
             return CreatedAtAction(nameof(GetNotification), new { id = notification.NotificationId }, notification);
         }
@@ -178,7 +175,6 @@ namespace Hien_mau.Controllers
             notification.SentAt = DateTime.Now;
 
             await _context.SaveChangesAsync();
-            await _logger.NotiLog(dto.UserId, "Notification", "Cập nhật thông báo", "Update");
 
             return Ok(new
             {
@@ -202,8 +198,7 @@ namespace Hien_mau.Controllers
             if (notification == null) return NotFound();
 
             _context.Notifications.Remove(notification);
-            await _context.SaveChangesAsync();
-            await _logger.NotiLog(notification.UserId, "Notification", "Delete notification", "Delete");
+            await _context.SaveChangesAsync(); 
 
             return NoContent();
         }
