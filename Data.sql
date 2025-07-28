@@ -79,7 +79,7 @@ GO
 -- Insert data into HospitalInfo table
 INSERT INTO HospitalInfo (ID, Name, Address, Phone, Email, WorkingHours, MapImageUrl, Latitude, Longitude)
 VALUES
-    (1, N'Trung Tâm Hiến Máu Bệnh viện Đa khoa Ánh Dương', N'Đường CMT8, Q.3, TP.HCM, Vietnam', '02838554137', 'trungtamhienmau.anhduong@gmail.com', 
+    (1, N'Trung Tâm Hiến Máu Bệnh viện Đa khoa Ánh Dương', N'Đường CMT8, Q.3, TP.HCM, Việt Nam', '02838554137', 'trungtamhienmau.anhduong@gmail.com', 
      N'Thứ 2 - Thứ 6: 7:00 - 17:00', 
      'https://www.google.com/maps/place/10%C2%B046''30.5%22N+106%C2%B041''10.4%22E/@10.7751389,106.6862222,17z/data=!3m1!4b1!4m4!3m3!8m2!3d10.7751389!4d106.6862222?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D', 
      '10.7751237', '106.6862143');
