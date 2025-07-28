@@ -1016,25 +1016,26 @@ GO
 
 INSERT INTO Appointments (UserID, AppointmentDate, TimeSlot, Status, Process, Cancel, Notes, CreatedAt)
 VALUES
-(1, '2025-06-20', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', GETDATE()),
-(2, '2025-06-21', N'Chiều (13:00-17:00)', NULL, 0, 0, N'Đặt lịch hiến máu', GETDATE()),
-(3, '2025-06-22', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', GETDATE()),
+(1, '2025-06-20', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-20')),
+(2, '2025-06-21', N'Chiều (13:00-17:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-21')),
+(3, '2025-06-22', N'Sáng (7:00-12:00)', NULL, 0, 0, N'Đặt lịch hiến máu', DATEADD(DAY, -10, '2025-06-22')),
 
-(1, '2025-06-23', N'Chiều (13:00-17:00)', 0, 0, 0,N'Đặt lịch bị từ chối', GETDATE()),
-(2, '2025-06-24', N'Sáng (7:00-12:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', GETDATE()), 
-(3, '2025-06-25', N'Chiều (13:00-17:00)', 0, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(1, '2025-06-23', N'Chiều (13:00-17:00)', 0, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-23')),
+(2, '2025-06-24', N'Sáng (7:00-12:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', DATEADD(DAY, -10, '2025-06-24')),
+(3, '2025-06-25', N'Chiều (13:00-17:00)', 0, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-25')),
 
-(1, '2025-06-26', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(2, '2025-06-27', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(3, '2025-06-28', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
+(1, '2025-06-26', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-26')),
+(2, '2025-06-27', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-27')),
+(3, '2025-06-28', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-28')),
 
-(1, '2025-06-29', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(2, '2025-06-30', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(3, '2025-07-01', N'Chiều (13:00-17:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', GETDATE()), 
+(1, '2025-06-29', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-29')),
+(2, '2025-06-30', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', DATEADD(DAY, -10, '2025-06-30')),
+(3, '2025-07-01', N'Chiều (13:00-17:00)', 1, 0, 1, N'Người dùng hủy đặt lịch', DATEADD(DAY, -10, '2025-07-01')),
 
-(1, '2025-07-02', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(2, '2025-07-03', N'Chiều (13:00-17:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE()),
-(3, '2025-07-04', N'Sáng (7:00-12:00)', 1, 0, 0, N'Đặt lịch bị từ chối', GETDATE());
+(1, '2025-07-26', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-26')),
+(2, '2025-07-27', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-27')),
+(3, '2025-07-28', N'Chiều (13:00-17:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-07-28'));
+
 
 INSERT INTO Reminders (UserId, Type, Message, RemindAt, IsDisabled, CreatedAt, IsSent, SentAt)
 VALUES

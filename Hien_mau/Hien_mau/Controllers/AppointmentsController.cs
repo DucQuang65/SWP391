@@ -115,23 +115,27 @@ public class AppointmentController : ControllerBase
     }
 
     [HttpGet("statistics/donors")]
-    public async Task<IActionResult> GetBloodDonorStatistics()
+    public async Task<IActionResult> GetDonorStatistics()
     {
-            var donorStats = await _context.Appointments
-                .AsNoTracking()
-                .Where(a => a.Status == true && a.Process == 4)
-                .GroupBy(a => new { a.BloodGroup, a.RhType })
-                .Select(g => new
-                {
-                    BloodGroup = g.Key.BloodGroup,
-                    RhType = g.Key.RhType,
-                    NumDonors = g.Select(a => a.UserID).Distinct().Count(),
-                    TotalDonations = g.Count()
-                })
-                .ToListAsync();
+        var stats = await _context.Appointments
+            .Where(a => a.Status == true && a.Process == 4)
+            .Join(_context.Users,
+                  a => a.UserID,
+                  u => u.UserId,
+                  (a, u) => new { a, u })
+            .GroupBy(x => new { x.u.BloodGroup, x.u.RhType })
+            .Select(g => new
+            {
+                BloodGroup = g.Key.BloodGroup,
+                RhType = g.Key.RhType,
+                NumDonors = g.Select(x => x.a.UserID).Distinct().Count(),
+                TotalDonations = g.Count()
+            })
+            .ToListAsync();
 
-            return Ok(donorStats);
+        return Ok(stats);
     }
+
 
     [HttpGet("last-donation/{userId}")]
     public async Task<ActionResult<AppointmentLastDonationDTO>> GetLastDonation(int userId)

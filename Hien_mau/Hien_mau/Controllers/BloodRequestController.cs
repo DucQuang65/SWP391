@@ -42,20 +42,22 @@ namespace Hien_mau.Controllers
         [HttpGet("statistics/recipients")]
         public async Task<IActionResult> GetBloodRecipientStatistics()
         {
-                var recipientStats = await _context.BloodRequests
-                    .AsNoTracking()
-                    .GroupBy(r => new { r.BloodGroup, r.RhType, r.ComponentId })
-                    .Select(g => new
-                    {
-                        BloodGroup = g.Key.BloodGroup,
-                        RhType = g.Key.RhType,
-                        ComponentId = g.Key.ComponentId,
-                        NumRecipients = g.Select(r => r.UserId).Distinct().Count(),
-                        TotalRequests = g.Count()
-                    })
-                    .ToListAsync();
+            var recipientStats = await _context.BloodRequests
+                .AsNoTracking()
+                .Include(r => r.Components)
+                .GroupBy(r => new { r.BloodGroup, r.RhType, r.ComponentId, r.Components.ComponentType })
+                .Select(g => new
+                {
+                    BloodGroup = g.Key.BloodGroup ?? "",  // English comment: Handle null for safety
+                    RhType = g.Key.RhType ?? "",
+                    ComponentId = g.Key.ComponentId,
+                    ComponentName = g.Key.ComponentType ?? "",
+                    NumRecipients = g.Select(r => r.UserId).Distinct().Count(),
+                    TotalRequests = g.Count()
+                })
+                .ToListAsync();
 
-                return Ok(recipientStats);
+            return Ok(recipientStats);
         }
 
         [HttpPost]

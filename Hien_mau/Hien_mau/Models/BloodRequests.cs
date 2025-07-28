@@ -45,10 +45,9 @@ public partial class BloodRequests
 
     public string? MedicalReport { get; set; }
 
-    public virtual Components? Component { get; set; }
+    public virtual Components Components { get; set; }
 
-    public virtual Patients? Patient { get; set; }
+    public virtual Patients Patient { get; set; }
 
-    public virtual Users User { get; set; } = null!;
-    //public virtual ICollection<Components> RequestComponents { get; set; } = new List<Components>();
+    public virtual Users User { get; set; } = null!;    
 }

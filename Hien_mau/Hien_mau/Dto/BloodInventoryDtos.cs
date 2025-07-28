@@ -64,8 +64,6 @@
             public int ComponentId { get; set; }
             public string? ComponentName { get; set; }
             public int Quantity { get; set; }
-            public int NumDonors { get; set; }
-            public int NumRecipients { get; set; }
         }
 
     }

@@ -63,16 +63,12 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-
-            modelBuilder.Entity<Components>(entity =>
-            {
-
-                entity.ToTable("Components"); 
-                entity.HasKey(e => e.ComponentId);
-                entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
-            });
-
+        modelBuilder.Entity<Components>(entity =>
+        {
+            entity.ToTable("Components");
+            entity.HasKey(e => e.ComponentId);
+            entity.Property(e => e.ComponentType).IsRequired().HasMaxLength(20);
+        });
 
         modelBuilder.Entity<Appointments>(entity =>
         {
@@ -120,57 +116,54 @@
 
 
         modelBuilder.Entity<BloodInventories>(entity =>
-            {
-                entity.HasKey(e => e.InventoryId);
+        {
+            entity.HasKey(e => e.InventoryId);
 
-                entity.Property(e => e.InventoryId)
-                    .HasColumnName("InventoryID");
+            entity.Property(e => e.InventoryId)
+                .HasColumnName("InventoryID");
 
-                entity.Property(e => e.BloodGroup)
-                    .HasMaxLength(2)
-                    .IsRequired();
+            entity.Property(e => e.BloodGroup)
+                .HasMaxLength(2)
+                .IsRequired();
 
-                entity.Property(e => e.RhType)
-                    .HasMaxLength(3)
-                    .IsRequired();
+            entity.Property(e => e.RhType)
+                .HasMaxLength(3)
+                .IsRequired();
 
-                entity.Property(e => e.BagType)
-                    .HasMaxLength(5)
-                    .IsRequired();
+            entity.Property(e => e.BagType)
+                .HasMaxLength(5)
+                .IsRequired();
 
-                entity.Property(e => e.Quantity)
-                    .IsRequired();
+            entity.Property(e => e.Quantity)
+                .IsRequired();
 
-                entity.Property(e => e.IsRare)
-                    .HasDefaultValue(false)
-                    .IsRequired();
+            entity.Property(e => e.IsRare)
+                .HasDefaultValue(false)
+                .IsRequired();
 
-                entity.Property(e => e.Status)
-                    .IsRequired();
+            entity.Property(e => e.Status)
+                .IsRequired();
 
+            entity.Property(e => e.LastUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.LastUpdated)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.ComponentId)
+                .HasColumnName("ComponentID");
 
-                entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
+            entity.HasOne(e => e.Components)
+                .WithMany(c => c.BloodInventories)
+                .HasForeignKey(e => e.ComponentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BloodInventories_Components");
 
+            entity.HasMany(e => e.BloodInventoryHistories)
+                .WithOne(h => h.Inventory)
+                .HasForeignKey(h => h.InventoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
-                entity.HasOne(e => e.Components)
-                    .WithMany(c => c.BloodInventories)
-                    .HasForeignKey(e => e.ComponentId)  
-                    .HasPrincipalKey(c => c.ComponentId)  
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BloodInventories_Components");
-
-
-                entity.HasMany(e => e.BloodInventoryHistories)
-                    .WithOne(h => h.Inventory)
-                    .HasForeignKey(h => h.InventoryId)
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            modelBuilder.Entity<BloodInventoryHistories>(entity =>
+        modelBuilder.Entity<BloodInventoryHistories>(entity =>
             {
                 entity.HasKey(e => e.HistoryId);
 
@@ -196,24 +189,32 @@
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
-            modelBuilder.Entity<BloodRequests>(entity =>
-            {
-                entity.HasKey(e => e.RequestId).HasName("PK__BloodReq__33A8519A48D7A9B8");
+        modelBuilder.Entity<BloodRequests>(entity =>
+        {
+            entity.HasKey(e => e.RequestId).HasName("PK__BloodReq__33A8519A48D7A9B8");
 
-                entity.Property(e => e.RequestId).HasColumnName("RequestID");
-                entity.Property(e => e.BloodGroup).HasMaxLength(2);
-                entity.Property(e => e.CreatedTime)
-                    .HasDefaultValueSql("(getdate())")
-                    .HasColumnType("datetime");
-                entity.Property(e => e.Reason).HasMaxLength(1000);
-                entity.Property(e => e.RhType).HasMaxLength(3);
-                entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.BloodGroup).HasMaxLength(2);
+            entity.Property(e => e.CreatedTime)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Reason).HasMaxLength(1000);
+            entity.Property(e => e.RhType).HasMaxLength(3);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.User).WithMany(p => p.BloodRequests)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BloodRequ__UserI__7E37BEF6");
-            });
+            entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
+
+            entity.HasOne(d => d.Components)
+                .WithMany(c => c.BloodRequests) 
+                .HasForeignKey(d => d.ComponentId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_BloodRequests_Components");
+
+            entity.HasOne(d => d.User).WithMany(p => p.BloodRequests)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__BloodRequ__UserI__7E37BEF6");
+        });
 
         modelBuilder.Entity<Reminder>(entity =>
         {
