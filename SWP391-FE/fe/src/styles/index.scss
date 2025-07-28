@@ -1,0 +1,12 @@
+// src/styles/index.scss
+@use './base/variables' as vars;
+@use './base/mixin' as mix;
+
+// Áp dụng reset và base cho toàn cục
+* {
+  @include mix.reset();
+}
+
+body {
+  @include mix.body-base();
+}

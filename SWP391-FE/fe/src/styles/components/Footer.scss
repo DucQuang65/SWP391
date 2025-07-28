@@ -1,0 +1,68 @@
+// src/styles/components/Footer.scss
+@use '../base/variables' as *;
+@use '../base/mixin' as *;
+
+// Style cho footer
+.footer {
+  background: $dark-blue; /* Sử dụng biến màu xanh đậm */
+  color: $white; /* Chữ trắng */
+  font-family: $font-secondary; /* Sử dụng font secondary */
+  padding: $spacing-lg 0; /* Điều chỉnh padding bằng biến */
+  display: flex;
+  justify-content: space-around; /* Phân bố đều 3 cột */
+  align-items: flex-start; /* Căn trên cùng */
+
+  .footer-column {
+    text-align: left; /* Căn trái nội dung */
+  }
+
+  .footer-brand {
+    @include heading($font-size-large, $white); /* Sử dụng mixin heading */
+    font-weight: 700;
+    margin-bottom: $spacing-xs; /* Khoảng cách dưới logo */
+    letter-spacing: 1px;
+    color: white;
+  }
+
+  .footer-title {
+    @include heading($font-size-large - 0.2rem, $white); /* Điều chỉnh kích thước tiêu đề */
+    font-weight: 900;
+    margin-bottom: $spacing-xs; /* Khoảng cách dưới tiêu đề */
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .footer-item {
+    @include text($font-size-base, $white); /* Sử dụng mixin text */
+    margin-bottom: $spacing-xxs; /* Khoảng cách giữa các mục */
+    display: flex;
+    align-items: center; /* Căn giữa icon và text */
+    gap: $spacing-xxs; /* Khoảng cách giữa icon và text */
+    background: transparent;
+
+    &:last-child {
+      margin-bottom: 0; /* Loại bỏ margin dưới mục cuối */
+    }
+  }
+
+  .footer-link {
+    color: $white; /* Sử dụng biến màu */
+    text-decoration: none;
+    font-weight: normal;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    line-height: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .footer-icon {
+    font-size: $font-size-base; /* Sử dụng biến font-size */
+    color: $secondary-color; /* Sử dụng biến màu đỏ */
+  }
+}

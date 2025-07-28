@@ -1,0 +1,551 @@
+@use '../base/variables' as vars;
+@use '../base/mixin' as mix;
+
+.eligible-donors-page {
+  display: flex;
+  min-height: 100vh;
+  background: vars.$manager-bg-light;
+  font-family: vars.$font-manager;
+
+  .donors-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: vars.$spacing-lg;
+    transition: margin-left 0.3s ease;
+
+    &.collapsed {
+      margin-left: 80px;
+    }
+
+    // Page Header
+    .page-header {
+      background: vars.$manager-bg;
+      padding: vars.$spacing-lg;
+      border-radius: 12px;
+      margin-bottom: vars.$spacing-lg;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+      @include mix.flex-align(space-between, center);
+
+      .header-info {
+        h1 {
+          margin: 0 0 8px 0;
+          font-size: 1.8rem;
+          font-weight: 600;
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+        }
+
+        p {
+          margin: 0;
+          color: vars.$manager-text-light;
+          font-size: 1rem;
+          font-family: vars.$font-manager;
+        }
+      }
+
+      .header-actions {
+        .ant-btn {
+          font-family: vars.$font-manager;
+        }
+
+        .view-mode-toggle {
+          @include mix.flex-align(flex-start, center);
+          gap: vars.$spacing-xs;
+
+          span {
+            font-size: 0.9rem;
+            color: vars.$manager-text;
+            font-family: vars.$font-manager;
+            font-weight: 500;
+          }
+
+          .ant-switch {
+            background-color: vars.$manager-border;
+
+            &.ant-switch-checked {
+              background-color: vars.$manager-primary;
+            }
+          }
+        }
+      }
+    }
+
+    // Filters Section
+    .filters-section {
+      background: vars.$manager-bg;
+      padding: vars.$spacing-lg;
+      border-radius: 12px;
+      margin-bottom: vars.$spacing-lg;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+
+      .filter-group {
+        @include mix.flex-align(flex-start, center);
+        gap: 8px;
+
+        label {
+          font-weight: 500;
+          color: vars.$manager-text;
+          font-size: 0.9rem;
+          font-family: vars.$font-manager;
+          min-width: 80px;
+        }
+
+        .ant-select,
+        .ant-input-search {
+          font-family: vars.$font-manager;
+        }
+      }
+    }
+
+    // Results Summary
+    .results-summary {
+      background: vars.$manager-bg-light;
+      padding: vars.$spacing-md;
+      border-radius: 8px;
+      margin-bottom: vars.$spacing-md;
+      border-left: 3px solid vars.$manager-primary;
+
+      span {
+        color: vars.$manager-text;
+        font-size: 0.9rem;
+        font-family: vars.$font-manager;
+      }
+    }
+
+    // Table Section
+    .table-section {
+      background: vars.$manager-bg;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px vars.$manager-shadow;
+      border: 1px solid vars.$manager-border;
+      overflow: hidden;
+
+      .ant-table {
+        font-family: vars.$font-manager;
+
+        .ant-table-thead > tr > th {
+          background: vars.$manager-bg-light;
+          color: vars.$manager-text;
+          font-weight: 600;
+          border-bottom: 1px solid vars.$manager-border;
+        }
+
+        .ant-table-tbody > tr > td {
+          border-bottom: 1px solid vars.$manager-border;
+        }
+
+        .ant-table-tbody > tr:hover > td {
+          background: vars.$manager-hover;
+        }
+      }
+    }
+
+    // Cards Section
+    .cards-section {
+      .donor-card {
+        border-radius: 12px;
+        box-shadow: 0 2px 8px vars.$manager-shadow;
+        border: 1px solid vars.$manager-border;
+        transition: all 0.3s ease;
+        font-family: vars.$font-manager;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px vars.$manager-shadow;
+        }
+
+        .card-header {
+          @include mix.flex-align(space-between, center);
+          margin-bottom: vars.$spacing-sm;
+
+          .donor-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: vars.$manager-text;
+            font-family: vars.$font-manager;
+          }
+
+          .blood-type-tag {
+            font-weight: bold;
+            font-size: 0.9rem;
+          }
+        }
+
+        .card-content {
+          .status-section {
+            margin-bottom: vars.$spacing-sm;
+
+            .status-badge {
+              .ant-badge-status-text {
+                font-family: vars.$font-manager;
+                font-weight: 500;
+              }
+            }
+          }
+
+          .info-item {
+            @include mix.flex-align(flex-start, center);
+            gap: vars.$spacing-xs;
+            margin-bottom: vars.$spacing-xs;
+            font-family: vars.$font-manager;
+
+            .info-icon {
+              color: vars.$manager-primary;
+              font-size: 0.9rem;
+            }
+
+            .distance-text {
+              font-weight: 500;
+              color: vars.$manager-text;
+            }
+
+            .phone-link {
+              color: vars.$manager-primary;
+              text-decoration: none;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        .ant-card-actions {
+          border-top: 1px solid vars.$manager-border;
+
+          > li {
+            margin: 0;
+
+            .anticon {
+              color: vars.$manager-text-light;
+              font-size: 1.1rem;
+              transition: all 0.3s ease;
+
+              &:hover {
+                color: vars.$manager-primary;
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: vars.$spacing-xl;
+        color: vars.$manager-text-light;
+
+        .empty-icon {
+          font-size: 3rem;
+          margin-bottom: vars.$spacing-md;
+          opacity: 0.6;
+        }
+
+        h3 {
+          color: vars.$manager-text;
+          margin-bottom: vars.$spacing-sm;
+          font-family: vars.$font-manager;
+        }
+
+        p {
+          font-family: vars.$font-manager;
+        }
+      }
+    }
+
+    // Modal Styles
+    .donor-details {
+      .detail-section {
+        margin-bottom: vars.$spacing-lg;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        h4 {
+          margin: 0 0 vars.$spacing-md 0;
+          color: vars.$manager-text;
+          font-size: 1.1rem;
+          font-weight: 600;
+          font-family: vars.$font-manager;
+          border-bottom: 1px solid vars.$manager-border;
+          padding-bottom: 8px;
+        }
+
+        .detail-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: vars.$spacing-md;
+
+          .detail-item {
+            @include mix.flex-align(space-between, flex-start);
+            padding: 8px 0;
+
+            &.full-width {
+              grid-column: 1 / -1;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 4px;
+            }
+
+            label {
+              font-weight: 500;
+              color: vars.$manager-text-light;
+              font-size: 0.9rem;
+              font-family: vars.$font-manager;
+              min-width: 120px;
+            }
+
+            span, a {
+              color: vars.$manager-text;
+              font-family: vars.$font-manager;
+              font-size: 0.9rem;
+
+              &[href] {
+                color: vars.$manager-primary;
+                text-decoration: none;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            .ant-tag {
+              margin: 0;
+            }
+          }
+        }
+
+        p {
+          margin: 0;
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+          line-height: 1.5;
+          background: vars.$manager-bg-light;
+          padding: vars.$spacing-sm;
+          border-radius: 6px;
+          border-left: 3px solid vars.$manager-primary;
+        }
+      }
+    }
+
+    // Process Workflow Modal
+    .process-workflow {
+      .donor-summary {
+        background: vars.$manager-bg-light;
+        padding: vars.$spacing-md;
+        border-radius: 8px;
+        margin-bottom: vars.$spacing-md;
+
+        .summary-item {
+          font-family: vars.$font-manager;
+
+          strong {
+            color: vars.$manager-text;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .workflow-steps {
+        .ant-steps {
+          .ant-steps-item {
+            .ant-steps-item-title {
+              font-family: vars.$font-manager;
+              font-weight: 600;
+              color: vars.$manager-text;
+            }
+
+            .ant-steps-item-description {
+              font-family: vars.$font-manager;
+              color: vars.$manager-text-light;
+            }
+
+            &.ant-steps-item-process {
+              .ant-steps-item-icon {
+                background: vars.$manager-primary;
+                border-color: vars.$manager-primary;
+              }
+            }
+
+            &.ant-steps-item-finish {
+              .ant-steps-item-icon {
+                background: vars.$success-color;
+                border-color: vars.$success-color;
+              }
+            }
+
+            &.ant-steps-item-error {
+              .ant-steps-item-icon {
+                background: vars.$error-color;
+                border-color: vars.$error-color;
+              }
+            }
+          }
+        }
+      }
+
+      .action-section {
+        background: rgba(vars.$manager-primary, 0.05);
+        padding: vars.$spacing-lg;
+        border-radius: 8px;
+        text-align: center;
+
+        h4 {
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+          margin-bottom: vars.$spacing-sm;
+        }
+
+        p {
+          color: vars.$manager-text-light;
+          font-family: vars.$font-manager;
+          margin-bottom: vars.$spacing-md;
+        }
+
+        .ant-btn {
+          font-family: vars.$font-manager;
+          font-weight: 600;
+        }
+      }
+
+      .notes-section {
+        h4 {
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+          margin-bottom: vars.$spacing-sm;
+        }
+
+        p {
+          color: vars.$manager-text;
+          font-family: vars.$font-manager;
+          background: vars.$manager-bg-light;
+          padding: vars.$spacing-sm;
+          border-radius: 6px;
+          border-left: 3px solid vars.$manager-primary;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@include mix.tablet {
+  .eligible-donors-page {
+    .donors-content {
+      margin-left: 240px;
+      padding: vars.$spacing-md;
+
+      &.collapsed {
+        margin-left: 80px;
+      }
+
+      .page-header {
+        padding: vars.$spacing-md;
+        
+        .header-info h1 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .filters-section {
+        padding: vars.$spacing-md;
+
+        .ant-space {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}
+
+@include mix.mobile {
+  .eligible-donors-page {
+    .donors-content {
+      margin-left: 0;
+      padding: vars.$spacing-sm;
+
+      .page-header {
+        padding: vars.$spacing-sm;
+        flex-direction: column;
+        align-items: stretch;
+        gap: vars.$spacing-sm;
+
+        .header-info h1 {
+          font-size: 1.3rem;
+        }
+      }
+
+      .filters-section {
+        padding: vars.$spacing-sm;
+
+        .ant-space {
+          flex-direction: column;
+          align-items: stretch;
+
+          .filter-group {
+            flex-direction: column;
+            align-items: stretch;
+
+            label {
+              min-width: auto;
+              margin-bottom: 4px;
+            }
+
+            .ant-select,
+            .ant-input-search {
+              width: 100% !important;
+            }
+          }
+        }
+      }
+
+      .table-section {
+        .ant-table {
+          font-size: 0.8rem;
+        }
+      }
+
+      .cards-section {
+        .donor-card {
+          .card-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: vars.$spacing-xs;
+
+            .donor-name {
+              font-size: 1rem;
+            }
+          }
+
+          .card-content {
+            .info-item {
+              font-size: 0.85rem;
+            }
+          }
+        }
+      }
+
+      .donor-details {
+        .detail-grid {
+          grid-template-columns: 1fr;
+
+          .detail-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+
+            label {
+              min-width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

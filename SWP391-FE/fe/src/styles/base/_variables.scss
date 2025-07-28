@@ -1,0 +1,119 @@
+// Màu sắc
+$primary-color: #1976d2; // Xanh dương chính
+$primary-hover: #1565c0; // Xanh dương khi hover
+$secondary-color: #d32f2f; // Đỏ chính
+$secondary-hover: #C21121; // Đỏ khi hover
+$dark-blue: #02314B; // Xanh đậm cho nền section
+$background-main: #f6fbfd; // Nền chính
+$background-box: #e3f2fd; // Nền hộp (nhóm máu dương)
+$background-box-secondary: #ffebee; // Nền hộp (nhóm máu âm)
+$background-light: #f6f6f6; // Nền sáng
+$text-color: #222; // Màu chữ chính
+$text-secondary: #6c757d; // Màu chữ phụ
+$white: #fff; // Trắng
+$black: #000; // Đen
+$border-light: #e8ecef; // Viền sáng
+$shadow-color: rgba(0, 0, 0, 0.2); // Màu bóng
+
+// Khoảng cách
+$spacing-xxl: 64px;
+$spacing-xl: 48px;
+$spacing-lg: 32px;
+$spacing-md: 20px;
+$spacing-base: 16px;
+$spacing-sm: 12px;
+$spacing-xs: 8px;
+$spacing-xxs: 4px;
+
+// Extended spacing for admin components only
+$spacing-1: 4px;
+$spacing-2: 8px;
+$spacing-3: 12px;
+$spacing-4: 16px;
+$spacing-5: 20px;
+$spacing-6: 24px;
+$spacing-7: 28px;
+$spacing-8: 32px;
+$spacing-10: 40px;
+$spacing-12: 48px;
+$spacing-16: 64px;
+
+// Font size
+$font-size-xlarge: 2.25rem; // 36px
+$font-size-large: 1.5rem; // 24px
+$font-size-base: 1rem; // 16px
+$font-size-small: 0.875rem; // 14px
+
+// Extended font sizes
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+$font-size-5xl: 3rem; // 48px
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Font family
+$font-primary: "Montserrat", "Poppins", Arial, Helvetica, sans-serif;
+$font-secondary: "Open Sans", "Roboto", "Inter", Arial, Helvetica, sans-serif;
+$font-manager: "Inter", "Roboto", "Segoe UI", sans-serif; // Font cho Manager
+
+// Extended colors
+$accent-color: #02314B; // Same as dark-blue
+$primary-light: #e3f2fd;
+$secondary-light: #ffebee;
+$secondary-dark: #b71c1c;
+
+$success-color: #4caf50;
+$warning-color: #ff9800;
+$error-color: #f44336;
+$info-color: #2196f3;
+
+// Manager Theme Colors (Minimalistic)
+$manager-primary: #D93E4C; // Màu chính cho Manager - nổi bật
+$manager-dark: #20374E; // Nền tối sang trọng cho báo cáo
+$manager-warm: #DECCAA; // Màu ấm áp cho vùng phụ trợ
+$manager-emergency: #D91022; // Cảnh báo/khẩn cấp
+$manager-bg: #ffffff; // Nền trắng
+$manager-bg-light: #f5f7fa; // Nền xanh nhạt
+$manager-text: #2c3e50; // Text chính
+$manager-text-light: #6c757d; // Text phụ
+$manager-border: #e9ecef; // Border nhẹ
+$manager-hover: #f8f9fa; // Hover state
+$manager-shadow: rgba(0, 0, 0, 0.08); // Shadow nhẹ
+
+$text-primary: #222;
+$text-secondary: #6c757d;
+$text-muted: #9e9e9e;
+$text-inverse: #ffffff;
+
+$background-card: #ffffff;
+$background-section: #f8f9fa;
+$background-light: #f6f6f6;
+
+$border-medium: #dee2e6;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-base: 8px;
+$border-radius-lg: 12px;
+$border-radius-full: 50%;
+
+// Line heights
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-fixed: 1020;
+$z-index-modal: 1050;
