@@ -41,7 +41,10 @@ namespace Hien_mau.Services
                 Status = x.Status,
                 Note = x.Note,
                 CreatedTime = x.CreatedTime,
-                MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null
+                MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null,
+                ApprovedByDoctorId = x.ApprovedByDoctorId,
+                ApprovedByDoctorName = x.ApprovedByDoctorName,
+                ApprovedTime = x.ApprovedTime
             }).ToListAsync();
         }
 
@@ -68,7 +71,10 @@ namespace Hien_mau.Services
                     Status = x.Status,
                     Note = x.Note,
                     CreatedTime = x.CreatedTime,
-                    MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null
+                    MedicalReportUrl = x.MedicalReport != null ? $"{request.Scheme}://{request.Host}{x.MedicalReport}" : null,
+                    ApprovedByDoctorId = x.ApprovedByDoctorId,
+                    ApprovedByDoctorName = x.ApprovedByDoctorName,
+                    ApprovedTime = x.ApprovedTime
                 }).FirstOrDefaultAsync();
         }
 
@@ -176,7 +182,7 @@ namespace Hien_mau.Services
             return true;
         }
 
-        public async Task<bool> PatchStatusBloodRequest(int id, byte status,string? note = null)
+        public async Task<bool> PatchStatusBloodRequest(int id, byte status, string? note = null, int? approvedByDoctorId = null)
         {
             var bloodRequest = await _context.BloodRequests.FindAsync(id);
             if (bloodRequest == null) 
@@ -184,14 +190,22 @@ namespace Hien_mau.Services
 
             bloodRequest.Status = status;
 
-            if (status == 3 && !string.IsNullOrWhiteSpace(note))
+            var vnTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
+                TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
+
+            if (approvedByDoctorId.HasValue)
             {
-                bloodRequest.Note = note;
+                var approver = await _context.Users.FindAsync(approvedByDoctorId.Value);
+                if (approver != null)
+                {
+                    bloodRequest.ApprovedByDoctorId = approver.UserId;
+                    bloodRequest.ApprovedByDoctorName = approver.Name;
+                    bloodRequest.ApprovedTime = vnTime;
+                }
             }
-            else
-            {
-                bloodRequest.Note = null; 
-            }
+
+            bloodRequest.Note = (status == 3 && !string.IsNullOrWhiteSpace(note)) ? note : null;
+
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
             return true;

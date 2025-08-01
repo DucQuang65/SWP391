@@ -45,6 +45,12 @@ public partial class BloodRequests
 
     public string? MedicalReport { get; set; }
 
+    public int? ApprovedByDoctorId { get; set; } 
+
+    public string? ApprovedByDoctorName { get; set; }
+
+    public DateTime? ApprovedTime { get; set; }
+
     public virtual Components Components { get; set; }
 
     public virtual Patients Patient { get; set; }

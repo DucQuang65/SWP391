@@ -170,6 +170,9 @@ CREATE TABLE BloodRequests (
     Note NVARCHAR(1000) NULL,
     CreatedTime DATETIME DEFAULT GETDATE(),
     MedicalReport NVARCHAR(500) NULL,
+	ApprovedByDoctorId INT ,
+	ApprovedByDoctorName NVARCHAR(100),
+	ApprovedTime DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (ComponentID) REFERENCES Components(ComponentID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)

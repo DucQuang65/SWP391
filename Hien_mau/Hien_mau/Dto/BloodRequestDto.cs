@@ -22,11 +22,17 @@
         public DateTime? CreatedTime { get; set; }
         public IFormFile? MedicalFile { get; set; }
         public string? MedicalReportUrl { get; set; }
+        public int? ApprovedByDoctorId { get; set; }
+        public string? ApprovedByDoctorName { get; set; }
+        public DateTime? ApprovedTime { get; set; }
     }
 
     public class UpdateStatusBloodRequestDto
     {
         public byte Status { get; set; }
+        public int? ApprovedByDoctorId { get; set; }
+        public string? ApprovedByDoctorName { get; set; }
+        public DateTime? ApprovedTime { get; set; }
         public string? Note { get; set; }
     }
 }

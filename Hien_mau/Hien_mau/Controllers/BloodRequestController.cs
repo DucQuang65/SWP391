@@ -88,7 +88,7 @@ namespace Hien_mau.Controllers
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> PatchStatus(int id, UpdateStatusBloodRequestDto dto)
         {
-            var success = await _service.PatchStatusBloodRequest(id, dto.Status,dto.Note);
+            var success = await _service.PatchStatusBloodRequest(id, dto.Status,dto.Note,dto.ApprovedByDoctorId);
             return success ? Ok() : NotFound();
         }
 
