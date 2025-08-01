@@ -92,7 +92,7 @@ namespace Hien_mau.Controllers
         [HttpPost]
         public async Task<ActionResult<object>> CreateBloodArticle([FromBody] ContentsCreateDto dto, [FromServices] ActivityLogger logger)
         {
-            // Kiểm tra dữ liệu đầu vào
+            // Check if the DTO is valid
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
             {
                 return BadRequest("Title, Content, and UserId are required.");
@@ -104,7 +104,7 @@ namespace Hien_mau.Controllers
                 return BadRequest($"UserId {dto.UserId} does not exist in Users table.");
             }
 
-            var postedAt = DateTime.UtcNow.AddHours(7); // Giờ GMT+7
+            var postedAt = DateTime.UtcNow.AddHours(7); // GMT+7
 
             var article = new Contents
             {
@@ -116,7 +116,7 @@ namespace Hien_mau.Controllers
                 CreatedAt = postedAt
             };
 
-            // Chỉ truy vấn Tags nếu cần
+            // Retrive and assign tags if provided
             if (dto.TagIds != null && dto.TagIds.Any())
             {
                 var tags = await _context.Tags
@@ -131,10 +131,10 @@ namespace Hien_mau.Controllers
 
             _context.Contents.Add(article);
             await _context.SaveChangesAsync();
-            // Ghi log
+            // Record activity log
             await logger.LogAsync(dto.UserId, "Create", "Article", article.ContentID, $"Tạo bài viết: {dto.Title}");
 
-            // Trả về đối tượng không chứa vòng lặp
+            // Respone with the created article details
             var response = new
             {
                 article.ContentID,
@@ -171,7 +171,7 @@ namespace Hien_mau.Controllers
                 return NotFound();
             }
 
-            // Kiểm tra dữ liệu đầu vào
+            // Check the valid input data
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content))
             {
                 return BadRequest("Title and Content are required.");
@@ -195,7 +195,7 @@ namespace Hien_mau.Controllers
             }
 
             await _context.SaveChangesAsync();
-            // Ghi log
+            //Record the activity log
             await logger.LogAsync(dto.UserId, "Update", "Article", article.ContentID, $"Cập nhật bài viết: {dto.Title}");
             return NoContent();
         }
@@ -214,12 +214,12 @@ namespace Hien_mau.Controllers
                 return NotFound();
             }
 
-            // Xóa các bản ghi liên quan trong ArticleTags
+            // Delte tags associated with the article
             article.Tags.Clear();
 
             _context.Contents.Remove(article);
             await _context.SaveChangesAsync();
-            // Ghi log
+            // Record the activity log
             await logger.LogAsync(userId, "Delete", "Article", article.ContentID, $"Xoá bài viết: {article.Title}");
             return NoContent();
         }

@@ -20,19 +20,20 @@ namespace Hien_mau.Controllers
             if (dto.File == null || dto.File.Length == 0)
                 return BadRequest("Không có file được gửi lên.");
 
+            // Allow only specific file types
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".pdf" };
             var extension = Path.GetExtension(dto.File.FileName).ToLowerInvariant();
 
             if (!allowedExtensions.Contains(extension))
                 return BadRequest("Chỉ hỗ trợ file ảnh (.jpg, .png, .gif) và PDF.");
 
-            // Tạo thư mục uploads nếu chưa có
+            // Ensure the uploads directory exists
             var uploadFolder = Path.Combine(_env.WebRootPath, "uploads");
             if (!Directory.Exists(uploadFolder))
                 Directory.CreateDirectory(uploadFolder);
 
-            // Tạo tên file ngẫu nhiên
-            var fileName = $"{Guid.NewGuid()}{extension}";
+            // Named file with a unique identifier
+            var fileName = $"{Guid.NewGuid()}{extension}";// Guid.NewGuid() generate random name
             var filePath = Path.Combine(uploadFolder, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -40,7 +41,7 @@ namespace Hien_mau.Controllers
                 await dto.File.CopyToAsync(stream);
             }
 
-            // Tạo URL trả về
+            // Return the file URL
             var fileUrl = $"{Request.Scheme}://{Request.Host}/uploads/{fileName}";
 
             return Ok(new

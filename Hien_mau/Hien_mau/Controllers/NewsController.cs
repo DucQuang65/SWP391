@@ -93,20 +93,20 @@ namespace Hien_mau.Controllers
         [HttpPost]
         public async Task<ActionResult<object>> CreateBlogPost([FromBody] ContentsCreateDto dto, [FromServices] ActivityLogger logger)
         {
-            // Kiểm tra dữ liệu đầu vào
+            // Check the validity of the input data
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content) || dto.UserId <= 0)
             {
                 return BadRequest("Title, Content, and UserId are required.");
             }
 
-            // Kiểm tra UserId tồn tại
+            // Check if the user exists
             var userExists = await _context.Users.AnyAsync(u => u.UserId == dto.UserId);
             if (!userExists)
             {
                 return BadRequest("Invalid UserId.");
             }
 
-            var postedAt = DateTime.UtcNow.AddHours(7); // Giờ GMT+7
+            var postedAt = DateTime.UtcNow.AddHours(7); // GMT+7
 
             var news = new Contents
             {
@@ -118,7 +118,7 @@ namespace Hien_mau.Controllers
                 CreatedAt = postedAt
             };
 
-            // Chỉ truy vấn Tags nếu cần
+            // Retrieve and assign tags if provided
             if (dto.TagIds != null && dto.TagIds.Any())
             {
                 var tags = await _context.Tags
@@ -133,10 +133,10 @@ namespace Hien_mau.Controllers
 
             _context.Contents.Add(news);
             await _context.SaveChangesAsync();
-            // Ghi log sau khi đã lưu
+            // Record the activity
             await logger.LogAsync(dto.UserId, "Create", "News", news.ContentID, $"Tạo bài viết: {news.Title}");
 
-            // Trả về đối tượng không chứa vòng lặp
+            // Resopne with the created blog post
             var response = new
             {
                 news.ContentID,
@@ -166,7 +166,7 @@ namespace Hien_mau.Controllers
                 .FirstOrDefaultAsync(p => p.ContentID == id);
             if (news == null) return NotFound();
 
-            // Kiểm tra dữ liệu đầu vào
+            // check valid input data
             if (string.IsNullOrEmpty(dto.Title) || string.IsNullOrEmpty(dto.Content))
             {
                 return BadRequest("Title and Content are required.");
@@ -190,7 +190,7 @@ namespace Hien_mau.Controllers
             }
 
             await _context.SaveChangesAsync();
-            // Ghi log
+            // Record the activity
             await logger.LogAsync(dto.UserId, "Update", "News", news.ContentID, $"Cập nhật bài viết: {news.Title}");
 
             return NoContent();
@@ -207,13 +207,13 @@ namespace Hien_mau.Controllers
             if (news == null) return NotFound();
 
 
-            // Xóa các bản ghi liên quan trong NewsTags
+            // Delete tags associated with the news
             news.Tags.Clear();
 
             _context.Contents.Remove(news);
             await _context.SaveChangesAsync();
 
-            // Ghi log
+            // record the activity
             await logger.LogAsync(userId, "Delete", "News", news.ContentID, $"Xoá bài viết: {news.Title}");
 
             return NoContent();
