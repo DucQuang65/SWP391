@@ -78,7 +78,7 @@ namespace Hien_mau.Services
             <tr>
             <!-- Logo -->
             <td style=""padding-right:15px; vertical-align:top;"">
-              <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+              <img src=""https://i.postimg.cc/WzxX9QR4/logo.png""
                     alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
             </td>
             <!-- Thông tin -->
@@ -213,7 +213,7 @@ namespace Hien_mau.Services
                     <tr>
                     <!-- Logo -->
                         <td style=""padding-right:15px; vertical-align:top;"">
-                <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+                <img src=""https://i.postimg.cc/WzxX9QR4/logo.png""
                             alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
                         </td>
                     <!-- Thông tin -->
@@ -334,7 +334,7 @@ namespace Hien_mau.Services
     <tr>
     <!-- Logo -->
     <td style=""padding-right:15px; vertical-align:top;"">
-      <img src=""https://i.postimg.cc/W4hDRcDH/logo.png""
+      <img src=""https://i.postimg.cc/WzxX9QR4/logo.png""
             alt=""Logo"" width=""90"" style=""display:block; border-radius:6px;"">
     </td>
     <!-- Thông tin -->
@@ -365,14 +365,10 @@ namespace Hien_mau.Services
     </td>
   </tr>
 </table>
-
     </div>
-
-  
   </div>
 </div>
 ";
-
                 var mail = new MailMessage
                 {
                     From = new MailAddress(senderEmail, "Trung tâm Hiến máu"),

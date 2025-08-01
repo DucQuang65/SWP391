@@ -123,7 +123,7 @@ namespace Hien_mau.Services
             {
                 Subject = new ClaimsIdentity(new[] {
                           new Claim(ClaimTypes.Email, email),
-                          new Claim("ResetPassword", "true") // Đánh dấu token này là cho reset password
+                          new Claim("ResetPassword", "true") 
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
