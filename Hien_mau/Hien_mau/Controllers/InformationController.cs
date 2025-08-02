@@ -59,7 +59,6 @@ namespace Hien_mau.Controllers
 
             if (!updated) 
                 return NotFound("Không thể cập nhật.");
-            await _logger.NotiLog(id, "UserProfile", "Hồ sơ đã cập nhật", "Update");
             return Ok();
         }
 
