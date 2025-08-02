@@ -144,7 +144,7 @@ namespace Hien_mau.Services
             _context.BloodRequests.Add(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(bloodRequest.UserId, "Tạo yêu cầu máu", "Yêu cầu hiến máu đã tạo", "Create");
+            await _logger.NotiLog(bloodRequest.UserId, "Tạo yêu cầu máu", "Yêu cầu nhận máu đã tạo", "Create");
 
             dto.RequestId = bloodRequest.RequestId;
             dto.Status = bloodRequest.Status;
@@ -178,7 +178,7 @@ namespace Hien_mau.Services
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(bloodRequest.UserId, "Cập nhật yêu cầu máu", "Yêu cầu hiến máu đã được cập nhật", "Update");
+            await _logger.NotiLog(bloodRequest.UserId, "Cập nhật yêu cầu máu", "Yêu cầu nhận máu đã được cập nhật", "Update");
             return true;
         }
 
@@ -221,7 +221,7 @@ namespace Hien_mau.Services
             _context.BloodRequests.Update(bloodRequest);
             await _context.SaveChangesAsync();
 
-            await _logger.NotiLog(bloodRequest.UserId, "Xóa yêu cầu máu", "Yêu cầu máu đã được xóa", "Delete");
+            await _logger.NotiLog(bloodRequest.UserId, "Xóa yêu cầu máu", "Yêu cầu nhận máu đã được xóa", "Delete");
             return true;
         }
     }
