@@ -70,7 +70,6 @@ namespace Hien_mau.Controllers
 
             if (result == null) 
                 return BadRequest("Yêu cầu không hợp lệ hoặc đã tồn tại.");
-            await _logger.NotiLog(result.UserId, "BloodRequest", "Yêu cầu hiến máu đã tạo", "Create");
             return CreatedAtAction(nameof(GetRequestById), new { id = result.RequestId }, result);
         }
 
