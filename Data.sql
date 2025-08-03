@@ -36,6 +36,8 @@ VALUES
     ('vinhntqse180354@fpt.edu.vn', 'Ab1234@', '0901234567', N'Trần Quang Vinh', 30, 'Male', N'123 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
     ('ducquang0565@gmail.com', 'Ab1234@', '0987654321', N'Bùi Quang Đức', 25, 'Male', N'45 Lê Lợi, Phường 1, Quận 3, TP.HCM', 'O', 'Rh+', 1, 1, NULL),
     ('member3@fpt.edu.vn', 'Ab1234@', '0931234567', N'Nguyễn Minh Tuấn', 19, 'Male', N'67 Trần Phú, Phường 4, Quận 5, TP.HCM', 'A', 'Rh+', 1, 1, NULL),
+	-- Banned account
+	('member4@fpt.edu.vn', 'Ab1234@', '0931234567', N'Nguyễn Quang Anh', 19, 'Male', N'145 Trần Hưng Đạo, Phường 6, Quận 3, TP.HCM', 'AB', 'Rh+', 0, 1, NULL),
 
 	-- Role: Doctor (RoleID = 2)
     ('kienlvse180681@fpt.edu.vn', 'Ab1234@', '0912345678', N'Lê Văn Kiên', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 'O', 'Rh-', 1, 2, 1),
@@ -150,7 +152,7 @@ VALUES
     N'Lưu ý:' + CHAR(13) + CHAR(10) +
     N'- Trong truyền máu, yếu tố Rh đóng vai trò quan trọng. Người Rh+ có thể nhận máu Rh- nhưng ngược lại thì không an toàn.',
     'https://vieclam123.vn/ckfinder/userfiles/images/images/nhom-mau-a-la-gi(1).jpg', 
-    2, 
+    5, 
     'Article', 
     '2025-05-01'),
 
@@ -171,7 +173,7 @@ VALUES
     N'- Người Rh- **chỉ nên nhận máu Rh-**, vì nếu nhận Rh+ có thể gây phản ứng miễn dịch nghiêm trọng.',
     
     'https://img.jagranjosh.com/images/2022/July/2672022/blood-group-peronality-test-blood-type-a-personality.jpg',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -189,7 +191,7 @@ Người có nhóm máu B Rh+:
 
 Lưu ý:
 - Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.', 
-     'https://phongkhambienviet.com/hinhanh/images/nhom-mau.jpg', 2, 'Article','2025-05-01'),
+     'https://phongkhambienviet.com/hinhanh/images/nhom-mau.jpg', 5, 'Article','2025-05-01'),
 
     -- Nhóm B Rh-
     (N'Giới thiệu nhóm máu B Rh+', 
@@ -207,7 +209,7 @@ Lưu ý:
     N'- Nhóm máu B Rh+ là phổ biến và có khả năng nhận từ nhiều nhóm khác nếu tương thích Rh.',
     
     'https://benhvienphuongdong.vn/public/uploads/tin-tuc/bai-viet/phu-nu-nhom-mau-b-1-1.jpg',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -228,7 +230,7 @@ Lưu ý:
     N'- AB Rh+ là **người nhận máu phổ thông**, rất thuận lợi trong cấp cứu.',
     
     'https://esuhai.vn/upload/news/2019/10/28/157224376892.jpg',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -249,7 +251,7 @@ Lưu ý:
     N'- Dù không có kháng thể, nhưng vì Rh- nên **chỉ nhận được từ người Rh-**.',
     
     'https://tudienbenhhoc.com/wp-content/uploads/2019/08/nhom-mau-1.jpg',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -270,7 +272,7 @@ Lưu ý:
     N'- Không thể nhận từ các nhóm A, B, AB vì có kháng thể.',
     
     'https://cdn.vietnammoi.vn/2019/4/24/583749802262586157325502275917074281267200n-1556102897580755669015.png',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -291,7 +293,7 @@ Lưu ý:
     N'- O Rh- là nhóm máu **quan trọng trong cấp cứu**, vì an toàn với hầu hết người nhận.',
     
     'https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/182FF/production/_107317099_blooddonor976.jpg',
-    2,
+    5,
     'Article',
     '2025-05-01'),
     
@@ -474,7 +476,7 @@ Lưu ý:
     N'Hiến máu không chỉ là một hành động tốt – đó còn là sự kết nối kỳ diệu giữa những trái tim.',
 
     'https://images.ctfassets.net/pxcfulgsd9e2/articleImage90323/86f549d15651b745eab20e1e20c5cc84/Blood-donation-myths-HN1221-Stock-844661710-Sized.png',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -573,7 +575,7 @@ Lưu ý:
     N' Hãy chọn cách hiến máu phù hợp với bạn, và cùng nhau lan tỏa sự sống đến mọi người!',
 
     'https://www.singlecare.com/blog/wp-content/uploads/2019/12/Blog_010620_Who_Can_Cant_Donate_Blood.png',
-    2,
+    5,
     'Article',
     '2025-05-01'),
 
@@ -638,7 +640,7 @@ Lưu ý:
     N' Đối tượng tham gia: Nhân viên doanh nghiệp, cộng đồng địa phương, và tất cả những ai muốn sẻ chia',
     
     'https://c8.alamy.com/comp/2D6N38T/blood-donation-transfusion-vector-flat-cartoon-illustration-volunteer-female-donor-donating-blood-in-medical-hospital-laboratory-world-blood-donor-2D6N38T.jpg',
-    2,
+    5,
     'News',
     '2025-07-01'),
 
@@ -716,7 +718,7 @@ Lưu ý:
     N' Đối tượng tham gia: Người có nhóm máu hiếm (O-, AB-) hoặc chưa biết nhóm máu',
 
     'https://static.vecteezy.com/system/resources/previews/004/449/815/original/blood-donation-2d-isolated-illustration-man-in-chair-on-blood-transfusion-donor-with-smiling-nurse-flat-characters-on-cartoon-background-charity-work-and-volunteering-colourful-scene-vector.jpg',
-    2,
+    5,
     'News',
     '2025-06-15'),
 
@@ -769,7 +771,7 @@ Lưu ý:
     N' Hoạt động: Hiến tiểu cầu, kiểm tra sức khỏe miễn phí, tư vấn y tế về ung thư và hiến máu',
 
     'https://stanfordbloodcenter.org/wp-content/uploads/2020/06/Blood-facts_10-illustration-graphics__canteen.png',
-    2,
+    5,
     'News',
     '2025-10-15');
 GO
@@ -990,7 +992,7 @@ VALUES
     (4, N'Yêu cầu máu đã chấp nhận', N'Yêu cầu máu của bạn đã được chấp nhận', 'Alert', 1, GETDATE()),
     (1, N'Lịch Hẹn Đã Hủy', N'Bạn đã hủy lịch hẹn hiến máu ngày 24/06/2025.', 'Report', 1, '2025-06-24 09:00:00'),
     (2, N'Nhắc Hồi Phục Hiến Máu', N'Bạn đã đủ 12 tuần kể từ lần hiến máu trước (01/04/2025)! Bạn có thể hiến lại.', 'Reminder', 1, '2025-06-24 07:01:00'),
-    (2, N'Cảm ơn', N'Cảm ơn bạn đã hiến máu!', 'Report', 1, '2025-04-01 12:00:00');
+    (2, N'Cảm ơn', N'Cảm ơn bạn đã hiến máu!', 'Report', 1, '2025-04-01 12:00:00'),
     (5, N'Có 1 bài viết mới', N'Hãy xem bài viết hướng dẫn về máu mới nhất của chúng tôi', 'Report', 0, GETDATE());	
 GO
 
