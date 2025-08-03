@@ -34,14 +34,14 @@ Migrations/
 .DS_Store
 
 # User secrets
-secrets.json
-appsettings.json
+*secrets.json
+*appsettings.json
 # node_modules (nếu có frontend)
 node_modules/
 
 # Firebase configuration
-google-services.json
-Config/google-services.json 
+*google-services.json
+*Config/google-services.json 
 
 
 # Logs
