@@ -26,6 +26,7 @@ packages/
 *.psess
 *.vsp
 *.vspscc
+*.appsettings.json
 
 # Entity Framework
 Migrations/
