@@ -160,7 +160,6 @@ namespace Hien_mau.Services
             _context.Users.Update(user);
 
             await _context.SaveChangesAsync();
-            await _logger.NotiLog(id, "Hồ sơ cá nhân", "Hồ sơ đã được cập nhập", "Update");
 
             return true;
         }
