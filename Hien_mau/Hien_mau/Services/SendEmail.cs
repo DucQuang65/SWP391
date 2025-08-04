@@ -300,7 +300,7 @@ namespace Hien_mau.Services
 <div style='max-width:600px; background-color:#ffffff; margin:0 auto; padding:30px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); color:#333333;'>
     
     <!-- Tiêu đề -->
-    <h2 style=""color: #B71C1C; font-size: 20px; margin-bottom: 20px; text-align:center;"">[Khẩn] Cần gấp máu <span style=""font-weight:bold; tẽ""></span> <br> Rất mong nhận được sự hỗ trợ từ bạn</h2>
+    <h2 style=""color: #B71C1C; font-size: 20px; margin-bottom: 20px; text-align:center;"">[Khẩn]></span> <br> Rất mong nhận được sự hỗ trợ từ bạn</h2>
     
     <!-- Lời chào -->
     <p style=""color:#000000;""><strong>Kính gửi {donorName},</strong></p>
