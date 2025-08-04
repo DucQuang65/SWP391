@@ -1023,10 +1023,10 @@ VALUES
 (1, '2025-06-24', N'Chiều (13:00-17:00)', NULL, 0, 1, N'Người dùng hủy lịch hẹn', DATEADD(DAY, -10, '2025-06-24'), NULL),
 
 -- UserID 1: Lịch hoàn chỉnh với ngày cách >=84 ngày (đổi từ 2025-06-30 sang 2025-04-01)
-(1, '2025-04-01', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công ngày 01/04/2025', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01'),
+(1, '2025-04-01', N'Sáng (7:00-12:00)', 1, 5, 0, N'Đã hiến máu thành công ngày 01/04/2025', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01'),
 
 -- UserID 2: Chỉ lịch hoàn chỉnh (ngày xa quá khứ để đủ điều kiện tạo lịch mới)
-(2, '2025-04-01', N'Sáng (7:00-12:00)', 1, 4, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01');
+(2, '2025-04-01', N'Sáng (7:00-12:00)', 1, 5, 0, N'Đã hiến máu thành công', DATEADD(DAY, -10, '2025-04-01'), '2025-04-01');
 
 GO
 
