@@ -238,7 +238,6 @@ public class AppointmentController : ControllerBase
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
-        await logger.NotiLog(dto.UserId, "Hiến máu", "Đăng ký đơn hiến máu thành công", "Create");
 
         var remindTime = dto.AppointmentDate.AddDays(-1).Date.AddHours(7);
         var reminder = new Reminder
@@ -276,7 +275,6 @@ public class AppointmentController : ControllerBase
         appointment.Process = dto.Process;
 
         await _context.SaveChangesAsync();
-        await logger.NotiLog(appointment.UserID, "Hiến máu", "Khám sức khỏe được cập nhật", "Update");
 
         return Ok(new AppointmentDTO
         {
