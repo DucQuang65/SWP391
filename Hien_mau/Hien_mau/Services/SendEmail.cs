@@ -311,7 +311,7 @@ namespace Hien_mau.Services
     <!-- Nội dung chính --> 
     <p style=""color: #B71C1C;""><strong>Hiện tại, ngân hàng máu của bệnh viện đang rất cần nhóm máu {fullBloodType} của bạn</strong> để kịp thời hỗ trợ những ca bệnh cấp cứu. Theo thông tin bạn đã đăng ký, bạn thuộc nhóm máu phù hợp và đủ điều kiện tham gia hiến máu trong thời điểm này.</p>
     
-    <p style=""color:#000000;"">Chúng tôi rất mong bạn dành chút thời gian tham gia hiến máu hoặc chia sẽ cho mọi người biết đến, bởi mỗi đơn vị máu bạn trao đi không chỉ cứu sống một người mà còn là món quà vô giá, thắp sáng niềm hy vọng cho nhiều gia đình.</p>
+    <p style=""color:#000000;"">Chúng tôi rất mong bạn dành chút thời gian tham gia hiến máu hoặc chia sẻ cho mọi người biết đến, bởi mỗi đơn vị máu bạn trao đi không chỉ cứu sống một người mà còn là món quà vô giá, thắp sáng niềm hy vọng cho nhiều gia đình.</p>
     
     <!-- Thông tin buổi hiến máu -->
     <div style=""border-left: 4px solid #B71C1C; padding-left: 15px; margin: 20px 0;"">
