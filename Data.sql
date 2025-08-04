@@ -30,9 +30,7 @@ VALUES
 
 
 -- Insert data into Users table with updated Vietnamese full names
-INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address,Distance, BloodGroup, RhType, Status, RoleID, DepartmentID)
-VALUES
-	INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, Distance, BloodGroup, RhType, Status, RoleID, DepartmentID)
+INSERT INTO Users (Email, Password, Phone, Name, Age, Gender, Address, Distance, BloodGroup, RhType, Status, RoleID, DepartmentID)
 VALUES
 	-- Role: Member (RoleID = 1)
 	('vinhntqse180354@fpt.edu.vn', 'Ab1234@', '0901234567', N'Trần Quang Vinh', 30, 'Male', N'123 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM', 2.5, 'A', 'Rh+', 1, 1, NULL),
@@ -80,7 +78,6 @@ VALUES
 	-- Khoa Huyết học
 	('phong.huyethoc@gmail.com', 'Ab1234@', '0966666001', N'Trần Quốc Phong', 41, 'Male', N'88 Trường Chinh, Tân Bình, TP.HCM', 5.9, 'AB', 'Rh+', 1, 2, 1),
 	('trang.huyethoc@gmail.com', 'Ab1234@', '0966666002', N'Nguyễn Thị Trang', 37, 'Female', N'19 Hoàng Sa, Quận 1, TP.HCM', 3.4, 'O', 'Rh-', 1, 2, 1);
-
 GO
 
 -- Insert data into HospitalInfo table
