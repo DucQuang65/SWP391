@@ -54,10 +54,13 @@ namespace Hien_mau
                     });
             });
 
+
             builder.Services.AddDbContext<Hien_mauContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+
             builder.Services.AddHangfire(config =>
                 config.UseSqlServerStorage(builder.Configuration.GetConnectionString("MyDB")));
+
             builder.Services.AddHangfireServer();
 
             builder.Services.AddScoped<BloodInventoryExpiryJob>();
@@ -111,6 +114,7 @@ namespace Hien_mau
             builder.Services.AddAuthorization();
 
             var app = builder.Build();
+
             app.UseHangfireDashboard();
 
             RecurringJob.AddOrUpdate<BloodInventoryExpiryJob>(

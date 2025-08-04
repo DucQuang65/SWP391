@@ -26,14 +26,15 @@ public class BloodInventoryExpiryJob
         foreach (var item in expiredCheckIns)
         {
            
-            var alreadyCheckedOut = await _context.BloodInventoryHistories.AnyAsync(h =>
-                h.ActionType == "CheckOut"
+            var alreadyCancel = await _context.BloodInventoryHistories.AnyAsync(h =>
+                h.ActionType == "Cancel"
                 && h.Notes == "Tự động hủy do hết hạn"
-                && h.ReceivedDate == item.ReceivedDate
+                && h.InventoryId == item.InventoryId
+                && h.ReceivedDate == item.ReceivedDate 
                 && h.ExpirationDate == item.ExpirationDate
                 && h.InventoryId == item.InventoryId);
 
-            if (alreadyCheckedOut) continue;
+            if (alreadyCancel) continue;
 
            
             var expiredLog = new BloodInventoryHistories
