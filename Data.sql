@@ -773,7 +773,7 @@ Lưu ý:
     'https://stanfordbloodcenter.org/wp-content/uploads/2020/06/Blood-facts_10-illustration-graphics__canteen.png',
     5,
     'News',
-    '2025-10-15');
+    '2025-08-01');
 GO
 
 -- Insert data into ArticleTags table
