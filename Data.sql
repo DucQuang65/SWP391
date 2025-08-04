@@ -41,19 +41,19 @@ VALUES
 	('member4@fpt.edu.vn', 'Ab1234@', '0931234567', N'Nguyễn Quang Anh', 19, 'Male', N'145 Trần Hưng Đạo, Phường 6, Quận 3, TP.HCM', 4.6, 'AB', 'Rh+', 0, 1, NULL),
 
 	-- Role: Doctor (RoleID = 2)
-	('kienlvse180681@fpt.edu.vn', 'Ab1234@', '0912345678', N'Lê Văn Kiên', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 6.0, 'O', 'Rh-', 1, 2, 1),
-	('doctor2@fpt.edu.vn', 'Ab1234@', '0971234567', N'Nguyễn Văn Hiếu', 38, 'Male', N'234 Nguyễn Văn Cừ, Phường Cầu Kho, Quận 1, TP.HCM', 3.8, 'A', 'Rh-', 1, 2, 2),
-	('doctor3@fpt.edu.vn', 'Ab1234@', '0941234567', N'Đặng Thị Thảo', 42, 'Female', N'56 Nguyễn Trãi, Phường 3, Quận 5, TP.HCM', 4.5, 'O', 'Rh+', 1, 2, 1),
+	('kienlvse180681@fpt.edu.vn', 'Ab1234@', '0912345678', N'Lê Văn Kiên', 45, 'Female', N'89 Phạm Văn Đồng, Phường Linh Đông, TP Thủ Đức, TP.HCM', 14, 'O', 'Rh-', 1, 2, 1),
+	('doctor2@fpt.edu.vn', 'Ab1234@', '0971234567', N'Nguyễn Văn Hiếu', 38, 'Male', N'234 Nguyễn Văn Cừ, Phường Cầu Kho, Quận 1, TP.HCM', 19, 'A', 'Rh-', 1, 2, 2),
+	('doctor3@fpt.edu.vn', 'Ab1234@', '0941234567', N'Đặng Thị Thảo', 42, 'Female', N'56 Nguyễn Trãi, Phường 3, Quận 5, TP.HCM', 17, 'O', 'Rh+', 1, 2, 1),
 	
 	-- Role: BloodManager (RoleID = 3)
-	('xpnhi023@gmail.com', 'Ab1234@', '0961234567', N'Phạm Thị Yến Nhi', 35, 'Male', N'78 Cách Mạng Tháng Tám, Phường 6, Quận 3, TP.HCM', 2.9, 'B', 'Rh+', 1, 3, NULL),
-	('bloodmanager2@gmail.com', 'Ab1234@', '0991234567', N'Trần Thị Kim Hoa', 29, 'Female', N'90 Huỳnh Tấn Phát, Phường Tân Thuận Đông, Quận 7, TP.HCM', 5.7, 'AB', 'Rh+', 1, 3, NULL),
-	('bloodmanager3@gmail.com', 'Ab1234@', '0701234567', N'Lê Quốc Phong', 36, 'Male', N'12 Lê Văn Sỹ, Phường 13, Quận 3, TP.HCM', 3.5, 'O', 'Rh+', 1, 3, NULL),
+	('xpnhi023@gmail.com', 'Ab1234@', '0961234567', N'Phạm Thị Yến Nhi', 35, 'Male', N'78 Cách Mạng Tháng Tám, Phường 6, Quận 3, TP.HCM', 22, 'B', 'Rh+', 1, 3, NULL),
+	('bloodmanager2@gmail.com', 'Ab1234@', '0991234567', N'Trần Thị Kim Hoa', 29, 'Female', N'90 Huỳnh Tấn Phát, Phường Tân Thuận Đông, Quận 7, TP.HCM', 25, 'AB', 'Rh+', 1, 3, NULL),
+	('bloodmanager3@gmail.com', 'Ab1234@', '0701234567', N'Lê Quốc Phong', 36, 'Male', N'12 Lê Văn Sỹ, Phường 13, Quận 3, TP.HCM', 28, 'O', 'Rh+', 1, 3, NULL),
 	
 	-- Role: Admin (RoleID = 4)
-	('admin1@gmail.com', 'Ab1234@', '0771234567', N'Nguyễn Thị Hồng Linh', 31, 'Female', N'34 Bùi Thị Xuân, Phường 2, Quận Tân Bình, TP.HCM', 4.0, 'A', 'Rh+', 1, 4, NULL),
-	('admin2@gmail.com', 'Ab1234@', '0881234567', N'Phạm Văn Dũng', 34, 'Male', N'56 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP.HCM', 3.2, 'B', 'Rh+', 1, 4, NULL),
-	('vukhanhnhu@gmail.com', 'Ab1234@', '0791234567', N'Phạm Vũ Khánh Như', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 4.3, 'AB', 'Rh-', 1, 4, NULL),
+	('admin1@gmail.com', 'Ab1234@', '0771234567', N'Nguyễn Thị Hồng Linh', 31, 'Female', N'34 Bùi Thị Xuân, Phường 2, Quận Tân Bình, TP.HCM', 60, 'A', 'Rh+', 1, 4, NULL),
+	('admin2@gmail.com', 'Ab1234@', '0881234567', N'Phạm Văn Dũng', 34, 'Male', N'56 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP.HCM', 70, 'B', 'Rh+', 1, 4, NULL),
+	('vukhanhnhu@gmail.com', 'Ab1234@', '0791234567', N'Phạm Vũ Khánh Như', 28, 'Female', N'78 Trần Hưng Đạo, Phường 2, Quận 5, TP.HCM', 80, 'AB', 'Rh-', 1, 4, NULL),
 	
 	-- Khoa Nhi
 	('lan.khoa.nhi@gmail.com', 'Ab1234@', '0911111001', N'Nguyễn Thị Thanh Lan', 40, 'Female', N'12 Pasteur, Quận 1, TP.HCM', 3.7, 'B', 'Rh+', 1, 2, 5),
