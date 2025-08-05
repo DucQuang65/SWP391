@@ -1000,9 +1000,9 @@ GO
 INSERT INTO ActivityLogs (UserID, ActivityType, EntityType, EntityId, Description, CreatedAt)
 VALUES
 -- Logs cho BloodArticles của UserID 2 (Doctor)
-(2, 'Create', 'Article', 1, N'Tạo bài viết: Giới thiệu nhóm máu A Rh+', '2025-06-08'),
-(2, 'Update', 'Article', 3, N'Cập nhật bài viết: Giới thiệu nhóm máu B Rh+', '2025-06-10'),
-(2, 'Delete', 'Article', 6, N'Xoá bài viết: Giới thiệu nhóm máu AB Rh-', '2025-06-15'),
+(8, 'Create', 'Article', 1, N'Tạo bài viết: Giới thiệu nhóm máu A Rh+', '2025-06-08'),
+(8, 'Update', 'Article', 3, N'Cập nhật bài viết: Giới thiệu nhóm máu B Rh+', '2025-06-10'),
+(8, 'Delete', 'Article', 6, N'Xoá bài viết: Giới thiệu nhóm máu AB Rh-', '2025-06-15'),
 
 -- Logs cho BloodArticles của UserID 6 (Doctor)
 (6, 'Create', 'Article', 9, N'Tạo bài viết: Hiến Máu Lần Đầu', '2025-06-09'),
@@ -1010,8 +1010,8 @@ VALUES
 (6, 'Delete', 'Article', 11, N'Xoá bài viết: Những Lợi Ích Sức Khỏe Khi Hiến Máu Định Kỳ', '2025-06-17'),
 
 -- Logs cho News của UserID 2
-(2, 'Create', 'News', 1, N'Tạo tin tức: CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025', '2025-06-10'),
-(2, 'Update', 'News', 4, N'Cập nhật tin tức: CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025', '2025-06-18'),
+(8, 'Create', 'News', 1, N'Tạo tin tức: CHIẾN DỊCH HIẾN MÁU CỘNG ĐỒNG 2025', '2025-06-10'),
+(8, 'Update', 'News', 4, N'Cập nhật tin tức: CHƯƠNG TRÌNH NGƯỜI HIẾN MÁU HIẾM 2025', '2025-06-18'),
 
 -- Logs cho News của UserID 6
 (6, 'Create', 'News', 2, N'Tạo tin tức: NGÀY HIẾN MÁU THẾ GIỚI 2025', '2025-06-07'),
